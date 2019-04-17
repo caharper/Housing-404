@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import { ProgressBar } from './components/ProgressBar'
+import { LoginInformation } from './components/homepage/LoginInformation'
 
-import { Registration } from './components/Registration';
+import { AccountRepository} from './api/accountRepository'
+import { Homepage } from './components/homepage/Homepage'
+
+
+
+
+import Background from './smu_background.jpg';
+
+var sectionStyle = {
+  width: "100%",
+  height: "400px",
+  backgroundImage: `url(${Background})`
+};
+
+
 
 // class App extends Component {
 //   render() {
@@ -28,11 +44,37 @@ import { Registration } from './components/Registration';
 // }
 
 class App extends Component {
+
+
+  accountRepository = new AccountRepository
+
+
+  state = {
+      userName: '',
+      rating: 0,
+      comment: ''
+    }
+
+
+    onSubmit(){
+      // let accountId = +this.props.match.params.accountId
+      // if(accountId) {
+      //   this.accountRepository.updateAccount(accountId, this.state)
+      //     .then(() => this.setState({ redirect: '/', message: `${this.state.name} has been saved successfully.` }))
+      // } else {
+      //   this.accountRepository.addAccount(this.state)
+      //     .then(() => this.setState({ redirect: '/' , message: `${this.state.name} has been added successfully.`}))
+      // }
+    }
+
+
   render() {
     return (
-      <div className="App">
-        <Registration />
-      </div>
+      <>
+        <div className="App">
+          <Homepage></Homepage>
+        </div>
+      </>
     );
   }
 }
