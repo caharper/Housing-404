@@ -50,7 +50,7 @@ CREATE TABLE uProfiles(
 	);
 	
 CREATE TABLE prevRents(
-	a_id int PRIMARY KEY,
+	a_id int,
 	rent int,
 	FOREIGN KEY(a_id) REFERENCES aProfiles(a_id)
 );
@@ -65,13 +65,13 @@ CREATE TABLE events(
 	FOREIGN KEY(owner) REFERENCES users(id));
 
 CREATE TABLE attending(
-	e_id int PRIMARY KEY, 
+	e_id int, 
 	u_id int,
 	FOREIGN KEY(u_id) REFERENCES users(id));
 
 CREATE TABLE notifications(
-	to_u_id int PRIMARY KEY,
-	from_u_id,
+	to_u_id int,
+	from_u_id int,
 	notification varchar(100),
 	FOREIGN KEY(to_u_id) REFERENCES users(id),
 	FOREIGN KEY(from_u_id) REFERENCES users(id)
