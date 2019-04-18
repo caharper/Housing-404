@@ -1,14 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { slide as Menu } from 'react-burger-menu';
 
 const Navbar = () => (
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
-        <button type="button" class="btn btn-default user-button" aria-label="Left Align">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        </button>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <nav className="navbar navbar-dark bg-dark justify-content-between">
+        <div>
+            <Menu>
+                <Link id="main" className="menu-item" to="/">Main</Link>
+                <Link id="profile" className="menu-item" to="/profile">Profile</Link>
+            </Menu>
+        </div>
+        
+        {/* <Link to="/profile">
+            <button type="button" className="btn btn-default user-button" aria-label="Right Align">
+                Profile
+            </button>
+        </Link> */}
+
+        <button aba>
+                Logout
+            </button>
     </nav>
 )
 

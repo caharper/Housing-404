@@ -1,43 +1,40 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-
-import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 class Main extends Component {
-    
+
     render() {
-      return (
-          <body>
-            <Navbar />
-
-            <div className="align">
-            <div> 
-                <Link to="/dashboard">
-                    <button className="width">Dashboard</button>
-                </Link>
-            </div>
+        return (
             <div>
-                <Link to="/findroomate">
-                    <button className="width">Find Roomate</button>
-                </Link>
-            </div>
 
-            <div>
-                <Link to="/findroomate">
-                    <button className="width">List Apartment</button>
-                </Link>
-            </div>
+                <div className="align">
+                    <div>
+                        <Link to="/dashboard">
+                            <button className="width">Dashboard</button>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/findroomate">
+                            <button className="width">Find Roomate</button>
+                        </Link>
+                    </div>
 
-            <div>
-                <Link to="/findroomate">
-                    <button className="width">Find Apartment</button>
-                </Link>
+                    <div>
+                        <Link to="/listApt">
+                            <button className="width">List Apartment</button>
+                        </Link>
+                    </div>
+
+                    <div>
+                        <Link to="/findApt">
+                            <button className="width">Find Apartment</button>
+                        </Link>
+                    </div>
+                
+                </div>
             </div>
-            </div>
-          </body>
-    
         );
     }
-  }
+}
 
-  export default Main;
+export default Main;
