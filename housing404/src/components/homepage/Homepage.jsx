@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { ProgressBar } from './../ProgressBar'
 import { LoginNav } from './LoginNav'
 import { AccountRepository } from './../../api/accountRepository'
+import { Step1 } from './Step1'
+
+import axios from 'axios'
 
 
 
@@ -13,7 +16,7 @@ export class Homepage extends React.Component {
       userName: '',
       rating: 0,
       comment: '',
-      emails: []
+      emails: ''
     }
 
 
@@ -24,84 +27,12 @@ export class Homepage extends React.Component {
 
       <>
         <LoginNav></LoginNav>
-
         <div className="container">
           <div className="row">
             <ProgressBar></ProgressBar>
           </div>
-          <div className="row">
-            <div class="card">
-              <div class="card-header">
-                Featured
-              </div>
-              <div class="card-body">
-                <div className="row">
-                  <div className="col-12">
-                    <form>
-                      <div>
-                        <div className="row">
-                          <div className="form-group col-8">
-                            <label htmlFor="userName">Your Name</label>
-                            <input type="text"
-                                   id="userName"
-                                   name="userName"
-                                   className="form-control"
-                                   value={this.state.userName}
-                                   onChange={e => this.setState({userName: e.target.value})}/>
-                          </div>
-
-
-                          <div className="form-group col-2">
-                            <label htmlFor="rating">Rating</label>
-                            <select type="number"
-                                   id="rating"
-                                   name="rating"
-                                   className="form-control"
-                                   value={this.state.rating}
-                                   onChange={e => this.setState({rating: e.target.value})}>
-                                   // options
-                                   <option></option>
-                                   <option>1</option>
-                                   <option>2</option>
-                                   <option>3</option>
-                                   <option>4</option>
-                                   <option>5</option>
-                            </select>
-                          </div>
-                        </div>
-
-
-                      </div>
-                        <div className="form-group ">
-                          <label htmlFor="comment">Comment</label>
-                          <textarea type="textarea"
-                                 id="comment"
-                                 name="comment"
-                                 className="form-control"
-                                 value={this.state.comment}
-                                 onChange={e => this.setState({comment: e.target.value})}>
-                           </textarea>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-
-
-                <div className="row">
-                  <div className="col-12">
-                    <button onClick={e => this.onSubmit()} className="btn btn-primary">Submit</button>
-                  </div>
-                </div>
-
-
-
-
-
-
-              </div>
-            </div>
-
-
+          <div className="row justify-content-center">
+            <Step1></Step1>
           </div>
 
 
@@ -118,11 +49,12 @@ export class Homepage extends React.Component {
             </thead>
             <tbody>
               {
-                this.state.emails.map((a, i) =>
-                  <tr key={i}>
-                    <td>{a}</td>
-                  </tr>
-                )
+                // this.state.emails.map((a, i) =>
+                //   <tr key={i}>
+                //     <td>{a}</td>
+                //   </tr>
+                // )
+                this.state.emails
               }
             </tbody>
           </table>
@@ -138,10 +70,26 @@ export class Homepage extends React.Component {
     )
   }
 
-  componentDidMount() {
-  this.accountRepository.getAccounts()
-    .then(emails => this.setState({ emails }))
-  }
+  // componentDidMount() {
+  // this.accountRepository.getAccounts()
+  //   .then(emails => this.setState({ emails }))
+  // }
+
+  // componentDidMount() {
+  //   axios.get(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws:3000`)
+  //   // axios.get(`https://ec2-18-224-138-138.us-east-2.compute.amazonaws.com`)
+  //   // axios.get(`http://p-172-31-24-183.us-east-2.compute.internal`)
+  //     .then(res => {
+  //       const dataFromServer = res.data;
+  //       this.setState({ emails: dataFromServer });
+  //     });
+  // }
+
+  // return new Promise((resolve, reject) => {
+  //   axios.get(this.url)
+  //   .then(resp => resolve(resp.data))
+  //   .catch(resp => alert(resp))
+  // })
 }
 
 export default Homepage
