@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 export class AccountRepository {
-  url = "http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:4000"
+  url = "http://18.224.138.138:3000/users"
   config = {
     headers: {
       username: 'housing404',
@@ -10,10 +10,12 @@ export class AccountRepository {
     }
   }
 
-  getAccounts() {
+  getUsers() {
     return new Promise((resolve, reject) => {
       axios.get(this.url)
-      .then(resp => resolve(resp.data))
+      .then(resp => {
+        resolve(resp.data)
+      })
       .catch(resp => alert(resp))
     })
   }
