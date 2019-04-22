@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { ProgressBar } from './../ProgressBar'
 import { LoginNav } from './LoginNav'
 import { AccountRepository } from './../../api/accountRepository'
-import { Step1 } from './Step1'
+import { LoginInformation } from './LoginInformation'
+import { CreateAccountForm } from './CreateAccountForm'
+import './homepage.css'
 
 import axios from 'axios'
 
@@ -32,35 +34,9 @@ export class Homepage extends React.Component {
             <ProgressBar></ProgressBar>
           </div>
           <div className="row justify-content-center">
-            <Step1></Step1>
+            <CreateAccountForm></CreateAccountForm>
           </div>
 
-          <table className="table table-striped table-condenced">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Employee</th>
-                <th>Department</th>
-                <th>&nbsp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                this.state.users.map((a, i) =>
-                  <tr key={i}>
-                    <td>
-                      {a.id}
-                    </td>
-                    <td>{a.name}</td>
-                    <td>{a.email}</td>
-
-                    <td>{a.password}</td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </table>
 
         </div>
       </>
@@ -68,15 +44,15 @@ export class Homepage extends React.Component {
   }
 
   // WORKS
-  componentDidMount() {
-  this.accountRepository.getUsers()
-    .then(users => {
-      this.setState({ users })
-      console.log(users)
-      }
-    )
-    // console.log(this.state.users)
-  }
+  // componentDidMount() {
+  // this.accountRepository.getUsers()
+  //   .then(users => {
+  //     this.setState({ users })
+  //     console.log(users)
+  //     }
+  //   )
+  //   // console.log(this.state.users)
+  // }
 
   // componentDidMount() {
   //   axios.get(`http://18.224.138.138:3000/users`)

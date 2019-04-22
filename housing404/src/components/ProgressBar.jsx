@@ -6,8 +6,8 @@ export const ProgressBar = (props) => (
   <div className="progressContainer mb-4">
     <ul className="progressbar">
       <li className="active">Login information</li>
-      <li>Roommate description</li>
       <li>Personal details</li>
+      <li>Roommate description</li>
       <li>Review</li>
     </ul>
   </div>

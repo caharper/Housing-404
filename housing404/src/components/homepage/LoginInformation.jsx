@@ -8,17 +8,63 @@ export class LoginInformation extends React.Component {
     }
     // The markup for the Step 1 UI
     return(
-      <div className="form-group">
-        <label htmlFor="email">Email address</label>
-        <input
-          className="form-control"
-          id="email"
-          name="email"
-          type="text"
-          placeholder="Enter email"
-          value={this.props.email} // Prop: The email input data
-          onChange={this.props.handleChange} // Prop: Puts data into state
-        />
+
+      <div className="card overflow-auto">
+        <div className="card-header">
+          Your Login Information
+        </div>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-12">
+              <form>
+
+                <div className="row">
+                  <div className="form-group col-12">
+                    <label htmlFor="name">Full Name</label>
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           className="form-control"
+                           placeholder="Full Name"
+                           value={this.props.name} // Prop: The name input data
+                           onChange={this.props.handleChange} // Prop: Puts data into state
+                           />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="form-group col-12">
+                    <label htmlFor="email">Your Email</label>
+                    <input type="text"
+                           id="email"
+                           name="email"
+                           className="form-control"
+                           placeholder="Email"
+                           value={this.props.email} // Prop: The email input data
+                           onChange={this.props.handleChange} // Prop: Puts data into state
+                           />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="form-group col-12">
+                    <label htmlFor="password">Password</label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           className="form-control"
+                           placeholder="Password"
+                           value={this.props.password} // Prop: The password input data
+                           onChange={this.props.handleChange} // Prop: Puts data into state
+                           />
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
       </div>
     )
   }
