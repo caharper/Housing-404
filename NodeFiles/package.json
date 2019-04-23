@@ -1,0 +1,11 @@
+{
+  "name": "housing_node",
+  "version": "0.0.2",
+  "description": "This is testing the base of this",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
