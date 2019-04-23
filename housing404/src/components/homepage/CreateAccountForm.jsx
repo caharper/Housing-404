@@ -4,6 +4,7 @@ import { PersonalDetails } from './PersonalDetails'
 import { RoommateDesc } from './RoommateDesc'
 import { Review } from './Review'
 import './homepage.css'
+import $ from 'jquery';
 
 
 export class CreateAccountForm extends Component {
@@ -40,6 +41,10 @@ export class CreateAccountForm extends Component {
     this.setState({
       currentStep: currentStep
     })
+
+    // Now update the progressbar
+    // $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+    // $("#progressbar li").index(this.state.currentStep).addClass("active");
   }
 
   // ******** May need to change here
@@ -50,6 +55,9 @@ export class CreateAccountForm extends Component {
     this.setState({
       currentStep: currentStep
     })
+
+    // Now update the progressbar
+    // $("#progressbar li").index(this.state.currentStep).removeClass("active");
   }
 
   onCreateAccount() {
@@ -64,7 +72,7 @@ export class CreateAccountForm extends Component {
     if(currentStep !==1){
       return (
         <button
-          className="btn btn-secondary btn-block"
+          className="btn btn-secondary btn-block mt-2"
           type="button" onClick={this._prev}>
         Previous
         </button>
@@ -80,7 +88,7 @@ export class CreateAccountForm extends Component {
     if(currentStep <4){
       return (
         <button
-          className="btn btn-primary btn-block float-right"
+          className="btn btn-primary btn-block float-right mt-2"
           type="button" onClick={this._next}>
         Next
         </button>
@@ -96,7 +104,7 @@ export class CreateAccountForm extends Component {
     if(currentStep === 4){
       return (
         <button
-          className="btn btn-success btn-block float-right"
+          className="btn btn-success btn-block float-right mt-2"
           type="button" onClick={this.onCreateAccount}>
         Create Account
         </button>

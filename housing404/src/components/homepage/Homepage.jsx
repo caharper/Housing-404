@@ -15,10 +15,12 @@ export class Homepage extends React.Component {
   accountRepository = new AccountRepository
 
   state = {
-      userName: '',
-      rating: 0,
-      comment: '',
-      users: []
+
+    }
+
+    onLogin(){
+      // Call api for login here
+      // will need to pass down through props
     }
 
 
@@ -28,7 +30,7 @@ export class Homepage extends React.Component {
     return(
 
       <>
-        <LoginNav></LoginNav>
+        <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
         <div className="container">
           <div className="row">
             <ProgressBar></ProgressBar>

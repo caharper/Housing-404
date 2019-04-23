@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 export class AccountRepository {
-  url = "http://18.224.138.138:3000/users"
+  url = "http://18.224.138.138:3000/"
   config = {
     headers: {
       username: 'housing404',
@@ -10,9 +10,18 @@ export class AccountRepository {
     }
   }
 
+  // Login function
+  login(email, password) {
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/users/login`, email, password)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
   getUsers() {
     return new Promise((resolve, reject) => {
-      axios.get(this.url)
+      axios.get(`${this.url}/users`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -26,13 +35,13 @@ export class AccountRepository {
 
   // Good stuff from class
   //
-  // getAccount(accountId){
-  //   return new Promise((resolve, reject) => {
-  //     axios.get(`${this.url}/${accountId}`)
-  //     .then(resp => resolve(resp.data))
-  //     .catch(resp => alert(resp))
-  //   })
-  // }
+  getAccount(accountId){
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/${accountId}`)
+      .then(resp => resolve(resp.data))
+      .catch(resp => alert(resp))
+    })
+  }
   //
   // updateAccount(accountId, account){
   //   return new Promise((resolve, reject) => {

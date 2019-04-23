@@ -13,6 +13,7 @@ export class LoginInformation extends React.Component {
         <div className="card-header">
           Your Login Information
         </div>
+        
         <div className="card-body">
           <div className="row">
             <div className="col-12">
