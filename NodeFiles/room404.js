@@ -208,6 +208,14 @@ app.get('/apartments/:aId?', (req, res) => {
 
 //post apartment
 //delete apartment
+app.delete('/apartment/:id',(req,res) => {
+	connection.query('DELETE aProfiles WHERE a_id = ?',[req.params.id],(err,rows,fields) => {
+		if(!err)
+		res.send('Deleted');
+		else
+		console.log(err);
+	})
+});
 //get events
 app.get('/events', (req, res) => {
    // if(!req.session.loggedin) {
