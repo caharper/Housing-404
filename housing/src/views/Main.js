@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 class Main extends Component {
 
     render() {
         return (
+            <>
             <div>
-
+                <Navbar></Navbar>
+            </div>
+            <div>
                 <div className="align">
                     <div>
-                        <Link to="/dashboard">
-                            <button className="width">Dashboard</button>
+                        <Link to="/archive">
+                            <button className="width">Archive</button>
                         </Link>
                     </div>
                     <div>
@@ -30,9 +34,11 @@ class Main extends Component {
                             <button className="width">Find Apartment</button>
                         </Link>
                     </div>
-                
+
                 </div>
             </div>
+            </>
+   
         );
     }
 }

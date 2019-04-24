@@ -1,0 +1,17 @@
+.card {
+  width: 30rem;
+  height: 25rem;
+  background-color: #55b776;
+}
+
+.card-header {
+  background-color: #55b776;
+}
+
+.special-card {
+  /* background-color: rgba(170, 166, 157, 0.71) !important; */
+}
+/*
+.btn:hover {
+  transform: scaleX(1.5);
+} */

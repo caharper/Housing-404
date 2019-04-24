@@ -5,29 +5,27 @@ import './App.css';
 import * as serviceWorker from './serviceWorker';
 
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import  Main from './views/Main';
-import Dashboard from './views/Dashboard';
+import Main from './views/Main';
+import Archive from './views/Archive';
 import FindRoomate from './views/FindRoomate';
-import NavBar from './views/Navbar';
 import Profile from './views/Profile';
 import ListApt from './views/ListApt';
 import FindApt from './views/FindApt';
+import Homepage from './components/homepage/Homepage';
 
 
 
 const routing = (
   <Router>
     <div>
-        <NavBar/>
-        <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/findroomate" component={FindRoomate} />
-            <Route path="/listApt" component={ListApt} />
-            <Route path="/findApt" component={FindApt} />
-
-
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/main" component={Main} />
+        <Route path="/profile" component={Profile} />
+        <Route path="//archive" component={Archive} />
+        <Route path="/findroomate" component={FindRoomate} />
+        <Route path="/listApt" component={ListApt} />
+        <Route path="/findApt" component={FindApt} />
       </Switch>
     </div>
   </Router>
