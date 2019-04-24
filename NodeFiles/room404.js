@@ -723,14 +723,16 @@ app.post('/events/results', (req, res) => {
 //update user information aka '/user/edit'
 app.post('/user/edit', (req, res) => {
 
-    var q = 'UPDATE users set'
+    var q = 'UPDATE users set '
     if (err) throw err;
-    else if (req.body.name !== null){
+
+    if (req.body.name !== null){
         q = q + 'name = ' + req.body.name;
     } else if (req.body.email !== null){
         q = q + 'email = ' + req.body.email;
     } else if (req.body.password !== null){
-        q = q + 'password = ' + req.body.password;
+        var hashedPW = crypto.createHash('SHA256').update(req.body.password).digest("hex");
+        q = q + 'password = ' + hashedPW;
     }
     q = q + ' WHERE id = ' + req.session.id;
 
