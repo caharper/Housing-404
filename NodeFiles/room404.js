@@ -641,15 +641,131 @@ app.post('/events/results', (req, res) => {
  * The following section contains post and put requests for various data
  */ 
 
+//update password
+
 //edit profile
 app.post('/user/profile/edit', (req, res) => {
     //if (!req.session.loggedin) {
     //  res.status(404).send("You must be logged in to edit this");
     //} else {
-        connection.query('SELECT * FROM uProfiles WHERE id = ?', [req.body.u_id], function(err, results, fields) {
+        connection.query('SELECT u_id FROM uProfiles WHERE id = ?', [req.body.u_id], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.id) {
-                //if statement going through all the changes using results vs req.body
+                var q = 'UPDATE uProfiles SET ';
+                var first = false;
+
+                if (req.body.gender !== null) {
+                    if (first === false) {
+                        q = q + 'gender = ' + req.body.gender;
+                        first = true;
+                    } else {
+                        q = q + ' AND gender = ' + req.body.gender;
+                    }
+                }
+                if (req.body.picture !== null) {
+                    if (first === false) {
+                        q = q + 'picture = ' + req.body.picture;
+                        first = true;
+                    } else {
+                        q = q + ' AND picture = ' + req.body.picture;
+                    }
+                }
+                if (req.body.smoker !== null) {
+                    if (first === false) {
+                        q = q + 'smoker = ' + req.body.smoker;
+                        first = true;
+                    } else {
+                        q = q + ' AND smoker = ' + req.body.smoker;
+                    }
+                }
+                if (req.body.genderP !== null) {
+                    if (first === false) {
+                        q = q + 'genderP = ' + req.body.genderP;
+                        first = true;
+                    } else {
+                        q = q + ' AND genderP = ' + req.body.genderP;
+                    }
+                }
+                if (req.body.smokerP !== null) {
+                    if (first === false) {
+                        q = q + 'smokerP = ' + req.body.smokerP;
+                        first = true;
+                    } else {
+                        q = q + ' AND smokerP = ' + req.body.smokerP;
+                    }
+                }
+                if (req.body.year !== null) {
+                    if (first === false) {
+                        q = q + 'year = ' + req.body.year;
+                        first = true;
+                    } else {
+                        q = q + ' AND year = ' + req.body.year;
+                    }
+                }
+                if (req.body.tidynessP !== null) {
+                    if (first === false) {
+                        q = q + 'tidynessP = ' + req.body.tidynessP;
+                        first = true;
+                    } else {
+                        q = q + ' AND tidynessP = ' + req.body.tidynessP;
+                    }
+                }
+                if (req.body.yearP !== null) {
+                    if (first === false) {
+                        q = q + 'yearP = ' + req.body.yearP;
+                        first = true;
+                    } else {
+                        q = q + ' AND yearP = ' + req.body.yearP;
+                    }
+                }
+                if (req.body.tempP !== null) {
+                    if (first === false) {
+                        q = q + 'tempP = ' + req.body.tempP;
+                        first = true;
+                    } else {
+                        q = q + ' AND tempP = ' + req.body.tempP;
+                    }
+                }
+                if (req.body.bedTimeP !== null) {
+                    if (first === false) {
+                        q = q + 'bedTimeP = ' + req.body.bedTimeP;
+                        first = true;
+                    } else {
+                        q = q + ' AND bedTimeP = ' + req.body.bedTimeP;
+                    }
+                }
+                if (req.body.gender !== null) {
+                    if (first === false) {
+                        q = q + 'wakeTime = ' + req.body.wakeTime;
+                        first = true;
+                    } else {
+                        q = q + ' AND wakeTime = ' + req.body.wakeTime;
+                    }
+                }
+                if (req.body.wakeTimeP !== null) {
+                    if (first === false) {
+                        q = q + 'wakeTimeP = ' + req.body.wakeTimeP;
+                        first = true;
+                    } else {
+                        q = q + ' AND wakeTimeP = ' + req.body.wakeTimeP;
+                    }
+                }
+                if (req.body.pets !== null) {
+                    if (first === false) {
+                        q = q + 'pets = ' + req.body.pets;
+                        first = true;
+                    } else {
+                        q = q + ' AND pets = ' + req.body.pets;
+                    }
+                }
+
+                q = q + ' WHERE id = ' + req.session.id;
+                connection.query(q, function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        res.status(200).send("Successfully updated user profile");
+                    }
+                });
             } else {
                 res.status(404).send("You are not authorized to edit this");
             }
@@ -690,7 +806,193 @@ app.post('/user/apartments/edit', (req, res) => {
         connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.body.a_id], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.id) {
-                //if statement going through all the changes using results vs req.body
+                var q = 'UPDATE aProfiles SET ';
+                var first = false;
+
+                if (req.body.location !== null) {
+                    if (first === false) {
+                        q = q + 'location = ' + req.body.location;
+                        first = true;
+                    } else {
+                        q = q + ' AND location = ' + req.body.location;
+                    }
+                }
+                if (req.body.type !== null) {
+                    if (first === false) {
+                        q = q + 'type = ' + req.body.type;
+                        first = true;
+                    } else {
+                        q = q + ' AND type = ' + req.body.type;
+                    }
+                }
+                if (req.body.rent !== null) {
+                    if (first === false) {
+                        q = q + 'rent = ' + req.body.rent;
+                        first = true;
+                    } else {
+                        q = q + ' AND rent = ' + req.body.rent;
+                    }
+                }
+                if (req.body.leaseTime !== null) {
+                    if (first === false) {
+                        q = q + 'leaseTime = ' + req.body.leaseTime;
+                        first = true;
+                    } else {
+                        q = q + ' AND leaseTime = ' + req.body.leaseTime;
+                    }
+                }
+                if (req.body.description !== null) {
+                    if (first === false) {
+                        q = q + 'description = ' + req.body.description;
+                        first = true;
+                    } else {
+                        q = q + ' AND description = ' + req.body.description;
+                    }
+                }
+                if (req.body.picture !== null) {
+                    if (first === false) {
+                        q = q + 'picture = ' + req.body.picture;
+                        first = true;
+                    } else {
+                        q = q + ' AND picture = ' + req.body.picture;
+                    }
+                }
+                if (req.body.occupants !== null) {
+                    if (first === false) {
+                        q = q + 'occupants = ' + req.body.occupants;
+                        first = true;
+                    } else {
+                        q = q + ' AND occupants = ' + req.body.occupants;
+                    }
+                }
+                if (req.body.beds !== null) {
+                    if (first === false) {
+                        q = q + 'beds = ' + req.body.beds;
+                        first = true;
+                    } else {
+                        q = q + ' AND beds = ' + req.body.beds;
+                    }
+                }
+                if (req.body.baths !== null) {
+                    if (first === false) {
+                        q = q + 'baths = ' + req.body.baths;
+                        first = true;
+                    } else {
+                        q = q + ' AND baths = ' + req.body.baths;
+                    }
+                }
+                if (req.body.squareFeet !== null) {
+                    if (first === false) {
+                        q = q + 'squareFeet = ' + req.body.squareFeet;
+                        first = true;
+                    } else {
+                        q = q + ' AND squareFeet = ' + req.body.squareFeet;
+                    }
+                }
+                if (req.body.rooms !== null) {
+                    if (first === false) {
+                        q = q + 'rooms = ' + req.body.rooms;
+                        first = true;
+                    } else {
+                        q = q + ' AND rooms = ' + req.body.rooms;
+                    }
+                }
+                if (req.body.kitchen !== null) {
+                    if (first === false) {
+                        q = q + 'kitchen = ' + req.body.kitchen;
+                        first = true;
+                    } else {
+                        q = q + ' AND kitchen = ' + req.body.kitchen;
+                    }
+                }
+                if (req.body.laundry !== null) {
+                    if (first === false) {
+                        q = q + 'laundry = ' + req.body.laundry;
+                        first = true;
+                    } else {
+                        q = q + ' AND laundry = ' + req.body.laundry;
+                    }
+                }
+                if (req.body.floor !== null) {
+                    if (first === false) {
+                        q = q + 'floor = ' + req.body.floor;
+                        first = true;
+                    } else {
+                        q = q + ' AND floor = ' + req.body.floor;
+                    }
+                }
+                if (req.body.pets !== null) {
+                    if (first === false) {
+                        q = q + 'pets = ' + req.body.pets;
+                        first = true;
+                    } else {
+                        q = q + ' AND pets = ' + req.body.pets;
+                    }
+                }
+                if (req.body.poBox !== null) {
+                    if (first === false) {
+                        q = q + 'poBox = ' + req.body.poBox;
+                        first = true;
+                    } else {
+                        q = q + ' AND poBox = ' + req.body.poBox;
+                    }
+                }
+                if (req.body.studyRooms !== null) {
+                    if (first === false) {
+                        q = q + 'studyRooms = ' + req.body.studyRooms;
+                        first = true;
+                    } else {
+                        q = q + ' AND studyRooms = ' + req.body.studyRooms;
+                    }
+                }
+                if (req.body.roomStyle !== null) {
+                    if (first === false) {
+                        q = q + 'roomStyle = ' + req.body.roomStyle;
+                        first = true;
+                    } else {
+                        q = q + ' AND roomStyle = ' + req.body.roomStyle;
+                    }
+                }
+                if (req.body.gym !== null) {
+                    if (first === false) {
+                        q = q + 'gym = ' + req.body.gym;
+                        first = true;
+                    } else {
+                        q = q + ' AND gym = ' + req.body.gym;
+                    }
+                }
+                if (req.body.pool !== null) {
+                    if (first === false) {
+                        q = q + 'pool = ' + req.body.pool;
+                        first = true;
+                    } else {
+                        q = q + ' AND pool = ' + req.body.pool;
+                    }
+                }
+                if (req.body.ac !== null) {
+                    if (first === false) {
+                        q = q + 'ac = ' + req.body.ac;
+                        first = true;
+                    } else {
+                        q = q + ' AND ac = ' + req.body.ac;
+                    }
+                }
+                if (req.body.heat !== null) {
+                    if (first === false) {
+                        q = q + 'heat = ' + req.body.heat;
+                        first = true;
+                    } else {
+                        q = q + ' AND heat = ' + req.body.heat;
+                    }
+                }
+
+                q = q + ' WHERE u_id = ' + req.session.id + ' AND a_id = ' + req.body.a_id;
+                connection.query(q, function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        res.status(200).send('Successfully updated apartment listing');
+                    }
+                });
             } else {
                 res.status(404).send("You are not authorized to edit this");
             }
@@ -716,14 +1018,48 @@ app.post('/events', (req, res) => {
 });
 
 //edit event
-app.post('/user/apartments/edit', (req, res) => {
+app.post('/user/event/edit', (req, res) => {
     //if (!req.session.loggedin) {
     //  res.status(404).send("You must be logged in to edit this");
     //} else {
         connection.query('SELECT * FROM events WHERE e_id = ?', [req.body.e_id], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.id) {
-                //if statement going through all the changes using results vs req.body
+                var q = 'UPDATE events SET ';
+                var first = false;
+
+                if (req.body.details !== null) {
+                    if (first === false) {
+                        q = q + 'details = ' + req.body.details;
+                        first = true;
+                    } else {
+                        q = q + ' AND details = ' + req.body.details;
+                    }
+                }
+                if (req.body.date !== null) {
+                    if (first === false) {
+                        q = q + 'date = ' + req.body.date;
+                        first = true;
+                    } else {
+                        q = q + ' AND date = ' + req.body.date;
+                    }
+                }
+                if (req.body.picture !== null) {
+                    if (first === false) {
+                        q = q + 'picture = ' + req.body.picture;
+                        first = true;
+                    } else {
+                        q = q + ' AND picture = ' + req.body.picture;
+                    }
+                }
+
+                q = q + ' WHERE owner = ' + req.session.id + ' AND e_id = ' + req.body.e_id;
+                connection.query(q, function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        res.status(200).send('Successfully updated apartment listing');
+                    }
+                });
             } else {
                 res.status(404).send("You are not authorized to edit this");
             }
