@@ -419,24 +419,133 @@ app.post('/apartments/:a_id?:rent?/prevRents', (req, res) => {
     //}
 });
 
+
+
+
 //deletes
 //delete notification
-//delete account
-//delete apt listing
-
-//delete apartment
-app.delete('/apartment/:id',(req,res) => {
-	connection.query('DELETE aProfiles WHERE a_id = ?',[req.params.id],(err,rows,fields) => {
-		if(!err)
-		res.send('Deleted');
-		else
-		console.log(err);
-	})
+app.delete('/user/notification', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        connection.query('DELETE FROM notifications WHERE to_u_id = ?', [req.session.id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send('Successfully removed notifications');
+            }
+        });
+    //}
 });
 
+//delete account
+app.delete('/user/account', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        //wtf do
+    //}
+});
+
+//delete apt listing
+app.delete('/apartment/:id?',(req,res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var aid = req.params.id;
+        connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                connection.query('DELETE FROM prevRents WHERE a_id = ?', [aid], function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        connection.query('DELETE FROM aProfiles WHERE a_id = ?',[aid],function(err,results,fields) {
+                            if (err) throw err;
+                            else {
+                                res.status(200).send('Successfully move listing');
+                            }
+                        });
+                    }
+                });
+            } else {
+                res.status(404).send("You don't have access to delete this");
+            }
+        });
+    //}
+});
 
 //delete event
-//delete attending
+app.delete('/user/:eid?', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var eid = req.params.eid;
+        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.u_id) {
+                connection.query('DELETE FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        connection.query('DELETE FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+                            if (err) throw err;
+                            else {
+                                res.status(200).send('Successfully deleted event');
+                            }
+                        });
+                    }
+                });
+            } else {
+                res.status(404).send("You don't have access to delete this");
+            }
+        });
+
+    //}
+});
+
+//delete attending your event
+app.delete('/user/:eid?/attending', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var eid = req.params.eid;
+        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.session.id], function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        res.status(200).send('Successfully deleted attending member');
+                    }
+                });
+            } else {
+                res.status(404).send("You don't have access to delete this");
+            }
+        });
+
+    //}
+});
+
+//delete attending to your event
+app.delete('/events/:eid?/attending', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var eid = req.params.eid;
+        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.body.uid], function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        res.status(200).send('Successfully deleted attending member');
+                    }
+                });
+            } else {
+                res.status(404).send("You don't have access to delete this");
+            }
+        });
+
+    //}
+});
 
 
 
