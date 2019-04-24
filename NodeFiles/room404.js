@@ -364,6 +364,26 @@ app.get('/events/:eid?/attending', (req, res) => {
 //puts/posts
 //edit profile
 //create listing
+app.post('/user/apartments', (req, res) => {
+	//if (!req.session.loggedin) {
+	//	res.status(404).send("You must be loggined in to view this");
+	//} else {
+        var a_id = 999 //replace with auto increment
+
+
+        console.log("User ", req.session.user_id, " is adding a listing");
+        
+        connection.query('insert into aProfiles values(? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?)'[a_id, req.session.user_id, req.body.location,
+        req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.picture, req.body.occupants, req.body.beds,
+        req.body.baths, req.body.squareFeet, req.body.rooms, req.body.kitchen, req.body.laundry, req.body.floor, req.body.pets, 
+        req.body.poBox, req.body.studyRooms, req.body.roomStyle, req.body.gym, req.body.pool, req.body.ac, req.body.pool], function(err, results, fields){
+			if (err) throw err;
+			else {
+				res.status(200).send(results);
+			}
+		});
+	//}
+});
 //edit apt listing
 //create event
 //edit event
