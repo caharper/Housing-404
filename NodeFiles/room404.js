@@ -129,10 +129,21 @@ app.post('/users/register', (req, res) => {
                 });
 });
 
+//gets
+//view your profile
+//view list profiles
+//view specific profiles
+//view list your attending events
+//view notifications
+//view your listings
+//view all listings
+//view specific listings
+//view previous rents for a listing
+//view your event
+//view all events
+//view specific event
+//view attending for specific event
 
-
-//delete user
-//change user data
 //get user data
 app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
@@ -206,16 +217,6 @@ app.get('/apartments/:aId?', (req, res) => {
 	//}
 });
 
-//post apartment
-//delete apartment
-app.delete('/apartment/:id',(req,res) => {
-	connection.query('DELETE aProfiles WHERE a_id = ?',[req.params.id],(err,rows,fields) => {
-		if(!err)
-		res.send('Deleted');
-		else
-		console.log(err);
-	})
-});
 //get events
 app.get('/events', (req, res) => {
    // if(!req.session.loggedin) {
@@ -245,8 +246,6 @@ app.get('/events/:eid?', (req, res) => {
 		});
 	//}
 });
-//post event
-//delete event
 //get notifications
 app.get('/user/notifications', (req, res) => {
    // if(!req.session.loggedin) {
@@ -261,8 +260,6 @@ app.get('/user/notifications', (req, res) => {
         }); //possibly limit what is selected
     //}
 });
-//post notifications
-//delete notifications?
 //get attending
 app.get('/events/attending', (req, res) => {
     //if(!req.session.loggedin) {
@@ -277,8 +274,50 @@ app.get('/events/attending', (req, res) => {
         }); //possibly limit what is selected
     //}
 });
-//post attending
-//delete attending?
+
+
+
+
+//puts/posts
+//edit profile
+//create listing
+//edit apt listing
+//create event
+//edit event
+//create notification
+//add to attending
+//add to previous rents
+
+//deletes
+//delete notification
+//delete account
+//delete apt listing
+
+//delete apartment
+app.delete('/apartment/:id',(req,res) => {
+	connection.query('DELETE aProfiles WHERE a_id = ?',[req.params.id],(err,rows,fields) => {
+		if(!err)
+		res.send('Deleted');
+		else
+		console.log(err);
+	})
+});
+
+
+//delete event
+//delete attending
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //how to do filters? tf?
