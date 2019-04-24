@@ -67,7 +67,7 @@ app.post('/user/login', (req, res) => {
             //check if correct user
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
-                    req.session.user_id = results[0].id;
+                    req.session.id = results[0].id;
                     console.log("Login Successful!");
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
@@ -153,7 +153,7 @@ app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -196,7 +196,7 @@ app.get('/user/events', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -210,7 +210,7 @@ app.get('/user/notifications', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_id = users.id WHERE notification.to_u_id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_id = users.id WHERE notification.to_u_id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -224,7 +224,7 @@ app.get('/user/apartments', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -282,7 +282,7 @@ app.get('/user/myEvents', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM users JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN events ON users.id = events.owner WHERE id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -312,7 +312,7 @@ app.get('/events/:eid?', (req, res) => {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
 		var eid = req.params.eid;
-		console.log("User ", req.session.user_id, " is checking an event");
+		console.log("User ", req.session.id, " is checking an event");
 		connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields){
 			if (err) throw err;
 			else {
@@ -329,7 +329,7 @@ app.get('/events/:eid?/attending', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
 	    var eid = req.params.eid;
-        console.log("User ", req.session.user_id, " is checking event attendance"); //console log to check
+        console.log("User ", req.session.id, " is checking event attendance"); //console log to check
         connection.query('SELECT * FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else {
@@ -376,8 +376,8 @@ app.get('/user/myEvents/:eid?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            console.log("User ", req.session.user_id, " is checking event", req.params.eid); //console log to check
-            connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.u_id], function(err, results, fields) {
+            console.log("User ", req.session.id, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -391,8 +391,8 @@ app.get('/user/myEvents/:eid/attending?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            console.log("User ", req.session.user_id, " is checking event", req.params.eid); //console log to check
-            connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, req.session.u_id], function(err, results, fields) {
+            console.log("User ", req.session.id, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -1300,7 +1300,7 @@ app.delete('/user/myEvents/:eid?', (req, res) => {
         var eid = req.params.eid;
         connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.u_id) {
+            else if (results[0].u_id === req.session.id) {
                 connection.query('DELETE FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1370,7 +1370,7 @@ app.delete('/user/notifications/:uid??', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            connection.query('DELETE FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.u_id, req.params.uid], function(err, results, fields) {
+            connection.query('DELETE FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.id, req.params.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
