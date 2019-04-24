@@ -281,8 +281,22 @@ app.get('/apartments/pastRents/:aId?', (req, res) => {
          }); //possibly limit what is selected
      //}
  });
- 
+
 //view your event
+app.get('/user/profile', (req, res) => {
+    // if(!req.session.loggedin) {
+    //     res.status(404).send("You must be logged in to view this");
+    // } else {
+         console.log("User ", req.session.user_id, " is checking their events"); //console log to check
+         connection.query('SELECT * FROM users NATURAL JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+             if (err) throw err;
+             else {
+                 res.status(200).send(results);
+             }
+         }); //possibly limit what is selected
+    // }
+ });
+
 //view all events
 
 //get events
