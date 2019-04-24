@@ -111,7 +111,7 @@ app.post('/users/register', (req, res) => {
     connection.query('SELECT id FROM users ORDER BY DESC LIMIT 1', function(err, results, fields) {
         if (err) throw err;
         else {
-            var tempId = results[0].id;
+            var tempId = results[0].id + 1;
         }
     });
     var hashed = crypto.createHash('SHA256').update(req.body.password).digest("hex");
