@@ -273,7 +273,7 @@ app.get('/apartments/pastRents/:aId?', (req, res) => {
     // } else {
         var aid = req.params.aId;
          console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
-         connection.query('SELECT rent FROM aProfiles NATURAL JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = >', [aid], function(err, results, fields) {
+         connection.query('SELECT rent FROM aProfiles NATURAL JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? >', [aid], function(err, results, fields) {
              if (err) throw err;
              else {
                  res.status(200).send(results);
