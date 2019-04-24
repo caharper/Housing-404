@@ -386,7 +386,7 @@ app.post('/user/apartments', (req, res) => {
 });
 //edit apt listing
 //create event
-app.post('/events/:e_id', (req, res) => {
+app.post('/events', (req, res) => {
 
     console.log("User ", req.session.user_id, " is adding attendance"); //console log to check
     connection.query('INSERT INTO events VALUES(? ? ? ?);', [req.params.e_id, req.sessions.owner, req.params.details, req.params.date], function(err, results, fields) {
