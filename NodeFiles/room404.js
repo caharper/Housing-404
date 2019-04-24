@@ -205,9 +205,9 @@ app.get('/user/notifications', (req, res) => {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
         console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
-        connection.query('SELECT * FROM users JOIN notifications ON users.id = notifications.to_u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_if - users.id WHERE notification.to_u_id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
-            else { //do we need to join with uProfiles or have gui redirect to the profile?
+            else {
                 res.status(200).send(results);
             }
         }); //possibly limit what is selected
@@ -283,7 +283,7 @@ app.get('/apartments/pastRents/:aId?', (req, res) => {
  });
 
 //view your event
-app.get('/user/profile', (req, res) => { //events
+app.get('/user/profile/event', (req, res) => { 
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
@@ -352,6 +352,306 @@ app.get('/events/:eid?/attending', (req, res) => {
 
 
 
+//filtering
+//apartments
+app.post('/apartments/results', (req, res) => {
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to view this");
+    //} else {
+        const filters = [req.body.rent, // less than    0
+            req.body.leaseTime, //equal 1
+            req.body.occupants, //less than 2
+            req.body.beds, //equal  3      
+            req.body.baths, //equal 4
+            req.body.squareFeet, //equal    5
+            req.body.rooms, //equal 6
+            req.body.kitchen, //equal   7
+            req.body.floor, //equal 8
+            req.body.pets, //equal  9
+            req.body.poBox, //equal 10
+            req.body.studyRooms, //equal    11
+            req.body.gym, //equal   12
+            req.body.pool, //equal  13
+            req.body.ac, //equal    14
+            req.body.heat //equal   15
+        ];
+        var first = false;
+        var q = 'SELECT * FROM aProfiles WHERE ';
+        if (filters[0] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'rent < ' + filters[0];
+            } else {
+                q = q + ' AND rent < ' + filters[0];
+            }
+        }
+        if (filters[1] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'leaseTime = ' + filters[1];
+            } else {
+                q = q + ' AND leaseTime = ' + filters[1];
+            }
+        }
+        if (filters[2] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'occupants < ' + filters[2];
+            } else {
+                q = q + ' AND occupants < ' + filters[2];
+            }
+        }
+        if (filters[3] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'beds = ' + filters[3];
+            } else {
+                q = q + ' AND beds = ' + filters[3];
+            }
+        }
+        if (filters[4] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'baths = ' + filters[4];
+            } else {
+                q = q + ' AND baths = ' + filters[4];
+            }
+        }
+        if (filters[5] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'squareFeet = ' + filters[5];
+            } else {
+                q = q + ' AND squareFeet = ' + filters[5];
+            }
+        }
+        if (filters[6] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'rooms = ' + filters[6];
+            } else {
+                q = q + ' AND rooms = ' + filters[6];
+            }
+        }
+        if (filters[7] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'rent kitchen = ' + filters[7];
+            } else {
+                q = q + ' AND kitchen = ' + filters[7];
+            }
+        }
+        if (filters[8] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'floor = ' + filters[8];
+            } else {
+                q = q + ' AND floor = ' + filters[8];
+            }
+        }
+        if (filters[9] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'pets = ' + filters[9];
+            } else {
+                q = q + ' AND pets = ' + filters[9];
+            }
+        }
+        if (filters[10] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'poBox = ' + filters[10];
+            } else {
+                q = q + ' AND poBox = ' + filters[10];
+            }
+        }
+        if (filters[11] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'studyRooms = ' + filters[11];
+            } else {
+                q = q + ' AND studyRooms = ' + filters[11];
+            }
+        }
+        if (filters[12] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'gym = ' + filters[12];
+            } else {
+                q = q + ' AND gym = ' + filters[12];
+            }
+        }
+        if (filters[13] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'pool = ' + filters[13];
+            } else {
+                q = q + ' AND pool = ' + filters[13];
+            }
+        }
+        if (filters[14] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'ac = ' + filters[14];
+            } else {
+                q = q + ' AND ac = ' + filters[14];
+            }
+        }
+        if (filters[15] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'heat = ' + filters[15];
+            } else {
+                q = q + ' AND heat = ' + filters[15];
+            }
+        }
+
+        connection.query(q, function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
+//users
+app.post('/users/results', (req, res) => {
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to view this");
+    //} else {
+        const filters = [req.body.gender, //0
+            req.body.smoker, //1
+            req.body.genderP, //2
+            req.body.smokerP, //3
+            req.body.year, //4
+            req.body.tidynessP, //5
+            req.body.yearP, //6
+            req.body.tempP, //7
+            req.body.bedTimeP, //8
+            req.body.wakeTime, //9
+            req.body.wakeTimeP, //10
+            req.body.pets //11
+        ];
+        var first = false;
+        var q = 'SELECT * FROM uProfiles WHERE ';
+        if (filters[0] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'gender = ' + filters[0];
+            } else {
+                q = q + ' AND gender = ' + filters[0];
+            }
+        }
+        if (filters[1] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'smoker = ' + filters[1];
+            } else {
+                q = q + ' AND smoker = ' + filters[1];
+            }
+        }
+        if (filters[2] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'genderP = ' + filters[2];
+            } else {
+                q = q + ' AND genderP = ' + filters[2];
+            }
+        }
+        if (filters[3] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'smokerP = ' + filters[3];
+            } else {
+                q = q + ' AND smokerP = ' + filters[3];
+            }
+        }
+        if (filters[4] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'year = ' + filters[4];
+            } else {
+                q = q + ' AND year = ' + filters[4];
+            }
+        }
+        if (filters[5] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'tidynessP = ' + filters[5];
+            } else {
+                q = q + ' AND tidynessP = ' + filters[5];
+            }
+        }
+        if (filters[6] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'yearP = ' + filters[6];
+            } else {
+                q = q + ' AND yearP = ' + filters[6];
+            }
+        }
+        if (filters[7] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'tempP = ' + filters[7];
+            } else {
+                q = q + ' AND tempP = ' + filters[7];
+            }
+        }
+        if (filters[8] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'bedTimeP = ' + filters[8];
+            } else {
+                q = q + ' AND bedTimeP = ' + filters[8];
+            }
+        }
+        if (filters[9] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'wakeTime = ' + filters[9];
+            } else {
+                q = q + ' AND wakeTime = ' + filters[9];
+            }
+        }
+        if (filters[10] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'wakeTimeP = ' + filters[10];
+            } else {
+                q = q + ' AND wakeTimeP = ' + filters[10];
+            }
+        }
+        if (filters[11] !== null) {
+            if (first !== true) {
+                first = true;
+                q = q + 'pets = ' + filters[11];
+            } else {
+                q = q + ' AND pets = ' + filters[11];
+            }
+        }
+
+        connection.query(q, function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
+//events
+app.post('/events/results', (req, res) => { //can only filter date
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to view this");
+    //} else {
+        connection.query('SELECT * FROM events WHERE date = ?', [req.body.date], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 
 
