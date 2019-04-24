@@ -401,7 +401,20 @@ app.get('/user/myEvents/:eid/attending?', (req, res) => {
     //}
 });
 
-
+//'user/notifications/:uid?'
+//view all notifications from a particular user to current user
+app.get('user/notifications/:uid??', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+            connection.query('SELECT notification FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.user_id, req.params.uid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 
 
@@ -1350,5 +1363,18 @@ app.delete('/user/myEvents/:eid?/attending', (req, res) => {
             }
         });
 
+    //}
+});
+
+app.delete('/user/notifications/:uid??', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+            connection.query('DELETE FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.u_id, req.params.uid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
     //}
 });
