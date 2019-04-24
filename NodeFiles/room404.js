@@ -341,11 +341,36 @@ app.get('/events/:eid?/attending', (req, res) => {
 
 //'/user/events/:eid?'
 
-//'/user/apartments/:aid?'
+//Get the details for your apartment listing
+app.get('/user/apartments/:aid?/', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var aid = req.params.aid;
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
-//'/user/apartments/:aid?/prevRents'
+//Get the previous rents for a specific listing of yours
+app.get('/user/apartments/:aid?/prevRents', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        var aid = req.params.aid;
+        connection.query('SELECT * FROM prevRents WHERE a_id = ?', [aid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
-//'/user/myEvents/:eid?'
 //view a user's own event
 app.get('/user/myEvents/:eid?', (req, res) => {
     //if(!req.session.loggedin) {
@@ -361,7 +386,6 @@ app.get('/user/myEvents/:eid?', (req, res) => {
     //}
 });
 
-//'/user/myEvents/:eid?/attending'
 //view a user's own event's attending memebers
 app.get('/user/myEvents/:eid/attending?', (req, res) => {
     //if(!req.session.loggedin) {
