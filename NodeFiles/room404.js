@@ -400,6 +400,18 @@ app.post('/events', (req, res) => {
 
 //edit event
 //create notification
+app.post('/notifications/', (req, res) => {
+
+    console.log("User ", req.session.user_id, " is adding attendance"); //console log to check
+    connection.query('INSERT INTO events VALUES(? ? ?);', [req.params.to_u_id, req.sessions.from_u_id, req.params.notification], function(err, results, fields) {
+        if (err) throw err;
+        else {
+            res.status(200).send(results);
+        }
+    });
+
+})
+
 //add to attending
 app.post('/events/:e_id?/attending', (req, res) => {
     //if(!req.session.loggedin) {
