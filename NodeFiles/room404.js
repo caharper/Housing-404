@@ -116,7 +116,26 @@ app.post('/user/register', (req, res) => {
     connection.query('INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)', userData, function(err, result) {
         if (err) throw err
         else{
-            res.status(200).send('Successfully registered');
+            const profileData = [tempId, 
+            req.body.gender,
+            req.body.picture,
+            req.body.smoker,
+            req.body.genderP,
+            req.body.smokerP,
+            req.body.year,
+            req.body.tidynessP,
+            req.body.yearP,
+            req.body.tempP,
+            req.body.bedTimeP,
+            req.body.wakeTime,
+            req.body.wakeTimeP,
+            req.body.pets]
+            connection.query('INSERT INTO uProfiles VALUES(? ? ? ? ? ? ? ? ? ? ? ? ? ?)', profileData, function(err, result) {
+                if (err) throw err
+                else{
+                    res.status(200).send('Successfully registered');
+                }
+            });
         }
     });
 });
