@@ -183,6 +183,20 @@ app.get('/users/:uid?', (req, res) => {
 
 
 //view list your attending events
+app.get('/user/attending/events', (req, res) => {
+    // if(!req.session.loggedin) {
+    //     res.status(404).send("You must be logged in to view this");
+    // } else {
+         console.log("User ", req.session.user_id, " is checking their events"); //console log to check
+         connection.query('SELECT * FROM users NATURAL JOIN events ON users.id = events.attending WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+             if (err) throw err;
+             else {
+                 res.status(200).send(results);
+             }
+         });
+     //}
+ });
+
 //view notifications
 
 //get notifications
@@ -202,6 +216,20 @@ app.get('/user/notifications', (req, res) => {
 
 
 //view your listings
+app.get('/user/listing', (req, res) => {
+    // if(!req.session.loggedin) {
+    //     res.status(404).send("You must be logged in to view this");
+    // } else {
+         console.log("User ", req.session.user_id, " is checking their listings"); //console log to check
+         connection.query('SELECT * FROM users NATURAL JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+             if (err) throw err;
+             else {
+                 res.status(200).send(results);
+             }
+         }); //possibly limit what is selected
+     //}
+ });
+
 //view all listings
 
 //get aparments
@@ -239,6 +267,21 @@ app.get('/apartments/:aId?', (req, res) => {
 
 
 //view previous rents for a listing
+app.get('/apartments/pastRents/:aId?', (req, res) => {
+    // if(!req.session.loggedin) {
+    //     res.status(404).send("You must be logged in to view this");
+    // } else {
+        var aid = req.params.aId;
+         console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
+         connection.query('SELECT rent FROM aProfiles NATURAL JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = >', [aid], function(err, results, fields) {
+             if (err) throw err;
+             else {
+                 res.status(200).send(results);
+             }
+         }); //possibly limit what is selected
+     //}
+ });
+ 
 //view your event
 //view all events
 
