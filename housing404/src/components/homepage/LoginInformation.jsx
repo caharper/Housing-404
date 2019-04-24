@@ -11,7 +11,7 @@ export class LoginInformation extends React.Component {
     return(
 
       <div className="card overflow-auto">
-        <div className="card-header bg-dark text-white">
+        <div className="card-header bg-secondary text-white">
           <h5>Your Login Information</h5>
         </div>
 

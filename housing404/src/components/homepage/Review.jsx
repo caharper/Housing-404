@@ -10,8 +10,8 @@ export class Review extends React.Component {
     return(
 
       <div className="card overflow-auto">
-        <div className="card-header bg-dark text-white">
-          Review
+        <div className="card-header bg-success text-white">
+          <h5>Review</h5>
         </div>
         <div className="card-body special-card">
           <div className="row">

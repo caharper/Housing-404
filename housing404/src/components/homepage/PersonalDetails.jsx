@@ -48,8 +48,8 @@ export class PersonalDetails extends React.Component {
     return(
 
       <div className="card overflow-auto">
-        <div className="card-header bg-dark text-white">
-          Personal Details
+        <div className="card-header bg-secondary text-white">
+          <h5>Personal Details</h5>
         </div>
         <div className="card-body special-card text-left">
           <div className="row">
@@ -78,15 +78,11 @@ export class PersonalDetails extends React.Component {
 
                 <div className="row">
                   <div className="form-group col-12">
-                    <label htmlFor="about">Tell us about yourself</label>
-                    <textarea type="text"
-                           id="about"
-                           name="about"
-                           className="form-control"
-                           placeholder="About you"
-                           value={this.props.about} // Prop: The email input data
-                           onChange={this.props.handleChange} // Prop: Puts data into state
-                           />
+                    <select id="gender" value={this.props.gender}>
+                      <option value="select">Select your gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
                   </div>
                 </div>
 

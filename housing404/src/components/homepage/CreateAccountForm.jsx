@@ -18,15 +18,29 @@ export class CreateAccountForm extends Component {
     // Set the initial input values
     this.state = {
       currentStep: 1, // Default is Step 1
+
+      // Login information
       email: '',
       name: '',
       password: '',
 
+      // Personal details/preferences
+      gender: '',
       picture: '',
-      about: '',
+      smoker: false,
+      year: 0,
+      bedTimePref: '9:00',
+      wakeTime: '9:00',
+      pets: 'no',
 
-      address: '',
-      roomDesc: '',
+      // Roommate preferences
+      smokerPref: false,
+      generPref: 'no',
+      tidynessPref: 1,
+      yearPref: 0,
+      tempPref: 0,
+      wakeTimePref: '9:00'
+
     }
     // Bind the submission to handleChange()
     this.handleChange = this.handleChange.bind(this)
@@ -71,7 +85,7 @@ export class CreateAccountForm extends Component {
     if(currentStep !==1){
       return (
         <button
-          className="btn btn-secondary btn-block mt-2"
+          className="btn btn-outline-secondary btn-block mt-2"
           type="button" onClick={this._prev}>
         Previous
         </button>
@@ -87,7 +101,7 @@ export class CreateAccountForm extends Component {
     if(currentStep <4){
       return (
         <button
-          className="btn btn-primary btn-block float-right mt-2"
+          className="btn btn-outline-primary btn-block float-right mt-2"
           type="button" onClick={this._next}>
         Next
         </button>
@@ -103,7 +117,7 @@ export class CreateAccountForm extends Component {
     if(currentStep === 4){
       return (
         <button
-          className="btn btn-success btn-block float-right mt-2"
+          className="btn btn-outline-success btn-block float-right mt-2"
           type="button" onClick={this.onSubmit()}>
         Create Account
         </button>
@@ -168,17 +182,28 @@ export class CreateAccountForm extends Component {
           email={this.state.email}
           password={this.state.password}>
         </LoginInformation>
+
         <PersonalDetails
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
+          gender={this.state.gender}
           picture={this.state.picture}
-          about={this.state.about}>
+          smoker={this.state.smoker}
+          year={this.state.year}
+          bedTimePref={this.state.bedTimePref}
+          wakeTime={this.state.wakeTime}
+          pets={this.state.pets}>
         </PersonalDetails>
+
         <RoommateDesc
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
-          address={this.state.address}
-          roomDesc={this.state.roomDesc}>
+          smokerPref={this.state.smokerPref}
+          generPref={this.state.generPref}
+          tidynessPref={this.state.tidynessPref}
+          yearPref={this.state.yearPref}
+          tempPref={this.state.tempPref}
+          wakeTimePref={this.state.wakeTimePref}>
         </RoommateDesc>
         <Review
           currentStep={this.state.currentStep}
