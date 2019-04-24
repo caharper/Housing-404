@@ -10,10 +10,10 @@ export class RoommateDesc extends React.Component {
     return(
 
       <div className="card overflow-auto">
-        <div className="card-header">
+        <div className="card-header bg-dark text-white">
           Roommate Description
         </div>
-        <div className="card-body">
+        <div className="card-body special-card">
           <div className="row">
             <div className="col-12">
               <form>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './homepage.css';
 
 
 export class LoginInformation extends React.Component {
@@ -10,11 +11,11 @@ export class LoginInformation extends React.Component {
     return(
 
       <div className="card overflow-auto">
-        <div className="card-header">
-          Your Login Information
+        <div className="card-header bg-dark text-white">
+          <h5>Your Login Information</h5>
         </div>
-        
-        <div className="card-body">
+
+        <div className="card-body special-card">
           <div className="row">
             <div className="col-12">
               <form>

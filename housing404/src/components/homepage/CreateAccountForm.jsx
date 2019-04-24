@@ -5,7 +5,7 @@ import { RoommateDesc } from './RoommateDesc'
 import { Review } from './Review'
 import './homepage.css'
 import $ from 'jquery';
-
+import { NewUser } from './../../models/newUser';
 
 export class CreateAccountForm extends Component {
   constructor(props) {
@@ -60,11 +60,6 @@ export class CreateAccountForm extends Component {
     // $("#progressbar li").index(this.state.currentStep).removeClass("active");
   }
 
-  onCreateAccount() {
-    // Add logic on form submit
-    // This should post to the api to add a user
-  }
-
   // The "next" and "previous" button functions
   get previousButton(){
     let currentStep = this.state.currentStep;
@@ -105,7 +100,7 @@ export class CreateAccountForm extends Component {
       return (
         <button
           className="btn btn-success btn-block float-right mt-2"
-          type="button" onClick={this.onCreateAccount}>
+          type="button" onClick={this.onSubmit()}>
         Create Account
         </button>
       )
@@ -113,6 +108,28 @@ export class CreateAccountForm extends Component {
     // ...else render nothing
     return null;
   }
+
+// ***** Having issues
+  onSubmit(){
+      //
+      // let newUser = new NewUser(this.state.name, this.state.email, this.state.password);
+      // this.props.onCreateAccount(newUser);
+      // //
+      // //     // clears the form
+      // this.setState(
+      //   {
+      //     currentStep: 1, // Default is Step 1
+      //     email: '',
+      //     name: '',
+      //     password: '',
+      //
+      //     picture: '',
+      //     about: '',
+      //
+      //     address: '',
+      //     roomDesc: '',
+      //   })
+    }
 
   // Use the submitted data to set the state
   // Needs a lot more logic

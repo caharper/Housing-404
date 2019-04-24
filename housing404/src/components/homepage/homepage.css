@@ -2,3 +2,11 @@
   width: 30rem;
   height: 25rem;
 }
+
+.special-card {
+  background-color: rgba(52, 58, 64, 0.4) !important;
+}
+/* 
+.btn:hover {
+  transform: scaleX(1.5);
+} */

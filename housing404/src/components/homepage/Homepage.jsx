@@ -16,15 +16,19 @@ export class Homepage extends React.Component {
 
   state = {
       // this will need to be routed if true
-      loggedIn: false
+      loggedIn: false,
+      createdAccount: false
     }
 
     onLogin(attemptUser){
-
-      // Call api for login here
-      // will need to pass down through props
+      // works
       this.accountRepository.login(attemptUser)
       .then(loggedIn => this.setState({ loggedIn }))
+    }
+
+    onCreateAccount(newUser){
+      this.accountRepository.login(newUser)
+      .then(createdAccount => this.setState({ createdAccount }))
     }
 
 
@@ -36,11 +40,15 @@ export class Homepage extends React.Component {
       <>
         <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
         <div className="container">
+          <div className="row justify-content-center mt-5 pt-5 mb-0 pb-0">
+            <h1>Find your roommate</h1>
+            <p className="text-secondary">By joining Housing404, you can search for roommates, filter out by roommate qualities, set up meeting times, and find your ideal roommate.</p>
+          </div>
           <div className="row">
             <ProgressBar></ProgressBar>
           </div>
           <div className="row justify-content-center">
-            <CreateAccountForm></CreateAccountForm>
+            <CreateAccountForm onCreateAccount={x => this.onCreateAccount(x) }></CreateAccountForm>
           </div>
 
 
