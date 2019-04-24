@@ -340,6 +340,14 @@ app.get('/events/:eid?/attending', (req, res) => {
 });
 
 //'/user/events/:eid?'
+app.get('/user/events/:eid?/', (req, res) => {
+    connection.query('SELECT * FROM events WHERE e_id = ?', [req.params.eid], function(err, results, fields) {
+        if (err) throw err;
+        else {
+            res.status(200).send(results);
+        }
+    })
+})
 
 //Get the details for your apartment listing
 app.get('/user/apartments/:aid?/', (req, res) => {
