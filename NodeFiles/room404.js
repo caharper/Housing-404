@@ -395,7 +395,7 @@ app.post('/events/:e_id?/attending', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         console.log("User ", req.session.user_id, " is adding attendance"); //console log to check
-        connection.query('INSERT INTO attending values(? ?)', [req.params.e_id, req.sessions.user_id], function(err, results, fields) {
+        connection.query('INSERT INTO attending VALUES(? ?);', [req.params.e_id, req.sessions.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -405,7 +405,19 @@ app.post('/events/:e_id?/attending', (req, res) => {
 });
 
 //add to previous rents
-//app
+app.post('/apartments/:a_id?:rent?/prevRents', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        console.log("User ", req.session.user_id, " is adding rents to prevRents" ); //console log to check
+        connection.query('INSERT INTO prevRents VALUES(? ?);', [req.params.a_id, req.params.rent], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 //deletes
 //delete notification
