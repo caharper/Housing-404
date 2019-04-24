@@ -131,18 +131,6 @@ app.post('/users/register', (req, res) => {
 
 //gets
 //view your profile
-//view list profiles
-//view specific profiles
-//view list your attending events
-//view notifications
-//view your listings
-//view all listings
-//view specific listings
-//view previous rents for a listing
-//view your event
-//view all events
-//view specific event
-//view attending for specific event
 
 //get user data
 app.get('/user/profile', (req, res) => {
@@ -158,6 +146,9 @@ app.get('/user/profile', (req, res) => {
         }); //possibly limit what is selected
    // }
 });
+
+//view list profiles
+
 app.get('/users', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to view this");
@@ -171,6 +162,10 @@ app.get('/users', (req, res) => {
 		});
 	//}
 });
+
+
+//view specific profiles
+
 app.get('/users/:uid?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to see this");
@@ -187,6 +182,28 @@ app.get('/users/:uid?', (req, res) => {
 });
 
 
+//view list your attending events
+//view notifications
+
+//get notifications
+app.get('/user/notifications', (req, res) => {
+   // if(!req.session.loggedin) {
+   //     res.status(404).send("You must be logged in to view this");
+   // } else {
+        console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
+        connection.query('SELECT * FROM users NATURAL JOIN notifications ON users.id = notifications.to_u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        }); //possibly limit what is selected
+    //}
+});
+
+
+//view your listings
+//view all listings
+
 //get aparments
 app.get('/apartments', (req, res) => {
    // if(!req.session.loggedin) {
@@ -201,6 +218,9 @@ app.get('/apartments', (req, res) => {
         }); //possibly limit what is selected
    // }
 });
+
+
+//view specific listings
 
 app.get('/apartments/:aId?', (req, res) => {
 	//if (!req.session.loggedin) {
@@ -217,6 +237,11 @@ app.get('/apartments/:aId?', (req, res) => {
 	//}
 });
 
+
+//view previous rents for a listing
+//view your event
+//view all events
+
 //get events
 app.get('/events', (req, res) => {
    // if(!req.session.loggedin) {
@@ -232,6 +257,9 @@ app.get('/events', (req, res) => {
    // }
 });
 
+
+//view specific event
+
 app.get('/events/:eid?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
@@ -246,27 +274,17 @@ app.get('/events/:eid?', (req, res) => {
 		});
 	//}
 });
-//get notifications
-app.get('/user/notifications', (req, res) => {
-   // if(!req.session.loggedin) {
-   //     res.status(404).send("You must be logged in to view this");
-   // } else {
-        console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
-        connection.query('SELECT * FROM users NATURAL JOIN notifications ON users.id = notifications.to_u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
-            if (err) throw err;
-            else {
-                res.status(200).send(results);
-            }
-        }); //possibly limit what is selected
-    //}
-});
+
+
+//view attending for specific event
 //get attending
-app.get('/events/attending', (req, res) => {
+app.get('/events/:eid?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
+	var eid = req.params.eid;
         console.log("User ", req.session.user_id, " is checking event attendance"); //console log to check
-        connection.query('SELECT * FROM attending WHERE e_id = ?', [req.body.e_id], function(err, results, fields) {
+        connection.query('SELECT * FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -274,6 +292,14 @@ app.get('/events/attending', (req, res) => {
         }); //possibly limit what is selected
     //}
 });
+
+
+
+
+
+
+
+
 
 
 
