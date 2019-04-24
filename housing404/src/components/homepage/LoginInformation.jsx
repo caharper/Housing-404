@@ -15,7 +15,7 @@ export class LoginInformation extends React.Component {
           <h5>Your Login Information</h5>
         </div>
 
-        <div className="card-body special-card">
+        <div className="card-body special-card text-left">
           <div className="row">
             <div className="col-12">
               <form>

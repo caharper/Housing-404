@@ -51,7 +51,7 @@ export class PersonalDetails extends React.Component {
         <div className="card-header bg-dark text-white">
           Personal Details
         </div>
-        <div className="card-body special-card">
+        <div className="card-body special-card text-left">
           <div className="row">
             <div className="col-12">
               <form>

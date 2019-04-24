@@ -42,22 +42,26 @@ export class CreateAccountForm extends Component {
       currentStep: currentStep
     })
 
+    let current_fs = $(this).parent();
+	  let next_fs = $(this).parent().next();
+
     // Now update the progressbar
     // $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    // $("#progressbar li").index(this.state.currentStep).addClass("active");
+    $("#progressbar li").eq(this.state.currentStep).addClass("active");
   }
 
   // ******** May need to change here
   _prev() {
     let currentStep = this.state.currentStep
     // If the current step is 2 or 3, then subtract one on "previous" button click
-    currentStep = currentStep <= 1? 1: currentStep - 1
+    currentStep = currentStep <= 1 ? 1: currentStep - 1
     this.setState({
       currentStep: currentStep
     })
 
     // Now update the progressbar
-    // $("#progressbar li").index(this.state.currentStep).removeClass("active");
+    $("#progressbar li").eq(this.state.currentStep).removeClass("active");
+    $("#progressbar li").eq(this.state.currentStep - 1).removeClass("active");
   }
 
   // The "next" and "previous" button functions
