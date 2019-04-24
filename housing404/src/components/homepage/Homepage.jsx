@@ -15,12 +15,16 @@ export class Homepage extends React.Component {
   accountRepository = new AccountRepository
 
   state = {
-
+      // this will need to be routed if true
+      loggedIn: false
     }
 
-    onLogin(){
+    onLogin(attemptUser){
+
       // Call api for login here
       // will need to pass down through props
+      this.accountRepository.login(attemptUser)
+      .then(loggedIn => this.setState({ loggedIn }))
     }
 
 
