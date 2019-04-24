@@ -1,3 +1,4 @@
+//include dependencies
 var express = require('express');
 var path = require('path');
 var cors = require('cors');
@@ -7,14 +8,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var app = express();
-//var random = require('random');
-
 var crypto = require('crypto');
 
-
+//create key and initialize port
 process.env.SECRET_KEY = 'illneverbearobdeniroformejoepesciisfine';
 const port = process.env.PORT || 3000; 
 
+//use parsers, cors, and create session
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
@@ -26,8 +26,10 @@ var sess = {
     cookie : { maxAge : 86400 * 1000 }
 }
 
+//use session
 app.use(session(sess));
 
+//connect to the sql database
 var connection = mysql.createConnection({
     host: 'housing404.csegpu8i3kxk.us-east-2.rds.amazonaws.com',
     port: '3306',
@@ -36,8 +38,7 @@ var connection = mysql.createConnection({
     database: 'room404'
 });
 
-
-
+//connect to the database
 connection.connect(function(err) {
     if (err) {
         console.log("error connecting" + err);
@@ -47,49 +48,37 @@ connection.connect(function(err) {
     }
 });
 
+//have server listen on the port
 app.listen(port, () => {
-    console.log('Simple Example');
-});
-
-
-app.get('/test/:userid?',(req, res) => {
-	var id = req.params.userid;
-	connection.query('SELECT * FROM users WHERE id = ?', [id], function(err, results, fields) {
-		if (err) throw err;
-		else {
-			res.send(results);
-		}
-	});
+    console.log('Sever Listening');
 });
 
 
 //Login function
 app.post('/users/login', (req, res) => {
-    //take u and p from front
+    //Get email and hash password
     var user_email_temp = req.body.email;
-    //let user_password = req.body.password;
     var hashedPW = crypto.createHash('SHA256').update(req.body.password).digest("hex");
-    if (req.session.loggedin) {
-        //checks if already logged in
+    if (req.session.loggedin) { //check if already logged in
         res.status(200).send('You are logged in as ' + req.session.user_name);
     } else {
-        //did user actually input both
+        //make sure email and pw both have values
         if (user_email_temp && hashedPW) {
-            //the ? fills in parameter
+            //check if correct user
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
-                if (results.length === 1) {
+                if (results.length === 1) { //if log in successful
                     req.session.user_id = results[0].id;
                     console.log("Login Successful!");
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
                     res.status(200).send('Login Success!');
-                } else {
+                } else { //if log in unsuccessful
                     req.status(400).send('Incorrect Username and/or Password!');
                     req.session.loggedin = false;
                 }
                 res.end();
             });
-        } else {
+        } else { //if both not entered send error
             res.status(400).send('Please enter Username and Password!');
             res.end();
         }
@@ -98,63 +87,68 @@ app.post('/users/login', (req, res) => {
 
 //logout function
 app.get('/users/logout', function (req, res) {
-    if (req.session.loggedin) {
+    if (req.session.loggedin) { //stop session
         req.session.destroy();
         res.send('Logout Successful!');
-    } else {
+    } else { //if not logged in send error
         res.send("<h1> You are not logged in. Can't log out!</h11>");
     }
 });
 
 //create user
 app.post('/users/register', (req, res) => {
+    //get id and increment
+    var tempId = 0;
     connection.query('SELECT id FROM users ORDER BY DESC LIMIT 1', function(err, results, fields) {
         if (err) throw err;
         else {
-            var tempId = results[0].id + 1;
+            tempId = results[0].id + 1;
         }
     });
+    //hash the password to store
     var hashed = crypto.createHash('SHA256').update(req.body.password).digest("hex");
-    const userData = [tempId,
-                    req.body.name,
-                    req.body.email,
-                    hashed]
+    const userData = [tempId, 
+        req.body.name, 
+        req.body.email, 
+        hashed]
  
-    connection.query('INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)',
-                    userData, function(err, result) {
-                  if (err) throw err
-                  else{
-                    console.log("user ", req.body.name, "created")
-                  }
-                });
+    //create user
+    connection.query('INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)', userData, function(err, result) {
+        if (err) throw err
+        else{
+            res.status(200).send('Successfully registered');
+        }
+    });
 });
 
-//gets
-//view your profile
 
-//get user data
+
+
+
+/*
+ * The following section contains get requests for various data
+ */
+
+//view your profile
 app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        console.log("User ", req.session.user_id, " is checking profile"); //console log to check
         connection.query('SELECT * FROM users NATURAL JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
             }
-        }); //possibly limit what is selected
+        });
    // }
 });
 
 //view list profiles
-
 app.get('/users', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to view this");
 	//} else {
-		console.log("User ", req.session.user_id, " is checking profiled");
-		connection.query('SELECT * FROM uProfiles', function(err, results, fields){
+		connection.query('SELECT * FROM uProfiles', function(err, results, fields) {
 			if (err) throw err;
 			else {
 				res.status(200).send(results);
@@ -163,16 +157,13 @@ app.get('/users', (req, res) => {
 	//}
 });
 
-
-//view specific profiles
-
+//view specific profile
 app.get('/users/:uid?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to see this");
 	//} else {
 		var uid = req.params.uid;
-		console.log("User ", req.session.user_id, " is checking a profile");
-		connection.query('SELECT * FROM uProfiles WHERE id = ?', [uid], function(err, results, fields){
+		connection.query('SELECT * FROM uProfiles WHERE id = ?', [uid], function(err, results, fields) {
 			if (err) throw err;
 			else {
 				res.status(200).send(results);
@@ -181,81 +172,68 @@ app.get('/users/:uid?', (req, res) => {
 	//}
 });
 
-
-//view list your attending events
+//view list of those events you are attending
 app.get('/user/attending/events', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-         console.log("User ", req.session.user_id, " is checking their events"); //console log to check
-         connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.user_id], function(err, results, fields) { //no attending
-             if (err) throw err;
-             else {
-                 res.status(200).send(results);
-             }
-         });
-     //}
- });
-
-//view notifications
-
-//get notifications
-app.get('/user/notifications', (req, res) => {
-   // if(!req.session.loggedin) {
-   //     res.status(404).send("You must be logged in to view this");
-   // } else {
-        console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
-        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_if - users.id WHERE notification.to_u_id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
             }
-        }); //possibly limit what is selected
+        });
+     //}
+});
+
+//view notifications
+app.get('/user/notifications', (req, res) => {
+   // if(!req.session.loggedin) {
+   //     res.status(404).send("You must be logged in to view this");
+   // } else {
+        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_id = users.id WHERE notification.to_u_id = ?', [req.session.user_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
     //}
 });
 
-
-//view your listings
+//view your apartment listings
 app.get('/user/listing', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-         console.log("User ", req.session.user_id, " is checking their listings"); //console log to check
-         connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
-             if (err) throw err;
-             else {
-                 res.status(200).send(results);
-             }
-         }); //possibly limit what is selected
-     //}
- });
+        connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
-//view all listings
-
-//get aparments
+//view all apartment listings
 app.get('/apartments', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        console.log("User ", req.session.user_id, " is checking apartments"); //console log to check
         connection.query('SELECT * FROM aProfiles', function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
             }
-        }); //possibly limit what is selected
+        });
    // }
 });
 
-
-//view specific listings
-
+//view specific apartment listings
 app.get('/apartments/:aId?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to view this");
 	//} else {
 		var aid = req.params.aId;
-		console.log('User', req.session.user_id, "is checking an apartment");
 		connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
 			if (err) throw err;
 			else {
@@ -265,52 +243,46 @@ app.get('/apartments/:aId?', (req, res) => {
 	//}
 });
 
-
-//view previous rents for a listing
+//view previous rents for an apartment listing
 app.get('/apartments/pastRents/:aId?', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
         var aid = req.params.aId;
-         console.log("User ", req.session.user_id, " is checking notifications"); //console log to check
-         connection.query('SELECT rent FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? >', [aid], function(err, results, fields) {
-             if (err) throw err;
-             else {
-                 res.status(200).send(results);
-             }
-         }); //possibly limit what is selected
-     //}
- });
+        connection.query('SELECT rent FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? ', [aid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 //view your event
 app.get('/user/profile/event', (req, res) => { 
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-         console.log("User ", req.session.user_id, " is checking their events"); //console log to check
-         connection.query('SELECT * FROM users NATURAL JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
-             if (err) throw err;
-             else {
-                 res.status(200).send(results);
-             }
-         }); //possibly limit what is selected
-    // }
- });
-
-//view all events
-
-//get events
-app.get('/events', (req, res) => {
-   // if(!req.session.loggedin) {
-   //     res.status(404).send("You must be logged in to view this");
-   // } else {
-        console.log("User ", req.session.user_id, " is checking events"); //console log to check
-        connection.query('SELECT * FROM events', function(err, results, fields) {
+        connection.query('SELECT * FROM users NATURAL JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
             }
         }); //possibly limit what is selected
+    // }
+});
+
+//view all events
+app.get('/events', (req, res) => {
+   // if(!req.session.loggedin) {
+   //     res.status(404).send("You must be logged in to view this");
+   // } else {
+        connection.query('SELECT * FROM events', function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
    // }
 });
 
@@ -346,13 +318,19 @@ app.get('/events/:eid?/attending', (req, res) => {
             else {
                 res.status(200).send(results);
             }
-        }); //possibly limit what is selected
+        });
     //}
 });
 
 
 
-//filtering
+
+
+/*
+ * The following section contains post requests for various data that
+ * filters the results shown on listing pages.
+ */
+
 //apartments
 app.post('/apartments/results', (req, res) => {
     //if (!req.session.loggedin) {
@@ -514,6 +492,7 @@ app.post('/apartments/results', (req, res) => {
         });
     //}
 });
+
 //users
 app.post('/users/results', (req, res) => {
     //if (!req.session.loggedin) {
@@ -639,8 +618,9 @@ app.post('/users/results', (req, res) => {
         });
     //}
 });
+
 //events
-app.post('/events/results', (req, res) => { //can only filter date
+app.post('/events/results', (req, res) => {
     //if (!req.session.loggedin) {
     //  res.status(404).send("You must be logged in to view this");
     //} else {
@@ -657,73 +637,70 @@ app.post('/events/results', (req, res) => { //can only filter date
 
 
 
+/* 
+ * The following section contains post and put requests for various data
+ */ 
 
-
-
-
-//puts/posts
 //edit profile
+
 //create listing
 app.post('/user/apartments', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
-		connection.query('SELECT a_id FROM aProfiles ORDER BY DESC LIMIT 1', function(err, results, fields) {
-			if (err) throw err;
+	    connection.query('SELECT a_id FROM aProfiles ORDER BY DESC LIMIT 1', function(err, results, fields) {
+		    if (err) throw err;
 			else {
 				var a_id = results[0].a_id + 1;
-				console.log("User ", req.session.id, " is adding a listing");
-        
-        			connection.query('insert into aProfiles values(? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?)'[a_id, req.session.id, req.body.location,
-        			req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.picture, req.body.occupants, req.body.beds,
+        		connection.query('insert into aProfiles values(? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?)'[a_id, req.session.id, req.body.location,
+        		    req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.picture, req.body.occupants, req.body.beds,
         			req.body.baths, req.body.squareFeet, req.body.rooms, req.body.kitchen, req.body.laundry, req.body.floor, req.body.pets, 
         			req.body.poBox, req.body.studyRooms, req.body.roomStyle, req.body.gym, req.body.pool, req.body.ac, req.body.pool], function(err, results, fields){
-					if (err) throw err;
+                    
+                    if (err) throw err;
 					else {
-						res.status(200).send("Successfully added event");
-					}
+					    res.status(200).send("Successfully added event");
+                    }
+                    
 				});
-				
 			}
 		});
-
 	//}
 });
+
 //edit apt listing
+
 //create event
 app.post('/events', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
-    console.log("User ", req.session.id, " is adding event"); //console log to check
-    connection.query('SELECT e_id FROM events ORDER BY DESC LIMIT 1', function(err, results, fields) {
-    	var e_id = results[0].e_id + 1;
-	connection.query('INSERT INTO events VALUES(? ? ? ?);', [e_id, req.sessions.id, req.body.details, req.body.date], function(err, results, fields) {
-        	if (err) throw err;
-        	else {
-        	    res.status(200).send("Successfully added event");
-        	}
-    	});
-    });
-
+        connection.query('SELECT e_id FROM events ORDER BY DESC LIMIT 1', function(err, results, fields) {
+    	    var e_id = results[0].e_id + 1;
+	        connection.query('INSERT INTO events VALUES(? ? ? ?);', [e_id, req.sessions.id, req.body.details, req.body.date], function(err, results, fields) {
+        	    if (err) throw err;
+        	    else {
+        	        res.status(200).send("Successfully added event");
+        	    }
+    	    });
+        });
 	//}
 });
 
 //edit event
+
 //create notification
 app.post('/notifications', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
-    console.log("User ", req.session.id, " is adding notification"); //console log to check
-    connection.query('INSERT INTO notifications VALUES(? ? ?);', [req.body.to_u_id, req.session.id, req.body.notification], function(err, results, fields) {
-        if (err) throw err;
-        else {
-            res.status(200).send("Successfully added notification");
-        }
-    });
+        connection.query('INSERT INTO notifications VALUES(? ? ?);', [req.body.to_u_id, req.session.id, req.body.notification], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send("Successfully added notification");
+            }
+        });
 	//}
-
 });
 
 //add to attending
@@ -731,7 +708,6 @@ app.post('/events/:e_id?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-        console.log("User ", req.session.user_id, " is adding attendance"); //console log to check
         connection.query('INSERT INTO attending VALUES(? ?);', [req.params.e_id, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
@@ -746,28 +722,30 @@ app.post('/apartments/:a_id?/prevRents', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-	connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [req.params.a_id], function(err, results, fields) => {
-		if (err) throw err;
-		else if (results[0].u_id === req.session.id) {
-			console.log("User ", req.session.user_id, " is adding rents to prevRents" ); //console log to check
+	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [req.params.a_id], function(err, results, fields) {
+		    if (err) throw err;
+		    else if (results[0].u_id === req.session.id) {
        			connection.query('INSERT INTO prevRents VALUES(? ?);', [req.params.a_id, req.body.rent], function(err, results, fields) {
-            			if (err) throw err;
-            			else {
-                			res.status(200).send("Successfully added rent");
-            			}
+            		if (err) throw err;
+            		else {
+                		res.status(200).send("Successfully added rent");
+            		}
         		});
-		} else {
-			res.status(404).send("You don't have authorization to do this");
-		}
-	});
-
+		    } else {
+			    res.status(404).send("You don't have authorization to do this");
+		    }
+	    });
     //}
 });
 
 
 
 
-//deletes
+
+/* 
+ * The following section contains delete requests for various data
+ */
+
 //delete notification
 app.delete('/user/notification', (req, res) => {
     //if(!req.session.loggedin) {
@@ -891,106 +869,3 @@ app.delete('/events/:eid?/attending', (req, res) => {
 
     //}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//how to do filters? tf?
-
-
-
-
-
-
-
-/*
-//examples below
-app.get('/url/blah', (req, res) => {
-    if (!req.session.loggedin) {
-        res.status(404).send("error message");
-    } else {
-        console.log("user id " + req.session.user_id);
-        connection.query('SELECT * FROM users JOIN tblename ON users.user_id = table.id  WHERE users.user_id = ?', [req.session.user_id], function(error, results, fields) {
-            let responseToFront = {}
-            for (var i = 0; i < results.length; i++) {
-                responseToFront[results[i].namething] = results[i].thing;
-            }
-            res.status(200).send(responseToFront);
-        });
-    }
-});
-//get stuff
-app.get('/users/blah', (req, res) => {
-    if (!req.session.loggedin) {
-        res.status(404).send("You are not authorized here");
-    } else {
-        var thingsToPrint = {};
-        connection.query('SELECT * FROM blah JOIN atable ON thing', function(err, results, fields) {
-            if (err) throw err;
-            else {
-                res.status(200).send(results);
-            }
-        });
-    }
-});
-//post as a delete
-app.post('/blah/user/delete', (req, res) => {
-    if (!req.session.loggedin) {
-        res.status(404).send('You are not authorized in here');
-    } else {
-        let variablething = req.body.variablething;
-        console.log('User id is ' + req.session.user_id);
-        connection.query('DELETE FROM users WHERE user_id = ?', [req.session.user_id], function(err, results, fields) {
-            res.status(200).send("Delete successful");
-        });
-    }
-});
-app.post('/blah/url/add', (req, res) => {
-    if (!req.session.loggedin) {
-        res.status(404).send("You are not authorized here");
-    } else {
-        //checking if exists and if so uses that
-        var a_id = -1; //so check if id exits?
-        connection.query('SELECT a_id FROM aProfiles WHERE a_id = ?', [req.body.a_id], function(err, results, fields) { //dont use id to check, find something else
-            if (err) throw err;
-            else {
-                //processing
-                //thing = results[0].thing
-                //if (results.length > 0) { a_id = results[0].a_id; }
-            }
-        });
-        if (a_id != -1) {
-            user_add_things = [req.session.user_id, a_id, req.body.blah]; //where blah would be all the parameters
-            console.log("user id ", req.session.user_id, "add apt");
-            connection.query('INSERT INTO aProfiles (user_id, a_id, etc) VALUES (?, ?, ?, ?)', user_add_things, function(err, results, fields) {
-                res.status(200).send('Add success');
-            });
-        } else {
-            connection.query('INSERT INTO aProfiles (a_id) VALUES ?',  [req.body.a_id], function(err, results, fields) {
-                if (err) throw err;
-            });
-            connection.query('SELECT a_id FROM aProfiles ORDER BY a_id DESC LIMIT 1', function(err, results, fields) {
-                if (err) throw err
-                else {
-                    if (results > 0) { a_id = results[0].a_id }
-                }
-            });
-            user_add_things = [req.session.user_id, a_id, req.body.things];
-            console.log("User id is ", req.session.user_id, " adds apartment");
-            connection.query('INSERT INTO aProfiles (list things) VALUES (?)', user_add_things, function(err, result, fields) {
-                res.status(200).send('Add success');
-            });
-        }
-    }
-});
-*/
