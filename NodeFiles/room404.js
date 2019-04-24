@@ -642,11 +642,25 @@ app.post('/events/results', (req, res) => {
  */ 
 
 //edit profile
+app.post('/user/profile/edit', (req, res) => {
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to edit this");
+    //} else {
+        connection.query('SELECT * FROM uProfiles WHERE id = ?', [req.body.u_id], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                //if statement going through all the changes using results vs req.body
+            } else {
+                res.status(404).send("You are not authorized to edit this");
+            }
+        });
+    //}
+});
 
 //create listing
 app.post('/user/apartments', (req, res) => {
 	//if (!req.session.loggedin) {
-	//	res.status(404).send("You must be loggined in to view this");
+	//	res.status(404).send("You must be loggined in to add this");
 	//} else {
 	    connection.query('SELECT a_id FROM aProfiles ORDER BY DESC LIMIT 1', function(err, results, fields) {
 		    if (err) throw err;
@@ -669,6 +683,20 @@ app.post('/user/apartments', (req, res) => {
 });
 
 //edit apt listing
+app.post('/user/apartments/edit', (req, res) => {
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to edit this");
+    //} else {
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.body.a_id], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                //if statement going through all the changes using results vs req.body
+            } else {
+                res.status(404).send("You are not authorized to edit this");
+            }
+        });
+    //}
+});
 
 //create event
 app.post('/events', (req, res) => {
@@ -688,6 +716,20 @@ app.post('/events', (req, res) => {
 });
 
 //edit event
+app.post('/user/apartments/edit', (req, res) => {
+    //if (!req.session.loggedin) {
+    //  res.status(404).send("You must be logged in to edit this");
+    //} else {
+        connection.query('SELECT * FROM events WHERE e_id = ?', [req.body.e_id], function(err, results, fields) {
+            if (err) throw err;
+            else if (results[0].u_id === req.session.id) {
+                //if statement going through all the changes using results vs req.body
+            } else {
+                res.status(404).send("You are not authorized to edit this");
+            }
+        });
+    //}
+});
 
 //create notification
 app.post('/notifications', (req, res) => {
