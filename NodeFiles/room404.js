@@ -153,7 +153,7 @@ app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM users NATURAL JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -282,7 +282,7 @@ app.get('/user/myEvents', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM users NATURAL JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN events ON users.id = events.owner WHERE id = ?', [req.session.user_id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -338,6 +338,16 @@ app.get('/events/:eid?/attending', (req, res) => {
         });
     //}
 });
+
+//'/user/events/:eid?'
+
+//'/user/apartments/:aid?'
+
+//'/user/apartments/:aid?/prevRents'
+
+//'/user/myEvents/:eid?'
+
+//'/user/myEvents/:eid?/attending'
 
 
 
@@ -658,7 +668,7 @@ app.post('/events/results', (req, res) => {
  * The following section contains post and put requests for various data
  */ 
 
-//update password
+//update user information aka '/user/edit'
 
 //edit profile
 app.post('/user/profile/edit', (req, res) => {
