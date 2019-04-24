@@ -386,9 +386,24 @@ app.post('/user/apartments', (req, res) => {
 });
 //edit apt listing
 //create event
+
 //edit event
 //create notification
 //add to attending
+app.get('/events/:e_id?/attending', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+        console.log("User ", req.session.user_id, " is adding attendance"); //console log to check
+        connection.query('INSERT INTO attending values(? ?)', [req.params.e_id, req.sessions.user_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
+
 //add to previous rents
 
 //deletes
