@@ -55,7 +55,7 @@ app.listen(port, () => {
 
 
 //Login function
-app.post('/users/login', (req, res) => {
+app.post('/user/login', (req, res) => {
     //Get email and hash password
     var user_email_temp = req.body.email;
     var hashedPW = crypto.createHash('SHA256').update(req.body.password).digest("hex");
@@ -86,7 +86,7 @@ app.post('/users/login', (req, res) => {
 });
 
 //logout function
-app.get('/users/logout', function (req, res) {
+app.get('/user/logout', function (req, res) {
     if (req.session.loggedin) { //stop session
         req.session.destroy();
         res.send('Logout Successful!');
@@ -96,7 +96,7 @@ app.get('/users/logout', function (req, res) {
 });
 
 //create user
-app.post('/users/register', (req, res) => {
+app.post('/user/register', (req, res) => {
     //get id and increment
     var tempId = 0;
     connection.query('SELECT id FROM users ORDER BY DESC LIMIT 1', function(err, results, fields) {
@@ -173,7 +173,7 @@ app.get('/users/:uid?', (req, res) => {
 });
 
 //view list of those events you are attending
-app.get('/user/attending/events', (req, res) => {
+app.get('/user/events', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
@@ -201,7 +201,7 @@ app.get('/user/notifications', (req, res) => {
 });
 
 //view your apartment listings
-app.get('/user/listing', (req, res) => {
+app.get('/user/apartments', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
@@ -229,11 +229,11 @@ app.get('/apartments', (req, res) => {
 });
 
 //view specific apartment listings
-app.get('/apartments/:aId?', (req, res) => {
+app.get('/apartments/:aid?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be logged in to view this");
 	//} else {
-		var aid = req.params.aId;
+		var aid = req.params.aid;
 		connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
 			if (err) throw err;
 			else {
@@ -244,11 +244,11 @@ app.get('/apartments/:aId?', (req, res) => {
 });
 
 //view previous rents for an apartment listing
-app.get('/apartments/pastRents/:aId?', (req, res) => {
+app.get('/apartments/:aid?/pastRents', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        var aid = req.params.aId;
+        var aid = req.params.aid;
         connection.query('SELECT rent FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? ', [aid], function(err, results, fields) {
             if (err) throw err;
             else {
@@ -259,7 +259,7 @@ app.get('/apartments/pastRents/:aId?', (req, res) => {
 });
 
 //view your event
-app.get('/user/profile/event', (req, res) => { 
+app.get('/user/myEvents', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
@@ -288,7 +288,6 @@ app.get('/events', (req, res) => {
 
 
 //view specific event
-
 app.get('/events/:eid?', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
@@ -306,7 +305,6 @@ app.get('/events/:eid?', (req, res) => {
 
 
 //view attending for specific event
-//get attending
 app.get('/events/:eid?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
@@ -799,7 +797,7 @@ app.post('/user/apartments', (req, res) => {
 });
 
 //edit apt listing
-app.post('/user/apartments/edit', (req, res) => {
+app.post('/user/apartments/:aid?/edit', (req, res) => {
     //if (!req.session.loggedin) {
     //  res.status(404).send("You must be logged in to edit this");
     //} else {
@@ -1001,7 +999,7 @@ app.post('/user/apartments/edit', (req, res) => {
 });
 
 //create event
-app.post('/events', (req, res) => {
+app.post('/user/myEvents', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
@@ -1018,11 +1016,12 @@ app.post('/events', (req, res) => {
 });
 
 //edit event
-app.post('/user/event/edit', (req, res) => {
+app.post('/user/myEvents/:eid?/edit', (req, res) => {
     //if (!req.session.loggedin) {
     //  res.status(404).send("You must be logged in to edit this");
     //} else {
-        connection.query('SELECT * FROM events WHERE e_id = ?', [req.body.e_id], function(err, results, fields) {
+        var eid = req.params.eid;
+        connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.id) {
                 var q = 'UPDATE events SET ';
@@ -1053,7 +1052,7 @@ app.post('/user/event/edit', (req, res) => {
                     }
                 }
 
-                q = q + ' WHERE owner = ' + req.session.id + ' AND e_id = ' + req.body.e_id;
+                q = q + ' WHERE owner = ' + req.session.id + ' AND e_id = ' + eid;
                 connection.query(q, function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1068,11 +1067,12 @@ app.post('/user/event/edit', (req, res) => {
 });
 
 //create notification
-app.post('/notifications', (req, res) => {
+app.post('/users/:uid?/contact', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
-        connection.query('INSERT INTO notifications VALUES(? ? ?);', [req.body.to_u_id, req.session.id, req.body.notification], function(err, results, fields) {
+        var uid = req.params.uid;
+        connection.query('INSERT INTO notifications VALUES(? ? ?);', [uid, req.session.id, req.body.notification], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send("Successfully added notification");
@@ -1082,11 +1082,12 @@ app.post('/notifications', (req, res) => {
 });
 
 //add to attending
-app.post('/events/:e_id?/attending', (req, res) => {
+app.post('/events/:eid?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-        connection.query('INSERT INTO attending VALUES(? ?);', [req.params.e_id, req.session.id], function(err, results, fields) {
+        var eid = req.params.eid;
+        connection.query('INSERT INTO attending VALUES(? ?);', [eid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send("Successfully added attending");
@@ -1096,14 +1097,15 @@ app.post('/events/:e_id?/attending', (req, res) => {
 });
 
 //add to previous rents
-app.post('/apartments/:a_id?/prevRents', (req, res) => {
+app.post('/user/apartments/:aid?/prevRents/edit', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [req.params.a_id], function(err, results, fields) {
+        var aid = req.params.aid;
+	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
 		    if (err) throw err;
 		    else if (results[0].u_id === req.session.id) {
-       			connection.query('INSERT INTO prevRents VALUES(? ?);', [req.params.a_id, req.body.rent], function(err, results, fields) {
+       			connection.query('INSERT INTO prevRents VALUES(? ?);', [aid, req.body.rent], function(err, results, fields) {
             		if (err) throw err;
             		else {
                 		res.status(200).send("Successfully added rent");
@@ -1125,7 +1127,7 @@ app.post('/apartments/:a_id?/prevRents', (req, res) => {
  */
 
 //delete notification
-app.delete('/user/notification', (req, res) => {
+app.delete('/user/notifications', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
@@ -1139,7 +1141,7 @@ app.delete('/user/notification', (req, res) => {
 });
 
 //delete account
-app.delete('/user/account', (req, res) => {
+app.delete('/user/edit', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
@@ -1148,11 +1150,11 @@ app.delete('/user/account', (req, res) => {
 });
 
 //delete apt listing
-app.delete('/apartment/:id?',(req,res) => {
+app.delete('/user/apartments/:aid?/edit',(req,res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-        var aid = req.params.id;
+        var aid = req.params.aid;
         connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.id) {
@@ -1175,7 +1177,7 @@ app.delete('/apartment/:id?',(req,res) => {
 });
 
 //delete event
-app.delete('/user/:eid?', (req, res) => {
+app.delete('/user/myEvents/:eid?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
@@ -1203,7 +1205,7 @@ app.delete('/user/:eid?', (req, res) => {
 });
 
 //delete attending your event
-app.delete('/user/:eid?/attending', (req, res) => {
+app.delete('/user/events/:eid?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
@@ -1226,7 +1228,7 @@ app.delete('/user/:eid?/attending', (req, res) => {
 });
 
 //delete attending to your event
-app.delete('/events/:eid?/attending', (req, res) => {
+app.delete('/user/myEvents/:eid?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
