@@ -721,6 +721,26 @@ app.post('/events/results', (req, res) => {
  */ 
 
 //update user information aka '/user/edit'
+app.post('/user/edit', (req, res) => {
+
+    var q = 'UPDATE users set'
+    if (err) throw err;
+    else if (req.body.name !== null){
+        q = q + 'name = ' + req.body.name;
+    } else if (req.body.email !== null){
+        q = q + 'email = ' + req.body.email;
+    } else if (req.body.password !== null){
+        q = q + 'password = ' + req.body.password;
+    }
+    q = q + ' WHERE id = ' + req.session.id;
+
+    connection.query(q, function(err, results, fields) {
+        if (err) throw err;
+        else {
+            res.status(200).send("Successfully edited user profile");
+        }
+    });
+})
 
 //edit profile
 app.post('/user/profile/edit', (req, res) => {
