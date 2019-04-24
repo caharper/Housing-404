@@ -390,7 +390,7 @@ app.post('/user/apartments', (req, res) => {
 //edit event
 //create notification
 //add to attending
-app.get('/events/:e_id?/attending', (req, res) => {
+app.post('/events/:e_id?/attending', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
@@ -405,6 +405,7 @@ app.get('/events/:e_id?/attending', (req, res) => {
 });
 
 //add to previous rents
+//app
 
 //deletes
 //delete notification
