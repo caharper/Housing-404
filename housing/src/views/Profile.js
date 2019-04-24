@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import Placeholder from '../placeholder.png';
 
 class Profile extends Component {
-
+  state = {
+    user:[
+      
+    ]
+  }
   render() {
     return (
       <div>
