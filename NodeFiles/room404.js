@@ -346,8 +346,36 @@ app.get('/events/:eid?/attending', (req, res) => {
 //'/user/apartments/:aid?/prevRents'
 
 //'/user/myEvents/:eid?'
+//view a user's own event
+app.get('/user/myEvents/:eid?', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+            console.log("User ", req.session.user_id, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.u_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 //'/user/myEvents/:eid?/attending'
+//view a user's own event's attending memebers
+app.get('/user/myEvents/:eid/attending?', (req, res) => {
+    //if(!req.session.loggedin) {
+    //    res.status(404).send("You must be logged in to view this");
+    //} else {
+            console.log("User ", req.session.user_id, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, req.session.u_id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                res.status(200).send(results);
+            }
+        });
+    //}
+});
 
 
 
