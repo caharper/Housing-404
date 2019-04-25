@@ -153,7 +153,7 @@ app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
