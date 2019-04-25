@@ -211,11 +211,80 @@ export class AccountRepository {
       })
   }
 
+  // Gets ALL apartment listings for a single user
+  getSingleUserApartments() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/user/apartments`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Creates an apartment listing
+  createApartment(aData){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/user/apartments`, aData)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Gets a SINGLE apartment with a given id associated with a user
+  getUserApartment(aId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/user/apartments/${aId}`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Gets the previous rent information for a specific apartment associated with a user
+  getUserApartmentRent(aId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/user/apartments/${aId}/prevRents`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Edits an apartment's rent with a given id associated with a user
+  editUserApartmentRent(aId, editInfo){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/user/apartments/${aId}/prevRents`, editInfo)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Edits an apartment listing with a given id associated with a user
+  editUserApartment(aId, editInfo){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/user/apartments/${aId}/edit`, editInfo)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Deletes an apartment listing with a given id
+  // deleteApartment(aId) {
+  //   return new Promise((resolve, reject) => {
+  //       axios.delete(`${this.url}/user/apartments/${aId}/edit`)
+  //       .then(resp => resolve(resp.data))
+  //       .catch(resp => alert(resp))
+  //     })
+  // }
 
 
 
   // Users functions
 
+  // Gets all users on the app
   getUsers() {
     return new Promise((resolve, reject) => {
       axios.get(`${this.url}/users`)
@@ -226,19 +295,155 @@ export class AccountRepository {
     })
   }
 
+  // Get a user on the app with a specific id
+  getUserWithId(uId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/users/${uId}`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Contact a user with a specific id from a user -----******This needs to receive an object with comment, sender, receiver
+  contactUser(contactInfo){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/users/${contactInfo.receiver}`, contactInfo)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Filter users for certain characteristics
+  filterUsers(filters){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/users/results`, filters)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Finds a user with the EXACT matching traits as current user
+  getPerfectMatch() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/users`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Gets ALL apartment listings
+  getAllApartments() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/apartments`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Gets an apartment with a given id
+  getApartmentsWithId(aId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/apartments/${aId}`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Get apartment's previous rents with a given id
+  getApartmentRent(aId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/apartments/${aId}/pastRents`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Filter out apartments with given filters
+  filterApartments(filters){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/apartments/results`, filters)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Get ALL events
+  getAllEvents() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/events`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Get event with a given id
+  getEventWithId(eId){
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/events/${eId}`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Get who is attending an event with a given id
+  getAttendingEventWithId(eId){
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.url}/events/${eId}/attending`)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(resp => alert(resp))
+    })
+  }
+
+  // Add a user to attend an event  -----********* I think this is what this does
+  addUserToEvent(eId, eventToPost){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/events/${eId}/attending`, eventToPost)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+  // Filters out events with given filters
+  filterEvents(filters){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/events/results`, filters)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
+
+
+
   // ************ DELETE LATER **********************
 
 
 
   // Good stuff from class
   //
-  getAccount(accountId){
-    return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/${accountId}`)
-      .then(resp => resolve(resp.data))
-      .catch(resp => alert(resp))
-    })
-  }
+  // getAccount(accountId){
+  //   return new Promise((resolve, reject) => {
+  //     axios.get(`${this.url}/${accountId}`)
+  //     .then(resp => resolve(resp.data))
+  //     .catch(resp => alert(resp))
+  //   })
+  // }
   //
   // updateAccount(accountId, account){
   //   return new Promise((resolve, reject) => {
