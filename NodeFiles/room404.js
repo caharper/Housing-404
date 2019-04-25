@@ -210,7 +210,7 @@ app.get('/user/notifications', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM notifications JOIN users ON notifications.to_u_id = users.id AND notifications.from_u_id = users.id WHERE notification.to_u_id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ?', [req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
