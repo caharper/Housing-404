@@ -341,7 +341,7 @@ app.get('/events/:eid?/attending', (req, res) => {
 
 //'/user/events/:eid?'
 app.get('/user/events/:eid?/', (req, res) => {
-    connection.query('SELECT * FROM events WHERE e_id = ?', [req.params.eid], function(err, results, fields) {
+    connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.id], function(err, results, fields) {
         if (err) throw err;
         else {
             res.status(200).send(results);
@@ -355,7 +355,7 @@ app.get('/user/apartments/:aid?/', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var aid = req.params.aid;
-        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ? AND u_id = ?', [aid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -370,7 +370,7 @@ app.get('/user/apartments/:aid?/prevRents', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var aid = req.params.aid;
-        connection.query('SELECT * FROM prevRents WHERE a_id = ?', [aid], function(err, results, fields) {
+        connection.query('SELECT prevRents.rent FROM prevRents JOIN aProfiles ON prevRents.a_id = aProfiles.a_id WHERE prevRents.a_id = ? AND u_id = ?', [aid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -411,7 +411,7 @@ app.get('/user/myEvents/:eid/attending?', (req, res) => {
 
 //'user/notifications/:uid?'
 //view all notifications from a particular user to current user
-app.get('user/notifications/:uid??', (req, res) => {
+app.get('user/notifications/:uid?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
