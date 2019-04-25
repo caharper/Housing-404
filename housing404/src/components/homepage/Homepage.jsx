@@ -5,6 +5,7 @@ import { AccountRepository } from './../../api/accountRepository'
 import { LoginInformation } from './LoginInformation'
 import { CreateAccountForm } from './CreateAccountForm'
 import './homepage.css'
+import logo from './../../housing404.svg';
 
 import axios from 'axios'
 
@@ -40,7 +41,10 @@ export class Homepage extends React.Component {
       <>
         <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
         <div className="container">
-          <div className="row justify-content-center mt-5 pt-5 mb-0 pb-0">
+          <div className="row justify-content-center mb-0 pb-0">
+            <img className="img-fluid" src={logo}></img>
+          </div>
+          <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
             <h1>Find your roommate</h1>
             <p className="text-secondary">By joining Housing404, you can search for roommates, filter out by roommate qualities, set up meeting times, and find your ideal roommate.</p>
           </div>

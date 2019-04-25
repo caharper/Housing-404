@@ -12,7 +12,7 @@ export class LoginInformation extends React.Component {
 
       <div className="card overflow-auto">
         <div className="card-header bg-secondary text-white">
-          <h5>Your Login Information</h5>
+          <h3 className="font-weight-bold">Create an account!</h3>
         </div>
 
         <div className="card-body special-card text-left">

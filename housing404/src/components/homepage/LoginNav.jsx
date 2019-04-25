@@ -51,7 +51,7 @@ export class LoginNav extends React.Component {
                   <input className="form-control mr-sm-2" placeholder="Password" id="password" type="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
                 </div>
               </form>
-              <button onClick={e => this.onSubmit()} className="btn btn-outline-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
+              <button onClick={e => this.onSubmit()} className="btn btn-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
             </div>
           </div>
 

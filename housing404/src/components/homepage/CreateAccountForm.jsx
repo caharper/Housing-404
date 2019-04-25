@@ -85,9 +85,9 @@ export class CreateAccountForm extends Component {
     if(currentStep !==1){
       return (
         <button
-          className="btn btn-outline-secondary btn-block mt-2"
+          className="btn btn-outline-primary btn-block mt-2"
           type="button" onClick={this._prev}>
-        Previous
+        Back
         </button>
       )
     }
@@ -101,7 +101,7 @@ export class CreateAccountForm extends Component {
     if(currentStep <4){
       return (
         <button
-          className="btn btn-outline-primary btn-block float-right mt-2"
+          className="btn btn-primary btn-block float-right mt-2"
           type="button" onClick={this._next}>
         Next
         </button>
@@ -117,7 +117,7 @@ export class CreateAccountForm extends Component {
     if(currentStep === 4){
       return (
         <button
-          className="btn btn-outline-success btn-block float-right mt-2"
+          className="btn btn-success btn-block float-right mt-2"
           type="button" onClick={this.onSubmit()}>
         Create Account
         </button>
