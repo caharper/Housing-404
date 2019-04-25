@@ -268,7 +268,7 @@ app.get('/apartments/:aid?/pastRents', (req, res) => {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
         var aid = req.params.aid;
-        connection.query('SELECT rent FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? ', [aid], function(err, results, fields) {
+        connection.query('SELECT * FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? ', [aid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
