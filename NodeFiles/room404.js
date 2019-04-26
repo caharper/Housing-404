@@ -615,101 +615,101 @@ app.post('/users/results', (req, res) => {
             req.body.pets //11
         ];
         var first = false;
-        var q = 'SELECT * FROM uProfiles WHERE ';
+        var q = "SELECT * FROM uProfiles WHERE ";
         if (filters[0] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'gender = ' + filters[0];
+                q = q + "gender = '" + filters[0] + "'";
             } else {
-                q = q + ' AND gender = ' + filters[0];
+                q = q + " AND gender = '" + filters[0] + "'";
             }
         }
         if (filters[1] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'smoker = ' + filters[1];
+                q = q + "smoker = " + filters[1];
             } else {
-                q = q + ' AND smoker = ' + filters[1];
+                q = q + " AND smoker = " + filters[1];
             }
         }
         if (filters[2] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'genderP = ' + filters[2];
+                q = q + "genderP = '" + filters[2] + "'";
             } else {
-                q = q + ' AND genderP = ' + filters[2];
+                q = q + " AND genderP = '" + filters[2] + "'";
             }
         }
         if (filters[3] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'smokerP = ' + filters[3];
+                q = q + "smokerP = " + filters[3];
             } else {
-                q = q + ' AND smokerP = ' + filters[3];
+                q = q + " AND smokerP = " + filters[3];
             }
         }
         if (filters[4] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'year = ' + filters[4];
+                q = q + "year = " + filters[4];
             } else {
-                q = q + ' AND year = ' + filters[4];
+                q = q + " AND year = " + filters[4];
             }
         }
         if (filters[5] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'tidynessP = ' + filters[5];
+                q = q + "tidynessP = " + filters[5];
             } else {
-                q = q + ' AND tidynessP = ' + filters[5];
+                q = q + " AND tidynessP = " + filters[5];
             }
         }
         if (filters[6] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'yearP = ' + filters[6];
+                q = q + "yearP = " + filters[6];
             } else {
-                q = q + ' AND yearP = ' + filters[6];
+                q = q + " AND yearP = " + filters[6];
             }
         }
         if (filters[7] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'tempP = ' + filters[7];
+                q = q + "tempP = " + filters[7];
             } else {
-                q = q + ' AND tempP = ' + filters[7];
+                q = q + " AND tempP = " + filters[7];
             }
         }
         if (filters[8] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'bedTimeP = ' + filters[8];
+                q = q + "bedTimeP = '" + filters[8] + "'";
             } else {
-                q = q + ' AND bedTimeP = ' + filters[8];
+                q = q + " AND bedTimeP = '" + filters[8] + "'";
             }
         }
         if (filters[9] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'wakeTime = ' + filters[9];
+                q = q + "wakeTime = '" + filters[9] + "'";
             } else {
-                q = q + ' AND wakeTime = ' + filters[9];
+                q = q + " AND wakeTime = '" + filters[9] + "'";
             }
         }
         if (filters[10] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'wakeTimeP = ' + filters[10];
+                q = q + "wakeTimeP = '" + filters[10] + "'";
             } else {
-                q = q + ' AND wakeTimeP = ' + filters[10];
+                q = q + " AND wakeTimeP = '" + filters[10] + "'";
             }
         }
         if (filters[11] !== null) {
             if (first !== true) {
                 first = true;
-                q = q + 'pets = ' + filters[11];
+                q = q + "pets = '" + filters[11] + "'";
             } else {
-                q = q + ' AND pets = ' + filters[11];
+                q = q + " AND pets = " + filters[11] + "'";
             }
         }
 
