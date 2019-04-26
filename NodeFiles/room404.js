@@ -68,12 +68,8 @@ app.post('/user/login', (req, res) => {
             //check if correct user
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
-					console.log("Sess Id is ", req.session.id);
-                    req.session.id = results[0].id;
+					console.log("Sess Id is ", req.session.uid);
 					req.session.uid = results[0].id;
-					console.log("uid is ", req.session.uid);
-					console.log("user id ", results[0].id);
-                    console.log("new sess id ", req.session.id);
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
                     res.status(200).send('Login Success!');
@@ -161,7 +157,7 @@ app.get('/user/profile', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -204,7 +200,7 @@ app.get('/user/events', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -218,7 +214,7 @@ app.get('/user/notifications', (req, res) => {
    // if(!req.session.loggedin) {
    //     res.status(404).send("You must be logged in to view this");
    // } else {
-        connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -232,7 +228,7 @@ app.get('/user/apartments', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN aProfiles ON users.id = aProfiles.u_id WHERE id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -290,7 +286,7 @@ app.get('/user/myEvents', (req, res) => {
     // if(!req.session.loggedin) {
     //     res.status(404).send("You must be logged in to view this");
     // } else {
-        connection.query('SELECT * FROM users JOIN events ON users.id = events.owner WHERE id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM users JOIN events ON users.id = events.owner WHERE id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -320,7 +316,7 @@ app.get('/events/:eid?', (req, res) => {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
 		var eid = req.params.eid;
-		console.log("User ", req.session.id, " is checking an event");
+		console.log("User ", req.session.uid, " is checking an event");
 		connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields){
 			if (err) throw err;
 			else {
@@ -337,7 +333,7 @@ app.get('/events/:eid?/attending', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
 	    var eid = req.params.eid;
-        console.log("User ", req.session.id, " is checking event attendance"); //console log to check
+        console.log("User ", req.session.uid, " is checking event attendance"); //console log to check
         connection.query('SELECT * FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else {
@@ -363,7 +359,7 @@ app.get('/user/apartments/:aid?/', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var aid = req.params.aid;
-        connection.query('SELECT * FROM aProfiles WHERE a_id = ? AND u_id = ?', [aid, req.session.id], function(err, results, fields) {
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ? AND u_id = ?', [aid, req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -378,7 +374,7 @@ app.get('/user/apartments/:aid?/prevRents', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var aid = req.params.aid;
-        connection.query('SELECT prevRents.rent FROM prevRents JOIN aProfiles ON prevRents.a_id = aProfiles.a_id WHERE prevRents.a_id = ? AND u_id = ?', [aid, req.session.id], function(err, results, fields) {
+        connection.query('SELECT prevRents.rent FROM prevRents JOIN aProfiles ON prevRents.a_id = aProfiles.a_id WHERE prevRents.a_id = ? AND u_id = ?', [aid, req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -392,8 +388,8 @@ app.get('/user/myEvents/:eid?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            console.log("User ", req.session.id, " is checking event", req.params.eid); //console log to check
-            connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.id], function(err, results, fields) {
+            console.log("User ", req.session.uid, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -407,8 +403,8 @@ app.get('/user/myEvents/:eid/attending?', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            console.log("User ", req.session.id, " is checking event", req.params.eid); //console log to check
-            connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, req.session.id], function(err, results, fields) {
+            console.log("User ", req.session.uid, " is checking event", req.params.eid); //console log to check
+            connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
@@ -763,7 +759,7 @@ app.post('/user/edit', (req, res) => {
         var hashedPW = crypto.createHash('SHA256').update(req.body.password).digest("hex");
         q = q + "password = '" + hashedPW + "'";
     }
-    q = q + " WHERE id = " + req.session.id;
+    q = q + " WHERE id = " + req.session.uid;
 
     connection.query(q, function(err, results, fields) {
         if (err) throw err;
@@ -780,7 +776,7 @@ app.post('/user/profile/edit', (req, res) => {
     //} else {
         connection.query('SELECT u_id FROM uProfiles WHERE id = ?', [req.body.u_id], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 var q = "UPDATE uProfiles SET ";
                 var first = false;
 
@@ -889,7 +885,7 @@ app.post('/user/profile/edit', (req, res) => {
                     }
                 }
 
-                q = q + " WHERE id = " + req.session.id;
+                q = q + " WHERE id = " + req.session.uid;
                 connection.query(q, function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -912,7 +908,7 @@ app.post('/user/apartments', (req, res) => {
 		    if (err) throw err;
 			else {
 				var a_id = results[0].a_id + 1;
-        		connection.query('insert into aProfiles values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'[a_id, req.session.id, req.body.location,
+        		connection.query('insert into aProfiles values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'[a_id, req.session.uid, req.body.location,
         		    req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.picture, req.body.occupants, req.body.beds,
         			req.body.baths, req.body.squareFeet, req.body.rooms, req.body.kitchen, req.body.laundry, req.body.floor, req.body.pets, 
         			req.body.poBox, req.body.studyRooms, req.body.roomStyle, req.body.gym, req.body.pool, req.body.ac, req.body.pool], function(err, results, fields){
@@ -935,7 +931,7 @@ app.post('/user/apartments/:aid?/edit', (req, res) => {
     //} else {
         connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.body.a_id], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 var q = "UPDATE aProfiles SET ";
                 var first = false;
 
@@ -1116,7 +1112,7 @@ app.post('/user/apartments/:aid?/edit', (req, res) => {
                     }
                 }
 
-                q = q + " WHERE u_id = " + req.session.id + " AND a_id = " + req.body.a_id;
+                q = q + " WHERE u_id = " + req.session.uid + " AND a_id = " + req.body.a_id;
                 connection.query(q, function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1155,7 +1151,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
         var eid = req.params.eid;
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 var q = "UPDATE events SET ";
                 var first = false;
 
@@ -1184,7 +1180,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
                     }
                 }
 
-                q = q + " WHERE owner = " + req.session.id + " AND e_id = " + eid;
+                q = q + " WHERE owner = " + req.session.uid + " AND e_id = " + eid;
                 connection.query(q, function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1204,7 +1200,7 @@ app.post('/users/:uid?/contact', (req, res) => {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
         var uid = req.params.uid;
-        connection.query('INSERT INTO notifications VALUES(?, ?, ?);', [uid, req.session.id, req.body.notification], function(err, results, fields) {
+        connection.query('INSERT INTO notifications VALUES(?, ?, ?);', [uid, req.session.uid, req.body.notification], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send("Successfully added notification");
@@ -1219,7 +1215,7 @@ app.post('/events/:eid?/attending', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var eid = req.params.eid;
-        connection.query('INSERT INTO attending VALUES(?, ?);', [eid, req.session.id], function(err, results, fields) {
+        connection.query('INSERT INTO attending VALUES(?, ?);', [eid, req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send("Successfully added attending");
@@ -1236,7 +1232,7 @@ app.post('/user/apartments/:aid?/prevRents/edit', (req, res) => {
         var aid = req.params.aid;
 	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
 		    if (err) throw err;
-		    else if (results[0].u_id === req.session.id) {
+		    else if (results[0].u_id === req.session.uid) {
        			connection.query('INSERT INTO prevRents VALUES(?, ?);', [aid, req.body.rent], function(err, results, fields) {
             		if (err) throw err;
             		else {
@@ -1263,7 +1259,7 @@ app.delete('/user/notifications', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-        connection.query('DELETE FROM notifications WHERE to_u_id = ?', [req.session.id], function(err, results, fields) {
+        connection.query('DELETE FROM notifications WHERE to_u_id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send('Successfully removed notifications');
@@ -1289,7 +1285,7 @@ app.delete('/user/apartments/:aid?/edit',(req,res) => {
         var aid = req.params.aid;
         connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 connection.query('DELETE FROM prevRents WHERE a_id = ?', [aid], function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1316,7 +1312,7 @@ app.delete('/user/myEvents/:eid?', (req, res) => {
         var eid = req.params.eid;
         connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 connection.query('DELETE FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1344,8 +1340,8 @@ app.delete('/user/events/:eid?', (req, res) => {
         var eid = req.params.eid;
         connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
-                connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.session.id], function(err, results, fields) {
+            else if (results[0].u_id === req.session.uid) {
+                connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.session.uid], function(err, results, fields) {
                     if (err) throw err;
                     else {
                         res.status(200).send('Successfully deleted attending member');
@@ -1367,7 +1363,7 @@ app.delete('/user/myEvents/:eid?/attending', (req, res) => {
         var eid = req.params.eid;
         connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === req.session.id) {
+            else if (results[0].u_id === req.session.uid) {
                 connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.body.uid], function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1386,7 +1382,7 @@ app.delete('/user/notifications/:uid??', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-            connection.query('DELETE FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.id, req.params.uid], function(err, results, fields) {
+            connection.query('DELETE FROM notifications WHERE to_u_id = ? AND from_u_id = ?', [req.session.uid, req.params.uid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
