@@ -102,6 +102,7 @@ app.post('/user/register', (req, res) => {
     connection.query('SELECT * FROM users ORDER BY id DESC LIMIT 1', function(err, results, fields) {
         if (err) throw err;
         else {
+	    console.log(results[0]);
             tempId = results[0].id + 1;
         }
     });
