@@ -102,47 +102,47 @@ app.post('/user/register', (req, res) => {
     connection.query('SELECT * FROM users ORDER BY id DESC LIMIT 1', function(err, results, fields) {
         if (err) throw err;
         else {
-	    console.log(results[0]);
             tempId = results[0].id;
-	    tempId++;
-        }
-    });
-    console.log(tempId);
-    //hash the password to store
-    var hashed = crypto.createHash('SHA256').update(req.body.password).digest("hex");
-    const userData = [tempId, 
-        req.body.name, 
-        req.body.email, 
-        hashed]
- 
-    //create user
-    connection.query('INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)', userData, function(err, result) {
-        if (err) throw err
-        else{
-            const profileData = [tempId, 
-            req.body.gender,
-            req.body.picture,
-            req.body.smoker,
-            req.body.genderP,
-            req.body.smokerP,
-            req.body.year,
-            req.body.tidynessP,
-            req.body.yearP,
-            req.body.tempP,
-            req.body.bedTimeP,
-            req.body.wakeTime,
-            req.body.wakeTimeP,
-            req.body.pets]
-            connection.query('INSERT INTO uProfiles VALUES(? ? ? ? ? ? ? ? ? ? ? ? ? ?)', profileData, function(err, result) {
+            tempId++;
+
+            //hash the password to store
+            var hashed = crypto.createHash('SHA256').update(req.body.password).digest("hex");
+                const userData = [tempId, 
+                req.body.name, 
+                req.body.email, 
+                hashed]
+
+            //create user
+            connection.query('INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)', userData, function(err, result) {
                 if (err) throw err
                 else{
-                    res.status(200).send('Successfully registered');
+                    const profileData = [tempId, 
+                    req.body.gender,
+                    req.body.picture,
+                    req.body.smoker,
+                    req.body.genderP,
+                    req.body.smokerP,
+                    req.body.year,
+                    req.body.tidynessP,
+                    req.body.yearP,
+                    req.body.tempP,
+                    req.body.bedTimeP,
+                    req.body.wakeTime,
+                    req.body.wakeTimeP,
+                    req.body.pets]
+
+                    connection.query('INSERT INTO uProfiles VALUES(? ? ? ? ? ? ? ? ? ? ? ? ? ?)', profileData, function(err, result) {
+                        if (err) throw err
+                        else{
+                            res.status(200).send('Successfully registered');
+                        }
+                    });
                 }
             });
+
         }
     });
 });
-
 
 
 
