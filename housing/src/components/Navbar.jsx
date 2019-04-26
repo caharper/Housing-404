@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
+import './navbar.css'
+
 
 const Navbar = () => (
     <nav className="navbar navbar-dark bg-dark justify-content-between">
@@ -20,7 +22,7 @@ const Navbar = () => (
             </button>
         </Link> */}
 
-        <button>
+        <button aba>
                 Logout
             </button>
     </nav>

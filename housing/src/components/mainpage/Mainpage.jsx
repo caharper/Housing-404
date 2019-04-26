@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
+import './mainpage.css'
 
-class Main extends Component {
+
+class MainPage extends Component {
 
     render() {
         return (
@@ -35,7 +37,6 @@ class Main extends Component {
                         </Link>
                     </div>
 
-
                     <div>
                         <Link to="/event">
                             <button className="width">Events</button>
@@ -50,4 +51,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default MainPage;

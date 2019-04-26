@@ -3,16 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import Main from './views/Main';
-import Archive from './views/Archive';
-import FindRoomate from './views/FindRoomate';
-import Profile from './views/Profile';
-import ListApt from './views/ListApt';
-import FindApt from './views/FindApt';
-import Homepage from './components/homepage/Homepage';
+//import Main from './views/Main';
+//import Archive from './views/Archive';
+//import FindRoomate from './views/FindRoomate';
+//import Profile from './views/Profile';
+//import ListApt from './views/ListApt';
+//import FindApt from './views/FindApt';
+//import Event from './views/Event';
 
+import Homepage from './components/homepage/Homepage';
+import Mainpage from './components/mainpage/Mainpage';
+import Archive from './components/archive/Archive';
+import FindRoomate from './components/findRoomate/FindRoomate';
+import Profile from './components/profile/Profile';
+//import ListApt from './components/listApartments/ListApt';
+import FindApt from './components/findApt/FindApt';
+import Event from './components/events/Events';
 
 
 const routing = (
@@ -20,12 +29,13 @@ const routing = (
     <div>
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/main" component={Main} />
+        <Route exact path="/main" component={Mainpage} />
         <Route path="/profile" component={Profile} />
         <Route path="//archive" component={Archive} />
         <Route path="/findroomate" component={FindRoomate} />
-        <Route path="/listApt" component={ListApt} />
         <Route path="/findApt" component={FindApt} />
+        <Route path="/event" component={Event} />
+
       </Switch>
     </div>
   </Router>
