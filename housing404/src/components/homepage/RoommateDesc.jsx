@@ -57,40 +57,6 @@ export class RoommateDesc extends React.Component {
               </select>
             </div>
           </div>
-
-          <div className="row">
-            <div className="col-6">
-              <p>What time would you like your to wake up?</p>
-            </div>
-            <div className="col-6">
-              <div className="row">
-                <div className="col-5">
-                  <input type="text"
-                         id=""
-                         name=""
-                         className="form-control"
-                         placeholder="Hour"
-                         value={this.state.wakeHour} // Prop: The email input data
-                         onChange={e => this.setState({wakeHour: e.target.value})} // Prop: Puts data into state
-                         />
-                  </div>
-                  <div className="col-2">
-                    <p>:</p>
-                  </div>
-                  <div className="col-5">
-                    <input type="text"
-                           id=""
-                           name=""
-                           className="form-control"
-                           placeholder="Minute"
-                           value={this.state.wakeMin} // Prop: The email input data
-                           onChange={e => this.setState({wakeMin: e.target.value})} // Prop: Puts data into state
-                           />
-                  </div>
-                </div>
-              </div>
-          </div>
-
         </div>
       </div>
     )

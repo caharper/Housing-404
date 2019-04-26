@@ -27,7 +27,7 @@ export class Review extends React.Component {
                   </div>
                 </div>
                 <div className="col-4">
-                  {this.props.picture}
+                  {this.props.email}
                 </div>
               </div>
 

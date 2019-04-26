@@ -29,7 +29,7 @@ export class Homepage extends React.Component {
     }
 
     onCreateAccount(newUser){
-      this.accountRepository.login(newUser)
+      this.accountRepository.createAccount(newUser)
       .then(createdAccount => this.setState({ createdAccount }))
     }
 
@@ -42,7 +42,7 @@ export class Homepage extends React.Component {
       <>
         <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
         <div className="container">
-          <div className="row">
+          <div className="row pt-5">
             <div className="col-6">
               <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
                 <h1>Find your roommate</h1>

@@ -27,24 +27,31 @@ export class CreateAccountForm extends Component {
       // Personal details/preferences
       gender: '',
       picture: '',
-      smoker: null,
-      year: null,
+      smoker: '',
+      year: '',
       bedTimePref: '',
       wakeTime: '',
       pets: '',
 
       // Roommate preferences
-      smokerPref: null,
+      smokerPref: '',
       generPref: '',
-      tidynessPref: null,
-      yearPref: null,
-      tempPref: null,
+      tidynessPref: '',
+      yearPref: '',
+      tempPref: '',
       wakeTimePref: ''
 
     }
     // Bind the submission to handleChange()
     this.handleChange = this.handleChange.bind(this)
   }
+
+  onPhotoUpload(pic){
+      this.setState(state => {
+        state.picture = pic
+        return state
+      })
+    }
 
   // Test current step with ternary
   // _next and _previous functions will be called on button click
@@ -66,7 +73,7 @@ export class CreateAccountForm extends Component {
 
     // Now update the progressbar
     // $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    $("#progressbar li").eq(this.state.currentStep).addClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep).addClass("active");
   }
 
   // ******** May need to change here
@@ -79,8 +86,8 @@ export class CreateAccountForm extends Component {
     })
 
     // Now update the progressbar
-    $("#progressbar li").eq(this.state.currentStep).removeClass("active");
-    $("#progressbar li").eq(this.state.currentStep - 1).removeClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep).removeClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep - 1).removeClass("active");
   }
 
   // The "next" and "previous" button functions
@@ -123,7 +130,7 @@ export class CreateAccountForm extends Component {
       return (
         <button
           className="btn btn-success btn-block float-right mt-2"
-          type="button" onClick={this.onSubmit()}>
+          type="button" onClick={() => this.onSubmit()}>
         Create Account
         </button>
       )
@@ -134,24 +141,43 @@ export class CreateAccountForm extends Component {
 
 // ***** Having issues
   onSubmit(){
-      //
-      // let newUser = new NewUser(this.state.name, this.state.email, this.state.password);
-      // this.props.onCreateAccount(newUser);
-      // //
-      // //     // clears the form
-      // this.setState(
-      //   {
-      //     currentStep: 1, // Default is Step 1
-      //     email: '',
-      //     name: '',
-      //     password: '',
-      //
-      //     picture: '',
-      //     about: '',
-      //
-      //     address: '',
-      //     roomDesc: '',
-      //   })
+
+      let newUser = new NewUser(this.state.name, this.state.email, this.state.password, this.state.gender,
+                                this.state.picture, this.state.smoker, this.state.year, this.state.bedTimePref,
+                                this.state.wakeTime, this.state.pets, this.state.smokerPref, this.state.generPref,
+                                this.state.tidynessPref, this.state.yearPref, this.state.tempPref, this.state.wakeTimePref);
+
+      console.log(newUser);
+
+      this.props.onCreateAccount(newUser);
+
+      // clears the form
+      this.setState(
+        {
+          currentStep: 1, // Default is Step 1
+
+          // Login information
+          email: '',
+          name: '',
+          password: '',
+
+          // Personal details/preferences
+          gender: '',
+          picture: '',
+          smoker: null,
+          year: null,
+          bedTimePref: null,
+          wakeTime: null,
+          pets: '',
+
+          // Roommate preferences
+          smokerPref: null,
+          generPref: '',
+          tidynessPref: null,
+          yearPref: null,
+          tempPref: null,
+          wakeTimePref: null
+        })
     }
 
   // Use the submitted data to set the state
@@ -189,6 +215,7 @@ export class CreateAccountForm extends Component {
         </LoginInformation>
 
         <PersonalDetails
+          onPhotoUpload={x => this.onPhotoUpload(x) }
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           gender={this.state.gender}

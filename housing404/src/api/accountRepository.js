@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 export class AccountRepository {
-  url = "`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000"
+  url = "http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000"
   config = {
     headers: {
       username: 'housing404',
@@ -15,7 +15,7 @@ export class AccountRepository {
   // Login function
   login(attemptUser) {
     return new Promise((resolve, reject) => {
-        axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/users/login`, attemptUser)
+        axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/user/login`, attemptUser)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })
@@ -24,7 +24,7 @@ export class AccountRepository {
   // Create Account functions
   createAccount(newUser){
     return new Promise((resolve, reject) => {
-        axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/users/register`, newUser)
+        axios.post(`${this.url}/user/register`, newUser)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })

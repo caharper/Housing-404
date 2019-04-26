@@ -10,10 +10,7 @@ export class PersonalDetails extends React.Component {
   }
 
   state = {
-    wakeHour: 0,
-    wakeMin: 0,
-    sleepHour: 0,
-    sleepMin: 0
+    pic: ''
   }
 
   _handleSubmit(e) {
@@ -27,6 +24,9 @@ export class PersonalDetails extends React.Component {
 
     let reader = new FileReader();
     let file = e.target.files[0];
+
+    // Convert the picture to blob
+    this.props.onPhotoUpload(new Blob([file]));
 
     reader.onloadend = () => {
       this.setState({
@@ -63,19 +63,21 @@ export class PersonalDetails extends React.Component {
             <div className="col-12">
 
               <div className="row">
-                <div className="form-group col-6">
-                  <label htmlFor="picture">Add Profile Picture: </label>
+                <div className="imgPreview">
+                  {$imagePreview}
+                </div>
+
+                <div class="custom-file">
                   <form onSubmit={(e)=>this._handleSubmit(e)}>
-                    <input className="fileInput"
-                      value={this.props.picture}
+                    <input className="custom-file-input"
+                      value={this.state.pic}
                       type="file"
+                      id="validatedCustomFile"
+                      required
                       onChange={(e)=>this._handleImageChange(e)}/>
                   </form>
-                </div>
-                <div className="col-6">
-                  <div className="imgPreview">
-                    {$imagePreview}
-                  </div>
+                  <label className="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                  <div className="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
               </div>
 
@@ -119,93 +121,6 @@ export class PersonalDetails extends React.Component {
                   </div>
                 </div>
               </div>
-
-              <div className="row">
-                <div className="col-6">
-                  <p>What temperature do you like?</p>
-                </div>
-                <div className="col-6">
-                  <div className="row">
-                    <div className="col-12">
-                      <input type="text"
-                             id=""
-                             name="tempPref"
-                             className="form-control"
-                             placeholder="Temp"
-                             value={this.props.tempPref} // Prop: The email input data
-                             onChange={this.props.handleChange} // Prop: Puts data into state
-                             />
-                      </div>
-                    </div>
-                  </div>
-              </div>
-
-              <div className="row">
-                <div className="col-6">
-                  <p>What time do you like to wake up?</p>
-                </div>
-                <div className="col-6">
-                  <div className="row">
-                    <div className="col-5">
-                      <input type="text"
-                             id=""
-                             name=""
-                             className="form-control"
-                             placeholder="Hour"
-                             value={this.state.wakeHour} // Prop: The email input data
-                             onChange={e => this.setState({wakeHour: e.target.value})} // Prop: Puts data into state
-                             />
-                      </div>
-                      <div className="col-2">
-                        <p>:</p>
-                      </div>
-                      <div className="col-5">
-                        <input type="text"
-                               id=""
-                               name=""
-                               className="form-control"
-                               placeholder="Minute"
-                               value={this.state.wakeMin} // Prop: The email input data
-                               onChange={e => this.setState({wakeMin: e.target.value})} // Prop: Puts data into state
-                               />
-                      </div>
-                    </div>
-                  </div>
-              </div>
-
-              <div className="row">
-                <div className="col-6">
-                  <p>What time do you like to go to bed?</p>
-                </div>
-                <div className="col-6">
-                  <div className="row">
-                    <div className="col-5">
-                      <input type="text"
-                             id=""
-                             name=""
-                             className="form-control"
-                             placeholder="Hour"
-                             value={this.state.sleepHour} // Prop: The email input data
-                             onChange={e => this.setState({sleepHour: e.target.value})} // Prop: Puts data into state
-                             />
-                      </div>
-                      <div className="col-2">
-                        <p>:</p>
-                      </div>
-                      <div className="col-5">
-                        <input type="text"
-                               id=""
-                               name=""
-                               className="form-control"
-                               placeholder="Minute"
-                               value={this.state.sleepMin} // Prop: The email input data
-                               onChange={e => this.setState({sleepMin: e.target.value})} // Prop: Puts data into state
-                               />
-                      </div>
-                    </div>
-                  </div>
-              </div>
-
             </div>
           </div>
 
