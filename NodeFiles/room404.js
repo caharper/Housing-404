@@ -103,9 +103,11 @@ app.post('/user/register', (req, res) => {
         if (err) throw err;
         else {
 	    console.log(results[0]);
-            tempId = results[0].id + 1;
+            tempId = results[0].id;
+	    tempId++;
         }
     });
+    console.log(tempId);
     //hash the password to store
     var hashed = crypto.createHash('SHA256').update(req.body.password).digest("hex");
     const userData = [tempId, 
