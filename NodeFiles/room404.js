@@ -99,7 +99,7 @@ app.get('/user/logout', function (req, res) {
 app.post('/user/register', (req, res) => {
     //get id and increment
     var tempId = 0;
-    connection.query('SELECT id FROM users ORDER BY DESC LIMIT 1', function(err, results, fields) {
+    connection.query('SELECT * FROM users ORDER BY id DESC LIMIT 1', function(err, results, fields) {
         if (err) throw err;
         else {
             tempId = results[0].id + 1;
@@ -900,7 +900,7 @@ app.post('/user/apartments', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to add this");
 	//} else {
-	    connection.query('SELECT a_id FROM aProfiles ORDER BY DESC LIMIT 1', function(err, results, fields) {
+	    connection.query('SELECT a_id FROM aProfiles ORDER BY a_id DESC LIMIT 1', function(err, results, fields) {
 		    if (err) throw err;
 			else {
 				var a_id = results[0].a_id + 1;
@@ -1127,7 +1127,7 @@ app.post('/user/myEvents', (req, res) => {
 	//if (!req.session.loggedin) {
 	//	res.status(404).send("You must be loggined in to view this");
 	//} else {
-        connection.query('SELECT e_id FROM events ORDER BY DESC LIMIT 1', function(err, results, fields) {
+        connection.query('SELECT e_id FROM events ORDER BY e_id DESC LIMIT 1', function(err, results, fields) {
     	    var e_id = results[0].e_id + 1;
 	        connection.query('INSERT INTO events VALUES(? ? ? ?);', [e_id, req.sessions.id, req.body.details, req.body.date], function(err, results, fields) {
         	    if (err) throw err;
