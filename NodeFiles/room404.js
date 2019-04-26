@@ -131,7 +131,7 @@ app.post('/user/register', (req, res) => {
                     req.body.wakeTimeP,
                     req.body.pets]
 
-                    connection.query('INSERT INTO uProfiles VALUES(? ? ? ? ? ? ? ? ? ? ? ? ? ?)', profileData, function(err, result) {
+                    connection.query('INSERT INTO uProfiles VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', profileData, function(err, result) {
                         if (err) throw err
                         else{
                             res.status(200).send('Successfully registered');
@@ -907,7 +907,7 @@ app.post('/user/apartments', (req, res) => {
 		    if (err) throw err;
 			else {
 				var a_id = results[0].a_id + 1;
-        		connection.query('insert into aProfiles values(? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?)'[a_id, req.session.id, req.body.location,
+        		connection.query('insert into aProfiles values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'[a_id, req.session.id, req.body.location,
         		    req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.picture, req.body.occupants, req.body.beds,
         			req.body.baths, req.body.squareFeet, req.body.rooms, req.body.kitchen, req.body.laundry, req.body.floor, req.body.pets, 
         			req.body.poBox, req.body.studyRooms, req.body.roomStyle, req.body.gym, req.body.pool, req.body.ac, req.body.pool], function(err, results, fields){
@@ -1132,7 +1132,7 @@ app.post('/user/myEvents', (req, res) => {
 	//} else {
         connection.query('SELECT e_id FROM events ORDER BY e_id DESC LIMIT 1', function(err, results, fields) {
     	    var e_id = results[0].e_id + 1;
-	        connection.query('INSERT INTO events VALUES(? ? ? ?);', [e_id, req.sessions.id, req.body.details, req.body.date], function(err, results, fields) {
+	        connection.query('INSERT INTO events VALUES(?, ?, ?, ?);', [e_id, req.sessions.id, req.body.details, req.body.date], function(err, results, fields) {
         	    if (err) throw err;
         	    else {
         	        res.status(200).send("Successfully added event");
@@ -1214,7 +1214,7 @@ app.post('/events/:eid?/attending', (req, res) => {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
         var eid = req.params.eid;
-        connection.query('INSERT INTO attending VALUES(? ?);', [eid, req.session.id], function(err, results, fields) {
+        connection.query('INSERT INTO attending VALUES(?, ?);', [eid, req.session.id], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send("Successfully added attending");
@@ -1232,7 +1232,7 @@ app.post('/user/apartments/:aid?/prevRents/edit', (req, res) => {
 	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
 		    if (err) throw err;
 		    else if (results[0].u_id === req.session.id) {
-       			connection.query('INSERT INTO prevRents VALUES(? ?);', [aid, req.body.rent], function(err, results, fields) {
+       			connection.query('INSERT INTO prevRents VALUES(?, ?);', [aid, req.body.rent], function(err, results, fields) {
             		if (err) throw err;
             		else {
                 		res.status(200).send("Successfully added rent");
