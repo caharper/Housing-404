@@ -60,7 +60,7 @@ app.post('/user/login', (req, res) => {
     var user_email_temp = req.body.email;
     var hashedPW = crypto.createHash('SHA256').update(req.body.password).digest("hex");
     if (req.session.loggedin) { //check if already logged in
-        res.status(200).send('You are logged in as ' + req.session.user_name);
+        res.status(200).send('You are logged in as ' + req.session.user_email_temp);
     } else {
         //make sure email and pw both have values
         if (user_email_temp && hashedPW) {
