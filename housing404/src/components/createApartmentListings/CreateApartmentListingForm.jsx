@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { LoginInformation } from './LoginInformation'
-import { PersonalDetails } from './PersonalDetails'
-import { RoommateDesc } from './RoommateDesc'
+import { ListingLanding } from './ListingLanding'
+import { ListingDetails } from './ListingDetails'
+import { Misc } from './Misc'
+import { ListingPicture } from './ListingPicture'
 import { Review } from './Review'
-import './homepage.css'
+// import './homepage.css'
 import $ from 'jquery';
-import { NewUser } from './../../models/newUser';
+// import { NewUser } from './../../models/newUser';
 
-export class CreateAccountForm extends Component {
+export class CreateApartmentListingForm extends Component {
   constructor(props) {
     super(props)
 
@@ -27,15 +28,15 @@ export class CreateAccountForm extends Component {
       // Personal details/preferences
       gender: '',
       picture: '',
-      smoker: 0,
+      smoker: false,
       year: 0,
       bedTimePref: '9:00',
       wakeTime: '9:00',
       pets: 'no',
 
       // Roommate preferences
-      smokerPref: 0,
-      generPref: '',
+      smokerPref: false,
+      generPref: 'no',
       tidynessPref: 1,
       yearPref: 0,
       tempPref: 0,
@@ -50,13 +51,8 @@ export class CreateAccountForm extends Component {
   // _next and _previous functions will be called on button click
   _next() {
     let currentStep = this.state.currentStep
-
-    // Need to do form checks here to make sure everything is good
-    // Based on the current step
-
-
     // If the current step is 1 or 2, then add one on "next" button click
-    currentStep = currentStep >= 3? 4: currentStep + 1
+    currentStep = currentStep >= 4? 5: currentStep + 1
     this.setState({
       currentStep: currentStep
     })
@@ -103,7 +99,7 @@ export class CreateAccountForm extends Component {
   get nextButton(){
     let currentStep = this.state.currentStep;
     // If the current step is not 4, then render the "next" button
-    if(currentStep <4){
+    if(currentStep <5){
       return (
         <button
           className="btn btn-primary btn-block float-right mt-2"
@@ -119,7 +115,7 @@ export class CreateAccountForm extends Component {
   get createAccountButton(){
     let currentStep = this.state.currentStep;
     // If the current step is not 4, then render the "next" button
-    if(currentStep === 4){
+    if(currentStep === 5){
       return (
         <button
           className="btn btn-success btn-block float-right mt-2"
@@ -180,15 +176,15 @@ export class CreateAccountForm extends Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <LoginInformation
+        <ListingLanding
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           name={this.state.name}
           email={this.state.email}
           password={this.state.password}>
-        </LoginInformation>
+        </ListingLanding>
 
-        <PersonalDetails
+        <ListingDetails
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           gender={this.state.gender}
@@ -197,19 +193,31 @@ export class CreateAccountForm extends Component {
           year={this.state.year}
           bedTimePref={this.state.bedTimePref}
           wakeTime={this.state.wakeTime}
-          tempPref={this.state.tempPref}
           pets={this.state.pets}>
-        </PersonalDetails>
+        </ListingDetails>
 
-        <RoommateDesc
+        <Misc
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           smokerPref={this.state.smokerPref}
           generPref={this.state.generPref}
           tidynessPref={this.state.tidynessPref}
           yearPref={this.state.yearPref}
+          tempPref={this.state.tempPref}
           wakeTimePref={this.state.wakeTimePref}>
-        </RoommateDesc>
+        </Misc>
+
+        <ListingPicture
+          currentStep={this.state.currentStep}
+          handleChange={this.handleChange}
+          smokerPref={this.state.smokerPref}
+          generPref={this.state.generPref}
+          tidynessPref={this.state.tidynessPref}
+          yearPref={this.state.yearPref}
+          tempPref={this.state.tempPref}
+          wakeTimePref={this.state.wakeTimePref}>
+        </ListingPicture>
+
         <Review
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
@@ -223,7 +231,7 @@ export class CreateAccountForm extends Component {
         </Review>
 
 
-        {(this.state.currentStep !== 1 && this.state.currentStep !== 4) &&
+        {(this.state.currentStep !== 1 && this.state.currentStep !== 5) &&
           <div className="row">
             <div className="col-6">
               {this.previousButton}
@@ -238,7 +246,7 @@ export class CreateAccountForm extends Component {
           this.nextButton
         }
 
-        {this.state.currentStep === 4 &&
+        {this.state.currentStep === 5 &&
           <div className="row">
             <div className="col-6">
               {this.previousButton}
@@ -256,4 +264,4 @@ export class CreateAccountForm extends Component {
   }
 }
 
-export default CreateAccountForm
+export default CreateApartmentListingForm

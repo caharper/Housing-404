@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import './homepage.css';
+// import './homepage.css';
 
 
-export class LoginInformation extends React.Component {
-
-  state = {
-    confirmPass: ''
-  }
-
+export class ListingLanding extends React.Component {
   render() {
     if (this.props.currentStep !== 1) { // Prop: The current step
       return null
     }
-
     // The markup for the Step 1 UI
     return(
 
       <div className="card overflow-auto">
         <div className="card-header bg-secondary text-white">
-          <h3 className="font-weight-bold">Create an account</h3>
+          <h3 className="font-weight-bold">Create an account!</h3>
         </div>
 
         <div className="card-body special-card text-left">
@@ -68,20 +62,6 @@ export class LoginInformation extends React.Component {
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="form-group col-12">
-                    <label htmlFor="">Confirm Password</label>
-                    <input type="password"
-                           id=""
-                           name=""
-                           className="form-control"
-                           placeholder="Password"
-                           value={this.state.confirmPass}
-                           onChange={this.props.handleChange} // Should check if matches here
-                           />
-                  </div>
-                </div>
-
               </form>
             </div>
           </div>
@@ -92,4 +72,4 @@ export class LoginInformation extends React.Component {
   }
 }
 
-export default LoginInformation
+export default ListingLanding

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import { ProgressBar } from './Progressbar'
-// /Users/clayharper/Desktop/Housing 404/housing404/src/components/homepage/ProgressBar.jsx
-import { LoginNav } from './LoginNav'
+import { ApartmentProgressBar } from './ApartmentProgressbar'
+// import { LoginNav } from './LoginNav'
 import { AccountRepository } from './../../api/accountRepository'
-import { LoginInformation } from './LoginInformation'
-import { CreateAccountForm } from './CreateAccountForm'
-import './homepage.css'
-import logo from './../../housing404.svg';
+// import { LoginInformation } from './LoginInformation'
+import { CreateApartmentListingForm } from './CreateApartmentListingForm'
 
-import axios from 'axios'
+// import './homepage.css'
 
 
 
 
-export class Homepage extends React.Component {
+export class CreateApartmentListings extends React.Component {
   accountRepository = new AccountRepository
 
   state = {
@@ -40,27 +37,15 @@ export class Homepage extends React.Component {
     return(
 
       <>
-        <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
         <div className="container">
           <div className="row">
-            <div className="col-6">
-              <div className="row justify-content-center mb-0 pb-0">
-                <img className="img-fluid" src={logo}></img>
-              </div>
-              <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
-                <h1>Find your roommate</h1>
-                <p className="text-secondary">By joining Housing404, you can search for roommates, filter out by roommate qualities, set up meeting times, and find your ideal roommate.</p>
-              </div>
-            </div>
-            <div className="col-6">
-              <div className="row">
-                <ProgressBar></ProgressBar>
-              </div>
-              <div className="row justify-content-center">
-                <CreateAccountForm onCreateAccount={x => this.onCreateAccount(x) }></CreateAccountForm>
-              </div>
-            </div>
+            <ApartmentProgressBar></ApartmentProgressBar>
           </div>
+          <div className="row justify-content-center">
+            <CreateApartmentListingForm onCreateAccount={x => this.onCreateAccount(x) }></CreateApartmentListingForm>
+          </div>
+
+
         </div>
       </>
     )
@@ -94,4 +79,4 @@ export class Homepage extends React.Component {
   // })
 }
 
-export default Homepage
+export default CreateApartmentListings

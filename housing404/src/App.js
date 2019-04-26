@@ -6,6 +6,7 @@ import { LoginInformation } from './components/homepage/LoginInformation'
 
 import { AccountRepository} from './api/accountRepository'
 import { Homepage } from './components/homepage/Homepage'
+import { CreateApartmentListings } from './components/createApartmentListings/CreateApartmentListing'
 
 
 
