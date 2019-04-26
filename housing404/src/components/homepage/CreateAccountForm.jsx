@@ -27,19 +27,19 @@ export class CreateAccountForm extends Component {
       // Personal details/preferences
       gender: '',
       picture: '',
-      smoker: 0,
-      year: 0,
-      bedTimePref: '9:00',
-      wakeTime: '9:00',
-      pets: 'no',
+      smoker: null,
+      year: null,
+      bedTimePref: '',
+      wakeTime: '',
+      pets: '',
 
       // Roommate preferences
-      smokerPref: 0,
+      smokerPref: null,
       generPref: '',
-      tidynessPref: 1,
-      yearPref: 0,
-      tempPref: 0,
-      wakeTimePref: '9:00'
+      tidynessPref: null,
+      yearPref: null,
+      tempPref: null,
+      wakeTimePref: ''
 
     }
     // Bind the submission to handleChange()

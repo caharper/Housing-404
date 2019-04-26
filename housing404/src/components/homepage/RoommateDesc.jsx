@@ -22,7 +22,7 @@ export class RoommateDesc extends React.Component {
 
           <div className="row">
             <div className="col-3">
-              <select className="form-control" id="smokerPref" value={this.props.smokerPref} onChange={this.props.handleChange}>
+              <select className="form-control" name="smokerPref" id="smokerPref" value={this.props.smokerPref} onChange={this.props.handleChange}>
                 <option value="select">Smoker</option>
                 <option value={1}>Yes</option>
                 <option value={0}>No</option>
@@ -30,7 +30,7 @@ export class RoommateDesc extends React.Component {
             </div>
 
             <div className="col-3">
-              <select className="form-control" id="generPref" value={this.props.generPref} onChange={this.props.handleChange}>
+              <select className="form-control" name="generPref" id="generPref" value={this.props.generPref} onChange={this.props.handleChange}>
                 <option value="select">Gender</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
@@ -39,7 +39,7 @@ export class RoommateDesc extends React.Component {
             </div>
 
             <div className="col-3">
-              <select className="form-control" id="tidynessPref" value={this.props.tidynessPref} onChange={this.props.handleChange}>
+              <select className="form-control" name="tidynessPref" id="tidynessPref" value={this.props.tidynessPref} onChange={this.props.handleChange}>
                 <option value="select">Tidy</option>
                 <option value={1}>Not Tidy</option>
                 <option value={2}>Tidy</option>
@@ -48,7 +48,7 @@ export class RoommateDesc extends React.Component {
             </div>
 
             <div className="col-3">
-              <select className="form-control" id="yearPref" value={this.props.yearPref} onChange={this.props.handleChange}>
+              <select className="form-control" name="yearPref" id="yearPref" value={this.props.yearPref} onChange={this.props.handleChange}>
                 <option value="select">Year</option>
                 <option value={1}>Freshman</option>
                 <option value={2}>Sophomore</option>

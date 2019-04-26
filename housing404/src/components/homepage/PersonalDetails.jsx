@@ -84,7 +84,8 @@ export class PersonalDetails extends React.Component {
                   Tell us about you
                   <div className="row">
                     <div className="col-3">
-                      <select className="form-control" id="gender" value={this.props.gender} onChange={this.props.handleChange}>
+
+                      <select className="form-control" name="gender" id="gender" htmlFor="gender" value={this.props.gender} onChange={this.props.handleChange}>
                         <option value="select">Gender</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -92,7 +93,7 @@ export class PersonalDetails extends React.Component {
                       </select>
                     </div>
                     <div className="col-3">
-                      <select className="form-control" id="smoker" value={this.props.smoker} onChange={this.props.handleChange}>
+                      <select className="form-control" name="smoker" id="smoker" value={this.props.smoker} onChange={this.props.handleChange}>
                         <option value="selected">Smoker</option>
                         <option value={1}>Yes</option>
                         <option value={0}>No</option>
@@ -100,7 +101,7 @@ export class PersonalDetails extends React.Component {
                     </div>
 
                     <div className="col-3">
-                      <select className="form-control" id="year" value={this.props.year} onChange={this.props.handleChange}>
+                      <select className="form-control" id="year" name="year" value={this.props.year} onChange={this.props.handleChange}>
                         <option value="select">Year</option>
                         <option value={1}>Freshman</option>
                         <option value={2}>Sophomore</option>
@@ -109,7 +110,7 @@ export class PersonalDetails extends React.Component {
                       </select>
                     </div>
                     <div className="col-3">
-                      <select className="form-control" id="pets" value={this.props.pets} onChange={this.props.handleChange}>
+                      <select className="form-control" id="pets" name="pets" value={this.props.pets} onChange={this.props.handleChange}>
                         <option value="select">Pets</option>
                         <option value="y">Yes</option>
                         <option value="n">No</option>
@@ -128,7 +129,7 @@ export class PersonalDetails extends React.Component {
                     <div className="col-12">
                       <input type="text"
                              id=""
-                             name=""
+                             name="tempPref"
                              className="form-control"
                              placeholder="Temp"
                              value={this.props.tempPref} // Prop: The email input data
