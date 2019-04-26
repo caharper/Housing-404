@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
+import { AccountRepository } from './../api/accountRepository'
+
 import './navbar.css'
 
+
+function Logout() {
+    const accountRepository = new AccountRepository
+    accountRepository
+    .logout()
+    .then(logout => localStorage.removeItem("isLoggedIn"))
+
+}
 
 const Navbar = () => (
     <nav className="navbar navbar-dark bg-dark justify-content-between">
@@ -17,12 +27,13 @@ const Navbar = () => (
                 <Link id="archive" className="menu-item" to="/archive">Archive</Link>
                 <Link id="profile" className="menu-item" to="/profile">Profile</Link>
             </Menu>
-            <a class="navbar-brand" href="#">PlaceHolder</a>
+            <a class="navbar-brand" href="#">Placeholder</a>
         </div>
 
-        <button>
+        <button onClick={Logout} >
             Logout
             </button>
+
     </nav>
 )
 

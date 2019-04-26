@@ -41,9 +41,7 @@ class FindRoomate extends Component {
   updateTidyness = (e) => {
     this.setState({ tidyness: e.type.value })
   }
-  updateTemoerature = (e) => {
-    this.setState({ temperature: e.type.value })
-  }
+
   
   filter = () => {
     // request server api call
@@ -56,7 +54,7 @@ class FindRoomate extends Component {
   }
 
   render() {
-    const { items, gender, smoker, year, pets, tidyness, temperature } = this.state;
+    const { items, gender, smoker, year, pets, tidyness } = this.state;
 
 
     return (
@@ -169,12 +167,6 @@ class FindRoomate extends Component {
                 <button onClick={this.updateTidyness}>x</button>
               </div>
 
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">Tempreture</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-              </div>
               <button onClick={this.filter}>Filter</button>
 
             </div>

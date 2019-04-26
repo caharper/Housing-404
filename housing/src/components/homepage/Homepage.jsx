@@ -11,8 +11,6 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios'
 
 
-
-
 export class Homepage extends React.Component {
   accountRepository = new AccountRepository
 
@@ -25,9 +23,12 @@ export class Homepage extends React.Component {
     onLogin(attemptUser){
       // works
       this.accountRepository.login(attemptUser)
-      .then(loggedIn => this.setState({ loggedIn: true }))
+      .then(data => {
+        this.setState({ loggedIn: true });
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('displayName', data);
+      })
     }
-
 
     onCreateAccount(newUser){
       this.accountRepository.login(newUser)
@@ -36,7 +37,7 @@ export class Homepage extends React.Component {
 
 
   render() {
-
+    console.log(this.state.loggedIn, 'loggedIn');
     if(this.state.loggedIn){
       return <Redirect to='/main'/>
     }
