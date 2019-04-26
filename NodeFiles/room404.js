@@ -23,8 +23,7 @@ var sess = {
     secret: 'illneverbearobdeniroformejoepesciisfine', 
     resave: true,
     saveUninitialized: true,
-    cookie : { maxAge : 86400 * 1000 },
-	uid : null
+    cookie : { maxAge : 86400 * 1000 }
 }
 
 //use session
@@ -68,8 +67,7 @@ app.post('/user/login', (req, res) => {
             //check if correct user
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
-					console.log("Sess Id is ", req.session.uid);
-					req.session.uid = results[0].id;
+                    req.session.uid = results[0].id;
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
                     res.status(200).send('Login Success!');
