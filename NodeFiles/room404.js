@@ -23,7 +23,8 @@ var sess = {
     secret: 'illneverbearobdeniroformejoepesciisfine', 
     resave: true,
     saveUninitialized: true,
-    cookie : { maxAge : 86400 * 1000 }
+    cookie : { maxAge : 86400 * 1000 },
+	uid : null
 }
 
 //use session
