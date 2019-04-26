@@ -84,6 +84,8 @@ app.post('/user/login', (req, res) => {
             res.end();
         }
     }
+	
+    req.session.save();
 });
 
 //logout function
