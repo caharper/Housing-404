@@ -71,7 +71,7 @@ app.post('/user/login', (req, res) => {
 					console.log("Sess Id is ", req.session.id);
                     req.session.id = results[0].id;
 					req.session.uid = results[0].id;
-					console.log("uid is ", uid);
+					console.log("uid is ", req.session.uid);
 					console.log("user id ", results[0].id);
                     console.log("new sess id ", req.session.id);
                     req.session.email = req.body.email;
