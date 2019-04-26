@@ -38,6 +38,12 @@ class MainPage extends Component {
                     </div>
 
                     <div>
+                        <Link to="/myevent">
+                            <button className="width">My Events</button>
+                        </Link>
+                    </div>
+
+                    <div>
                         <Link to="/event">
                             <button className="width">Events</button>
                         </Link>

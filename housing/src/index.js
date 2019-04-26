@@ -21,7 +21,9 @@ import FindRoomate from './components/findRoomate/FindRoomate';
 import Profile from './components/profile/Profile';
 //import ListApt from './components/listApartments/ListApt';
 import FindApt from './components/findApt/FindApt';
-import Event from './components/events/Events';
+import MyEvents from './components/myEvents/Myevents';
+import Event from './components/event/Event';
+
 
 
 const routing = (
@@ -31,10 +33,12 @@ const routing = (
         <Route exact path="/" component={Homepage} />
         <Route exact path="/main" component={Mainpage} />
         <Route path="/profile" component={Profile} />
-        <Route path="//archive" component={Archive} />
+        <Route path="/archive" component={Archive} />
         <Route path="/findroomate" component={FindRoomate} />
         <Route path="/findApt" component={FindApt} />
+        <Route path="/myevent" component={MyEvents} />
         <Route path="/event" component={Event} />
+
 
       </Switch>
     </div>

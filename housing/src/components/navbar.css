@@ -91,7 +91,8 @@
     width:100%;
     transition:800ms ease all;
   }
-   /*hamburger-menu*/
+   
+  /*hamburger-menu*/
    /* code below derived from https://github.com/negomi/react-burger-menu */
   
    /* Position and sizing of burger button */
