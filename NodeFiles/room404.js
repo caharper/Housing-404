@@ -28,6 +28,7 @@ var sess = {
 
 //use session
 app.use(session(sess));
+app.use(router);
 
 //connect to the sql database
 var connection = mysql.createConnection({
