@@ -28,6 +28,7 @@ var sess = {
 
 //use session
 app.use(session(sess));
+var router = express.Router();
 app.use(router);
 
 //connect to the sql database
