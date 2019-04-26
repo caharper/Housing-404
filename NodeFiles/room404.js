@@ -67,9 +67,12 @@ app.post('/user/login', (req, res) => {
             //check if correct user
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
+					console.log("Sess Id is ", req.session.id);
                     req.session.id = results[0].id;
-					console.log(results[0].id);
-                    console.log(req.session.id);
+					req.session.uid = results[0].id;
+					console.log("uid is ", uid);
+					console.log("user id ", results[0].id);
+                    console.log("new sess id ", req.session.id);
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
                     res.status(200).send('Login Success!');
