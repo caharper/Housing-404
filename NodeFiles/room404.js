@@ -1103,7 +1103,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
 	var sessuid = req.query.sessuid;
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].owner === req.session.uid) {
+            else if (results[0].owner === sessuid) {
                 var q = "UPDATE events SET ";
                 var first = false;
 
