@@ -70,6 +70,7 @@ app.post('/user/login', (req, res) => {
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
                     var sessuid = results[0].id;
+                    sessuid.toString();
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
                     res.status(200).send(sessuid);
@@ -156,12 +157,13 @@ app.post('/user/register', (req, res) => {
 
 //view your profile
 app.get('/user/profile', (req, res) => {
-connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.query.sessuid], function(err, results, fields) {
-    if (err) throw err;
-    else {
-	res.status(200).send(results);
-    }
-});
+    var sessuid = parseInt(req.query.sessuid, 10);
+    connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.query.sessuid], function(err, results, fields) {
+            if (err) throw err;
+            else {
+		    res.status(200).send(results);
+            }
+    });
 });
 
 //view list profiles
