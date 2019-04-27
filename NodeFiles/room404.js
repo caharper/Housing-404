@@ -909,14 +909,6 @@ app.post('/user/apartments/:aid?/edit', (req, res) => {
                         q = q + " AND location = '" + req.body.location + "'";
                     }
                 }
-                if (req.body.type !== null) {
-                    if (first === false) {
-                        q = q + "type = '" + req.body.type + "'";
-                        first = true;
-                    } else {
-                        q = q + " AND type = '" + req.body.type + "'";
-                    }
-                }
                 if (req.body.rent !== null) {
                     if (first === false) {
                         q = q + "rent = " + req.body.rent;
