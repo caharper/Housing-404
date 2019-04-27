@@ -100,11 +100,12 @@ export class AccountRepository {
   // }
 
   // Get user profile
-  getUserProfile() {
+  getUserProfile(uId) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/profile`)
+      axios.get(`${this.url}/user/profile?sessuid=${uId}`)
       .then(resp => {
         resolve(resp.data)
+        console.log(`${this.url}/user/profile?sessuid=${uId}`)
       })
       .catch(resp => alert(resp))
     })

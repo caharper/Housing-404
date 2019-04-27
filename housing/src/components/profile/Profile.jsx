@@ -7,14 +7,21 @@ class Profile extends Component {
   accountRepository = new AccountRepository;
 
   state = {
-    user: null
+    userList: null
   }
+  
   render() {
-    if(this.state.user === null){
-      return(<></>)
-    }
 
-    const { resetPassword, user } = this.state;
+    if(this.state.userList === null){
+      return(<></>)
+    } 
+
+    // console.log('**********')
+    // console.log(this.state.userList)
+    // let user = this.state.userList[0].id;
+
+
+    const { userList, resetPassword} = this.state;
 
     return (
       <>
@@ -23,19 +30,17 @@ class Profile extends Component {
         <div>
           <h1>Profile Page</h1>
           <div>
-    
-              <div>
-                <div>Name: {this.state.user.name}</div>
-                <div> Gender: {this.state.user.gender}</div>
-                <div> Smoker: {this.state.user.smoker}</div>
-                <div> Tidyness: {this.state.user.tidyness}</div>
-                <div> Smoker: {this.state.user.smoker}</div>
-                <div> Year: {this.state.user.yearP}</div>
-                <div> Pets: {this.state.user.pets}</div>
+          <div>
+                <>
+                  <div>Name: {userList.name}</div>
+                  <div> Gender: {userList.gender}</div>
+                  <div> Tidyness: {userList.tidyness}</div>
+                  <div> Year: {userList.yearP}</div>
+                  <div> Pets: {userList.pets}</div>
 
-
-                <button onClick={this.remove}>Delete Account</button>
-              </div>
+                  <button onClick={this.remove}>Delete Account</button>
+                </>
+                </div>
 
 
             <div class="input-group mb-3">
@@ -53,8 +58,15 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    this.accountRepository.getUserProfile()
-      .then(user => this.setState({ user }))
+    console.log('what the fuck')
+    console.log(localStorage.getItem("sessuid"))
+    this.accountRepository.getUserProfile(localStorage.getItem("sessuid"))
+      .then(userListResp => {
+        console.log(userList)
+        let userList = userListResp[0];
+        this.setState({ userList })
+        console.log(userList)
+      })
   }
 }
 

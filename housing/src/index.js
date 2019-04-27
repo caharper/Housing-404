@@ -29,35 +29,35 @@ import Notification from './components/notification/Notification';
 
 
 
-//check cookie or state if logged in
-function isAuthenticated(){    
-  const token = localStorage.getItem('isLoggedIn');
-    console.log(token)
-    if(token){
-      return true;
-    }   
-  return false;
-}
+// //check cookie or state if logged in
+// function isAuthenticated(){    
+//   const token = localStorage.getItem('isLoggedIn');
+//     console.log(token)
+//     if(token){
+//       return true;
+//     }   
+//   return false;
+// }
 
-function PrivateRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: props.location }
-            }}
-          />
-        )
-      }
-    />
-  );
-}
+// function PrivateRoute({ component: Component, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={props =>
+//         isAuthenticated() ? (
+//           <Component {...props} />
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/",
+//               state: { from: props.location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
 
 const routing = (
   <Router>

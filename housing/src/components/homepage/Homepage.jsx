@@ -17,16 +17,33 @@ export class Homepage extends React.Component {
   state = {
       // this will need to be routed if true
       loggedIn: false,
-      createdAccount: false
+      createdAccount: false,
+      user: null
     }
+    // onLogin(attemptUser){
+    //   // works
+    //   this.accountRepository.login(attemptUser)
+    //   .then(data => {
+    //     this.setState({ loggedIn: true });
+    //   //localStorage.getItem('uid')
+    //   //let id = document.getElementById("uid");
+    //   // let id = sessionStorage.getItem('uid');
+    //     localStorage.setItem('isLoggedIn', true);
+    //     localStorage.setItem('session', data);
+    //   })
+    //   this.accountRepository.getUserProfile()
+    //   .then(user => {
+    //     console.log('im here')
+    //     console.log(user)
+    //     this.setState({ user })
+    //   })
+    // }
 
     onLogin(attemptUser){
-      // works
       this.accountRepository.login(attemptUser)
-      .then(data => {
-        this.setState({ loggedIn: true });
-        localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('displayName', data);
+      .then(user => {
+        this.setState({user})
+        localStorage.setItem('sessuid', user[0].id)
       })
     }
 
@@ -35,12 +52,25 @@ export class Homepage extends React.Component {
       .then(createdAccount => this.setState({ createdAccount }))
     }
 
+    iamloggedin(){
+      this.accountRepository.getUserProfile()
+      .then(user => {
+        console.log('im here')
+        console.log(user)
+        this.setState({ user })
+      })
+    }
+
+  
 
   render() {
-    console.log(this.state.loggedIn, 'loggedIn');
-    if(this.state.loggedIn){
-      return <Redirect to='/main'/>
-    }
+    // console.log(this.state.loggedIn, 'loggedIn');
+    //     sessionStorage.getItem("uid")
+    
+        if(this.state.user !== null){
+          return <Redirect to='/main'/>
+        }
+    
 
     // The markup for the Step 1 UI
     return(
