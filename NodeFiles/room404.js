@@ -156,74 +156,54 @@ app.post('/user/register', (req, res) => {
 
 //view your profile
 app.get('/user/profile', (req, res) => {
-   // if(!req.session.loggedin) {
-   //     res.status(404).send("You must be logged in to view this");
-   // } else {
-        connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.uid], function(err, results, fields) {
-            if (err) throw err;
-            else {
-console.log("Session ID is ", req.session.id);
-                res.status(200).send(req.session.id);
-            }
-        });
-   // }
+connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.uid], function(err, results, fields) {
+    if (err) throw err;
+    else {
+	console.log("Session ID is ", req.session.id);
+	res.status(200).send(req.session.id);
+    }
+});
 });
 
 //view list profiles
 app.get('/users', (req, res) => {
-	//if (!req.session.loggedin) {
-	//	res.status(404).send("You must be logged in to view this");
-	//} else {
-		connection.query('SELECT * FROM uProfiles', function(err, results, fields) {
-			if (err) throw err;
-			else {
-				res.status(200).send(results);
-			}
-		});
-	//}
+	connection.query('SELECT * FROM uProfiles', function(err, results, fields) {
+		if (err) throw err;
+		else {
+			res.status(200).send(results);
+		}
+	});
 });
 
 //view specific profile
 app.get('/users/:uid?', (req, res) => {
-	//if (!req.session.loggedin) {
-	//	res.status(404).send("You must be logged in to see this");
-	//} else {
-		var uid = req.params.uid;
-		connection.query('SELECT * FROM uProfiles WHERE id = ?', [uid], function(err, results, fields) {
-			if (err) throw err;
-			else {
-				res.status(200).send(results);
-			}
-		});
-	//}
+	var uid = req.params.uid;
+	connection.query('SELECT * FROM uProfiles WHERE id = ?', [uid], function(err, results, fields) {
+		if (err) throw err;
+		else {
+			res.status(200).send(results);
+		}
+	});
 });
 
 //view list of those events you are attending
 app.get('/user/events', (req, res) => {
-    // if(!req.session.loggedin) {
-    //     res.status(404).send("You must be logged in to view this");
-    // } else {
-        connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.uid], function(err, results, fields) {
-            if (err) throw err;
-            else {
-                res.status(200).send(results);
-            }
-        });
-     //}
+connection.query('SELECT * FROM attending WHERE u_id = ?', [req.session.uid], function(err, results, fields) {
+    if (err) throw err;
+    else {
+	res.status(200).send(results);
+    }
+});
 });
 
 //view notifications
 app.get('/user/notifications', (req, res) => {
-   // if(!req.session.loggedin) {
-   //     res.status(404).send("You must be logged in to view this");
-   // } else {
-        connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ?', [req.session.uid], function(err, results, fields) {
-            if (err) throw err;
-            else {
-                res.status(200).send(results);
-            }
-        });
-    //}
+connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ?', [req.session.uid], function(err, results, fields) {
+    if (err) throw err;
+    else {
+	res.status(200).send(results);
+    }
+});
 });
 
 //view your apartment listings
