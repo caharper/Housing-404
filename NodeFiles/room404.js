@@ -703,7 +703,6 @@ app.post('/events/results', (req, res) => {
 app.post('/user/edit', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
     var q = "UPDATE users set ";
-    //if (err) throw err;
 
     if (req.body.name !== null){
         q = q + "name = '" + req.body.name + "'";
