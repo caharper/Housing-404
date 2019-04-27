@@ -29,8 +29,8 @@ export class CreateAccountForm extends Component {
       picture: '',
       smoker: '',
       year: '',
-      bedTimePref: '',
-      wakeTime: '',
+      bedTimePref: 'na',
+      wakeTime: 'na',
       pets: '',
 
       // Roommate preferences
@@ -38,8 +38,8 @@ export class CreateAccountForm extends Component {
       generPref: '',
       tidynessPref: '',
       yearPref: '',
-      tempPref: '',
-      wakeTimePref: ''
+      tempPref: 0,
+      wakeTimePref: 'na'
 
     }
     // Bind the submission to handleChange()
@@ -143,9 +143,9 @@ export class CreateAccountForm extends Component {
   onSubmit(){
 
       let newUser = new NewUser(this.state.name, this.state.email, this.state.password, this.state.gender,
-                                this.state.picture, this.state.smoker, this.state.year, this.state.bedTimePref,
+                                this.state.smoker, this.state.year, this.state.bedTimePref,
                                 this.state.wakeTime, this.state.pets, this.state.smokerPref, this.state.generPref,
-                                this.state.tidynessPref, this.state.yearPref, this.state.tempPref, this.state.wakeTimePref);
+                                this.state.tidynessPref, this.state.yearPref, this.state.tempPref, this.state.wakeTimePref, this.state.picture);
 
       console.log(newUser);
 

@@ -53,7 +53,7 @@ export class Homepage extends React.Component {
               </div>
             </div>
             <div className="col-6">
-              <div className="row">
+              <div className="row justify-content-center">
                 <ProgressBar></ProgressBar>
               </div>
               <div className="row justify-content-center">

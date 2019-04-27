@@ -67,7 +67,7 @@ export class PersonalDetails extends React.Component {
                   {$imagePreview}
                 </div>
 
-                <div class="custom-file">
+                <div className="custom-file">
                   <form onSubmit={(e)=>this._handleSubmit(e)}>
                     <input className="custom-file-input"
                       value={this.state.pic}
@@ -76,7 +76,7 @@ export class PersonalDetails extends React.Component {
                       required
                       onChange={(e)=>this._handleImageChange(e)}/>
                   </form>
-                  <label className="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                  <label className="custom-file-label" htmlFor="validatedCustomFile">Choose file...</label>
                   <div className="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
               </div>
@@ -97,18 +97,18 @@ export class PersonalDetails extends React.Component {
                     <div className="col-3">
                       <select className="form-control" name="smoker" id="smoker" value={this.props.smoker} onChange={this.props.handleChange}>
                         <option value="selected">Smoker</option>
-                        <option value={1}>Yes</option>
-                        <option value={0}>No</option>
+                        <option value={+1}>Yes</option>
+                        <option value={+0}>No</option>
                       </select>
                     </div>
 
                     <div className="col-3">
                       <select className="form-control" id="year" name="year" value={this.props.year} onChange={this.props.handleChange}>
                         <option value="select">Year</option>
-                        <option value={1}>Freshman</option>
-                        <option value={2}>Sophomore</option>
-                        <option value={3}>Junior</option>
-                        <option value={4}>Senior</option>
+                        <option value={+1}>Freshman</option>
+                        <option value={+2}>Sophomore</option>
+                        <option value={+3}>Junior</option>
+                        <option value={+4}>Senior</option>
                       </select>
                     </div>
                     <div className="col-3">

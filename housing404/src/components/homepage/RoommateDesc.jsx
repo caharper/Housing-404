@@ -24,8 +24,8 @@ export class RoommateDesc extends React.Component {
             <div className="col-3">
               <select className="form-control" name="smokerPref" id="smokerPref" value={this.props.smokerPref} onChange={this.props.handleChange}>
                 <option value="select">Smoker</option>
-                <option value={1}>Yes</option>
-                <option value={0}>No</option>
+                <option value={+1}>Yes</option>
+                <option value={+0}>No</option>
               </select>
             </div>
 
@@ -41,19 +41,19 @@ export class RoommateDesc extends React.Component {
             <div className="col-3">
               <select className="form-control" name="tidynessPref" id="tidynessPref" value={this.props.tidynessPref} onChange={this.props.handleChange}>
                 <option value="select">Tidy</option>
-                <option value={1}>Not Tidy</option>
-                <option value={2}>Tidy</option>
-                <option value={3}>Very Tidy</option>
+                <option value={+1}>Not Tidy</option>
+                <option value={+2}>Tidy</option>
+                <option value={+3}>Very Tidy</option>
               </select>
             </div>
 
             <div className="col-3">
               <select className="form-control" name="yearPref" id="yearPref" value={this.props.yearPref} onChange={this.props.handleChange}>
                 <option value="select">Year</option>
-                <option value={1}>Freshman</option>
-                <option value={2}>Sophomore</option>
-                <option value={3}>Junior</option>
-                <option value={4}>Senior</option>
+                <option value={+1}>Freshman</option>
+                <option value={+2}>Sophomore</option>
+                <option value={+3}>Junior</option>
+                <option value={+4}>Senior</option>
               </select>
             </div>
           </div>
