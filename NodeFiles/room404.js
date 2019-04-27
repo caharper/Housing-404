@@ -72,7 +72,7 @@ app.post('/user/login', (req, res) => {
                     req.session.uid = results[0].id;
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
-                    res.status(200).send(req.session.id);
+                    res.status(200).send(req.session.uid);
                 } else { //if log in unsuccessful
                     req.status(400).send('Incorrect Username and/or Password!');
                     req.session.loggedin = false;
@@ -162,7 +162,7 @@ app.get('/user/profile', (req, res) => {
         connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
-console.log("Session ID is ", req.session.uid);
+console.log("Session ID is ", req.session.id);
                 res.status(200).send(req.session.uid);
             }
         });
