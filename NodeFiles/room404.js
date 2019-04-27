@@ -346,7 +346,7 @@ app.get('/user/myEvents/:eid?', (req, res) => {
 //view a user's own event's attending memebers
 app.get('/user/myEvents/:eid/attending?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-	connection.query('SELECT attending.u_id FROM events NATURAL JOIN attending WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, sessuid], function(err, results, fields) {
+	connection.query('SELECT users.name FROM events NATURAL JOIN attending JOIN users ON attending.u_id = users.id WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, sessuid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
