@@ -725,9 +725,9 @@ app.post('/user/edit', (req, res) => {
 //edit profile
 app.post('/user/profile/edit', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-        connection.query('SELECT u_id FROM uProfiles WHERE id = ?', [req.body.u_id], function(err, results, fields) {
+        /*connection.query('SELECT id FROM uProfiles WHERE id = ?', [sessuid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === sessuid) {
+            else if (results[0].u_id === sessuid) {*/
                 var q = "UPDATE uProfiles SET ";
                 var first = false;
 
@@ -843,10 +843,10 @@ app.post('/user/profile/edit', (req, res) => {
                         res.status(200).send("Successfully updated user profile");
                     }
                 });
-            } else {
+            /*} else {
                 res.status(404).send("You are not authorized to edit this");
             }
-        });
+        });*/
 });
 
 //create listing
@@ -875,7 +875,7 @@ app.post('/user/apartments', (req, res) => {
 //edit apt listing
 app.post('/user/apartments/:aid?/edit', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.body.a_id], function(err, results, fields) {
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.params.a_id], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === req.session.uid) {
                 var q = "UPDATE aProfiles SET ";
