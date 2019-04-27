@@ -1117,10 +1117,10 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
                 }
                 if (req.body.date !== null) {
                     if (first === false) {
-                        q = q + "date = " + req.body.date + "'";
+                        q = q + "date = '" + req.body.date + "'";
                         first = true;
                     } else {
-                        q = q + " AND date = " + req.body.date + "'";
+                        q = q + " AND date = '" + req.body.date + "'";
                     }
                 }
                 if (req.body.picture !== null) {
