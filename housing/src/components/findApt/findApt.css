@@ -29,20 +29,15 @@ h1 {
     color: black;
   }
 
-.col , .col-lg-8{
-    background-size: 300px 100px;
-    
-  }
 
-  .searchResult{
+.searchResult{
     text-align: left;
     font-size: 20px;
     border: 10px solid white;
 
-    
   }
 
-  .searchResultLabel {
+.searchResultLabel {
     font-weight: bold;
     font-size: 10px;
   }

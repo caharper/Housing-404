@@ -119,7 +119,7 @@ class FindApt extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-3">
-
+              <h1>Filter</h1>
               <div className="filter">
                 <select className="custom-select" onChange={this.updateType} value={type}>
                   <option value="">Type</option>
@@ -523,8 +523,8 @@ class FindApt extends Component {
                   <span className="input-group-text">.00</span>
                 </div>
               </div>
-              <button onClick={this.filter}>Filter</button>
 
+              <button onClick={this.filter} className="filterButton">Filter</button>
             </div>
 
 
@@ -535,17 +535,15 @@ class FindApt extends Component {
                   {items.map(item => (
                     <div className="searchResult" >
                       <div className="row">
-                        
+
                         <div class="col col-mg-3 img">
                           <div className="imageSearched">
                             <img src={item.img} />
                           </div>
                         </div>
-                        
+
                         <div className="col col-mg-8 items">
-                          <div>
-                            <span class="searchResultLabel">Name:</span> <span class="searchResultValue">{item.name}</span>
-                            </div>
+                          <div>Name:{item.type}</div>
                           <div> Type:{item.type}</div>
                           <div> Description:{item.description}</div>
                           <div> Location:{item.location}</div>
@@ -555,15 +553,18 @@ class FindApt extends Component {
                           <div> Number of Bedrooms:{item.beds}</div>
                           <div> Number of Bathrooms:{item.baths}</div>
                           <div> Sqaure Feet:{item.squareFeet}</div>
-
-                            <button onClick={this.archive} className="addToArchive">Add to Archive</button>
+                          <button onClick={this.archive} className="addToArchive">Add to Archive</button>
                         </div>
+
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
       </>

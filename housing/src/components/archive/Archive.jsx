@@ -32,22 +32,35 @@ export default class Archive extends Component {
         </div>
 
         <div>
+          <h1>Archived</h1>
+          
           {items.map(item => (
-            <div>
-              <div>Name: {item.name}</div>
-              <div> Gender: {item.gender}</div>
-              <div> Smoker: {item.smoker}</div>
-              <div> Tidyness: {item.tidyness}</div>
-              <div> Smoker: {item.smoker}</div>
-              <div> Year: {item.year}</div>
-              <div> Temp: {item.temp}</div>
-              <div> Wake Up Time: {item.wakeTime}</div>
-              <div> Pets: {item.pets}</div>
-              <div className="image searched">
-                <img src={item.img} />
-              </div>
-              <button onClick={this.remove}className="removeButton">Remove</button>
+            <div className="archiveResult" >
+              <div className="row">
 
+                <div className="col-sm img">
+                  <div className="archiveImage">
+                    <img src={item.img} />
+                  </div>
+                </div>
+
+                <div className="col col-mg-8 items">
+                  <div>Name: {item.name}</div>
+                  <div> Gender: {item.gender}</div>
+                  <div> Smoker: {item.smoker}</div>
+                  <div> Tidyness: {item.tidyness}</div>
+                  <div> Smoker: {item.smoker}</div>
+                  <div> Year: {item.year}</div>
+                  <div> Temp: {item.temp}</div>
+                  <div> Wake Up Time: {item.wakeTime}</div>
+                  <div> Pets: {item.pets}</div>
+                </div>
+
+                <div className="col-sm button">
+                  <button onClick={this.remove} className="removeButton">Remove</button>
+                </div>
+
+              </div>
             </div>
           ))}
 
