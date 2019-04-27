@@ -431,6 +431,34 @@ app.get('user/notifications/:uid?', (req, res) => {
     //}
 });
 
+//get all pMatches from the 
+app.get('user/uProfiles', (req, res) => {
+    connection.query('SELECT * from uProfiles WHERE id = ?', [req.session.id], function(err, results, field) {
+        if(err) throw err;
+        else {
+            var Ugender = results[0].gender;
+            var Usmoker = results[0].smoker;
+            var UgenderP = results[0].genderP;
+            var UsmokerP = results[0].smokerP;
+            var Uyear = results[0].year;
+            var UTidynessP = results[0].tidynessP;
+            var UyearP = results[0].yearP;
+            var UtempP = results[0].tempP;
+            var UbedTimeP = results[0].bedTimeP;
+            var UwakeTime = results[0].wakeTime;
+            var UwakeTimeP = results[0].wakeTimeP;
+            var Upets = results[0].pets;
+            
+            var q = 'SELECT * from uProfiles WHERE id != ? AND gender == ' + Ugender + ' AND smoker == ' + Usmoker + ' AND genderP == ' + UgenderP + ' AND smokerP == ' + UsmokerP + ' AND year == ' + Uyear + ' AND tidynessP == ' + UtidynessP + ' AND yearP == ' + UyearP + ' AND tempP == ' + UtempP + ' AND bedTime == ' + UbedTimeP + ' AND wakeTime == ' + UwakeTime + ' AND wakeTimeP == ' + UwakeTimeP + ' AND pets == ' + pets;
+            connection.query(q, [req.session.id], function(err, results, field) {
+                if (err) throw err;
+                else {
+                    res.status(200).send(results);
+                }
+            })
+        }
+    })
+}
 
 
 /*
