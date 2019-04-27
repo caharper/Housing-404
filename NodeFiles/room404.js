@@ -856,7 +856,7 @@ app.post('/user/apartments', (req, res) => {
 		    if (err) throw err;
 			else {
 				var a_id = results[0].a_id + 1;
-        		connection.query('insert into aProfiles (a_id, u_id, location, rent, leaseTime, description, picture, occupants, beds, baths, squareFeet, rooms, kitchen, laundry, floor, pets, poBox, studyRooms, roomStyle, gym, pool, ac) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [a_id, sessuid, req.body.location,
+        		connection.query('insert into aProfiles (a_id, u_id, location, rent, leaseTime, description, picture, occupants, beds, baths, squareFeet, rooms, kitchen, laundry, floor, pets, poBox, studyRooms, roomStyle, gym, pool, ac) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [a_id, sessuid, req.body.location,
         		    req.body.rent, req.body.leaseTime, req.body.description, req.body.picture, req.body.occupants, req.body.beds,
         			req.body.baths, req.body.squareFeet, req.body.rooms, req.body.kitchen, req.body.laundry, req.body.floor, req.body.pets, 
         			req.body.poBox, req.body.studyRooms, req.body.roomStyle, req.body.gym, req.body.pool, req.body.ac], function(err, results, fields){
