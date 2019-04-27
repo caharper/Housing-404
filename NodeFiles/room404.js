@@ -1132,7 +1132,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
                     }
                 });
             } else {
-                res.status(404).send("You are not authorized to edit this");
+                res.status(404).send("You are not authorized to edit this; owner: " + results[0].owner + "; your id: " + sessuid);
             }
         });
 });
