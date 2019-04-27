@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar";
+import './archive.css';
 
 
 
@@ -45,7 +46,7 @@ export default class Archive extends Component {
               <div className="image searched">
                 <img src={item.img} />
               </div>
-              <button onClick={this.remove}>Remove</button>
+              <button onClick={this.remove}className="removeButton">Remove</button>
 
             </div>
           ))}
