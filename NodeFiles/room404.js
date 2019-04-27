@@ -162,7 +162,8 @@ app.get('/user/profile', (req, res) => {
         connection.query('SELECT * FROM users JOIN uProfiles ON users.id = uProfiles.id WHERE users.id = ?', [req.session.uid], function(err, results, fields) {
             if (err) throw err;
             else {
-                res.status(200).send(results);
+console.log("Session ID is ", req.session.uid);
+                res.status(200).send(req.session.uid);
             }
         });
    // }
