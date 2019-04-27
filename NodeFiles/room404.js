@@ -73,7 +73,7 @@ app.post('/user/login', (req, res) => {
                     sessuid.toString();
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
-                    res.status(200).send(sessuid);
+                    res.status(200).send(" ", sessuid);
                 } else { //if log in unsuccessful
                     res.status(400).send('Incorrect Username and/or Password!');
                     req.session.loggedin = false;
