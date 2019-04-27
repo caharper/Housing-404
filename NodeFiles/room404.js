@@ -1088,7 +1088,7 @@ app.post('/user/myEvents', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         connection.query('SELECT e_id FROM events ORDER BY e_id DESC LIMIT 1', function(err, results, fields) {
     	    var e_id = results[0].e_id + 1;
-	        connection.query('INSERT INTO events VALUES(?, ?, ?, ?)', [e_id, sessuid, req.body.details, req.body.date], function(err, results, fields) {
+	        connection.query('INSERT INTO events (e_id, owner, details, date, picture) VALUES(?, ?, ?, ?, ?)', [e_id, sessuid, req.body.details, req.body.date, req.body.picture], function(err, results, fields) {
         	    if (err) throw err;
         	    else {
         	        res.status(200).send("Successfully added event");
