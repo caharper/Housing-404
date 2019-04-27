@@ -335,7 +335,7 @@ app.get('/user/apartments/:aid?/prevRents', (req, res) => {
 //view a user's own event
 app.get('/user/myEvents/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-        connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, sessiud], function(err, results, fields) {
+        connection.query('SELECT * FROM events WHERE e_id = ? AND owner = ?', [req.params.eid, sessuid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
