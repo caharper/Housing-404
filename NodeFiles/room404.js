@@ -121,7 +121,6 @@ app.post('/user/register', (req, res) => {
                 else{
                     const profileData = [tempId, 
                     req.body.gender,
-                    req.body.picture,
                     req.body.smoker,
                     req.body.genderP,
                     req.body.smokerP,
@@ -132,7 +131,8 @@ app.post('/user/register', (req, res) => {
                     req.body.bedTimeP,
                     req.body.wakeTime,
                     req.body.wakeTimeP,
-                    req.body.pets]
+                    req.body.pets,
+                    req.body.picture]
 
                     connection.query('INSERT INTO uProfiles VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', profileData, function(err, result) {
                         if (err) throw err
