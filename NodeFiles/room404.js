@@ -432,7 +432,7 @@ app.get('user/notifications/:uid?', (req, res) => {
 });
 
 //get all pMatches from the 
-app.get('user/uProfiles', (req, res) => {
+/*app.get('user/uProfiles', (req, res) => {
     connection.query('SELECT * from uProfiles WHERE id = ?', [req.session.id], function(err, results, field) {
         if(err) throw err;
         else {
@@ -458,7 +458,7 @@ app.get('user/uProfiles', (req, res) => {
             })
         }
     })
-}
+}*/
 
 
 /*
