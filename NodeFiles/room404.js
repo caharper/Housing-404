@@ -1175,7 +1175,7 @@ app.post('/user/apartments/:aid?/prevRents/edit', (req, res) => {
             		}
         		});
 		    } else {
-			    res.status(404).send("You don't have authorization to do this");
+			    res.status(404).send("You don't have authorization to do this; event id: " + results[0].u_id + "your id: " + sessuid);
 		    }
 	    });
     //}
