@@ -1100,7 +1100,7 @@ app.post('/user/myEvents', (req, res) => {
 //edit event
 app.post('/user/myEvents/:eid?/edit', (req, res) => {
         var eid = req.params.eid;
-	var sessuid = results[0].id;
+	var sessuid = req.query.sessuid;
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].owner === req.session.uid) {
@@ -1112,7 +1112,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
                         q = q + "details = '" + req.body.details + "'";
                         first = true;
                     } else {
-                        q = q + " AND details = " + req.body.details + "'";
+                        q = q + " AND details = '" + req.body.details + "'";
                     }
                 }
                 if (req.body.date !== null) {
