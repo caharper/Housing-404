@@ -1078,7 +1078,7 @@ app.post('/user/apartments/:aid?/edit', (req, res) => {
                     }
                 }
 
-                q = q + " WHERE u_id = " + sessuid + " AND a_id = " + req.body.a_id;
+                q = q + " WHERE u_id = " + sessuid + " AND a_id = " + req.params.aid;
                 connection.query(q, function(err, results, fields) {
                     if (err) throw err;
                     else {
