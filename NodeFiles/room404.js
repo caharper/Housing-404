@@ -70,9 +70,10 @@ app.post('/user/login', (req, res) => {
             connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [user_email_temp, hashedPW], function(err, results, fields) {
                 if (results.length === 1) { //if log in successful
                     var sessuid = results[0].id;
+			console.log("sessuid ", sessuid);
                     req.session.email = req.body.email;
                     req.session.loggedin = true;
-                    res.status(200).send(results[0].id);
+                    res.status(200).send(sessuid);
                 } else { //if log in unsuccessful
                     req.status(400).send('Incorrect Username and/or Password!');
                     req.session.loggedin = false;
