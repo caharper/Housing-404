@@ -1100,7 +1100,7 @@ app.post('/user/myEvents', (req, res) => {
 //edit event
 app.post('/user/myEvents/:eid?/edit', (req, res) => {
         var eid = req.params.eid;
-	var sessuid = req.query.sessuid;
+	var sessuid = parseInt(req.query.sessuid, 10);
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].owner === sessuid) {
