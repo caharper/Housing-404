@@ -811,7 +811,7 @@ app.post('/user/profile/edit', (req, res) => {
                         q = q + " AND bedTimeP = '" + req.body.bedTimeP + "'";
                     }
                 }
-                if (req.body.gender !== null) {
+                if (req.body.wakeTime !== null) {
                     if (first === false) {
                         q = q + "wakeTime = '" + req.body.wakeTime + "'";
                         first = true;
