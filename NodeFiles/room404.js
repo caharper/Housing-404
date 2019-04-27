@@ -1123,14 +1123,6 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
                         q = q + " AND date = '" + req.body.date + "'";
                     }
                 }
-                if (req.body.picture !== null) {
-                    if (first === false) {
-                        q = q + "picture = " + req.body.picture;
-                        first = true;
-                    } else {
-                        q = q + " AND picture = " + req.body.picture;
-                    }
-                }
 
                 q = q + " WHERE owner = " + sessuid + " AND e_id = " + eid;
                 connection.query(q, function(err, results, fields) {
