@@ -895,7 +895,7 @@ app.post('/user/apartments', (req, res) => {
 //edit apt listing
 app.post('/user/apartments/:aid?/edit', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.params.a_id], function(err, results, fields) {
+        connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.params.aid], function(err, results, fields) {
             if (err) throw err;
             else if (results[0].u_id === sessuid) {
                 var q = "UPDATE aProfiles SET ";
