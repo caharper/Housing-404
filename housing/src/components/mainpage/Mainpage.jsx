@@ -15,7 +15,7 @@ class MainPage extends Component {
             <div>
                 <div className="align">
                     <div>
-                        <Link to="//notification">
+                        <Link to="/notification">
                             <button className="width">Notification</button>
                         </Link>
                     </div>

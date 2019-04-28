@@ -20,10 +20,7 @@ class Myevents extends Component {
       }
     ],
   }
-  remove = () => {
-    // request server api call
 
-  }
   render() {
 
     if(this.state.eventsAttend === null || this.state.eventsAttend === undefined){
@@ -60,9 +57,6 @@ class Myevents extends Component {
                       </div>
                     ))}
               </div>
-         
-            
-
             </div>
 
             <div class="col-6" >
@@ -77,7 +71,6 @@ class Myevents extends Component {
                   <button onClick={this.remove}>Remove</button>
                 </div>
               ))}
-
             </div>
           </div>
         </div>

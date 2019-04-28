@@ -24,7 +24,8 @@ const Navbar = () => (
                 <Link id="listApt" className="menu-item" to="/listApt">List Apartment</Link>
                 <Link id="event" className="menu-item" to="/event">Events</Link>
                 <Link id="myevent" className="menu-item" to="/myevent">My Events</Link>
-                <Link id="archive" className="menu-item" to="/archive">Archive</Link>
+                <Link id="notifcation" className="menu-item" to="/notification">Notifcation</Link>
+
                 <Link id="profile" className="menu-item" to="/profile">Profile</Link>
             </Menu>
             <a class="navbar-brand" href="#">Placeholder</a>

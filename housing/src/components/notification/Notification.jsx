@@ -3,16 +3,13 @@ import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
 
 
-
-export default class Notification extends Component {
+ class Notification extends Component {
     accountRepository = new AccountRepository;
 
     state = {
         notification: []
     }
-    mynotification = () => {
-        // request server api call
-    }
+
 
     render() {
         if(this.state.notification === null || this.state.notification === undefined){
@@ -41,7 +38,7 @@ export default class Notification extends Component {
             </>
         );
     }
-    
+
     componentDidMount(){
         this.accountRepository.getUserNotifications(localStorage.getItem("sessuid"))
           .then(notificationResp => {
@@ -51,3 +48,4 @@ export default class Notification extends Component {
         } 
 
 }
+export default Notification;

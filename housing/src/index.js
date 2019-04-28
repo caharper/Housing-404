@@ -18,7 +18,6 @@ import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-d
 
 import Homepage from './components/homepage/Homepage';
 import Mainpage from './components/mainpage/Mainpage';
-import Archive from './components/archive/Archive';
 import FindRoomate from './components/findRoomate/FindRoomate';
 import Profile from './components/profile/Profile';
 import CreateApartmentListings from './components/listApartments/CreateApartmentListing';
@@ -66,7 +65,6 @@ const routing = (
         <Route exact path="/" component={Homepage} />
         <Route exact path="/main" component={Mainpage} />
         <Route path="/profile" component={Profile} />
-        <Route path="/archive" component={Archive} />
         <Route path="/findroomate" component={FindRoomate} />
         <Route path="/listApt" component={CreateApartmentListings} />
         <Route path="/findApt" component={FindApt} />
