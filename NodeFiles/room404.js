@@ -366,7 +366,7 @@ app.get('user/notifications/:uid?', (req, res) => {
 });
 
 //get all pMatches from the 
-/*app.get('user/uProfiles', (req, res) => {
+/*app.get('users/pMatch', (req, res) => {
     connection.query('SELECT * from uProfiles WHERE id = ?', [req.session.id], function(err, results, field) {
         if(err) throw err;
         else {
@@ -383,16 +383,44 @@ app.get('user/notifications/:uid?', (req, res) => {
             var UwakeTimeP = results[0].wakeTimeP;
             var Upets = results[0].pets;
             
-            var q = 'SELECT * from uProfiles WHERE id != ? AND gender == ' + Ugender + ' AND smoker == ' + Usmoker + ' AND genderP == ' + UgenderP + ' AND smokerP == ' + UsmokerP + ' AND year == ' + Uyear + ' AND tidynessP == ' + UtidynessP + ' AND yearP == ' + UyearP + ' AND tempP == ' + UtempP + ' AND bedTime == ' + UbedTimeP + ' AND wakeTime == ' + UwakeTime + ' AND wakeTimeP == ' + UwakeTimeP + ' AND pets == ' + pets;
+            var q = 'SELECT * from uProfiles WHERE gender = ' + Ugender + ' AND smoker == ' + Usmoker + ' AND genderP == ' + UgenderP + ' AND smokerP == ' + UsmokerP + ' AND year == ' + Uyear + ' AND tidynessP == ' + UtidynessP + ' AND yearP == ' + UyearP + ' AND tempP == ' + UtempP + ' AND bedTime == ' + UbedTimeP + ' AND wakeTime == ' + UwakeTime + ' AND wakeTimeP == ' + UwakeTimeP + ' AND pets == ' + pets;
             connection.query(q, [req.session.id], function(err, results, field) {
                 if (err) throw err;
                 else {
                     res.status(200).send(results);
                 }
-            })
+            });
         }
-    })
-}*/
+});*/
+
+app.get('/users/pMatch', (req, res) => {
+	var sessuid = parseInt(req.query.sessuid, 10);
+	connection.query('SELECT * FROM uProfiles WHERE id = ?', [sessuid], function(err, results, field) {
+		if (err) throw err;
+		else {
+			const passIN = [ results[0].gender, //your gender their genderP
+				results[0].genderP, //their gender your genderP
+				results[0].smoker, //your smoker their smokerP
+				results[0].smokerP, //their smoker your smokerP
+				results[0].year, //your year their yearP
+				results[0].yearP, //their year your yearP
+				results[0].tidynessP, //tidynessP
+				results[0].tempP, //tempP
+				results[0].bedTimeP, //bedTimeP
+				results[0].wakeTime, //your wakeTime their wakeTimeP
+				results[0].wakeTimeP, //their wakeTime your wakeTimeP
+				results[0].pets //pets
+			]
+			
+			connection.query('SELECT * FROM uProfiles WHERE genderP = ? AND gender = ? AND smokerP = ? AND smoker = ? AND yearP = ? AND year = ? AND tidynessP = ? AND tempP = ? AND bedTimeP = ? AND wakeTimeP = ? AND wakeTime = ? AND pets = ?', passIn, function(err, results, fields) {
+				if (err) throw err;
+				else {
+					res.status(200).send(results);
+				}
+			});
+		}
+	});
+});
 
 
 /*
