@@ -7,7 +7,8 @@ class Profile extends Component {
   accountRepository = new AccountRepository;
 
   state = {
-    userList: null
+    userList: null,
+    changePassword: null
   }
   
   render() {
@@ -15,11 +16,6 @@ class Profile extends Component {
     if(this.state.userList === null){
       return(<></>)
     } 
-
-    // console.log('**********')
-    // console.log(this.state.userList)
-    // let user = this.state.userList[0].id;
-
 
     const { userList, resetPassword} = this.state;
 
@@ -42,7 +38,6 @@ class Profile extends Component {
                 </>
                 </div>
 
-
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Old Password" aria-label="Old Password" aria-describedby="button-addon2" />
               <input type="text" class="form-control" placeholder="New Password" aria-label="New Password" aria-describedby="button-addon2" />
@@ -58,7 +53,6 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    console.log('what the fuck')
     console.log(localStorage.getItem("sessuid"))
     this.accountRepository.getUserProfile(localStorage.getItem("sessuid"))
       .then(userListResp => {

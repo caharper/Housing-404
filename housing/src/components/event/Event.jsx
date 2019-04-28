@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
+import { AccountRepository } from './../../api/accountRepository'
 import Navbar from "../Navbar";
 
 
 export default class Event extends Component {
+    accountRepository = new AccountRepository;
     state = {
-        events: [
-            {
-                Details: 'Party',
-                Date: "May 21", img: "https://via.placeholder.com/150"
-            }
-
-        ],
+        events: [],
     }
     myEvents = () => {
         // request server api call
     }
 
     render() {
+       
+        if(this.state.userList === null){
+            return(<></>)
+          } 
+
         const { events } = this.state;
         return (
             <>
@@ -40,5 +41,13 @@ export default class Event extends Component {
             </>
         );
     }
+
+    componentDidMount(){
+        this.accountRepository.getAllEvents()
+          .then(events => {
+            this.setState({ events })
+          })
+      }
+
 }
 

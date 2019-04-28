@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar";
+import { AccountRepository } from './../../api/accountRepository';
+
 
 
 class Myevents extends Component {
+  accountRepository = new AccountRepository;
+
   state = {
-    events: [
-      {
-        Details: 'Party',
-        Date: "May 21", img: "https://via.placeholder.com/150"
-      }
-    ],
+    eventsAttend: null,
     myEvents: [
       {
         type: 'Apartment',
@@ -27,10 +26,20 @@ class Myevents extends Component {
   }
   render() {
 
-    const { events, myEvents } = this.state;
+    if(this.state.eventsAttend === null || this.state.eventsAttend === undefined){
+      return(
+        <>
+          <div><Navbar></Navbar></div>
+          You have no events
+        </>
+      )
+    } 
+
+    const { eventsAttend, myEvents } = this.state;
 
     return (
       <>
+
         <div><Navbar></Navbar></div>
 
         <div class="container">
@@ -38,16 +47,21 @@ class Myevents extends Component {
 
             <div class="col-6">
               <h1>Event Attending</h1>
-              {events.map(events => (
-                <div>
-                  <div>Details:{events.name}</div>
-                  <div> Date:{events.type}</div>
-                  <div className="image searched">
-                    <img src={events.img} />
-                  </div>
-                  <button onClick={this.remove}>Remove</button>
-                </div>
-              ))}
+
+              <div>
+                {this.state.eventsAttend.map(item => (
+                      <div className="searchResult" >
+                        <div className="row">
+                          <div className="col col-mg-8 items">
+                            <div>Name:{item.details}</div>
+                            <div> Date:{item.date}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+              </div>
+         
+            
 
             </div>
 
@@ -69,6 +83,21 @@ class Myevents extends Component {
         </div>
       </>
     );
+  }
+  componentDidMount(){
+    this.accountRepository.getUserGoingEvents(localStorage.getItem("sessuid"))
+      .then(eventListResp => {
+        let eventsAttend = eventListResp[0];
+        this.setState({eventsAttend: eventsAttend})
+      })
+
+      this.accountRepository.getUserOwnedEvents(localStorage.getItem("sessuid"))
+      .then(myEventsResp => {
+        let myEvents = myEventsResp[0];
+        this.setState({myEvents: myEvents })
+        console.log(this.state.eventsAttend)
+        console.log(this.state.myEvents)
+      })
   }
 }
 export default Myevents;

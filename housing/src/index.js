@@ -21,7 +21,7 @@ import Mainpage from './components/mainpage/Mainpage';
 import Archive from './components/archive/Archive';
 import FindRoomate from './components/findRoomate/FindRoomate';
 import Profile from './components/profile/Profile';
-//import ListApt from './components/listApartments/ListApt';
+import CreateApartmentListings from './components/listApartments/CreateApartmentListing';
 import FindApt from './components/findApt/FindApt';
 import MyEvents from './components/myEvents/Myevents';
 import Event from './components/event/Event';
@@ -68,6 +68,7 @@ const routing = (
         <Route path="/profile" component={Profile} />
         <Route path="/archive" component={Archive} />
         <Route path="/findroomate" component={FindRoomate} />
+        <Route path="/listApt" component={CreateApartmentListings} />
         <Route path="/findApt" component={FindApt} />
         <Route path="/myevent" component={MyEvents} />
         <Route path="/event" component={Event} />

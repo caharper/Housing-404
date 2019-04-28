@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { AccountRepository } from './../../api/accountRepository';
 import Navbar from "../Navbar";
 import './archive.css';
 
 
 
 export default class Archive extends Component {
+  accountRepository = new AccountRepository;
   state = {
-    items: [
+    archive: [
       {
         type: 'Apartment',
         name: "Haya", gender: "student", img: "https://via.placeholder.com/150"
@@ -24,7 +26,10 @@ export default class Archive extends Component {
   }
 
   render() {
-    const { items, type } = this.state;
+    if(this.state.archive === null){
+      return(<></>)
+    } 
+    const { archive, type } = this.state;
     return (
       <>
         <div>
@@ -33,27 +38,26 @@ export default class Archive extends Component {
 
         <div>
           <h1>Archived</h1>
-          
-          {items.map(item => (
+         
             <div className="archiveResult" >
               <div className="row">
 
                 <div className="col-sm img">
                   <div className="archiveImage">
-                    <img src={item.img} />
+                    <img src={archive.img} />
                   </div>
                 </div>
 
-                <div className="col col-mg-8 items">
-                  <div>Name: {item.name}</div>
-                  <div> Gender: {item.gender}</div>
-                  <div> Smoker: {item.smoker}</div>
-                  <div> Tidyness: {item.tidyness}</div>
-                  <div> Smoker: {item.smoker}</div>
-                  <div> Year: {item.year}</div>
-                  <div> Temp: {item.temp}</div>
-                  <div> Wake Up Time: {item.wakeTime}</div>
-                  <div> Pets: {item.pets}</div>
+                <div className="col col-mg-8 archives">
+                  <div>Name: {archive.name}</div>
+                  <div> Gender: {archive.gender}</div>
+                  <div> Smoker: {archive.smoker}</div>
+                  <div> Tidyness: {archive.tidyness}</div>
+                  <div> Smoker: {archive.smoker}</div>
+                  <div> Year: {archive.year}</div>
+                  <div> Temp: {archive.temp}</div>
+                  <div> Wake Up Time: {archive.wakeTime}</div>
+                  <div> Pets: {archive.pets}</div>
                 </div>
 
                 <div className="col-sm button">
@@ -62,11 +66,20 @@ export default class Archive extends Component {
 
               </div>
             </div>
-          ))}
-
         </div>
       </>
     );
   }
+
+  // componentDidMount(){
+  //   console.log(localStorage.getItem("sessuid"))
+  //   this.accountRepository.getArchive(localStorage.getItem("sessuid"))
+  //     .then(archiveResp => {
+  //       console.log(archive)
+  //       let archive = archiveResp[0];
+  //       this.setState({ archive })
+  //       console.log(archive)
+  //     })
+  // }
 }
 

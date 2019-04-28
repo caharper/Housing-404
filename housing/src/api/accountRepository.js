@@ -121,9 +121,9 @@ export class AccountRepository {
   }
 
   // Get all events a user is going to  ------ ****** doesn't this need a user id ?
-  getUserGoingEvents() {
+  getUserGoingEvents(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/events`)
+      axios.get(`${this.url}/user/events?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -153,9 +153,9 @@ export class AccountRepository {
 
 
   // Get all events owned by a user  ------ ****** doesn't this need a user id ?
-  getUserOwnedEvents() {
+  getUserOwnedEvents(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/myEvents`)
+      axios.get(`${this.url}/user/myEvents?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -419,14 +419,14 @@ export class AccountRepository {
       })
   }
 
-  // Filters out events with given filters
-  filterEvents(filters){
-    return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/events/results`, filters)
-        .then(resp => resolve(resp.data))
-        .catch(resp => alert(resp))
-      })
-  }
+  // // Filters out events with given filters
+  // filterEvents(filters){
+  //   return new Promise((resolve, reject) => {
+  //       axios.post(`${this.url}/events/results`, filters)
+  //       .then(resp => resolve(resp.data))
+  //       .catch(resp => alert(resp))
+  //     })
+  // }
 
 
 

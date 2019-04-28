@@ -15,8 +15,8 @@ class MainPage extends Component {
             <div>
                 <div className="align">
                     <div>
-                        <Link to="/archive">
-                            <button className="width">Archive</button>
+                        <Link to="//notification">
+                            <button className="width">Notification</button>
                         </Link>
                     </div>
                     <div>
