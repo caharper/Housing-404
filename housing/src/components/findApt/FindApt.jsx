@@ -9,17 +9,7 @@ class FindApt extends Component {
   accountRepository = new AccountRepository;
 
   state = {
-    items: [
-      {
-        name: "Lofts", type: "House", description: "Nice place in dallas", img: "https://via.placeholder.com/150"
-      },
-      {
-        name: "Landmark", type: "Apartment", img: "https://via.placeholder.com/150"
-      },
-      {
-        name: "5MockingBird", type: "Townhouse", img: "https://via.placeholder.com/150"
-      }
-    ],
+    items: [],
     type: null,
     year: null,
     squareFeet: null,
@@ -103,6 +93,9 @@ class FindApt extends Component {
   updateRoomStyle = (e) => {
     this.setState({ roomStyle: e.target.value || null })
   }
+  updateRoomRent = (e) => {
+    this.setState({ rent: e.target.value || null })
+  }
 
 
   filter() {
@@ -141,7 +134,7 @@ class FindApt extends Component {
                   <option value="Dorm">Dorm</option>
                 </select>
               </div>
-              <div>
+              <div className="filter">
                 <select className="custom-select" onChange={this.updateYear} value={year}>
                   <option value="">Year</option>
                   <option value={1}>Freshman</option>
@@ -151,21 +144,6 @@ class FindApt extends Component {
                 </select>
               </div>
 
-              <div>
-                <select className="custom-select" onChange={this.updateSqureFeet} value={squareFeet}>
-                  <option value="">Square Feet</option>
-                  <option value="500">500</option>
-                  <option value="750">750</option>
-                  <option value="1000">1000</option>
-                  <option value="1250">1250</option>
-                  <option value="1500">1500</option>
-                  <option value="1750">1750</option>
-                  <option value="2000">2000</option>
-                  <option value="2250">2250</option>
-                  <option value="2750">2750</option>
-                  <option value="3000">3000</option>
-                </select>
-              </div>
 
               <div className="filter">
                 <div className="filterTitle">Bedrooms
@@ -190,7 +168,7 @@ class FindApt extends Component {
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="bedroom" id="bedroom3"
                     checked={bedrooms === '3'}
-                    value= {3} onChange={this.updateBedrooms} />
+                    value={3} onChange={this.updateBedrooms} />
                   <label className="form-check-label" htmlFor="bedroom3">
                     3
                 </label>
@@ -199,7 +177,7 @@ class FindApt extends Component {
               </div>
 
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle"> Bathrooms
                 <button onClick={this.updateBathrooms} className="xbutton">x</button>
                 </div>
@@ -229,7 +207,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle"> Number of occupants
                 <button onClick={this.updateOccupants} className="xbutton">x</button>
                 </div>
@@ -259,7 +237,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle"> Rooms
                 <button onClick={this.updateRooms} className="xbutton">x</button>
                 </div>
@@ -290,7 +268,7 @@ class FindApt extends Component {
 
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Number of Floors
                 <button onClick={this.updateFloors} className="xbutton">x</button>
                 </div>
@@ -321,14 +299,15 @@ class FindApt extends Component {
 
               </div>
 
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateRoomStyle} value={roomStyle}>
+                  <option value="">Room Style</option>
+                  <option value="Suite">Suite</option>
+                  <option value="Double">Double</option>
+                </select>
+              </div>
 
-              <select className="custom-select" onChange={this.updateRoomStyle} value={roomStyle}>
-                <option value="">Room Style</option>
-                <option value="Suite">Suite</option>
-                <option value="Double">Double</option>
-              </select>
-
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Kitchens
                 <button onClick={this.updateKitchens} className="xbutton">x</button>
                 </div>
@@ -350,7 +329,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Laundry Room
                 <button onClick={this.updateLaundryRooms} className="xbutton">x</button>
                 </div>
@@ -372,7 +351,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Pet
                 <button onClick={this.updatePets} className="xbutton">x</button>
                 </div>
@@ -394,7 +373,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Smoking
                 <button onClick={this.updateSmoking} className="xbutton">x</button>
                 </div>
@@ -416,7 +395,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Pool
                 <button onClick={this.updatePool} className="xbutton">x</button>
                 </div>
@@ -438,7 +417,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Gym
                 <button onClick={this.updateGym} className="xbutton">x</button>
                 </div>
@@ -460,7 +439,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Study Room
                 <button onClick={this.updatestudyRoom} className="xbutton">x</button>
                 </div>
@@ -482,14 +461,24 @@ class FindApt extends Component {
                 </div>
               </div>
 
-
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">Rent</span>
+              <div className="filter">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" onChange={this.updateSqureFeet} value={squareFeet}>SquareFeet</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"/>
                 </div>
-                <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
-                <div className="input-group-append">
-                  <span className="input-group-text">.00</span>
+              </div>
+
+              <div className="filter">
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" onChange={this.updateRent} value={rent}>Rent</span>
+                  </div>
+                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+                  <div className="input-group-append">
+                    <span className="input-group-text">.00</span>
+                  </div>
                 </div>
               </div>
 

@@ -37,38 +37,38 @@ class FindRoomate extends Component {
   }
 
   updateSmoker = (e) => {
-    this.setState({ smoker: e.type.value || null })
+    this.setState({ smokerP: e.target.value || null })
   }
 
   updateGender = (e) => {
-    this.setState({ gender: e.target.value || null })
+    this.setState({ genderP: e.target.value || null })
   }
   updateYear = (e) => {
-    this.setState({ year: e.type.value|| null })
+    this.setState({ yearP: e.target.value || null })
   }
   updatePets = (e) => {
-    this.setState({ pets: e.type.value|| null })
+    this.setState({ pets: e.target.value || null })
   }
   updateTidyness = (e) => {
-    this.setState({ tidyness: e.type.value|| null })
+    this.setState({ tidynessP: e.target.value || null })
   }
-  
+
   filter() {
     // request server api call
     let filter = new FilterRoommate(
-    this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
-  
+      this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
 
-  this.accountRepository.filterUsers(filter)
-  .then(filterRoomate => {
-    console.log(filterRoomate)
-    this.setState({ filterRoomate })
-  })
-}
+
+    this.accountRepository.filterUsers(filter)
+      .then(filterRoomate => {
+        console.log(filterRoomate)
+        this.setState({ filterRoomate })
+      })
+  }
 
 
   render() {
-    const { items, gender, smoker, year, pets, tidynessP } = this.state;
+    const { items, genderP, smokerP, yearP, pets, tidynessP } = this.state;
 
 
     return (
@@ -78,14 +78,14 @@ class FindRoomate extends Component {
           <div class="row">
 
             <div class="col-sm-3">
-            <h1>Filter</h1>
-             
-              <div>
+              <h1>Filter</h1>
+
+              <div className="filter">
                 <div className="filterTitle">Gender
               <button onClick={this.updateGender} className="xbutton">x</button>
                 </div>
                 <div className="form-check form-check-inline" >
-                  <input className="form-check-input" type="radio" name="gender" id="genderMale" checked={gender === "M"}
+                  <input className="form-check-input" type="radio" name="gender" id="genderMale" checked={genderP === "M"}
                     value='M'
                     onChange={this.updateGender} />
                   <label className="form-check-label" htmlFor="genderMale">
@@ -94,7 +94,7 @@ class FindRoomate extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="gender" id="genderFemale"
-                    checked={gender === "F"}
+                    checked={genderP === "F"}
                     value="F" onChange={this.updateGender} />
                   <label className="form-check-label" htmlFor="genderFemale">
                     Female
@@ -102,7 +102,7 @@ class FindRoomate extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="gender" id="genderOther"
-                    checked={gender === "O"}
+                    checked={genderP === "O"}
                     value="O" onChange={this.updateGender} />
                   <label className="form-check-label" htmlFor="genderOther">
                     Other
@@ -111,59 +111,70 @@ class FindRoomate extends Component {
               </div>
 
 
-              <div>
-                <div className="filterTitle"> Smoker
+
+              <div className="filter">
+                <div className="filterTitle">Smoker
                 <button onClick={this.updateSmoker} className="xbutton">x</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerYes"
-                    checked={smoker === "Yes"}
+                    checked={smokerP === '1'}
                     value={1} onChange={this.updateSmoker} />
-                  <label className="form-check-label" htmlFor="smokerYes">Yes</label>
+                  <label className="form-check-label" htmlFor="smokerYes">
+                    Yes
+                </label>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerNo"
-                    checked={smoker === "No"}
+                    checked={smokerP === '2'}
                     value={2} onChange={this.updateSmoker} />
-                  <label className="form-check-label" htmlFor="smokerNo">No</label>
+                  <label className="form-check-label" htmlFor="smokerNo">
+                    No
+                </label>
                 </div>
               </div>
 
-              <select className="custom-select" onChange={this.updateYear} value={year}>
-                <option value="">Year</option>
-                <option value={1}>Freshman</option>
-                <option value={2}>Sophmore</option>
-                <option value={3}>Junior</option>
-                <option value={4}>Senior</option>
-              </select>
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateYear} value={yearP}>
+                  <option value="">Year</option>
+                  <option value={1}>Freshman</option>
+                  <option value={2}>Sophmore</option>
+                  <option value={3}>Junior</option>
+                  <option value={4}>Senior</option>
+                </select>
+              </div>
 
-
-              <div>
+              <div className="filter">
                 <div className="filterTitle">Pet
                 <button onClick={this.updatePets} className="xbutton">x</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petYes"
-                    checked={pets === "Yes"}
+                    checked={pets === '1'}
                     value={1} onChange={this.updatePets} />
-                  <label className="form-check-label" htmlFor="petYes">Yes</label>
+                  <label className="form-check-label" htmlFor="petYes">
+                    Yes
+                </label>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petNo"
-                    checked={pets === "No"}
+                    checked={pets === '2'}
                     value={2} onChange={this.updatePets} />
-                  <label className="form-check-label" htmlFor="petNo">No</label>
+                  <label className="form-check-label" htmlFor="petNo">
+                    No
+                </label>
                 </div>
               </div>
 
-              
-              <select className="custom-select" onChange={this.updateTidyness} value={year}>
-                <option value="">Tidyness</option>
-                <option value={1}>Not Tiddy</option>
-                <option value={2}>Tidy</option>
-                <option value={3}>Very Tiddy</option>
-              </select>
-              
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
+                  <option value="">Tidyness</option>
+                  <option value={1}>Not Tiddy</option>
+                  <option value={2}>Tidy</option>
+                  <option value={3}>Very Tiddy</option>
+                </select>
+              </div>
+
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
 
             </div>

@@ -13,10 +13,10 @@ export default class Event extends Component {
     }
 
     render() {
-       
-        if(this.state.userList === null){
-            return(<></>)
-          } 
+
+        if (this.state.userList === null) {
+            return (<></>)
+        }
 
         const { events } = this.state;
         return (
@@ -26,15 +26,18 @@ export default class Event extends Component {
                     <Navbar></Navbar>
                 </div>
 
-                <div>
+                <div className="card-deck">
                     {events.map(events => (
-                        <div>
-                            <div>Details:{events.details}</div>
-                            <div> Date:{events.date}</div>
+                        <div className="card">
                             <div className="image searched">
-                                <img src={events.img} />
+                                <img src={events.img} className="card-img-top" />
                             </div>
-                            <button onClick={this.myEvents}>Add to My Events</button>
+                            <div className="card-body">
+                                <div class="card-title">Details:{events.details}</div>
+                                <div class="card-text"> Date:{events.date}</div>
+
+                                <button onClick={this.myEvents} className="addToEvent">Add to My Events</button>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -42,12 +45,13 @@ export default class Event extends Component {
         );
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.accountRepository.getAllEvents()
-          .then(events => {
-            this.setState({ events })
-          })
-      }
+            .then(events => {
+                this.setState({ events })
+            })
+    }
 
 }
+
 

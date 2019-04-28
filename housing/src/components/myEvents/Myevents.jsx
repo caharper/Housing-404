@@ -23,14 +23,14 @@ class Myevents extends Component {
 
   render() {
 
-    if(this.state.eventsAttend === null || this.state.eventsAttend === undefined){
-      return(
+    if (this.state.eventsAttend === null || this.state.eventsAttend === undefined) {
+      return (
         <>
           <div><Navbar></Navbar></div>
           You have no events
         </>
       )
-    } 
+    }
 
     const { eventsAttend, myEvents } = this.state;
 
@@ -47,15 +47,15 @@ class Myevents extends Component {
 
               <div>
                 {this.state.eventsAttend.map(item => (
-                      <div className="searchResult" >
-                        <div className="row">
-                          <div className="col col-mg-8 items">
-                            <div>Name:{item.details}</div>
-                            <div> Date:{item.date}</div>
-                          </div>
-                        </div>
+                  <div className="searchResult" >
+                    <div className="row">
+                      <div className="col col-mg-8 items">
+                        <div>Name:{item.details}</div>
+                        <div> Date:{item.date}</div>
                       </div>
-                    ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -63,11 +63,11 @@ class Myevents extends Component {
               <h1>Events Posted</h1>
               {myEvents.map(events => (
                 <div>
-                  <div>Details:{events.name}</div>
-                  <div> Date:{events.date}</div>
                   <div className="image searched">
                     <img src={events.img} />
                   </div>
+                  <div>Details:{events.name}</div>
+                  <div> Date:{events.date}</div>
                   <button onClick={this.remove}>Remove</button>
                 </div>
               ))}
@@ -77,17 +77,17 @@ class Myevents extends Component {
       </>
     );
   }
-  componentDidMount(){
+  componentDidMount() {
     this.accountRepository.getUserGoingEvents(localStorage.getItem("sessuid"))
       .then(eventListResp => {
         let eventsAttend = eventListResp[0];
-        this.setState({eventsAttend: eventsAttend})
+        this.setState({ eventsAttend: eventsAttend })
       })
 
-      this.accountRepository.getUserOwnedEvents(localStorage.getItem("sessuid"))
+    this.accountRepository.getUserOwnedEvents(localStorage.getItem("sessuid"))
       .then(myEventsResp => {
         let myEvents = myEventsResp[0];
-        this.setState({myEvents: myEvents })
+        this.setState({ myEvents: myEvents })
         console.log(this.state.eventsAttend)
         console.log(this.state.myEvents)
       })
