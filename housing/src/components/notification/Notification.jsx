@@ -4,7 +4,7 @@ import Navbar from "../Navbar";
 
 export default class Notification extends Component {
     state = {
-        notification: [],
+        notification: []
     }
     mynotification = () => {
         // request server api call

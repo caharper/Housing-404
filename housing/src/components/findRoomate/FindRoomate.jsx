@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AccountRepository } from './../../api/accountRepository';
-
+import { FilterRoommate } from './../../models/filterRoomate'
 import Navbar from "../Navbar";
 
 
@@ -25,8 +25,15 @@ class FindRoomate extends Component {
     year: null,
     pets: null,
     tidyness: null,
-    temperature: null
-
+    temp: null,
+    genderP: null,
+    smokerP: null,
+    tidynessP: null,
+    tidynessP: null,
+    yearP: null,
+    bedtimeP: null,
+    wakeTime: null,
+    wakeTimeP: null
   }
 
   updateSmoker = (e) => {
@@ -45,20 +52,23 @@ class FindRoomate extends Component {
   updateTidyness = (e) => {
     this.setState({ tidyness: e.type.value|| null })
   }
-
-
-  filter = () => {
+  
+  filter() {
     // request server api call
+    let filter = new FilterRoommate(
+    this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
+  
 
-  }
+  this.accountRepository.filterUsers(filter)
+  .then(filterRoomate => {
+    console.log(filterRoomate)
+    this.setState({ filterRoomate })
+  })
+}
 
-  archive = () => {
-    // request server api call
-
-  }
 
   render() {
-    const { items, gender, smoker, year, pets, tidyness } = this.state;
+    const { items, gender, smoker, year, pets, tidynessP } = this.state;
 
 
     return (
@@ -154,7 +164,7 @@ class FindRoomate extends Component {
                 <option value={3}>Very Tiddy</option>
               </select>
               
-              <button onClick={this.filter} className="filterButton">Filter</button>
+              <button onClick={() => this.filter()} className="filterButton">Filter</button>
 
             </div>
 
@@ -180,7 +190,6 @@ class FindRoomate extends Component {
                         <div> Year: {item.yearP}</div>
                         <div> Pets: {item.pets}</div>
 
-                        <button onClick={this.archive} className="addToArchive">Add to Archive</button>
                       </div>
                     </div>
                   </div>

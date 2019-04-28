@@ -119,7 +119,7 @@ class FindApt extends Component {
 
 
   render() {
-    const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, heat, airCondition, roomStyle, rent } = this.state;
+    const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
 
 
     return (
