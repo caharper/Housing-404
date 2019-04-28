@@ -24,32 +24,150 @@ export class CreateAccountForm extends Component {
       name: '',
       password: '',
 
+      confirmPass: ' ',
+
       // Personal details/preferences
       gender: '',
       picture: '',
-      smoker: false,
-      year: 0,
-      bedTimePref: '9:00',
-      wakeTime: '9:00',
-      pets: 'no',
+      smoker: '',
+      year: '',
+      bedTimePref: 'na',
+      wakeTime: 'na',
+      pets: '',
 
       // Roommate preferences
-      smokerPref: false,
-      generPref: 'no',
-      tidynessPref: 1,
-      yearPref: 0,
+      smokerPref: '',
+      generPref: '',
+      tidynessPref: '',
+      yearPref: '',
       tempPref: 0,
-      wakeTimePref: '9:00'
+      wakeTimePref: 'na'
 
     }
     // Bind the submission to handleChange()
     this.handleChange = this.handleChange.bind(this)
   }
 
+  onPhotoUpload(pic){
+      this.setState(state => {
+        state.picture = pic
+        return state
+      })
+    }
+
   // Test current step with ternary
   // _next and _previous functions will be called on button click
   _next() {
     let currentStep = this.state.currentStep
+
+    // LoginInformation check
+    if(this.state.currentStep === 1) {
+
+      // Passwords
+      let matchingPass = this.state.password === this.state.confirmPass
+
+      // Email is valid
+      let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let validEmail = re.test(this.state.email) && (this.state.email !== '');
+
+      // Add logic to check if the user inputted name too
+      if(!matchingPass || !validEmail || this.state.name === ''){
+        if(!matchingPass){
+          // Not changing password for some reason
+          $("#password-create").addClass("is-invalid");
+          $("#confirmPass").addClass("is-invalid");
+          $("#invalid-pass").removeClass("incorrect-no-display");
+        }
+
+        if(!validEmail || this.state.email === ''){
+          // Label invalid email
+          $("#email-create").addClass("is-invalid");
+          $("#invalid-email").removeClass("incorrect-no-display");
+        }
+
+        if(this.state.name === ''){
+          $("#name").addClass("is-invalid");
+          $("#no-name").removeClass("incorrect-no-display");
+        }
+
+        // Don't let the user go on
+        return
+      }
+    }
+
+    // PersonalDetails check
+    else if (this.state.currentStep === 2) {
+      let allInput = true;
+      // Check Gender
+      if(this.state.gender === ''){
+        $("#gender").addClass("is-invalid");
+        allInput = false;
+        // $("#invalid-pass").removeClass("incorrect-no-display");
+      }
+
+      // check smoker
+      if(this.state.smoker === ''){
+        $("#smoker").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check year
+      if(this.state.year === ''){
+        $("#year").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check pets
+      if(this.state.pets === '') {
+        $("#pets").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-personal-details").removeClass("incorrect-no-display");
+        return
+      }
+
+    }
+
+    // RoommateDesc check
+    else if (this.state.currentStep === 3 ) {
+
+      let allInput = true;
+      // Check Gender
+      if(this.state.generPref === ''){
+        $("#generPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check smoker
+      if(this.state.smokerPref === ''){
+        $("#smokerPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check tidyness
+      if(this.state.tidynessPref === ''){
+        $("#tidynessPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check year
+      if(this.state.yearPref === ''){
+        $("#yearPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-roommate-details").removeClass("incorrect-no-display");
+        return
+      }
+
+    }
+
+
     // If the current step is 1 or 2, then add one on "next" button click
     currentStep = currentStep >= 3? 4: currentStep + 1
     this.setState({
@@ -61,7 +179,7 @@ export class CreateAccountForm extends Component {
 
     // Now update the progressbar
     // $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    $("#progressbar li").eq(this.state.currentStep).addClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep).addClass("active");
   }
 
   // ******** May need to change here
@@ -74,8 +192,8 @@ export class CreateAccountForm extends Component {
     })
 
     // Now update the progressbar
-    $("#progressbar li").eq(this.state.currentStep).removeClass("active");
-    $("#progressbar li").eq(this.state.currentStep - 1).removeClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep).removeClass("active");
+    $("#progressbarHome li").eq(this.state.currentStep - 1).removeClass("active");
   }
 
   // The "next" and "previous" button functions
@@ -85,9 +203,9 @@ export class CreateAccountForm extends Component {
     if(currentStep !==1){
       return (
         <button
-          className="btn btn-outline-secondary btn-block mt-2"
+          className="btn btn-outline-primary btn-block mt-2"
           type="button" onClick={this._prev}>
-        Previous
+        Back
         </button>
       )
     }
@@ -101,7 +219,7 @@ export class CreateAccountForm extends Component {
     if(currentStep <4){
       return (
         <button
-          className="btn btn-outline-primary btn-block float-right mt-2"
+          className="btn btn-primary btn-block float-right mt-2"
           type="button" onClick={this._next}>
         Next
         </button>
@@ -117,8 +235,8 @@ export class CreateAccountForm extends Component {
     if(currentStep === 4){
       return (
         <button
-          className="btn btn-outline-success btn-block float-right mt-2"
-          type="button" onClick={this.onSubmit()}>
+          className="btn btn-success btn-block float-right mt-2"
+          type="button" onClick={() => this.onSubmit()}>
         Create Account
         </button>
       )
@@ -129,24 +247,43 @@ export class CreateAccountForm extends Component {
 
 // ***** Having issues
   onSubmit(){
-      //
-      // let newUser = new NewUser(this.state.name, this.state.email, this.state.password);
-      // this.props.onCreateAccount(newUser);
-      // //
-      // //     // clears the form
-      // this.setState(
-      //   {
-      //     currentStep: 1, // Default is Step 1
-      //     email: '',
-      //     name: '',
-      //     password: '',
-      //
-      //     picture: '',
-      //     about: '',
-      //
-      //     address: '',
-      //     roomDesc: '',
-      //   })
+
+      let newUser = new NewUser(this.state.name, this.state.email, this.state.password, this.state.gender,
+                                this.state.smoker, this.state.year, this.state.bedTimePref,
+                                this.state.wakeTime, this.state.pets, this.state.smokerPref, this.state.generPref,
+                                this.state.tidynessPref, this.state.yearPref, this.state.tempPref, this.state.wakeTimePref, this.state.picture);
+
+      console.log(newUser);
+
+      this.props.onCreateAccount(newUser);
+
+      // clears the form
+      this.setState(
+        {
+          currentStep: 1, // Default is Step 1
+
+          // Login information
+          email: '',
+          name: '',
+          password: '',
+
+          // Personal details/preferences
+          gender: '',
+          picture: '',
+          smoker: null,
+          year: null,
+          bedTimePref: null,
+          wakeTime: null,
+          pets: '',
+
+          // Roommate preferences
+          smokerPref: null,
+          generPref: '',
+          tidynessPref: null,
+          yearPref: null,
+          tempPref: null,
+          wakeTimePref: null
+        })
     }
 
   // Use the submitted data to set the state
@@ -184,6 +321,7 @@ export class CreateAccountForm extends Component {
         </LoginInformation>
 
         <PersonalDetails
+          onPhotoUpload={x => this.onPhotoUpload(x) }
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           gender={this.state.gender}
@@ -192,6 +330,7 @@ export class CreateAccountForm extends Component {
           year={this.state.year}
           bedTimePref={this.state.bedTimePref}
           wakeTime={this.state.wakeTime}
+          tempPref={this.state.tempPref}
           pets={this.state.pets}>
         </PersonalDetails>
 
@@ -202,7 +341,6 @@ export class CreateAccountForm extends Component {
           generPref={this.state.generPref}
           tidynessPref={this.state.tidynessPref}
           yearPref={this.state.yearPref}
-          tempPref={this.state.tempPref}
           wakeTimePref={this.state.wakeTimePref}>
         </RoommateDesc>
         <Review
@@ -210,8 +348,15 @@ export class CreateAccountForm extends Component {
           handleChange={this.handleChange}
           name={this.state.name}
           email={this.state.email}
-          password={this.state.password}
           picture={this.state.picture}
+          gender={this.state.gender}
+          smoker={this.state.smoker}
+          year={this.state.year}
+          pets={this.state.pets}
+          smokerPref={this.state.smokerPref}
+          generPref={this.state.generPref}
+          tidynessPref={this.state.tidynessPref}
+          yearPref={this.state.yearPref}
           about={this.state.about}
           address={this.state.address}
           roomDesc={this.state.roomDesc}>

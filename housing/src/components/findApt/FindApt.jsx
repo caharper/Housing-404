@@ -462,7 +462,7 @@ class FindApt extends Component {
                   <div class="input-group-prepend">
                     <span class="input-group-text">SquareFeet</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="SquareFeet" onChange={this.updateSqureFeet} value={this.squareFeet} />
+                  <input type="text" class="form-control" aria-label="SquareFeet" onChange={this.updateSqureFeet} value={this.squareFeet} maxlength="4" />
                 </div>
               </div>
 
@@ -471,7 +471,7 @@ class FindApt extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text">Rent</span>
                   </div>
-                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" onChange={this.updateRent} value={this.rent} />
+                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" onChange={this.updateRent} value={this.rent} maxlength="4"/>
                   <div className="input-group-append">
                     <span className="input-group-text">.00</span>
                   </div>
