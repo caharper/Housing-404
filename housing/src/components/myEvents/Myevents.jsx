@@ -70,7 +70,7 @@ class Myevents extends Component {
               {myEvents.map(events => (
                 <div>
                   <div>Details:{events.name}</div>
-                  <div> Date:{events.type}</div>
+                  <div> Date:{events.date}</div>
                   <div className="image searched">
                     <img src={events.img} />
                   </div>

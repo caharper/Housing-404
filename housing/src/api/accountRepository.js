@@ -60,9 +60,9 @@ export class AccountRepository {
   // }
 
   // Get notifications for ALL users
-  getUserNotifications() {
+  getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/notifications`)
+      axios.get(`${this.url}/user/notifications?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
