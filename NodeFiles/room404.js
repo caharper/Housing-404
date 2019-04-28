@@ -1234,7 +1234,42 @@ app.delete('/user/edit', (req, res) => {
     //if(!req.session.loggedin) {
     //    res.status(404).send("You must be logged in to view this");
     //} else {
-        //wtf do
+        connection.query('DELETE FROM uProfiles WHERE id = ?', [req.session.id], function(err, results, fields) {
+            if (err) throw err;
+            else {
+                connection.query('DELETE events, attending FROM events NATURAL JOIN attending WHERE events.owner = ?', [req.session.id], function(err, results, fields) {
+                    if (err) throw err;
+                    else {
+                        connection.query('DELETE FROM attending WHERE u_id = ?', [req.session.id], function(err, results, fields) {
+                            if (err) throw err;
+                            else {
+                                connection.query('DELETE FROM notifications WHERE to_u_id = ?', [req.session.id], function(err, results, fields) {
+                                    if (err) throw err;
+                                    else {
+                                        connection.query('DELETE prevRents FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.u_id = ?', [req.session.id], function(err, results, fields) {
+                                            if (err) throw err;
+                                            else {
+                                                connection.query('DELETE FROM aProfiles WHERE aProfiles.u_id = ?', [req.session.id], function(err, results, fields) {
+                                                    if (err) throw err;
+                                                    else {
+                                                        connection.query('DELETE FROM users WHERE id = ?', [req.session.id], function(err, results, fields) {
+                                                            if (err) throw err;
+                                                            else {
+                                                                res.status(200).send('Successfully deleted account');
+                                                                }
+                                                         });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });         
     //}
 });
 
