@@ -18,6 +18,73 @@ export class Review extends React.Component {
             <p className="text-secondary mb-0">Please review your information before creating an account.</p>
           </div>
 
+
+
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Your information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Your name: {this.props.name}</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+          <div className="row justify-content-left pt-2 pl-4" id="review-user">
+            <div className="row bg-secondary">
+              <h6 className="">Your information:</h6>
+            </div>
+          </div>
+
+          <div className="row">
+            <p>Your name: {this.props.name}</p>
+          </div>
+
+          <div className="row">
+            <p>Your email: {this.props.email}</p>
+          </div>
+
+          <div className="row">
+            <p>Your gender: {this.props.gender}</p>
+          </div>
+
+          <div className="row">
+            <p>Smoker: {this.props.smoker}</p>
+          </div>
+
+          <div className="row">
+            <p>Year: {this.props.year}</p>
+          </div>
+
+          <div className="row">
+            <p>Pets: {this.props.pets}</p>
+          </div>
+
+          <div className="row justify-content-left pt-2 pl-4 bg-secondary" id="review-roommate">
+            <div className="row">
+              <h6>Your ideal roommate:</h6>
+            </div>
+          </div>
+
           <div className="row mb-1">
             <div className="col-6">
               <p>Your name: {this.props.name}</p>

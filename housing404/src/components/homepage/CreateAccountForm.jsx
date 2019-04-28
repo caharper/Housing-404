@@ -60,9 +60,6 @@ export class CreateAccountForm extends Component {
   _next() {
     let currentStep = this.state.currentStep
 
-    // Need to do form checks here to make sure everything is good
-    // Based on the current step
-
     // LoginInformation check
     if(this.state.currentStep === 1) {
 
@@ -351,8 +348,15 @@ export class CreateAccountForm extends Component {
           handleChange={this.handleChange}
           name={this.state.name}
           email={this.state.email}
-          password={this.state.password}
           picture={this.state.picture}
+          gender={this.state.gender}
+          smoker={this.state.smoker}
+          year={this.state.year}
+          pets={this.state.pets}
+          smokerPref={this.state.smokerPref}
+          generPref={this.state.generPref}
+          tidynessPref={this.state.tidynessPref}
+          yearPref={this.state.yearPref}
           about={this.state.about}
           address={this.state.address}
           roomDesc={this.state.roomDesc}>
