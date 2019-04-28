@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
+import './notification.css';
+
 
 
  class Notification extends Component {

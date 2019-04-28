@@ -8,7 +8,6 @@ import Navbar from "../Navbar";
 class FindRoomate extends Component {
   accountRepository = new AccountRepository;
 
-
   state = {
     items: [
       {
@@ -68,8 +67,13 @@ class FindRoomate extends Component {
 
 
   render() {
-    const { items, genderP, smokerP, yearP, pets, tidynessP } = this.state;
 
+    if (this.state.items === [] || this.state.items === null) {
+      return (
+        <>No Match Found</>
+      )
+    }
+    const { items, genderP, smokerP, yearP, pets, tidynessP } = this.state;
 
     return (
       <>
@@ -126,8 +130,8 @@ class FindRoomate extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerNo"
-                    checked={smokerP === '2'}
-                    value={2} onChange={this.updateSmoker} />
+                    checked={smokerP === '0'}
+                    value={0} onChange={this.updateSmoker} />
                   <label className="form-check-label" htmlFor="smokerNo">
                     No
                 </label>
@@ -158,8 +162,8 @@ class FindRoomate extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petNo"
-                    checked={pets === '2'}
-                    value={2} onChange={this.updatePets} />
+                    checked={pets === '0'}
+                    value={0} onChange={this.updatePets} />
                   <label className="form-check-label" htmlFor="petNo">
                     No
                 </label>

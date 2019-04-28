@@ -112,7 +112,12 @@ class FindApt extends Component {
 
 
   render() {
-    const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
+    if (this.state.items === [] || this.state.items === null) {
+      return (
+        <>No Match Found</>
+      )
+    }
+    const {items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
 
 
     return (
@@ -321,8 +326,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="kitchen" id="kitchenNo"
-                    checked={kitchens === '2'}
-                    value={2} onChange={this.updateKitchens} />
+                    checked={kitchens === '0'}
+                    value={0} onChange={this.updateKitchens} />
                   <label className="form-check-label" htmlFor="kitchenNo">
                     No
                 </label>
@@ -343,8 +348,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="laundryRoom" id="laundryRoomNo"
-                    checked={laundryRooms === '2'}
-                    value={2} onChange={this.updateLaundryRooms} />
+                    checked={laundryRooms === '0'}
+                    value={0} onChange={this.updateLaundryRooms} />
                   <label className="form-check-label" htmlFor="laundryRoomNo">
                     No
                 </label>
@@ -365,8 +370,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petNo"
-                    checked={pets === '2'}
-                    value={2} onChange={this.updatePets} />
+                    checked={pets === '0'}
+                    value={0} onChange={this.updatePets} />
                   <label className="form-check-label" htmlFor="petNo">
                     No
                 </label>
@@ -387,8 +392,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoking" id="smokingNo"
-                    checked={smoking === '2'}
-                    value={2} onChange={this.updateSmoking} />
+                    checked={smoking === '0'}
+                    value={0} onChange={this.updateSmoking} />
                   <label className="form-check-label" htmlFor="smokingNo">
                     No
                 </label>
@@ -409,8 +414,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pool" id="poolNo"
-                    checked={pool === '2'}
-                    value={2} onChange={this.updatePool} />
+                    checked={pool === '0'}
+                    value={0} onChange={this.updatePool} />
                   <label className="form-check-label" htmlFor="poolNo">
                     No
                 </label>
@@ -431,8 +436,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="gym" id="gymNo"
-                    checked={gym === '2'}
-                    value={2} onChange={this.updateGym} />
+                    checked={gym === '0'}
+                    value={0} onChange={this.updateGym} />
                   <label className="form-check-label" htmlFor="gymNo">
                     No
                 </label>
@@ -453,8 +458,8 @@ class FindApt extends Component {
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="studyRoom" id="studyRoomNo"
-                    checked={studyRoom === '2'}
-                    value={2} onChange={this.updateStudyRoom} />
+                    checked={studyRoom === '0'}
+                    value={0} onChange={this.updateStudyRoom} />
                   <label className="form-check-label" htmlFor="StudyRoomNo">
                     No
                 </label>
@@ -466,7 +471,7 @@ class FindApt extends Component {
                   <div class="input-group-prepend">
                     <span class="input-group-text" onChange={this.updateSqureFeet} value={squareFeet}>SquareFeet</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"/>
+                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
                 </div>
               </div>
 
@@ -475,7 +480,7 @@ class FindApt extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text" onChange={this.updateRent} value={rent}>Rent</span>
                   </div>
-                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
                   <div className="input-group-append">
                     <span className="input-group-text">.00</span>
                   </div>
@@ -484,7 +489,6 @@ class FindApt extends Component {
 
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
             </div>
-
 
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
@@ -507,7 +511,7 @@ class FindApt extends Component {
                           <div> Location:{item.location}</div>
                           <div> Rent:{item.rent}</div>
                           <div> Avalibility:{item.leaseTime}</div>
-                          <div> Number of occupants:{item.occupants}</div>
+                          <div> Number of Occupants:{item.occupants}</div>
                           <div> Number of Bedrooms:{item.beds}</div>
                           <div> Number of Bathrooms:{item.baths}</div>
                           <div> Sqaure Feet:{item.squareFeet}</div>

@@ -12,5 +12,6 @@ export default class AddEvent extends Component {
         <div></div>
     );
 }
+
 }
 export default AddEvent;

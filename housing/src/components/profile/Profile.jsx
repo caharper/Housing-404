@@ -9,7 +9,7 @@ class Profile extends Component {
 
   state = {
     userList: null,
-    changePassword: null
+    resetPassword: null
   }
 
   render() {
@@ -46,9 +46,7 @@ class Profile extends Component {
               <div className="col col-mg-8">
                 <div className="resetPassword">
                   <h1>Reset Password</h1>
-
                   <form>
-
                     <div class="form-group">
                       <input type="password" className="form-control" id="oldPassword" placeholder="Old Password" />
                     </div>
@@ -56,12 +54,9 @@ class Profile extends Component {
                       <input type="password" className="form-control" id="newPassword" placeholder="New Password" />
                     </div>
                     <div className="input-group-append">
-                      <button onClick={this.updateRooms} className="resetButton">Reset</button>
+                      <button onClick className="resetButton">Reset</button>
                     </div>
                   </form>
-
-
-
 
                 </div>
               </div>
@@ -73,19 +68,13 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem("sessuid"))
     this.accountRepository.getUserProfile(localStorage.getItem("sessuid"))
       .then(userListResp => {
-        console.log(userList)
         let userList = userListResp[0];
         this.setState({ userList })
-        console.log(userList)
       })
   }
 }
 
-Profile.propTypes = {
-
-};
 
 export default Profile;
