@@ -7,7 +7,7 @@ CREATE TABLE users(
 CREATE TABLE uProfiles(
 	id int PRIMARY KEY,
 	gender  varchar(3),
-	picture BLOB,
+	picture MEDIUMBLOB,
 	smoker bit,
 	genderP varchar(3),
 	smokerP bit,
@@ -30,7 +30,7 @@ CREATE TABLE uProfiles(
 	rent int,
 	leaseTime int,
 	description varchar(500),
-	picture blob,
+	picture MEDIUMBLOB,
 	occupants int,
 	beds int,
 	baths float,
@@ -61,7 +61,7 @@ CREATE TABLE events(
 	owner int,
 	details varchar[500],
 	date varchar[14],
-	picture blob
+	picture MEDIUMBLOB,
 	FOREIGN KEY(owner) REFERENCES users(id));
 
 CREATE TABLE attending(
