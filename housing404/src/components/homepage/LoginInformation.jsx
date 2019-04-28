@@ -23,10 +23,10 @@ export class LoginInformation extends React.Component {
         <div className="card-body special-card text-left">
           <div className="row">
             <div className="col-12">
-              <form className="needs-validation" novalidate>
+              <form className="needs-validation" noValidate>
 
                 <div className="row my-0 py-0">
-                  <div className="form-group col-12">
+                  <div className="form-group col-12 m-0">
                     <label htmlFor="name">Full Name</label>
                     <input type="text"
                            id="name"
@@ -44,7 +44,7 @@ export class LoginInformation extends React.Component {
                 </div>
 
                 <div className="row">
-                  <div className="form-group col-12">
+                  <div className="form-group col-12 m-0">
                     <label htmlFor="email">Your Email</label>
                     <input type="text"
                            id="email-create"
@@ -62,7 +62,7 @@ export class LoginInformation extends React.Component {
                 </div>
 
                 <div className="row">
-                  <div className="form-group col-12">
+                  <div className="form-group col-12 m-0">
                     <label htmlFor="password">Password</label>
                     <input type="password"
                            id="password-create"
@@ -75,17 +75,20 @@ export class LoginInformation extends React.Component {
                             />
                   </div>
                 </div>
+                <div className="row justify-content-center py-0 my-0">
+                  <p className="incorrect-no-display" id="no-name"></p>
+                </div>
 
                 <div className="row">
-                  <div className="form-group col-12">
-                    <label htmlFor="">Confirm Password</label>
+                  <div className="form-group col-12 m-0">
+                    <label htmlFor="confirmPass">Confirm Password</label>
                     <input type="password"
                            id="confirmPass"
                            name="confirmPass"
                            className="form-control"
                            placeholder="Password"
                            value={this.props.confirmPass}
-                           onChange={this.props.handleChange} // Should check if matches here
+                           onChange={this.props.handleChange}
                             />
                   </div>
                 </div>

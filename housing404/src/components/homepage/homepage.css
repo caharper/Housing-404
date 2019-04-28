@@ -15,6 +15,8 @@
 .incorrect {
   font-size: .2em;
   color: red;
+  padding: 0;
+  margin: 0;
 }
 
 .incorrect-no-display {
@@ -57,7 +59,7 @@
     list-style-type: none;
     width: 25%;
     float: left;
-    font-size: 12px;
+    font-size: .75em;
     position: relative;
     text-align: center;
     text-transform: uppercase;
@@ -72,7 +74,7 @@
     border: 2px solid #7d7d7d;
     display: block;
     text-align: center;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 1em auto;
     border-radius: 50%;
     background-color: white;
 }

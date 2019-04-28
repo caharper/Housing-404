@@ -93,7 +93,7 @@ export class PersonalDetails extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="gender" id="gender" htmlFor="gender" value={this.props.gender} onChange={this.props.handleChange}>
-                <option>Gender</option>
+                <option value=''>Gender</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
                 <option value="O">Other</option>
@@ -108,7 +108,7 @@ export class PersonalDetails extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="smoker" id="smoker" value={this.props.smoker} onChange={this.props.handleChange}>
-                <option>Smoker</option>
+                <option value=''>Smoker</option>
                 <option value={+1}>Yes</option>
                 <option value={+0}>No</option>
               </select>
@@ -121,7 +121,7 @@ export class PersonalDetails extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" id="year" name="year" value={this.props.year} onChange={this.props.handleChange}>
-                <option>Year</option>
+                <option value=''>Year</option>
                 <option value={+1}>Freshman</option>
                 <option value={+2}>Sophomore</option>
                 <option value={+3}>Junior</option>
@@ -136,7 +136,7 @@ export class PersonalDetails extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" id="pets" name="pets" value={this.props.pets} onChange={this.props.handleChange}>
-                <option>Pets</option>
+                <option value=''>Pets</option>
                 <option value="y">Yes</option>
                 <option value="n">No</option>
               </select>

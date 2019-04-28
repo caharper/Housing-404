@@ -24,7 +24,7 @@ export class CreateAccountForm extends Component {
       name: '',
       password: '',
 
-      confirmPass: null,
+      confirmPass: ' ',
 
       // Personal details/preferences
       gender: '',

@@ -35,7 +35,7 @@ export class RoommateDesc extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="smokerPref" id="smokerPref" value={this.props.smokerPref} onChange={this.props.handleChange}>
-                <option>Smoker</option>
+                <option value=''>Smoker</option>
                 <option value={+1}>Yes</option>
                 <option value={+0}>No</option>
               </select>
@@ -48,7 +48,7 @@ export class RoommateDesc extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="generPref" id="generPref" value={this.props.generPref} onChange={this.props.handleChange}>
-                <option>Gender</option>
+                <option value=''>Gender</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
                 <option value="O">Other</option>
@@ -62,7 +62,7 @@ export class RoommateDesc extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="tidynessPref" id="tidynessPref" value={this.props.tidynessPref} onChange={this.props.handleChange}>
-                <option>Tidyness</option>
+                <option value=''>Tidyness</option>
                 <option value={+1}>Not Tidy</option>
                 <option value={+2}>Tidy</option>
                 <option value={+3}>Very Tidy</option>
@@ -77,7 +77,7 @@ export class RoommateDesc extends React.Component {
             </div>
             <div className="col-7">
               <select className="form-control" name="yearPref" id="yearPref" value={this.props.yearPref} onChange={this.props.handleChange}>
-                <option>Year</option>
+                <option value=''>Year</option>
                 <option value={+1}>Freshman</option>
                 <option value={+2}>Sophomore</option>
                 <option value={+3}>Junior</option>
