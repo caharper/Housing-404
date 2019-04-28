@@ -14,68 +14,87 @@ export class Review extends React.Component {
           <h5>Review</h5>
         </div>
         <div className="card-body special-card">
-          <div className="row">
-            <div className="col-12">
+          <div className="row justify-content-center">
+            <p className="text-secondary mb-0">Please review your information before creating an account.</p>
+          </div>
 
-              <div className="row">
-                <div className="form-group col-12">
-                  <div className="col-2">
-                    Name:
-                  </div>
-                  <div className="col-6">
-                    {this.props.name}
-                  </div>
-                </div>
-                <div className="col-4">
-                  {this.props.email}
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="form-group col-12">
-                  <div className="col-2">
-                    Email:
-                  </div>
-                  <div className="col-10">
-                    {this.props.email}
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="form-group col-12">
-                  <div className="col-2">
-                    About:
-                  </div>
-                  <div className="col-10">
-                    {this.props.about}
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="form-group col-12">
-                  <div className="col-2">
-                    Location:
-                  </div>
-                  <div className="col-10">
-                    {this.props.address}
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="form-group col-12">
-                  <div className="col-2">
-                    Description:
-                  </div>
-                  <div className="col-10">
-                    {this.props.roomDesc}
-                  </div>
-                </div>
-              </div>
-
+          <div className="row mb-1">
+            <div className="col-6">
+              <p>Your name: {this.props.name}</p>
             </div>
+            <div className="col-6">
+              <p>Your email:{this.props.email}</p>
+            </div>
+
+          </div>
+
+          <div className="row mb-1">
+            <div className="col-2">
+              <p>Your gender:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.gender}</p>
+            </div>
+
+            <div className="col-2">
+              <p>Smoker:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.smoker}</p>
+            </div>
+
+          </div>
+
+          <div className="row mb-1">
+            <div className="col-2">
+              <p>Your year:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.year}</p>
+            </div>
+
+            <div className="col-2">
+              <p>Pets:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.pets}</p>
+            </div>
+
+          </div>
+
+
+          <div className="row mb-1">
+            <div className="col-2">
+              <p>Roommate smoker:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.smokerPref}</p>
+            </div>
+
+            <div className="col-2">
+              <p>Roomate gender:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.generPref}</p>
+            </div>
+
+          </div>
+
+          <div className="row mb-1">
+            <div className="col-2">
+              <p>Roommate tidyness:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.tidynessPref}</p>
+            </div>
+
+            <div className="col-2">
+              <p>Roomate year:</p>
+            </div>
+            <div className="col-4">
+              <p>{this.props.yearPref}</p>
+            </div>
+
           </div>
 
 

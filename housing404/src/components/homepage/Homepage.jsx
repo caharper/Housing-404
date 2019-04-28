@@ -7,6 +7,7 @@ import { LoginInformation } from './LoginInformation'
 import { CreateAccountForm } from './CreateAccountForm'
 import './homepage.css'
 import logo from './../../housing404.svg';
+import $ from 'jquery';
 
 import axios from 'axios'
 
@@ -26,6 +27,11 @@ export class Homepage extends React.Component {
       // works
       this.accountRepository.login(attemptUser)
       .then(loggedIn => this.setState({ loggedIn }))
+      .catch(
+        $("#email").addClass("is-invalid"),
+        $("#password").addClass("is-invalid"),
+        $("#invalid-login").removeClass("incorrect-no-display")
+      )
     }
 
     onCreateAccount(newUser){
@@ -46,10 +52,10 @@ export class Homepage extends React.Component {
             <div className="col-6">
               <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
                 <h1>Find your roommate</h1>
-                <p className="text-secondary">By joining Housing404, you can search for roommates, filter out by roommate qualities, set up meeting times, and find your ideal roommate.</p>
+                <p className="text-secondary">By joining Housing404, you can search for roommates, set up meetings, and find your ideal roommate.</p>
               </div>
-              <div className="row justify-content-center mb-0 pb-0">
-                <img className="img-fluid" src={logo}></img>
+              <div className="row justify-content-center mb-0 pb-0 position-relative">
+                <img className="img-fluid position-absolute big-logo" src={logo}></img>
               </div>
             </div>
             <div className="col-6">

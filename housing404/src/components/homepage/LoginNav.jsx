@@ -49,6 +49,9 @@ export class LoginNav extends React.Component {
 
           <div className="col-auto">
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+              <p className="incorrect incorrect-no-display pr-2" id="invalid-login">Incorrect email or password</p>
+
               <form className="form-inline my-2 my-lg-0">
                 <div className="form-group">
                   <input className="form-control mr-sm-2" placeholder="Email" id="email" type="text" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>

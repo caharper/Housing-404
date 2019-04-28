@@ -24,6 +24,8 @@ export class CreateAccountForm extends Component {
       name: '',
       password: '',
 
+      confirmPass: null,
+
       // Personal details/preferences
       gender: '',
       picture: '',
@@ -60,6 +62,113 @@ export class CreateAccountForm extends Component {
 
     // Need to do form checks here to make sure everything is good
     // Based on the current step
+
+    // LoginInformation check
+    if(this.state.currentStep === 1) {
+
+      // Passwords
+      let matchingPass = this.state.password === this.state.confirmPass
+
+      // Email is valid
+      let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let validEmail = re.test(this.state.email) && (this.state.email !== '');
+
+      // Add logic to check if the user inputted name too
+      if(!matchingPass || !validEmail || this.state.name === ''){
+        if(!matchingPass){
+          // Not changing password for some reason
+          $("#password-create").addClass("is-invalid");
+          $("#confirmPass").addClass("is-invalid");
+          $("#invalid-pass").removeClass("incorrect-no-display");
+        }
+
+        if(!validEmail || this.state.email === ''){
+          // Label invalid email
+          $("#email-create").addClass("is-invalid");
+          $("#invalid-email").removeClass("incorrect-no-display");
+        }
+
+        if(this.state.name === ''){
+          $("#name").addClass("is-invalid");
+          $("#no-name").removeClass("incorrect-no-display");
+        }
+
+        // Don't let the user go on
+        return
+      }
+    }
+
+    // PersonalDetails check
+    else if (this.state.currentStep === 2) {
+      let allInput = true;
+      // Check Gender
+      if(this.state.gender === ''){
+        $("#gender").addClass("is-invalid");
+        allInput = false;
+        // $("#invalid-pass").removeClass("incorrect-no-display");
+      }
+
+      // check smoker
+      if(this.state.smoker === ''){
+        $("#smoker").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check year
+      if(this.state.year === ''){
+        $("#year").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check pets
+      if(this.state.pets === '') {
+        $("#pets").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-personal-details").removeClass("incorrect-no-display");
+        return
+      }
+
+    }
+
+    // RoommateDesc check
+    else if (this.state.currentStep === 3 ) {
+
+      let allInput = true;
+      // Check Gender
+      if(this.state.generPref === ''){
+        $("#generPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check smoker
+      if(this.state.smokerPref === ''){
+        $("#smokerPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check tidyness
+      if(this.state.tidynessPref === ''){
+        $("#tidynessPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check year
+      if(this.state.yearPref === ''){
+        $("#yearPref").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-roommate-details").removeClass("incorrect-no-display");
+        return
+      }
+
+    }
 
 
     // If the current step is 1 or 2, then add one on "next" button click

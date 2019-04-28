@@ -17,7 +17,7 @@ export class AccountRepository {
     return new Promise((resolve, reject) => {
         axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/user/login`, attemptUser)
         .then(resp => resolve(resp.data))
-        .catch(resp => alert(resp))
+        .catch()
       })
   }
 
