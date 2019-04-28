@@ -42,9 +42,9 @@ export class AccountRepository {
   }
 
   // Edit name, email, password
-  editUser(editInfo) {
+  editUser(sessuid, editInfo) {
     return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/user/edit`, editInfo)
+        axios.post(`${this.url}/user/edit?sessuid=${sessuid}`, editInfo)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })
@@ -59,7 +59,7 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for ALL users
+  // Get notifications for a ingle user
   getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
       axios.get(`${this.url}/user/notifications?sessuid=${sessuid}`)
@@ -79,16 +79,6 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for a SINGLE user
-  getUserNotifications(uId) {
-    return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/notifications/${uId}`)
-      .then(resp => {
-        resolve(resp.data)
-      })
-      .catch(resp => alert(resp))
-    })
-  }
 
   // // Delete ALL user notifications for a SINGLE user
   // deleteUserNotifications() {

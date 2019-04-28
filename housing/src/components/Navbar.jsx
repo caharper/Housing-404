@@ -10,7 +10,11 @@ function Logout() {
     const accountRepository = new AccountRepository
     accountRepository
     .logout()
-    .then(logout => localStorage.removeItem("isLoggedIn"))
+    .then(logout => {
+        localStorage.removeItem("isLoggedIn");
+        // redirect login   if(this.state.user !== null){
+        window.location.href = '/';
+    })
 
 }
 

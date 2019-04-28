@@ -9,7 +9,29 @@ class Profile extends Component {
 
   state = {
     userList: null,
-    resetPassword: null
+    resetPassword: null,
+    password: ''
+  }
+
+  updatePassword = e => {
+    this.setState({
+      password: e.target.value
+    })
+  }
+
+  changePassword = (e) => {
+    e.preventDefault();
+    this.accountRepository.editUser(localStorage.getItem("sessuid"), {
+      password: this.state.password,
+      name: null,
+      email: null
+    })
+    .then(() => {
+      // password reset
+      this.setState({
+        password: ''
+      });
+    })
   }
 
   render() {
@@ -45,16 +67,13 @@ class Profile extends Component {
 
               <div className="col col-mg-8">
                 <div className="resetPassword">
-                  <h1>Reset Password</h1>
+                  <h1>Change Password</h1>
                   <form>
                     <div class="form-group">
-                      <input type="password" className="form-control" id="oldPassword" placeholder="Old Password" />
-                    </div>
-                    <div class="form-group">
-                      <input type="password" className="form-control" id="newPassword" placeholder="New Password" />
+                      <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
                     </div>
                     <div className="input-group-append">
-                      <button onClick className="resetButton">Reset</button>
+                      <button onClick={this.changePassword} className="resetButton">Send</button>
                     </div>
                   </form>
 

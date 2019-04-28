@@ -24,7 +24,7 @@ class FindRoomate extends Component {
     year: null,
     pets: null,
     tidyness: null,
-    temp: null,
+    tempP: null,
     genderP: null,
     smokerP: null,
     tidynessP: null,
@@ -55,7 +55,8 @@ class FindRoomate extends Component {
   filter() {
     // request server api call
     let filter = new FilterRoommate(
-      this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
+
+       this.state.gender, this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
 
 
     this.accountRepository.filterUsers(filter)

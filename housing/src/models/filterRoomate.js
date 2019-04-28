@@ -1,5 +1,5 @@
 export class FilterRoommate{
-    constructor(genderP, smoker, smokerP, year, pets, tidynessP, tempP, yearP, bedtimeP, wakeTime, wakeTimeP){ 
+    constructor(gender,genderP, smoker, smokerP, year, pets, tidynessP, tempP, yearP, bedtimeP, wakeTime, wakeTimeP){ 
         this.genderP = genderP;
         this.smoker = smoker;
         this.smokerP = smokerP;
@@ -11,7 +11,7 @@ export class FilterRoommate{
         this.bedtimeP = bedtimeP;
         this.wakeTime = wakeTime;
         this.wakeTimeP = wakeTimeP;
-
+        this.gender = gender;
 
 
     }
