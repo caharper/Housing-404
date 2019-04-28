@@ -411,10 +411,10 @@ app.get('/users/pMatch', (req, res) => {
 				results[0].wakeTimeP, //their wakeTime your wakeTimeP
 				results[0].pets //pets
 			]
-			
+			console.log(passIN);
 			connection.query('SELECT * FROM uProfiles WHERE genderP = ? AND gender = ? AND smokerP = ? AND smoker = ? AND yearP = ? AND year = ? AND tidynessP = ? AND tempP = ? AND bedTimeP = ? AND wakeTimeP = ? AND wakeTime = ? AND pets = ?', passIN, function(err, results, fields) {
 				if (err) throw err;
-				else {					
+				else {
 					res.status(200).send(results);
 				}
 			});
