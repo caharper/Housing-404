@@ -395,6 +395,7 @@ app.get('user/notifications/:uid?', (req, res) => {
 
 app.get('/users/pMatch', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
+	console.log(sessuid);
 	connection.query('SELECT * FROM uProfiles WHERE id = ?', [sessuid], function(err, results, field) {
 		if (err) throw err;
 		else {
