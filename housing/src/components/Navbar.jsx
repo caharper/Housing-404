@@ -17,6 +17,9 @@ function Logout() {
     })
 
 }
+function Id(){
+localStorage.getItem("sessuid") 
+}
 
 const Navbar = () => (
     <nav className="navbar navbar-dark bg-dark justify-content-between">
@@ -32,7 +35,7 @@ const Navbar = () => (
 
                 <Link id="profile" className="menu-item" to="/profile">Profile</Link>
             </Menu>
-            <a class="navbar-brand" href="#">Placeholder</a>
+            <a class="navbar-brand"  href="#">{Id}PlaceHolder</a>
         </div>
 
         <button onClick={Logout} >

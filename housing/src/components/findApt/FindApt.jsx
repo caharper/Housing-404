@@ -39,15 +39,9 @@ class FindApt extends Component {
   updateType = (e) => {
     this.setState({ type: e.target.value || null })
   }
-
-  updateSquareFeet = (e) => {
-    this.setState({ squareFeet: e.target.value || null })
-  }
-
   updateYear = (e) => {
     this.setState({ year: e.target.value || null })
   }
-
   updateBedrooms = (e) => {
     this.setState({ bedrooms: e.target.value || null })
   }
@@ -78,12 +72,6 @@ class FindApt extends Component {
   updateGym = (e) => {
     this.setState({ gym: e.target.value || null })
   }
-  updateHeat = (e) => {
-    this.setState({ heat: e.target.value || null })
-  }
-  updateAirCondition = (e) => {
-    this.setState({ airCondition: e.target.value || null })
-  }
   updateSmoking = (e) => {
     this.setState({ smoking: e.target.value || null })
   }
@@ -93,8 +81,11 @@ class FindApt extends Component {
   updateRoomStyle = (e) => {
     this.setState({ roomStyle: e.target.value || null })
   }
-  updateRoomRent = (e) => {
+  updateRent = (e) => {
     this.setState({ rent: e.target.value || null })
+  }
+  updateSqureFeet = (e) => {
+    this.setState({ squareFeet: e.target.value || null })
   }
 
 
@@ -469,18 +460,18 @@ class FindApt extends Component {
               <div className="filter">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" onChange={this.updateSqureFeet} value={squareFeet}>SquareFeet</span>
+                    <span class="input-group-text">SquareFeet</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
+                  <input type="text" class="form-control" aria-label="SquareFeet" onChange={this.updateSqureFeet} value={this.squareFeet} />
                 </div>
               </div>
 
               <div className="filter">
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
-                    <span className="input-group-text" onChange={this.updateRent} value={rent}>Rent</span>
+                    <span className="input-group-text">Rent</span>
                   </div>
-                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" onChange={this.updateRent} value={this.rent} />
                   <div className="input-group-append">
                     <span className="input-group-text">.00</span>
                   </div>

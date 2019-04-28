@@ -12,11 +12,11 @@ class FindRoomate extends Component {
     items: [
       {
         type: 'Apartment',
-        name: "Haya", gender: "student", img: "https://via.placeholder.com/150"
+        name: "Haya", genderP: "Male", img: "https://via.placeholder.com/150"
       },
       {
-        gender: 'female', type: 'house',
-        name: "Bob", gender: "student", img: "https://via.placeholder.com/150"
+        genderP: 'Male',
+        name: "Bob", img: "https://via.placeholder.com/150"
       }
     ],
     gender: null,
@@ -181,6 +181,8 @@ class FindRoomate extends Component {
               </div>
 
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
+              <button onClick={() => this.filter()} className="perfectButton">Perfect Match</button>
+
 
             </div>
 
