@@ -290,7 +290,7 @@ app.get('/events/:eid?', (req, res) => {
 //view attending for specific event
 app.get('/events/attending/:eid?', (req, res) => {
 	var eid = req.params.eid;
-        connection.query('SELECT * FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
+        connection.query('SELECT users.name FROM attending JOIN users ON users.id = attending.u_id WHERE attending.e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
