@@ -344,7 +344,7 @@ app.get('/user/myEvents/:eid?', (req, res) => {
 });
 
 //view a user's own event's attending memebers
-app.get('/user/myEvents/:eid/attending?', (req, res) => {
+app.get('/user/myEvents/:eid/attending', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
 	connection.query('SELECT users.name FROM events NATURAL JOIN attending JOIN users ON attending.u_id = users.id WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, sessuid], function(err, results, fields) {
             if (err) throw err;
@@ -1301,9 +1301,9 @@ app.delete('/user/apartments/:aid?/edit',(req,res) => {
 app.delete('/user/myEvents/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var eid = req.params.eid;
-        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+        connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === sessuid) {
+            else if (results[0].owner === sessuid) {
                 connection.query('DELETE FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
                     if (err) throw err;
                     else {
@@ -1325,18 +1325,11 @@ app.delete('/user/myEvents/:eid?', (req, res) => {
 app.delete('/user/events/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var eid = req.params.eid;
-        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
-            if (err) throw err;
-            else if (results[0].u_id === sessuid) {
-                connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, sessuid], function(err, results, fields) {
-                    if (err) throw err;
-                    else {
-                        res.status(200).send('Successfully deleted attending member');
-                    }
-                });
-            } else {
-                res.status(404).send("You don't have access to delete this");
-            }
+        connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, sessuid], function(err, results, fields) {
+                if (err) throw err;
+                else {
+                    res.status(200).send('Successfully deleted attending member');
+                }
         });
 
 });
@@ -1345,9 +1338,9 @@ app.delete('/user/events/:eid?', (req, res) => {
 app.delete('/user/myEvents/:eid?/attending', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var eid = req.params.eid;
-        connection.query('SELECT u_id FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
+        connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
-            else if (results[0].u_id === sessuid) {
+            else if (results[0].owner === sessuid) {
                 connection.query('DELETE FROM attending WHERE e_id = ? AND u_id = ?', [eid, req.body.uid], function(err, results, fields) {
                     if (err) throw err;
                     else {
