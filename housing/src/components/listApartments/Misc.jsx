@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export class Misc extends React.Component {
   render() {
-    if (this.props.currentStep !== 3) { // Prop: The current step
+    if (this.props.currentStep !== 4) { // Prop: The current step
       return null
     }
     // The markup for the Step 1 UI
@@ -11,48 +11,65 @@ export class Misc extends React.Component {
 
       <div className="card overflow-auto">
         <div className="card-header bg-secondary text-white">
-          <h5>Roommate Description</h5>
+          <h3 className="font-weight-bold">Miscellaneous</h3>
         </div>
+
         <div className="card-body special-card text-left">
-          <div className="row">
-            <div className="col-12">
-              <form>
-
-                <div className="row">
-                  <div className="form-group">
-                    <label htmlFor="smokerPref">
-                    <input type="checkbox"
-                           id="smokerPref"
-                           name="smokerPref"
-                           value={this.props.smokerPref}
-                           />
-                         Smoker
-                    </label>
-                  </div>
-                </div>
+          <div className="row justify-content-center">
+            <p className="text-secondary mb-0">Tell us more about your housing situation.</p>
+          </div>
 
 
 
-                <div className="row">
-                  <div className="form-group col-12">
-                    <label htmlFor="about">Year Preference</label>
-                    <textarea type="text"
-                           id="roomDesc"
-                           name="roomDesc"
-                           className="form-control"
-                           placeholder="What do you want in a roommate?"
-                           value={this.props.yearPref} // Prop: The email input data
-                           onChange={this.props.handleChange} // Prop: Puts data into state
-                           />
-                  </div>
-                </div>
+          <div className="row justify-content-center py-0 my-0">
+            <p className="incorrect incorrect-no-display" id="invalid-misc-details">All information must be filled</p>
+          </div>
 
-              </form>
+
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>Do you have a gym?</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="gym" id="gym" htmlFor="gym" value={this.props.gym} onChange={this.props.handleChange}>
+                <option value=''>Gym</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>Do you have a pool</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="pool" id="pool" htmlFor="pool" value={this.props.pool} onChange={this.props.handleChange}>
+                <option value=''>Pool</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
             </div>
           </div>
 
 
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>Do you allow pets?</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="pets" id="pets" htmlFor="pets" value={this.props.pets} onChange={this.props.handleChange}>
+                <option value=''>Pets</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+
+
         </div>
+
       </div>
     )
   }

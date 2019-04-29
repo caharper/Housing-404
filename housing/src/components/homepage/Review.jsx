@@ -6,6 +6,73 @@ export class Review extends React.Component {
     if (this.props.currentStep !== 4) { // Prop: The current step
       return null
     }
+
+    let gender = '';
+
+    if(this.props.gender === "M"){
+      gender = "Male";
+    }
+    else if (this.props.gender === "F") {
+      gender = "Female";
+    }
+    else {
+      gender = "Other";
+    }
+
+    let rGender = '';
+
+    if(this.props.generPref === "M"){
+      rGender = "Male";
+    }
+    else if (this.props.generPref === "F") {
+      rGender = "Female";
+    }
+    else {
+      rGender = "Other";
+    }
+
+    let year = '';
+
+    if(this.props.year == "1"){
+      year = "Freshman";
+    }
+    else if (this.props.year == "2") {
+      year = "Sophomore";
+    }
+    else if (this.props.year == "3") {
+      year = "Junior";
+    }
+    else {
+      year = "Senior";
+    }
+
+    let rYear = '';
+
+    if(this.props.yearPref == "1"){
+      rYear = "Freshman";
+    }
+    else if (this.props.yearPref == "2") {
+      rYear = "Sophomore";
+    }
+    else if (this.props.yearPref == "3") {
+      rYear = "Junior";
+    }
+    else {
+      rYear = "Senior";
+    }
+
+    let tidyness = '';
+
+    if(this.props.tidynessPref == "1"){
+      tidyness = "Not Tidy";
+    }
+    else if (this.props.tidynessPref == "2") {
+      tidyness = "Tidy";
+    }
+    else {
+      tidyness = "Very Tidy";
+    }
+
     // The markup for the Step 1 UI
     return(
 
@@ -20,150 +87,67 @@ export class Review extends React.Component {
 
 
 
-          <table class="table">
-            <thead class="thead-light">
+          <table className="table">
+            <thead className="thead-light">
               <tr>
-                <th scope="col">Your information</th>
+                <th className="text-left">Your information</th>
+                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Your name: {this.props.name}</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td className="text-left">Name:</td>
+                <td className="text-right">{this.props.name}</td>
               </tr>
               <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+                <td className="text-left">Email:</td>
+                <td className="text-right">{this.props.email}</td>
               </tr>
               <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+                <td className="text-left">Gender:</td>
+                <td className="text-right">{gender}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Smoker:</td>
+                <td className="text-right">{this.props.smoker === "1" ? "Yes" : "No"}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Year:</td>
+                <td className="text-right">{year}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Pets:</td>
+                <td className="text-right">{this.props.pets == "y" ? "Yes" : "No"}</td>
               </tr>
             </tbody>
           </table>
 
-
-
-          <div className="row justify-content-left pt-2 pl-4" id="review-user">
-            <div className="row bg-secondary">
-              <h6 className="">Your information:</h6>
-            </div>
-          </div>
-
-          <div className="row">
-            <p>Your name: {this.props.name}</p>
-          </div>
-
-          <div className="row">
-            <p>Your email: {this.props.email}</p>
-          </div>
-
-          <div className="row">
-            <p>Your gender: {this.props.gender}</p>
-          </div>
-
-          <div className="row">
-            <p>Smoker: {this.props.smoker}</p>
-          </div>
-
-          <div className="row">
-            <p>Year: {this.props.year}</p>
-          </div>
-
-          <div className="row">
-            <p>Pets: {this.props.pets}</p>
-          </div>
-
-          <div className="row justify-content-left pt-2 pl-4 bg-secondary" id="review-roommate">
-            <div className="row">
-              <h6>Your ideal roommate:</h6>
-            </div>
-          </div>
-
-          <div className="row mb-1">
-            <div className="col-6">
-              <p>Your name: {this.props.name}</p>
-            </div>
-            <div className="col-6">
-              <p>Your email:{this.props.email}</p>
-            </div>
-
-          </div>
-
-          <div className="row mb-1">
-            <div className="col-2">
-              <p>Your gender:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.gender}</p>
-            </div>
-
-            <div className="col-2">
-              <p>Smoker:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.smoker}</p>
-            </div>
-
-          </div>
-
-          <div className="row mb-1">
-            <div className="col-2">
-              <p>Your year:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.year}</p>
-            </div>
-
-            <div className="col-2">
-              <p>Pets:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.pets}</p>
-            </div>
-
-          </div>
-
-
-          <div className="row mb-1">
-            <div className="col-2">
-              <p>Roommate smoker:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.smokerPref}</p>
-            </div>
-
-            <div className="col-2">
-              <p>Roomate gender:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.generPref}</p>
-            </div>
-
-          </div>
-
-          <div className="row mb-1">
-            <div className="col-2">
-              <p>Roommate tidyness:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.tidynessPref}</p>
-            </div>
-
-            <div className="col-2">
-              <p>Roomate year:</p>
-            </div>
-            <div className="col-4">
-              <p>{this.props.yearPref}</p>
-            </div>
-
-          </div>
-
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th className="text-left">Desired Roommate Description</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="text-left">Roommate Smoker:</td>
+                <td className="text-right">{this.props.smokerPref === "1" ? "Yes" : "No"}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Gender:</td>
+                <td className="text-right">{rGender}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Tidyness:</td>
+                <td className="text-right">{tidyness}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Year:</td>
+                <td className="text-right">{rYear}</td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
       </div>

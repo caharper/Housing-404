@@ -7,8 +7,8 @@ export const ApartmentProgressBar = (props) => (
     <ul className="progressbar" id="progressbar">
       <li className="active ">Type of housing</li>
       <li>Housing details</li>
+      <li>Floor plan</li>
       <li>Miscellaneous</li>
-      <li>Housing picture</li>
       <li>Review</li>
     </ul>
   </div>

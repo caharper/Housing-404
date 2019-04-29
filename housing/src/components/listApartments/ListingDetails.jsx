@@ -9,86 +9,109 @@ export class ListingDetails extends React.Component {
     this.state = {file: '',imagePreviewUrl: ''};
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-  }
 
-  _handleImageChange(e) {
-    e.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
-  }
 
   render() {
     if (this.props.currentStep !== 2) { // Prop: The current step
       return null
     }
 
-    let {imagePreviewUrl} = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-    $imagePreview = (<img src={imagePreviewUrl} />);
-    } else {
-      $imagePreview = (<img src="http://placehold.it/65" />);
-    }
 
     // The markup for the Step 1 UI
     return(
 
       <div className="card overflow-auto">
         <div className="card-header bg-secondary text-white">
-          <h5>Personal Details</h5>
+          <h3 className="font-weight-bold">Housing Details</h3>
         </div>
+
         <div className="card-body special-card text-left">
-          <div className="row">
-            <div className="col-12">
-              <form>
-
-                <div className="row">
-                  <div className="form-group col-12">
-                    <label htmlFor="picture">Add Profile Picture: </label>
-                    <div className="previewComponent">
-                      <form onSubmit={(e)=>this._handleSubmit(e)}>
-                        <input className="fileInput"
-                          value={this.props.picture}
-                          type="file"
-                          onChange={(e)=>this._handleImageChange(e)}/>
-                      </form>
-                      <div className="imgPreview">
-                        {$imagePreview}
-                      </div>
-                  </div>
+          <div className="row justify-content-center">
+            <p className="text-secondary mb-0">Tell us more about your housing situation.</p>
+          </div>
 
 
 
-                  </div>
-                </div>
+          <div className="row justify-content-center py-0 my-0">
+            <p className="incorrect incorrect-no-display" id="invalid-apt-details">All information must be filled</p>
+          </div>
 
-                <div className="row">
-                  <div className="form-group col-12">
-                    <select id="gender" value={this.props.gender}>
-                      <option value="select">Select your gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
-                  </div>
-                </div>
-
-              </form>
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>How many roommates can you accomodate?</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="occupants" id="occupants" htmlFor="occupants" value={this.props.occupants} onChange={this.props.handleChange}>
+                <option value=''>Occupants</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
             </div>
           </div>
+
+
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>How many bedrooms do you have?</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="beds" id="beds" htmlFor="beds" value={this.props.beds} onChange={this.props.handleChange}>
+                <option value=''>Beds</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>How many bathrooms do you have?</p>
+            </div>
+            <div className="col-7">
+              <select className="form-control" name="baths" id="baths" htmlFor="baths" value={this.props.baths} onChange={this.props.handleChange}>
+                <option value=''>Bathrooms</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div className="row mb-1 mt-2">
+            <div className="col-5">
+              <p>How many square feet?</p>
+            </div>
+            <div className="col-7">
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">Square Feet</span>
+                </div>
+                <input type="text"
+                       id="squareFeet"
+                       name="squareFeet"
+                       className="form-control"
+                       aria-label="Amount (to the nearest dollar)"
+                       onChange={this.props.handleChange}
+                       value={this.props.squareFeet}
+                       maxlength={4}/>
+              </div>
+            </div>
+          </div>
+          <div className="row justify-content-center py-0 my-0">
+            <p className="incorrect incorrect-no-display" id="invalid-sq-ft">Square feet must be a number and greater than 0</p>
+          </div>
+
+
+
+
 
         </div>
 

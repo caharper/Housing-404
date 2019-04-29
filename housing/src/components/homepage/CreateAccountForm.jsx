@@ -63,6 +63,15 @@ export class CreateAccountForm extends Component {
     // LoginInformation check
     if(this.state.currentStep === 1) {
 
+      // Reset
+      $("#password-create").removeClass("is-invalid");
+      $("#confirmPass").removeClass("is-invalid");
+      $("#invalid-pass").addClass("incorrect-no-display");
+      $("#email-create").removeClass("is-invalid");
+      $("#invalid-email").addClass("incorrect-no-display");
+      $("#name").removeClass("is-invalid");
+      $("#no-name").addClass("incorrect-no-display");
+
       // Passwords
       let matchingPass = this.state.password === this.state.confirmPass
 
@@ -97,6 +106,15 @@ export class CreateAccountForm extends Component {
 
     // PersonalDetails check
     else if (this.state.currentStep === 2) {
+
+      // Reset
+      $("#gender").removeClass("is-invalid");
+      $("#smoker").removeClass("is-invalid");
+      $("#year").removeClass("is-invalid");
+      $("#pets").removeClass("is-invalid");
+      $("#invalid-personal-details").addClass("incorrect-no-display");
+
+
       let allInput = true;
       // Check Gender
       if(this.state.gender === ''){
@@ -133,6 +151,14 @@ export class CreateAccountForm extends Component {
 
     // RoommateDesc check
     else if (this.state.currentStep === 3 ) {
+
+      // Reset
+      $("#generPref").removeClass("is-invalid");
+      $("#smokerPref").removeClass("is-invalid");
+      $("#tidynessPref").removeClass("is-invalid");
+      $("#yearPref").removeClass("is-invalid");
+      $("#invalid-roommate-details").addClass("incorrect-no-display");
+
 
       let allInput = true;
       // Check Gender
