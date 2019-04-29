@@ -56,7 +56,7 @@ class FindRoomate extends Component {
     // request server api call
     let filter = new FilterRoommate(
 
-       this.state.gender, this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
+      this.state.gender, this.state.genderP, this.state.smoker, this.state.smokerP, this.state.year, this.state.pets, this.state.tidynessP, this.state.tempP, this.state.yearP, this.state.bedtimeP, this.state.wakeTime, this.state.wakeTimeP)
 
 
     this.accountRepository.filterUsers(filter)
@@ -83,11 +83,30 @@ class FindRoomate extends Component {
           <div class="row">
 
             <div class="col-sm-3">
+            
               <h1>Filter</h1>
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateYear} value={yearP}>
+                  <option value="">Year</option>
+                  <option value={1}>Freshman</option>
+                  <option value={2}>Sophmore</option>
+                  <option value={3}>Junior</option>
+                  <option value={4}>Senior</option>
+                </select>
+              </div>
+
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
+                  <option value="">Tidyness</option>
+                  <option value={1}>Not Tiddy</option>
+                  <option value={2}>Tidy</option>
+                  <option value={3}>Very Tiddy</option>
+                </select>
+              </div>
 
               <div className="filter">
                 <div className="filterTitle">Gender
-              <button onClick={this.updateGender} className="xbutton">x</button>
+              <button onClick={this.updateGender} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="gender" id="genderMale" checked={genderP === "M"}
@@ -119,7 +138,7 @@ class FindRoomate extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Smoker
-                <button onClick={this.updateSmoker} className="xbutton"></button>
+                <button onClick={this.updateSmoker} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerYes"
@@ -139,15 +158,7 @@ class FindRoomate extends Component {
                 </div>
               </div>
 
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateYear} value={yearP}>
-                  <option value="">Year</option>
-                  <option value={1}>Freshman</option>
-                  <option value={2}>Sophmore</option>
-                  <option value={3}>Junior</option>
-                  <option value={4}>Senior</option>
-                </select>
-              </div>
+
 
               <div className="filter">
                 <div className="filterTitle">Pet
@@ -171,14 +182,6 @@ class FindRoomate extends Component {
                 </div>
               </div>
 
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
-                  <option value="">Tidyness</option>
-                  <option value={1}>Not Tiddy</option>
-                  <option value={2}>Tidy</option>
-                  <option value={3}>Very Tiddy</option>
-                </select>
-              </div>
 
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
               <button onClick={() => this.filter()} className="perfectButton">Perfect Match</button>

@@ -48,6 +48,7 @@ export default class Event extends Component {
     componentDidMount() {
         this.accountRepository.getAllEvents()
             .then(events => {
+                console.log(events)
                 this.setState({ events })
             })
     }

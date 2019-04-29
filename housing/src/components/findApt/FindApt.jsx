@@ -140,10 +140,18 @@ class FindApt extends Component {
                 </select>
               </div>
 
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateRoomStyle} value={roomStyle}>
+                  <option value="">Room Style</option>
+                  <option value="Suite">Suite</option>
+                  <option value="Double">Double</option>
+                </select>
+              </div>
+
 
               <div className="filter">
                 <div className="filterTitle">Bedrooms
-                 <button onClick={this.updateBedrooms} className="xbutton">x</button>
+                 <button onClick={this.updateBedrooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="bedroom" id="bedroom1" checked={bedrooms === "1"}
@@ -175,7 +183,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Bathrooms
-                <button onClick={this.updateBathrooms} className="xbutton">x</button>
+                <button onClick={this.updateBathrooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="bathroom" id="bathroom" checked={bathrooms === "1"}
@@ -205,7 +213,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Number of occupants
-                <button onClick={this.updateOccupants} className="xbutton">x</button>
+                <button onClick={this.updateOccupants} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="occupant" id="occupant" checked={occupants === '1'}
@@ -235,7 +243,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Rooms
-                <button onClick={this.updateRooms} className="xbutton">x</button>
+                <button onClick={this.updateRooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="room" id="room" checked={rooms === '1'}
@@ -266,7 +274,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Number of Floors
-                <button onClick={this.updateFloors} className="xbutton">x</button>
+                <button onClick={this.updateFloors} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="floor" id="floor1"
@@ -295,17 +303,10 @@ class FindApt extends Component {
 
               </div>
 
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateRoomStyle} value={roomStyle}>
-                  <option value="">Room Style</option>
-                  <option value="Suite">Suite</option>
-                  <option value="Double">Double</option>
-                </select>
-              </div>
 
               <div className="filter">
                 <div className="filterTitle">Kitchens
-                <button onClick={this.updateKitchens} className="xbutton">x</button>
+                <button onClick={this.updateKitchens} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="kitchen" id="kitchenYes"
@@ -327,7 +328,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Laundry Room
-                <button onClick={this.updateLaundryRooms} className="xbutton">x</button>
+                <button onClick={this.updateLaundryRooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="laundryRoom" id="laundryRoomYes"
@@ -349,7 +350,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Pet
-                <button onClick={this.updatePets} className="xbutton">x</button>
+                <button onClick={this.updatePets} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petYes"
@@ -371,7 +372,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Smoking
-                <button onClick={this.updateSmoking} className="xbutton">x</button>
+                <button onClick={this.updateSmoking} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoking" id="smokingYes"
@@ -393,7 +394,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Pool
-                <button onClick={this.updatePool} className="xbutton">x</button>
+                <button onClick={this.updatePool} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pool" id="poolYes"
@@ -415,7 +416,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Gym
-                <button onClick={this.updateGym} className="xbutton">x</button>
+                <button onClick={this.updateGym} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="gym" id="gymYes"
@@ -437,7 +438,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Study Room
-                <button onClick={this.updatestudyRoom} className="xbutton">x</button>
+                <button onClick={this.updatestudyRoom} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="studyRoom" id="studyRoomYes"
