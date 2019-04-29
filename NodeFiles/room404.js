@@ -355,7 +355,7 @@ app.get('/user/myEvents/attending/:eid?', (req, res) => {
 });
 
 //view all notifications from a particular user to current user
-app.get('user/notifications/:uid?', (req, res) => {
+app.get('/user/notifications/:uid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
 	connection.query('SELECT notifications.to_u_id, notifications.from_u_id, users.name, users.email, notifications.notification FROM notifications JOIN users ON notifications.from_u_id = users.id WHERE to_u_id = ? AND from_u_id', [sessuid, req.params.uid], function(err, results, fields) {
             if (err) throw err;
