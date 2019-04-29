@@ -55,7 +55,7 @@
     display:inline-block;
     vertical-align:middle;
   }
-  button{
+  .mainButton{
     background:#1AAB8A;
     color:#fff;
     border:none;
@@ -67,11 +67,11 @@
     transition:800ms ease all;
     outline:none;
   }
-  button:hover{
+  .mainButton:hover{
     background:#fff;
     color:#1AAB8A;
   }
-  button:before,button:after{
+  .mainButton:before,.mainButton:after{
     content:'';
     position:absolute;
     top:0;
@@ -81,13 +81,13 @@
     background: #1AAB8A;
     transition:400ms ease all;
   }
-  button:after{
+  .mainButton:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
   }
-  button:hover:before,button:hover:after{
+  .mainButton:hover:before,.mainButton:hover:after{
     width:100%;
     transition:800ms ease all;
   }
