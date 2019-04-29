@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
+import AddEvent from "./AddEvents";
 
 
 
@@ -9,42 +10,92 @@ class Myevents extends Component {
 
   state = {
     eventsAttend: null,
-    myEvents: [
-      {
-        type: 'Apartment',
-        name: "Haya", gender: "student", img: "https://via.placeholder.com/150"
-      },
-      {
-        gender: 'female', type: 'house',
-        name: "Bob", img: "https://via.placeholder.com/150"
-      }
-    ],
+    myEvents: null
+
   }
+  // addEvent() {
+  //   let addEvents = new Event(this.state.details, this.state.date)
+
+  //   this.accountRepository.createUserOwnedEvent(addEvents)
+  //     .then(addEvent => {
+  //       console.log(addEvent)
+  //       this.setState({ addEvent })
+  //     })
+  // }
 
   render() {
 
-    if (this.state.eventsAttend === null || this.state.eventsAttend === undefined) {
+    // Don't display my events
+    // let badMyevents = (this.state.myEvents === undefined || this.state.myEvents === null)
+    // Don't display events attend
+    // let badEventsattend = (this.state.eventsAttend === undefined || this.state.eventsAttend === null)
+
+    console.log(this.state.eventsAttend)
+    console.log('my events: ',this.state.myEvents)
+
+    if (!this.state.myEvents && !this.state.eventsAttend) {
       return (
         <>
           <div><Navbar></Navbar></div>
+          <div>
+            <AddEvent></AddEvent>
+          </div>
           You have no events
         </>
       )
     }
-
-    const { eventsAttend, myEvents } = this.state;
-
+    if (!this.state.eventsAttend) {
+      return (
+        <>
+          <div><Navbar></Navbar></div>
+          <div>
+            <AddEvent></AddEvent>
+          </div>
+          You have no attending events, but you have created events
+          <h1>Event Attending</h1>
+          <div>
+            {/* {this.state.myEvents.map(item => (
+              <>
+                <div>Name:{item.details}</div>
+                <div> Date:{item.date}</div>
+              </>
+            ))} */
+            this.state.myEvents.name}
+          </div>
+        </>
+      )
+    }
+    if (!this.state.myEvents) {
+      return (
+        <>
+          <div><Navbar></Navbar></div>
+          <div>
+            <AddEvent></AddEvent>
+          </div>
+          You have no created events, but you have attending events
+            <h1>Events Posted</h1>
+          <div>
+            <AddEvent></AddEvent>
+          </div>
+          <div>
+            {this.state.eventsAttend.map(events => (
+              <div>
+                <div>Details:{events.name}</div>
+                <div> Date:{events.date}</div>
+                <button onClick={this.remove}>Remove</button>
+              </div>
+            ))}
+          </div>
+        </>
+      )
+    }
     return (
       <>
-
         <div><Navbar></Navbar></div>
-
         <div class="container">
           <div class="row">
-
             <div class="col-6">
               <h1>Event Attending</h1>
-
               <div>
                 {this.state.eventsAttend.map(item => (
                   <div className="searchResult" >
@@ -58,14 +109,13 @@ class Myevents extends Component {
                 ))}
               </div>
             </div>
-
             <div class="col-6" >
               <h1>Events Posted</h1>
-              {myEvents.map(events => (
+              <div>
+                <AddEvent></AddEvent>
+              </div>
+              {this.state.myEvents.map(events => (
                 <div>
-                  <div className="image searched">
-                    <img src={events.img} />
-                  </div>
                   <div>Details:{events.name}</div>
                   <div> Date:{events.date}</div>
                   <button onClick={this.remove}>Remove</button>
@@ -80,13 +130,14 @@ class Myevents extends Component {
   componentDidMount() {
     this.accountRepository.getUserGoingEvents(localStorage.getItem("sessuid"))
       .then(eventListResp => {
-        let eventsAttend = eventListResp[0];
+        let eventsAttend = eventListResp;
+        console.log('Attend events: ', eventsAttend)
         this.setState({ eventsAttend: eventsAttend })
       })
-
     this.accountRepository.getUserOwnedEvents(localStorage.getItem("sessuid"))
       .then(myEventsResp => {
-        let myEvents = myEventsResp[0];
+        let myEvents = myEventsResp;
+        console.log('My events: ', myEvents)
         this.setState({ myEvents: myEvents })
         console.log(this.state.eventsAttend)
         console.log(this.state.myEvents)
