@@ -288,7 +288,7 @@ app.get('/events/:eid?', (req, res) => {
 
 
 //view attending for specific event
-app.get('/events/:eid?/attending', (req, res) => {
+app.get('/events/attending/:eid?', (req, res) => {
 	var eid = req.params.eid;
         connection.query('SELECT * FROM attending WHERE e_id = ?', [eid], function(err, results, fields) {
             if (err) throw err;
@@ -299,7 +299,7 @@ app.get('/events/:eid?/attending', (req, res) => {
 });
 
 //'/user/events/:eid?'
-app.get('/user/events/:eid?/', (req, res) => {
+app.get('/user/events/:eid?', (req, res) => {
 	connection.query('SELECT * FROM events WHERE e_id = ?', [req.params.eid], function(err, results, fields) {
         	if (err) throw err;
         	else {
@@ -309,7 +309,7 @@ app.get('/user/events/:eid?/', (req, res) => {
 });
 
 //Get the details for your apartment listing
-app.get('/user/apartments/:aid?/', (req, res) => {
+app.get('/user/apartments/:aid?', (req, res) => {
         var aid = req.params.aid;
 	var sessuid = parseInt(req.query.sessuid, 10);
         connection.query('SELECT * FROM aProfiles WHERE a_id = ? AND u_id = ?', [aid, sessuid], function(err, results, fields) {
@@ -321,7 +321,7 @@ app.get('/user/apartments/:aid?/', (req, res) => {
 });
 
 //Get the previous rents for a specific listing of yours
-app.get('/user/apartments/:aid?/prevRents', (req, res) => {
+app.get('/user/apartments/pastRents/:aid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var aid = req.params.aid;
         connection.query('SELECT prevRents.rent FROM prevRents JOIN aProfiles ON prevRents.a_id = aProfiles.a_id WHERE prevRents.a_id = ? AND u_id = ?', [aid, sessuid], function(err, results, fields) {
@@ -344,7 +344,7 @@ app.get('/user/myEvents/:eid?', (req, res) => {
 });
 
 //view a user's own event's attending memebers
-app.get('/user/myEvents/:eid/attending', (req, res) => {
+app.get('/user/myEvents/attending/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
 	connection.query('SELECT users.name FROM events NATURAL JOIN attending JOIN users ON attending.u_id = users.id WHERE events.e_id = ? AND events.owner = ?', [req.params.eid, sessuid], function(err, results, fields) {
             if (err) throw err;
@@ -365,34 +365,7 @@ app.get('user/notifications/:uid?', (req, res) => {
         });
 });
 
-//get all pMatches from the 
-/*app.get('users/pMatch', (req, res) => {
-    connection.query('SELECT * from uProfiles WHERE id = ?', [req.session.id], function(err, results, field) {
-        if(err) throw err;
-        else {
-            var Ugender = results[0].gender;
-            var Usmoker = results[0].smoker;
-            var UgenderP = results[0].genderP;
-            var UsmokerP = results[0].smokerP;
-            var Uyear = results[0].year;
-            var UTidynessP = results[0].tidynessP;
-            var UyearP = results[0].yearP;
-            var UtempP = results[0].tempP;
-            var UbedTimeP = results[0].bedTimeP;
-            var UwakeTime = results[0].wakeTime;
-            var UwakeTimeP = results[0].wakeTimeP;
-            var Upets = results[0].pets;
-            
-            var q = 'SELECT * from uProfiles WHERE gender = ' + Ugender + ' AND smoker == ' + Usmoker + ' AND genderP == ' + UgenderP + ' AND smokerP == ' + UsmokerP + ' AND year == ' + Uyear + ' AND tidynessP == ' + UtidynessP + ' AND yearP == ' + UyearP + ' AND tempP == ' + UtempP + ' AND bedTime == ' + UbedTimeP + ' AND wakeTime == ' + UwakeTime + ' AND wakeTimeP == ' + UwakeTimeP + ' AND pets == ' + pets;
-            connection.query(q, [req.session.id], function(err, results, field) {
-                if (err) throw err;
-                else {
-                    res.status(200).send(results);
-                }
-            });
-        }
-});*/
-
+//return a user's perfect match if there is one
 app.get('/users/pMatch/results', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
 	console.log("I started this");
@@ -922,7 +895,7 @@ app.post('/user/apartments', (req, res) => {
 });
 
 //edit apt listing
-app.post('/user/apartments/:aid?/edit', (req, res) => {
+app.post('/user/apartments/edit/:aid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         connection.query('SELECT * FROM aProfiles WHERE a_id = ?', [req.params.aid], function(err, results, fields) {
             if (err) throw err;
@@ -1127,7 +1100,7 @@ app.post('/user/myEvents', (req, res) => {
 });
 
 //edit event
-app.post('/user/myEvents/:eid?/edit', (req, res) => {
+app.post('/user/myEvents/edit/:eid?', (req, res) => {
         var eid = req.params.eid;
 	var sessuid = parseInt(req.query.sessuid, 10);
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
@@ -1167,7 +1140,7 @@ app.post('/user/myEvents/:eid?/edit', (req, res) => {
 });
 
 //create notification
-app.post('/users/:uid?/contact', (req, res) => {
+app.post('/users/contact/:uid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var uid = req.params.uid;
         connection.query('INSERT INTO notifications VALUES(?, ?, ?);', [uid, sessuid, req.body.notification], function(err, results, fields) {
@@ -1179,7 +1152,7 @@ app.post('/users/:uid?/contact', (req, res) => {
 });
 
 //add to attending
-app.post('/events/:eid?/attending', (req, res) => {
+app.post('/events/attending/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var eid = req.params.eid;
         connection.query('INSERT INTO attending VALUES(?, ?);', [eid, sessuid], function(err, results, fields) {
@@ -1191,7 +1164,7 @@ app.post('/events/:eid?/attending', (req, res) => {
 });
 
 //add to previous rents
-app.post('/user/apartments/:aid?/prevRents/edit', (req, res) => {
+app.post('/user/apartments/pastRents/edit/:aid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var aid = req.params.aid;
 	    connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
@@ -1272,7 +1245,7 @@ app.delete('/user/edit', (req, res) => {
 });
 
 //delete apt listing
-app.delete('/user/apartments/:aid?/edit',(req,res) => {
+app.delete('/user/apartments/edit/:aid?',(req,res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var aid = req.params.aid;
         connection.query('SELECT u_id FROM aProfiles WHERE a_id = ?', [aid], function(err, results, fields) {
@@ -1333,7 +1306,7 @@ app.delete('/user/events/:eid?', (req, res) => {
 });
 
 //delete attending to your event
-app.delete('/user/myEvents/:eid?/attending', (req, res) => {
+app.delete('/user/myEvents/attending/:eid?', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
         var eid = req.params.eid;
         connection.query('SELECT * FROM events WHERE e_id = ?', [eid], function(err, results, fields) {
