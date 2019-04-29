@@ -43,7 +43,10 @@ export class Homepage extends React.Component {
 
     onCreateAccount(newUser){
       this.accountRepository.createAccount(newUser)
-      .then(createdAccount => this.setState({ createdAccount }))
+      .then(user => {
+        this.setState({user})
+        localStorage.setItem('sessuid', user[0].id)
+      })
     }
 
     iamloggedin(){
