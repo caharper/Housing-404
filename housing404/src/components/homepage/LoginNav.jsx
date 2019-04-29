@@ -36,7 +36,7 @@ export class LoginNav extends React.Component {
 
     // The markup for the Step 1 UI
     return(
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-dark">
         <div className="row col-12 m-0 p-0">
 
           <div className="col-auto mr-auto position-relative">

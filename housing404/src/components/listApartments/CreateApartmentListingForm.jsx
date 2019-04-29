@@ -6,6 +6,7 @@ import { ListingPicture } from './ListingPicture'
 import { Review } from './Review'
 // import './homepage.css'
 import $ from 'jquery';
+import { Apt } from './../../models/apartment';
 // import { NewUser } from './../../models/newUser';
 
 export class CreateApartmentListingForm extends Component {
@@ -281,7 +282,7 @@ export class CreateApartmentListingForm extends Component {
       return (
         <button
           className="btn btn-success btn-block float-right mt-2"
-          type="button" onClick={this.onSubmit()}>
+          type="button" onClick={() => this.onSubmit()}>
         Create Account
         </button>
       )
@@ -290,29 +291,42 @@ export class CreateApartmentListingForm extends Component {
     return null;
   }
 
-// ***** Having issues
   onSubmit(){
-      //
-      // let newUser = new NewUser(this.state.name, this.state.email, this.state.password);
-      // type, beds, year, squareFeet, baths, occupants, rooms, floor, kitchen, studyRooms, pets, smoking, gym, pool, heat, ac, roomStyle, rent, leaseTime, poBox
 
-      // let newApt = new Apt()
-      // this.props.onCreateAccount(newUser);
-      // //
-      // //     // clears the form
-      // this.setState(
-      //   {
-      //     currentStep: 1, // Default is Step 1
-      //     email: '',
-      //     name: '',
-      //     password: '',
+      let newApt = new Apt(this.state.beds, this.state.year, this.state.squareFeet, this.state.baths,
+                           this.state.occupants, this.state.rooms, this.state.floor, this.state.kitchen,
+                           this.state.studyRooms, this.state.pets, this.state.smoking, this.state.gym,
+                           this.state.pool, this.state.heat, this.state.ac, this.state.roomStyle, this.state.rent,
+                           this.state.leaseTime, this.state.poBox, this.state.location, this.state.description,
+                           "", this.state.laundry);
+
+      this.props.onCreateApt(newApt);
       //
-      //     picture: '',
-      //     about: '',
-      //
-      //     address: '',
-      //     roomDesc: '',
-      //   })
+      this.state = {
+        currentStep: 1, // Default is Step 1
+
+        location: '',
+        rent: '',
+        leaseTime: '',
+        description: '',
+        pictue: '',
+        occupants: '',
+        beds: '',
+        baths: '',
+        squareFeet: '',
+        rooms: '',
+        kitchen: '',
+        laundry: '',
+        floor: '',
+        pets: '',
+        poBox: '',
+        studyRooms: '',
+        roomStyle: '',
+        gym: '',
+        pool: '',
+        ac: '',
+        heat: ''
+      }
     }
 
   // Use the submitted data to set the state

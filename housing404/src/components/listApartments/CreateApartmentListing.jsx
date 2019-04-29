@@ -16,19 +16,20 @@ export class CreateApartmentListings extends React.Component {
 
   state = {
     // this will need to be routed if true
-    loggedIn: false,
-    createdAccount: false
+    // loggedIn: false,
+    createdApt: false
   }
+  //
+  // onLogin(attemptUser) {
+  //   // works
+  //   this.accountRepository.login(attemptUser)
+  //     .then(loggedIn => this.setState({ loggedIn }))
+  // }
 
-  onLogin(attemptUser) {
-    // works
-    this.accountRepository.login(attemptUser)
-      .then(loggedIn => this.setState({ loggedIn }))
-  }
-
-  onCreateAccount(newUser) {
-    this.accountRepository.login(newUser)
-      .then(createdAccount => this.setState({ createdAccount }))
+  onCreateApt(newApt) {
+    let sessuid = localStorage.getItem("sessuid")
+    this.accountRepository.createApartment(newApt, sessuid)
+      .then(createdApt => this.setState({ createdApt }))
   }
 
 
@@ -47,7 +48,7 @@ export class CreateApartmentListings extends React.Component {
             <ApartmentProgressBar></ApartmentProgressBar>
           </div>
           <div className="row justify-content-center">
-            <CreateApartmentListingForm onCreateAccount={x => this.onCreateAccount(x)}></CreateApartmentListingForm>
+            <CreateApartmentListingForm onCreateApt={x => this.onCreateApt(x)}></CreateApartmentListingForm>
           </div>
 
 

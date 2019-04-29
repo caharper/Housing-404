@@ -218,9 +218,9 @@ export class AccountRepository {
   }
 
   // Creates an apartment listing
-  createApartment(aData){
+  createApartment(aData, sessuid){
     return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/user/apartments`, aData)
+        axios.post(`${this.url}/user/apartments?sessuid=${sessuid}`, aData)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })

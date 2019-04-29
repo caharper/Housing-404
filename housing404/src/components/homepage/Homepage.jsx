@@ -59,7 +59,7 @@ export class Homepage extends React.Component {
     }
 
   render() {
-    
+
     if(this.state.user !== null){
       return <Redirect to='/main'/>
     }
@@ -69,7 +69,7 @@ export class Homepage extends React.Component {
 
       <>
         <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
-        <div className="container">
+        <div className="container d-none d-xl-block">
           <div className="row pt-5">
             <div className="col-6">
               <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
