@@ -1,18 +1,18 @@
 export class FilterRoommate{
-    constructor(gender,genderP, smoker, smokerP, year, pets, tidynessP, tempP, yearP, bedtimeP, wakeTime, wakeTimeP){ 
-        this.genderP = genderP;
+    constructor(gender, smoker, year, pets, tempP, genderP, smokerP, tidynessP,
+                yearP, bedTimeP, wakeTime, wakeTimeP){
+
+        this.gender = gender;
         this.smoker = smoker;
-        this.smokerP = smokerP;
-        this.yearP = yearP;
         this.year = year;
         this.pets = pets;
-        this.tidynessP = tidynessP;
         this.tempP = tempP;
-        this.bedtimeP = bedtimeP;
+        this.genderP = genderP;
+        this.smokerP = smokerP;
+        this.tidynessP = tidynessP;
+        this.yearP = yearP;
+        this.bedTimeP = bedTimeP;
         this.wakeTime = wakeTime;
         this.wakeTimeP = wakeTimeP;
-        this.gender = gender;
-
-
     }
 }
