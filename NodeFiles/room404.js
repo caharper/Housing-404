@@ -393,7 +393,7 @@ app.get('user/notifications/:uid?', (req, res) => {
         }
 });*/
 
-app.get('/users/pMatch', (req, res) => {
+app.get('/users/pMatch/results', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
 	console.log("I started this");
 	connection.query('SELECT * FROM uProfiles WHERE id = ?', [sessuid], function(err, results, field) {
