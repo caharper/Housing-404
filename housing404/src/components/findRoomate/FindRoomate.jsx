@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AccountRepository } from './../../api/accountRepository';
 import { FilterRoommate } from './../../models/filterRoomate'
 import Navbar from "../Navbar";
-import $ from 'jquery'
+import $ from 'jquery';
 
 
 
@@ -47,6 +47,8 @@ class FindRoomate extends Component {
   async filter() {
     // Reset on new search
     $("#no-roommate-match").addClass("incorrect-no-display");
+    $("#no-selected-r-filter").addClass("incorrect-no-display");
+    $("#no-filter-select-heading").addClass("incorrect-no-display");
 
     // request server api call
     let filter = new FilterRoommate(this.state.gender, this.state.smoker, this.state.year,
@@ -55,6 +57,16 @@ class FindRoomate extends Component {
                                     this.state.bedTimeP, this.state.wakeTime, this.state.wakeTimeP)
 
     console.log(filter);
+
+    // Need to make it where error pops up if no filters selected
+    if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
+       this.state.pets === null && this.state.tempP, this.state.genderP === null &&
+       this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
+       this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
+         $("#no-selected-r-filter").removeClass("incorrect-no-display");
+         $("#no-filter-select-heading").removeClass("incorrect-no-display");
+         return
+       }
 
     this.accountRepository.filterUsers(filter)
       .then(resp => {
@@ -92,6 +104,9 @@ class FindRoomate extends Component {
 
             <div className="col-sm-3">
               <h1>Filter</h1>
+              <div className="row justify-content-center py-0 my-0">
+                <p className="incorrect incorrect-no-display" id="no-selected-r-filter">Please select a filter</p>
+              </div>
 
               <div className="filter">
                 <div className="filterTitle">Gender
@@ -221,10 +236,12 @@ class FindRoomate extends Component {
                 //     </div>
                 //   </div>
                 // ))
+                // Needs to be in a child component 
               }
               </div>
 
               <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
+              <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
             </div>
 
 

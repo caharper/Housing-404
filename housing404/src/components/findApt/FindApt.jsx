@@ -1,52 +1,48 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { AccountRepository } from './../../api/accountRepository';
 import Navbar from "../Navbar";
-import { FilterApt } from './../../models/filterApt'
-import './findApt.css'
+import { FilterApt } from './../../models/filterApt';
+import './findApt.css';
+import $ from 'jquery';
 
 
 class FindApt extends Component {
   accountRepository = new AccountRepository;
 
   state = {
-    items: [],
-    type: null,
-    year: null,
-    squareFeet: null,
-    bedrooms: null,
-    bathrooms: null,
-    occupants: null,
-    rooms: null,
-    floors: null,
+
     rent: null,
-    kitchens: null,
-    laundryRooms: null,
-    studyRoom: null,
+    leaseTime: null,
+    occupants: null,
+    beds: null,
+    baths: null,
+    squareFeet: null,
+    rooms: null,
+    kitchen: null,
+    floor: null,
     pets: null,
-    smoking: null,
+    poBox: null,
+    studyRooms: null,
     gym: null,
     pool: null,
+    ac: null,
     heat: null,
-    airCondition: null,
-    roomStyle: null,
-    leaseTime: null,
-    poBox: null,
 
     filteredApts: []
 
   }
 
-  updateType = (e) => {
-    this.setState({ type: e.target.value || null })
-  }
-  updateYear = (e) => {
-    this.setState({ year: e.target.value || null })
-  }
+  // updateType = (e) => {
+  //   this.setState({ type: e.target.value || null })
+  // }
+  // updateYear = (e) => {
+  //   this.setState({ year: e.target.value || null })
+  // }
   updateBedrooms = (e) => {
-    this.setState({ bedrooms: e.target.value || null })
+    this.setState({ beds: e.target.value || null })
   }
   updateBathrooms = (e) => {
-    this.setState({ bathrooms: e.target.value || null })
+    this.setState({ baths: e.target.value || null })
   }
   updateOccupants = (e) => {
     this.setState({ occupants: e.target.value || null })
@@ -55,16 +51,16 @@ class FindApt extends Component {
     this.setState({ rooms: e.target.value || null })
   }
   updateFloors = (e) => {
-    this.setState({ floors: e.target.value || null })
+    this.setState({ floor: e.target.value || null })
   }
   updateKitchens = (e) => {
-    this.setState({ kitchens: e.target.value || null })
+    this.setState({ kitchen: e.target.value || null })
   }
-  updateLaundryRooms = (e) => {
-    this.setState({ laundryRooms: e.target.value || null })
-  }
+  // updateLaundryRooms = (e) => {
+  //   this.setState({ laundryRooms: e.target.value || null })
+  // }
   updateStudyRoom = (e) => {
-    this.setState({ studyRoom: e.target.value || null })
+    this.setState({ studyRooms: e.target.value || null })
   }
   updatePets = (e) => {
     this.setState({ pets: e.target.value || null })
@@ -72,15 +68,15 @@ class FindApt extends Component {
   updateGym = (e) => {
     this.setState({ gym: e.target.value || null })
   }
-  updateSmoking = (e) => {
-    this.setState({ smoking: e.target.value || null })
-  }
+  // updateSmoking = (e) => {
+  //   this.setState({ smoking: e.target.value || null })
+  // }
   updatePool = (e) => {
     this.setState({ pool: e.target.value || null })
   }
-  updateRoomStyle = (e) => {
-    this.setState({ roomStyle: e.target.value || null })
-  }
+  // updateRoomStyle = (e) => {
+  //   this.setState({ roomStyle: e.target.value || null })
+  // }
   updateRent = (e) => {
     this.setState({ rent: e.target.value || null })
   }
@@ -91,23 +87,37 @@ class FindApt extends Component {
 
   filter() {
     // request server api call
-    let filter = new FilterApt(this.state.type, this.state.bedrooms, this.state.year, this.state.squareFeet, this.state.bathrooms, this.state.occupants, this.state.rooms, this.state.floors, this.state.kitchens, this.state.studyRoom, this.state.pets, this.state.smoking, this.state.gym, this.state.pool, this.state.heat, this.state.airCondition, this.state.roomStyle, this.state.rent, this.state.leaseTime, this.state.poBox)
+    let filter = new FilterApt(this.state.rent, this.state.leaseTime, this.state.occupants, this.state.beds,
+                               this.state.baths, this.state.squareFeet, this.state.rooms, this.state.kitchen,
+                               this.state.floor, this.state.pets, this.state.poBox, this.state.studyRooms,
+                               this.state.gym, this.state.pool, this.state.ac, this.state.heat)
 
 
     this.accountRepository.filterApartments(filter)
-      .then(filteredApts => {
-        console.log(filteredApts)
-        this.setState({ filteredApts })
+      .then(resp => {
+        console.log(resp)
+
+        let apts = resp;
+        this.setState({filteredApts: apts})
+        // this.setState({ filteredApts })
+        console.log(this.state)
+
+        if(!this.state.filteredApts){
+          $("#no-apt-match").removeClass("incorrect-no-display");
+        }
+        else if (this.state.filteredApts.length === 0) {
+          $("#no-apt-match").removeClass("incorrect-no-display");
+        }
       })
   }
 
 
   render() {
-    if (this.state.items === [] || this.state.items === null) {
-      return (
-        <>No Match Found</>
-      )
-    }
+    // if (this.state.items === [] || this.state.items === null) {
+    //   return (
+    //     <>No Match Found</>
+    //   )
+    // }
     const {items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
 
 
@@ -485,33 +495,36 @@ class FindApt extends Component {
               <h1 >Search Results</h1>
               <div className="searchResultback">
                 <div>
-                  {items.map(item => (
-                    <div className="searchResult" >
-                      <div className="row">
-
-                        <div class="col col-mg-3 img">
-                          <div className="imageSearched">
-                            <img src={item.img} />
-                          </div>
-                        </div>
-
-                        <div className="col col-mg-8 items">
-                          <div>Name:{item.type}</div>
-                          <div> Type:{item.type}</div>
-                          <div> Description:{item.description}</div>
-                          <div> Location:{item.location}</div>
-                          <div> Rent:{item.rent}</div>
-                          <div> Avalibility:{item.leaseTime}</div>
-                          <div> Number of Occupants:{item.occupants}</div>
-                          <div> Number of Bedrooms:{item.beds}</div>
-                          <div> Number of Bathrooms:{item.baths}</div>
-                          <div> Sqaure Feet:{item.squareFeet}</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  {
+                  // this.filteredApts.map((item, index) => (
+                  //   <div className="searchResult" key={index}>
+                  //     <div className="row">
+                  //
+                  //       <div class="col col-mg-3 img">
+                  //         <div className="imageSearched">
+                  //           <img src={item.img} />
+                  //         </div>
+                  //       </div>
+                  //
+                  //       <div className="col col-mg-8 items">
+                  //         <div>Name:{item.type}</div>
+                  //         <div> Type:{item.type}</div>
+                  //         <div> Description:{item.description}</div>
+                  //         <div> Location:{item.location}</div>
+                  //         <div> Rent:{item.rent}</div>
+                  //         <div> Avalibility:{item.leaseTime}</div>
+                  //         <div> Number of Occupants:{item.occupants}</div>
+                  //         <div> Number of Bedrooms:{item.beds}</div>
+                  //         <div> Number of Bathrooms:{item.baths}</div>
+                  //         <div> Sqaure Feet:{item.squareFeet}</div>
+                  //       </div>
+                  //     </div>
+                  //   </div>
+                  // ))
+                }
                 </div>
               </div>
+              <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>
             </div>
 
           </div>
