@@ -119,7 +119,7 @@ class FindRoomate extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Smoker
-                <button onClick={this.updateSmoker} className="xbutton">x</button>
+                <button onClick={this.updateSmoker} className="xbutton"></button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerYes"
@@ -151,7 +151,7 @@ class FindRoomate extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Pet
-                <button onClick={this.updatePets} className="xbutton">x</button>
+                <button onClick={this.updatePets} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petYes"

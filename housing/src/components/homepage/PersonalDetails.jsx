@@ -26,7 +26,12 @@ export class PersonalDetails extends React.Component {
     let file = e.target.files[0];
 
     // Convert the picture to blob
-    let blb = new Blob([file]);
+    // let blb = new Blob([file]);
+
+
+    // let base64 = '';
+    // reader.readAsDataURL(file);
+
 
     reader.onloadend = () => {
       this.setState({
@@ -37,8 +42,8 @@ export class PersonalDetails extends React.Component {
 
     reader.readAsDataURL(file)
 
-    let blbString = reader.readAsText(blb);
-    this.props.onPhotoUpload(blbString);
+    // let blbString = reader.readAsText(blb);
+    // this.props.onPhotoUpload(blbString);
   }
 
   render() {
