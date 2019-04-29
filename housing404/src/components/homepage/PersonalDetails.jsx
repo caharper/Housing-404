@@ -26,7 +26,12 @@ export class PersonalDetails extends React.Component {
     let file = e.target.files[0];
 
     // Convert the picture to blob
-    this.props.onPhotoUpload(new Blob([file]));
+    // let blb = new Blob([file]);
+
+
+    // let base64 = '';
+    // reader.readAsDataURL(file);
+
 
     reader.onloadend = () => {
       this.setState({
@@ -36,6 +41,9 @@ export class PersonalDetails extends React.Component {
     }
 
     reader.readAsDataURL(file)
+
+    // let blbString = reader.readAsText(blb);
+    // this.props.onPhotoUpload(blbString);
   }
 
   render() {
@@ -109,8 +117,8 @@ export class PersonalDetails extends React.Component {
             <div className="col-7">
               <select className="form-control" name="smoker" id="smoker" value={this.props.smoker} onChange={this.props.handleChange}>
                 <option value=''>Smoker</option>
-                <option value={+1}>Yes</option>
-                <option value={+0}>No</option>
+                <option value={1}>Yes</option>
+                <option value={0}>No</option>
               </select>
             </div>
           </div>
@@ -122,10 +130,10 @@ export class PersonalDetails extends React.Component {
             <div className="col-7">
               <select className="form-control" id="year" name="year" value={this.props.year} onChange={this.props.handleChange}>
                 <option value=''>Year</option>
-                <option value={+1}>Freshman</option>
-                <option value={+2}>Sophomore</option>
-                <option value={+3}>Junior</option>
-                <option value={+4}>Senior</option>
+                <option value={1}>Freshman</option>
+                <option value={2}>Sophomore</option>
+                <option value={3}>Junior</option>
+                <option value={4}>Senior</option>
               </select>
             </div>
           </div>

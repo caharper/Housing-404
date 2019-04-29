@@ -8,6 +8,8 @@ import { CreateAccountForm } from './CreateAccountForm'
 import './homepage.css'
 import logo from './../../housing404.svg';
 import $ from 'jquery';
+import { Redirect } from 'react-router-dom';
+
 
 import axios from 'axios'
 
@@ -20,27 +22,47 @@ export class Homepage extends React.Component {
   state = {
       // this will need to be routed if true
       loggedIn: false,
-      createdAccount: false
+      createdAccount: false,
+      user: null
     }
 
     onLogin(attemptUser){
       // works
       this.accountRepository.login(attemptUser)
-      .then(loggedIn => this.setState({ loggedIn }))
-      .catch(
-        $("#email").addClass("is-invalid"),
-        $("#password").addClass("is-invalid"),
-        $("#invalid-login").removeClass("incorrect-no-display")
-      )
+      .then(user => {
+        this.setState({user})
+        localStorage.setItem('sessuid', user[0].id)
+      })
+      //.catch(
+        // $("#email").addClass("is-invalid"),
+        // $("#password").addClass("is-invalid"),
+        // $("#invalid-login").removeClass("incorrect-no-display")
+     // )
     }
+
 
     onCreateAccount(newUser){
       this.accountRepository.createAccount(newUser)
-      .then(createdAccount => this.setState({ createdAccount }))
+      .then(user => {
+        this.setState({user})
+        localStorage.setItem('sessuid', user[0].id)
+      })
     }
 
+    iamloggedin(){
+      this.accountRepository.getUserProfile()
+      .then(user => {
+        console.log('im here')
+        console.log(user)
+        this.setState({ user })
+      })
+    }
 
   render() {
+    
+    if(this.state.user !== null){
+      return <Redirect to='/main'/>
+    }
 
     // The markup for the Step 1 UI
     return(

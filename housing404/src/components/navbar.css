@@ -1,0 +1,162 @@
+/*main*/
+/* * {
+  box-sizing: border-box;
+} */
+
+/* html, body { min-height: 100%; } */
+
+.user-button {
+  border-radius: 50%;
+}
+
+.blue {
+  background-color: #008CBA;
+}
+
+.white-text {
+  color: white;
+}
+
+.text-size {
+  font-size:4vw;
+}
+
+.option {
+  color: white;
+  background-color: #008CBA;
+  font-size:4vw;
+}
+
+.width {
+  width: 30vw;
+}
+
+.align {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50vh;
+}
+
+
+  /* code below derived from https://www.designskilz.com/cool-css-buttons/ all credits
+  go to original author */
+
+  body{
+    text-align:center;
+  }
+  body:before{
+    content:'';
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+  }
+  button{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  button:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+
+  /*hamburger-menu*/
+   /* code below derived from https://github.com/negomi/react-burger-menu */
+
+   /* Position and sizing of burger button */
+  .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: #1AAB8A;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .bm-burger-bars-hover {
+    background: white;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+  .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .bm-menu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
+
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }

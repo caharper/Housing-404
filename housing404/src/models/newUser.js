@@ -1,5 +1,5 @@
 export class NewUser {
-  constructor(name, email, password, gender, picture, smoker, year, bedTimePref, wakeTime, pets, smokerPref, generPref, tidynessPref, yearPref, tempPref, wakeTimePref){
+  constructor(name, email, password, gender, smoker, year, bedTimePref, wakeTime, pets, smokerPref, generPref, tidynessPref, yearPref, tempPref, wakeTimePref, picture){
     this.name = name;
     this.email = email;
     this.password = password;
@@ -17,7 +17,5 @@ export class NewUser {
     this.wakeTime = wakeTime;
     this.wakeTimeP = wakeTimePref;
     this.pets = pets;
-
-
   }
 }

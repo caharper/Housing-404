@@ -1,0 +1,39 @@
+.user-button {
+    border-radius: 50%;
+  }
+  
+  .blue {
+    background-color: #008CBA;
+  }
+  
+  .white-text {
+    color: white;
+  }
+  
+  .text-size {
+    font-size:4vw;
+  }
+  
+  .option {
+    color: white;
+    background-color: #008CBA;
+    font-size:4vw;
+  }
+  
+  .width {
+    width: 30vw;
+  }
+  
+  .align {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50vh;
+  }
+  
+  .perfectButton{
+
+  }

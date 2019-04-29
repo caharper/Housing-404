@@ -1,4 +1,5 @@
 import axios from 'axios'
+import $ from 'jquery';
 
 
 export class AccountRepository {
@@ -17,14 +18,17 @@ export class AccountRepository {
     return new Promise((resolve, reject) => {
         axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/user/login`, attemptUser)
         .then(resp => resolve(resp.data))
-        .catch()
+        .catch(
+        $("#email").addClass("is-invalid"),
+        $("#password").addClass("is-invalid"),
+        $("#invalid-login").removeClass("incorrect-no-display"))
       })
   }
 
   // Create Account functions
   createAccount(newUser){
     return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/user/register`, newUser)
+        axios.post(`http://ec2-18-224-138-138.us-east-2.compute.amazonaws.com:3000/user/register`, newUser)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })
@@ -42,9 +46,9 @@ export class AccountRepository {
   }
 
   // Edit name, email, password
-  editUser(editInfo) {
+  editUser(sessuid, editInfo) {
     return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/user/edit`, editInfo)
+        axios.post(`${this.url}/user/edit?sessuid=${sessuid}`, editInfo)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })
@@ -59,10 +63,10 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for ALL users
-  getUserNotifications() {
+  // Get notifications for a ingle user
+  getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/notifications`)
+      axios.get(`${this.url}/user/notifications?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -79,16 +83,6 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for a SINGLE user
-  getUserNotifications(uId) {
-    return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/notifications/${uId}`)
-      .then(resp => {
-        resolve(resp.data)
-      })
-      .catch(resp => alert(resp))
-    })
-  }
 
   // // Delete ALL user notifications for a SINGLE user
   // deleteUserNotifications() {
@@ -100,11 +94,12 @@ export class AccountRepository {
   // }
 
   // Get user profile
-  getUserProfile() {
+  getUserProfile(uId) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/profile`)
+      axios.get(`${this.url}/user/profile?sessuid=${uId}`)
       .then(resp => {
         resolve(resp.data)
+        console.log(`${this.url}/user/profile?sessuid=${uId}`)
       })
       .catch(resp => alert(resp))
     })
@@ -120,9 +115,9 @@ export class AccountRepository {
   }
 
   // Get all events a user is going to  ------ ****** doesn't this need a user id ?
-  getUserGoingEvents() {
+  getUserGoingEvents(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/events`)
+      axios.get(`${this.url}/user/events?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -152,9 +147,9 @@ export class AccountRepository {
 
 
   // Get all events owned by a user  ------ ****** doesn't this need a user id ?
-  getUserOwnedEvents() {
+  getUserOwnedEvents(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/myEvents`)
+      axios.get(`${this.url}/user/myEvents?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -253,7 +248,6 @@ export class AccountRepository {
     })
   }
 
-  // Edits an apartment's rent with a given id associated with a user
   editUserApartmentRent(aId, editInfo){
     return new Promise((resolve, reject) => {
         axios.post(`${this.url}/user/apartments/${aId}/prevRents`, editInfo)
@@ -419,15 +413,14 @@ export class AccountRepository {
       })
   }
 
-  // Filters out events with given filters
-  filterEvents(filters){
-    return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/events/results`, filters)
-        .then(resp => resolve(resp.data))
-        .catch(resp => alert(resp))
-      })
-  }
-
+  // // Filters out events with given filters
+  // filterEvents(filters){
+  //   return new Promise((resolve, reject) => {
+  //       axios.post(`${this.url}/events/results`, filters)
+  //       .then(resp => resolve(resp.data))
+  //       .catch(resp => alert(resp))
+  //     })
+  // }
 
 
 
