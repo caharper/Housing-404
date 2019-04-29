@@ -55,161 +55,161 @@ export class CreateApartmentListingForm extends Component {
     // Create listing check
     if(this.state.currentStep === 1) {
 
-      // // Remove invalids for previous clicks
-      // $("#description-enter").removeClass("is-invalid");
-      // $("#location-enter").removeClass("is-invalid");
-      // $("#rent-enter").removeClass("is-invalid");
-      // $("#invalid-rent").addClass("incorrect-no-display");
-      // $("#invalid-location").addClass("incorrect-no-display");
-      // $("#invalid-description-apt").addClass("incorrect-no-display");
+      // Remove invalids for previous clicks
+      $("#description-enter").removeClass("is-invalid");
+      $("#location-enter").removeClass("is-invalid");
+      $("#rent-enter").removeClass("is-invalid");
+      $("#invalid-rent").addClass("incorrect-no-display");
+      $("#invalid-location").addClass("incorrect-no-display");
+      $("#invalid-description-apt").addClass("incorrect-no-display");
 
-      //
-      // // Email is valid
-      // let validRent = re.test(this.state.rent) && this.state.rent !==0;
-      // console.log(validRent)
-      //
-      // // Add logic to check if the user inputted name too
-      // if(!validRent || this.state.location === '' || this.state.description === ''){
-      //   if(!validRent){
-      //     // Not changing password for some reason
-      //     $("#rent-enter").addClass("is-invalid");
-      //     $("#invalid-rent").removeClass("incorrect-no-display");
-      //   }
-      //
-      //   if(this.state.location === ''){
-      //     // Label invalid email
-      //     $("#location-enter").addClass("is-invalid");
-      //     $("#invalid-location").removeClass("incorrect-no-display");
-      //   }
-      //
-      //   if(this.state.description === ''){
-      //     $("#description-enter").addClass("is-invalid");
-      //     $("#invalid-description-apt").removeClass("incorrect-no-display");
-      //   }
-      //
-      //   // Don't let the user go on
-      //   return
-      // }
+
+      // Email is valid
+      let validRent = re.test(this.state.rent) && this.state.rent !==0;
+      console.log(validRent)
+
+      // Add logic to check if the user inputted name too
+      if(!validRent || this.state.location === '' || this.state.description === ''){
+        if(!validRent){
+          // Not changing password for some reason
+          $("#rent-enter").addClass("is-invalid");
+          $("#invalid-rent").removeClass("incorrect-no-display");
+        }
+
+        if(this.state.location === ''){
+          // Label invalid email
+          $("#location-enter").addClass("is-invalid");
+          $("#invalid-location").removeClass("incorrect-no-display");
+        }
+
+        if(this.state.description === ''){
+          $("#description-enter").addClass("is-invalid");
+          $("#invalid-description-apt").removeClass("incorrect-no-display");
+        }
+
+        // Don't let the user go on
+        return
+      }
     }
 
     // PersonalDetails check
     else if (this.state.currentStep === 2) {
 
-      // $("#occupants").removeClass("is-invalid");
-      // $("#beds").removeClass("is-invalid");
-      // $("#baths").removeClass("is-invalid");
-      // $("#squareFeet").removeClass("is-invalid");
-      // $("#invalid-sq-ft").addClass("incorrect-no-display");
-      // $("#invalid-apt-details").addClass("incorrect-no-display");
-      //
-      //
-      // let allInput = true;
-      // // Check occupants
-      // if(this.state.occupants === 0 || this.state.occupants === ''){
-      //   $("#occupants").addClass("is-invalid");
-      //   allInput = false;
-      //   // $("#invalid-pass").removeClass("incorrect-no-display");
-      // }
-      //
-      // // check beds
-      // if(this.state.beds === 0 || this.state.beds === ''){
-      //   $("#beds").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // Check baths
-      // if(this.state.baths === 0 || this.state.baths === ''){
-      //   $("#baths").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // let validSquareFt = this.state.squareFeet !== 0 && re.test(this.state.squareFeet)
-      // // Check pets
-      // if(!validSquareFt) {
-      //   $("#squareFeet").addClass("is-invalid");
-      //   $("#invalid-sq-ft").removeClass("incorrect-no-display");
-      // }
-      //
-      // if(allInput === false){
-      //   // Add the label for enter all
-      //   $("#invalid-apt-details").removeClass("incorrect-no-display");
-      //   return
-      // }
+      $("#occupants").removeClass("is-invalid");
+      $("#beds").removeClass("is-invalid");
+      $("#baths").removeClass("is-invalid");
+      $("#squareFeet").removeClass("is-invalid");
+      $("#invalid-sq-ft").addClass("incorrect-no-display");
+      $("#invalid-apt-details").addClass("incorrect-no-display");
+
+
+      let allInput = true;
+      // Check occupants
+      if(this.state.occupants === 0 || this.state.occupants === ''){
+        $("#occupants").addClass("is-invalid");
+        allInput = false;
+        // $("#invalid-pass").removeClass("incorrect-no-display");
+      }
+
+      // check beds
+      if(this.state.beds === 0 || this.state.beds === ''){
+        $("#beds").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check baths
+      if(this.state.baths === 0 || this.state.baths === ''){
+        $("#baths").addClass("is-invalid");
+        allInput = false;
+      }
+
+      let validSquareFt = this.state.squareFeet !== 0 && re.test(this.state.squareFeet)
+      // Check pets
+      if(!validSquareFt) {
+        $("#squareFeet").addClass("is-invalid");
+        $("#invalid-sq-ft").removeClass("incorrect-no-display");
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-apt-details").removeClass("incorrect-no-display");
+        return
+      }
 
     }
 
     // RoommateDesc check
     else if (this.state.currentStep === 3 ) {
 
-      // $("#floor").removeClass("is-invalid");
-      // $("#roomStyle").removeClass("is-invalid");
-      // $("#studyRooms").removeClass("is-invalid");
-      // $("#kitchen").removeClass("is-invalid");
-      // $("#invalid-floor-details").addClass("incorrect-no-display");
-      //
-      // let allInput = true;
-      // // Check Gender
-      // if(this.state.floor === ''){
-      //   $("#floor").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // check smoker
-      // if(this.state.roomStyle === ''){
-      //   $("#roomStyle").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // check tidyness
-      // if(this.state.studyRooms === ''){
-      //   $("#studyRooms").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // Check year
-      // if(this.state.kitchen === ''){
-      //   $("#kitchen").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // if(allInput === false){
-      //   // Add the label for enter all
-      //   $("#invalid-floor-details").removeClass("incorrect-no-display");
-      //   return
-      // }
+      $("#floor").removeClass("is-invalid");
+      $("#roomStyle").removeClass("is-invalid");
+      $("#studyRooms").removeClass("is-invalid");
+      $("#kitchen").removeClass("is-invalid");
+      $("#invalid-floor-details").addClass("incorrect-no-display");
+
+      let allInput = true;
+      // Check Gender
+      if(this.state.floor === ''){
+        $("#floor").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check smoker
+      if(this.state.roomStyle === ''){
+        $("#roomStyle").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check tidyness
+      if(this.state.studyRooms === ''){
+        $("#studyRooms").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // Check year
+      if(this.state.kitchen === ''){
+        $("#kitchen").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-floor-details").removeClass("incorrect-no-display");
+        return
+      }
 
     }
 
     else if (this.state.currentStep === 4) {
-      // $("#gym").removeClass("is-invalid");
-      // $("#pool").removeClass("is-invalid");
-      // $("#pets").removeClass("is-invalid");
-      // $("#invalid-misc-details").addClass("incorrect-no-display");
-      //
-      // let allInput = true;
-      // // Check gym
-      // if(this.state.gym === ''){
-      //   $("#gym").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // check pool
-      // if(this.state.pool === ''){
-      //   $("#pool").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // // check pets
-      // if(this.state.pets === ''){
-      //   $("#pets").addClass("is-invalid");
-      //   allInput = false;
-      // }
-      //
-      // if(allInput === false){
-      //   // Add the label for enter all
-      //   $("#invalid-misc-details").removeClass("incorrect-no-display");
-      //   return
-      // }
+      $("#gym").removeClass("is-invalid");
+      $("#pool").removeClass("is-invalid");
+      $("#pets").removeClass("is-invalid");
+      $("#invalid-misc-details").addClass("incorrect-no-display");
+
+      let allInput = true;
+      // Check gym
+      if(this.state.gym === ''){
+        $("#gym").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check pool
+      if(this.state.pool === ''){
+        $("#pool").addClass("is-invalid");
+        allInput = false;
+      }
+
+      // check pets
+      if(this.state.pets === ''){
+        $("#pets").addClass("is-invalid");
+        allInput = false;
+      }
+
+      if(allInput === false){
+        // Add the label for enter all
+        $("#invalid-misc-details").removeClass("incorrect-no-display");
+        return
+      }
     }
 
 
