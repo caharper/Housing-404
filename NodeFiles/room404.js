@@ -245,7 +245,7 @@ app.get('/apartments/:aid?', (req, res) => {
 //view previous rents for an apartment listing
 app.get('/apartments/pastRents/:aid?', (req, res) => {
         var aid = req.params.aid;
-        connection.query('SELECT * FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.a_id = ? ', [aid], function(err, results, fields) {
+        connection.query('SELECT * FROM prevRents WHERE a_id = ? ', [aid], function(err, results, fields) {
             if (err) throw err;
             else {
                 res.status(200).send(results);
