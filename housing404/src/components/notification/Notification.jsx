@@ -14,29 +14,31 @@ import './notification.css';
 
 
     render() {
-        if(this.state.notification === null || this.state.notification === undefined){
+        // console.log(typeof(this.state.notifcation))
+        if(!this.state.notification){
             return(
               <>
                 <div><Navbar></Navbar></div>
-                You have no notification
+                <h4 className="pt-5">You have no notifications</h4>
               </>
             )
-          } 
-        const { notification } = this.state;
+          }
+
         return (
             <>
-                <div>
-                    <Navbar></Navbar>
-                </div>
+              <div>
+                  <Navbar></Navbar>
+              </div>
 
-                <div>
-                    {notification.map(notification => (
-                        <div>
-                            <div>Notification:{notification.details}</div>
-                            <button onClick={this.mynotification}>Delete</button>
-                        </div>
-                    ))}
-                </div>
+              <div>
+                {this.state.notification.map((notif,  index) => (
+                    <div key={index}>
+                        <div>From:{notif.name}</div>
+                        <div>Email:{notif.email}</div>
+                        <div>Notifcation:{notif.notification}</div>
+                    </div>
+                ))}
+              </div>
             </>
         );
     }
@@ -44,10 +46,10 @@ import './notification.css';
     componentDidMount(){
         this.accountRepository.getUserNotifications(localStorage.getItem("sessuid"))
           .then(notificationResp => {
-            let notification = notificationResp[0];
+            let notification = notificationResp;
             this.setState({notification: notification})
           })
-        } 
+        }
 
 }
 export default Notification;
