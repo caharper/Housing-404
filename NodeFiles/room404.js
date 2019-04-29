@@ -1217,6 +1217,9 @@ app.delete('/user/edit', (req, res) => {
                                 connection.query('DELETE FROM notifications WHERE to_u_id = ?', [sessuid], function(err, results, fields) {
                                     if (err) throw err;
                                     else {
+					    connection.query('DELETE FROM notifications WHERE from_u_id = ?', [sessuid], function(err, results, fields) {
+						    if (err) throw err;
+						    else {
                                         connection.query('DELETE prevRents FROM aProfiles JOIN prevRents ON aProfiles.a_id = prevRents.a_id WHERE aProfiles.u_id = ?', [sessuid], function(err, results, fields) {
                                             if (err) throw err;
                                             else {
@@ -1235,6 +1238,8 @@ app.delete('/user/edit', (req, res) => {
                                             });
                                         }
                                     });
+				    }
+				    });
                                 }
                             });
                         }
