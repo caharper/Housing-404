@@ -227,9 +227,9 @@ export class AccountRepository {
   }
 
   // Gets ALL apartment listings for a single user
-  getSingleUserApartments() {
+  getSingleUserApartments(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/user/apartments`)
+      axios.get(`${this.url}/user/apartments?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })
@@ -286,13 +286,13 @@ export class AccountRepository {
   }
 
   // Deletes an apartment listing with a given id
-  // deleteApartment(aId) {
-  //   return new Promise((resolve, reject) => {
-  //       axios.delete(`${this.url}/user/apartments/${aId}/edit`)
-  //       .then(resp => resolve(resp.data))
-  //       .catch(resp => alert(resp))
-  //     })
-  // }
+  deleteApartment(sessuid, aId) {
+    return new Promise((resolve, reject) => {
+        axios.delete(`${this.url}/user/apartments/edit/${aId}?sessuid=${sessuid}`)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
 
 
 

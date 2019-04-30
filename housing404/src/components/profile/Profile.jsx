@@ -11,7 +11,8 @@ class Profile extends Component {
   state = {
     userList: null,
     resetPassword: null,
-    password: ''
+    password: '',
+    aptListings: null
   }
 
   updatePassword = e => {
@@ -35,9 +36,19 @@ class Profile extends Component {
     })
   }
 
+  deleteApartment(aId){
+    this.accountRepository.deleteApartment(localStorage.getItem("sessuid"), aId)
+      .then(eventListResp => {
+        console.log(eventListResp)
+      })
+      .catch(eventListResp => {
+        console.log(eventListResp)
+      })
+  }
+
   render() {
 
-    if (this.state.userList === null) {
+    if (this.state.userList === null || !this.state.aptListings) {
       return (<></>)
     }
 
@@ -84,6 +95,26 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
+
+            <div className="row">
+              <h5>Your apartment listings:</h5>
+            </div>
+
+            {this.state.aptListings.map(listing => (
+              <>
+                <div className="row">
+                  <div className="col-5">
+                    <div>Description: {listing.description}</div>
+                  </div>
+                  <div className="col-5">
+                    <div>Location: {listing.location}</div>
+                  </div>
+                  <button onClick={() => this.deleteApartment(listing.a_id)} className="btn-red">Delete</button>
+                </div>
+              </>
+            ))}
+
+
           </div>
         </div>
       </>
@@ -95,6 +126,12 @@ class Profile extends Component {
       .then(userListResp => {
         let userList = userListResp[0];
         this.setState({ userList })
+      })
+
+    this.accountRepository.getSingleUserApartments(localStorage.getItem("sessuid"))
+      .then(myApts => {
+        console.log(myApts)
+        this.setState({aptListings: myApts })
       })
   }
 }
