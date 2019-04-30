@@ -34,7 +34,7 @@ export default class Event extends Component {
                                 <div className="card-body">
                                     <div class="card-title">Details:{events.details}</div>
                                     <div class="card-text"> Date:{events.date}</div>
-                                    <button onClick={this.myEvents} className="attendButton">Attend</button>
+                                    <button onClick={this.myEvents} className="resetButton">Attend</button>
                                 </div>
                             </div>
                         ))}
