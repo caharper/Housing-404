@@ -26,22 +26,21 @@ export default class Event extends Component {
                 <div>
                     <Navbar></Navbar>
                 </div>
-                <h1>Events</h1>
-                
-                <div className="card-deck">
-                    {events.map(events => (
-                        <div className="eventCard">
-                            <div className="image searched">
-                                <img src={events.img} className="card-img-top" />
-                            </div>
-                            <div className="card-body">
-                                <div class="card-title">Details:{events.details}</div>
-                                <div class="card-text"> Date:{events.date}</div>
+                <div className="container">
+                    <h1>Events</h1>
 
-                                <button onClick={this.myEvents} className="attendButton">Attend</button>
+                    <div className="card-deck">
+                        {events.map(events => (
+                            <div className="eventCard">
+                                <div className="card-body">
+                                    <div class="card-title">Details:{events.details}</div>
+                                    <div class="card-text"> Date:{events.date}</div>
+
+                                    <button onClick={this.myEvents} className="attendButton">Attend</button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </>
         );
