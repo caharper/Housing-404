@@ -1188,7 +1188,7 @@ app.delete('/user/edit', (req, res) => {
     connection.query('DELETE FROM uProfiles WHERE id = ?', [sessuid], function(err, results, fields) {
         if (err) throw err;
         else {
-            connection.query('DELETE events, attending FROM events NATURAL JOIN attending WHERE events.owner = ?', [sessuid], function(err, results, fields) {
+            connection.query('DELETE FROM events WHERE events.owner = ?', [sessuid], function(err, results, fields) {
                 if (err) throw err;
                 else {
                     connection.query('DELETE FROM attending WHERE u_id = ?', [sessuid], function(err, results, fields) {
