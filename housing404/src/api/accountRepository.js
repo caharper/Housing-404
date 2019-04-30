@@ -205,6 +205,9 @@ export class AccountRepository {
       })
   }
 
+  // Get who is attending an event with an e id
+
+
   // Delete people attending user owned event
   // deleteAttendingUserEvent(eId, uId) {
   //   return new Promise((resolve, reject) => {
@@ -413,7 +416,7 @@ export class AccountRepository {
   // Get who is attending an event with a given id
   getAttendingEventWithId(eId){
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/events/${eId}/attending`)
+      axios.get(`${this.url}/events/attending/${eId}`)
       .then(resp => {
         resolve(resp.data)
       })

@@ -23,6 +23,15 @@ class Myevents extends Component {
   //     })
   // }
 
+  getAttending(eId) {
+    // make api call
+    this.accountRepository.getAttendingEventWithId(eId)
+        .then(attendees => {
+          let list = attendees.join()
+          return list
+        })
+  }
+
   render() {
 
     // Don't display my events
@@ -89,6 +98,10 @@ class Myevents extends Component {
         </>
       )
     }
+
+    else{
+
+    }
     return (
       <>
         <div><Navbar></Navbar></div>
@@ -116,11 +129,19 @@ class Myevents extends Component {
                 <AddEvent></AddEvent>
               </div>
               {this.state.myEvents.map(events => (
-                <div>
-                  <div>Details:{events.name}</div>
-                  <div> Date:{events.date}</div>
-                  <button onClick={() => this.removePostedEvents()}>Remove</button>
-                </div>
+                <>
+                  <div className="row">
+                    <div className="col-6">
+                      <div>Details:{events.name}</div>
+                    </div>
+                    <div className="col-6">
+                      <div> Date:{events.date}</div>
+                    </div>
+                  </div>
+                  <div className="row pb-2">
+                    <div>Attending: {this.getAttending(events.e_id)}</div>
+                  </div>
+                </>
               ))}
             </div>
           </div>
@@ -143,6 +164,9 @@ class Myevents extends Component {
         console.log(this.state.eventsAttend)
         console.log(this.state.myEvents)
       })
+
+      // Get who is going to my event
+
   }
 }
 export default Myevents;
