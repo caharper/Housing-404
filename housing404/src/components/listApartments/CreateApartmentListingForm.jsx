@@ -66,8 +66,9 @@ export class CreateApartmentListingForm extends Component {
 
 
       // Email is valid
-      let validRent = re.test(this.state.rent) && this.state.rent !==0;
+      let validRent = re.test(this.state.rent) && this.state.rent && this.state.rent !== 0;
       console.log(validRent)
+
 
       // Add logic to check if the user inputted name too
       if(!validRent || this.state.location === '' || this.state.description === ''){
@@ -124,7 +125,7 @@ export class CreateApartmentListingForm extends Component {
         allInput = false;
       }
 
-      let validSquareFt = this.state.squareFeet !== 0 && re.test(this.state.squareFeet)
+      let validSquareFt = (this.state.squareFeet !== 0 && re.test(this.state.squareFeet) && this.state.squareFeet)
       // Check pets
       if(!validSquareFt) {
         $("#squareFeet").addClass("is-invalid");

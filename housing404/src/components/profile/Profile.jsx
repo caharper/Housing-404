@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
 import './profile.css';
+import accountLogo from './../../user_ph_logo.svg';
 
 
 class Profile extends Component {
@@ -51,6 +52,9 @@ class Profile extends Component {
             <div className="row">
               <div className="col col-mg-8">
                 <div className="profile">
+                  <div className="row">
+                    <img className="icon position-absolute pl-1" src={accountLogo}></img>
+                  </div>
                   <h1>Profile Information</h1>
 
                   <div>Name: {userList.name}</div>

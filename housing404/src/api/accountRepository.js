@@ -63,7 +63,7 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for a ingle user
+  // Get notifications for a single user
   getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
       axios.get(`${this.url}/user/notifications?sessuid=${sessuid}`)
@@ -72,6 +72,15 @@ export class AccountRepository {
       })
       .catch(resp => alert(resp))
     })
+  }
+
+  // Create notifcation
+  createNotification(sessuid, toId, notif){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/users/${toId}/contact?sessuid=${sessuid}`, notif)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
   }
 
   // // Delete ALL user notifications for ALL users
@@ -319,9 +328,9 @@ export class AccountRepository {
   }
 
   // Finds a user with the EXACT matching traits as current user
-  getPerfectMatch() {
+  getPerfectMatch(sessuid) {
     return new Promise((resolve, reject) => {
-      axios.get(`${this.url}/users`)
+      axios.get(`${this.url}/users/pMatch/results?sessuid=${sessuid}`)
       .then(resp => {
         resolve(resp.data)
       })

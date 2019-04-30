@@ -34,7 +34,7 @@ export class ListingLanding extends React.Component {
             <div className="col-7">
               <div className="input-group mb-3">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">Rent</span>
+                  <span className="input-group-text">$</span>
                 </div>
                 <input type="text"
                        id="rent-enter"

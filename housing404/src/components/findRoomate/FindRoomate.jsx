@@ -59,18 +59,18 @@ class FindRoomate extends Component {
     console.log(filter);
 
     // Need to make it where error pops up if no filters selected
-    if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
-       this.state.pets === null && this.state.tempP, this.state.genderP === null &&
-       this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
-       this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
-         $("#no-selected-r-filter").removeClass("incorrect-no-display");
-         $("#no-filter-select-heading").removeClass("incorrect-no-display");
-         return
-       }
+    // if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
+    //    this.state.pets === null && this.state.tempP, this.state.genderP === null &&
+    //    this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
+    //    this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
+    //      $("#no-selected-r-filter").removeClass("incorrect-no-display");
+    //      $("#no-filter-select-heading").removeClass("incorrect-no-display");
+    //      return
+    //    }
 
     this.accountRepository.filterUsers(filter)
       .then(resp => {
-        console.log(resp)
+        console.log("response: ",resp)
         let roommates = resp;
         this.setState({items: roommates})
         console.log('items in state: ',this.state.items)
@@ -84,6 +84,16 @@ class FindRoomate extends Component {
         // ****************** needs another component to pass values to props
       })
 
+  }
+
+
+  pMatch() {
+    this.accountRepository.getPerfectMatch(localStorage.getItem("sessuid"))
+      .then(matchResp => {
+        let matches = matchResp;
+        console.log(matches)
+        this.setState({ items: matches })
+      })
   }
 
 
@@ -204,7 +214,7 @@ class FindRoomate extends Component {
               </div>
 
               <button await onClick={() => this.filter()} className="filterButton">Filter</button>
-              <button onClick={() => this.filter()} className="perfectButton">Perfect Match</button>
+              <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
 
 
             </div>
@@ -236,7 +246,7 @@ class FindRoomate extends Component {
                 //     </div>
                 //   </div>
                 // ))
-                // Needs to be in a child component 
+                // Needs to be in a child component
               }
               </div>
 

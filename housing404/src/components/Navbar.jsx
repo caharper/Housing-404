@@ -21,27 +21,26 @@ function Id() {
 }
 
 const Navbar = () => (
-    <nav className="navbar navbar-dark bg-dark justify-content-between">
+    <nav className="navbar navbar-dark bg-dark justify-content-between mt-" >
         <div>
-            <div className="btn-group">
-                <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
-                </button>
-                <div className="dropdown-menu">
-                    <li>
-                        <Link id="main" className="dropdown-item" href="/main">Main</Link>
-                        <Link id="notifcation" className="dropdown-item" href="/notification">Notifcation</Link>
-                        <Link id="findroomate" className="dropdown-item" href="/findroomate" >Find Roomate</Link>
-                        <Link id="listApt" className="dropdown-item" href="/findroomate">List Apartment</Link>
-                        <Link id="findApt" className="dropdown-item" href="/findApt">Find Apartment</Link>
-                        <Link id="event" className="dropdown-item" href="to=/event">Events</Link>
-                        <Link id="myevent" className="dropdown-item" href="/myevent">My Events</Link>
-                        <Link id="profile" className="dropdown-item" href="/profile">Profile</Link>
-                    </li>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><Link id="main" className="dropdown-item" to="/main">Main</Link></li>
+                    <li> <Link id="notifcation" className="dropdown-item" to="/notification">Notifcation</Link></li>
+                    <li><Link id="findroomate" className="dropdown-item" href="/findroomate" >Find Roomate</Link></li>
+                    <li><Link id="listApt" className="dropdown-item" to="/findroomate">List Apartment</Link></li>
+                    <li><Link id="findApt" className="dropdown-item" to="/findApt">Find Apartment</Link></li>
+                    <li><Link id="event" cclassName="dropdown-item" to="to=/event">Events</Link></li>
+                    <li><Link id="myevent" className="dropdown-item" to="/myevent">My Events</Link></li>
+                    <li><Link id="profile" className="dropdown-item" to="/profile">Profile</Link></li>
                 </div>
             </div>
-            <a className="navbar-brand" href="#">{Id}PlaceHolder</a>
         </div>
+        <a class="navbar-brand" href="#">{Id}PlaceHolder</a>
 
         <button onClick={Logout} className="logoutButton" >
             Logout

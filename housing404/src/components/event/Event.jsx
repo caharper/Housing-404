@@ -8,8 +8,9 @@ export default class Event extends Component {
     state = {
         events: [],
     }
-    myEvents = () => {
-        // request server api call
+
+    addToMyEvents(){
+
     }
 
     render() {
@@ -27,18 +28,29 @@ export default class Event extends Component {
                 </div>
 
                 <div className="card-deck">
-                    {events.map(events => (
-                        <div className="card">
-                            <div className="image searched">
-                                <img src={events.img} className="card-img-top" />
-                            </div>
-                            <div className="card-body">
-                                <div class="card-title">Details:{events.details}</div>
-                                <div class="card-text"> Date:{events.date}</div>
+                    {events.map((event, index)=> (
+                      <>
+                      <div className="row" key={index}>
 
-                                <button onClick={this.myEvents} className="addToEvent">Add to My Events</button>
+                      </div>
+
+
+
+
+
+
+
+
+                        <div className="card">
+                            <div className="card-body">
+
+                                <div className="card-title">Details:{event.details}</div>
+                                <div className="card-text"> Date:{event.date}</div>
+
+                                <button onClick={() => this.addToMyEvents()} className="addToEvent">Add to My Events</button>
                             </div>
                         </div>
+                      </>
                     ))}
                 </div>
             </>
@@ -46,12 +58,11 @@ export default class Event extends Component {
     }
 
     componentDidMount() {
-        this.accountRepository.getAllEvents()
-            .then(events => {
-                this.setState({ events })
-            })
+      this.accountRepository.getAllEvents()
+          .then(events => {
+            console.log(events)
+            this.setState({ events })
+          })
     }
 
 }
-
-
