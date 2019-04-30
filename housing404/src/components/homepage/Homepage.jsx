@@ -132,11 +132,11 @@ export class Homepage extends React.Component {
             </div>
           </div>
           <div className="row justify-content-center">
-            <button onClick={e => this.onSubmit()} className="btn btn-lg w-75 h-25 btn-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
+            <button onClick={e => this.onSubmit()} className="btn btn-lg w-75 h-25 btn-success mt-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
           </div>
 
-          <div className="row justify-content-center border-top border-bottom mb-2">
-            <h4 className="">OR</h4>
+          <div className="row justify-content-center border-top border-bottom my-3">
+            <h4 className="">—OR—</h4>
           </div>
 
           <div className="row justify-content-center">

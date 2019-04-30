@@ -125,11 +125,12 @@ export class CreateApartmentListingForm extends Component {
         allInput = false;
       }
 
-      let validSquareFt = (this.state.squareFeet !== 0 && re.test(this.state.squareFeet) && this.state.squareFeet)
+      let validSquareFt = (this.state.squareFeet !== 0 && this.state.squareFeet !== '' && re.test(this.state.squareFeet) && this.state.squareFeet)
       // Check pets
       if(!validSquareFt) {
         $("#squareFeet").addClass("is-invalid");
         $("#invalid-sq-ft").removeClass("incorrect-no-display");
+        allInput = false;
       }
 
       if(allInput === false){
