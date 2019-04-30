@@ -109,8 +109,27 @@ class FindRoomate extends Component {
               </div>
 
               <div className="filter">
+                <select className="custom-select" onChange={this.updateYear} value={year}>
+                  <option value="">Year</option>
+                  <option value={1}>Freshman</option>
+                  <option value={2}>Sophmore</option>
+                  <option value={3}>Junior</option>
+                  <option value={4}>Senior</option>
+                </select>
+              </div>
+              
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
+                  <option value="">Tidyness</option>
+                  <option value={1}>Not Tiddy</option>
+                  <option value={2}>Tidy</option>
+                  <option value={3}>Very Tiddy</option>
+                </select>
+              </div>
+
+              <div className="filter">
                 <div className="filterTitle">Gender
-              <button onClick={this.updateGender} className="xbutton">x</button>
+              <button onClick={this.updateGender} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="gender" id="genderMale" checked={gender === "M"}
@@ -139,10 +158,9 @@ class FindRoomate extends Component {
               </div>
 
 
-
               <div className="filter">
                 <div className="filterTitle">Smoker
-                <button onClick={this.updateSmoker} className="xbutton"></button>
+                <button onClick={this.updateSmoker} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerYes"
@@ -162,15 +180,6 @@ class FindRoomate extends Component {
                 </div>
               </div>
 
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateYear} value={year}>
-                  <option value="">Year</option>
-                  <option value={1}>Freshman</option>
-                  <option value={2}>Sophmore</option>
-                  <option value={3}>Junior</option>
-                  <option value={4}>Senior</option>
-                </select>
-              </div>
 
               <div className="filter">
                 <div className="filterTitle">Pet
@@ -194,18 +203,9 @@ class FindRoomate extends Component {
                 </div>
               </div>
 
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
-                  <option value="">Tidyness</option>
-                  <option value={1}>Not Tiddy</option>
-                  <option value={2}>Tidy</option>
-                  <option value={3}>Very Tiddy</option>
-                </select>
-              </div>
 
               <button await onClick={() => this.filter()} className="filterButton">Filter</button>
               <button onClick={() => this.filter()} className="perfectButton">Perfect Match</button>
-
 
             </div>
 

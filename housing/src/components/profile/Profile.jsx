@@ -26,12 +26,12 @@ class Profile extends Component {
       name: null,
       email: null
     })
-    .then(() => {
-      // password reset
-      this.setState({
-        password: ''
-      });
-    })
+      .then(() => {
+        // password reset
+        this.setState({
+          password: ''
+        });
+      })
   }
 
   render() {
@@ -47,41 +47,31 @@ class Profile extends Component {
         <Navbar></Navbar>
 
         <div>
-          <div className="archiveResult" >
-            <div className="row">
-              <div className="col col-mg-8">
-                <div className="profile">
-                  <h1>Profile Information</h1>
+            <div className="profile">
+              <h1>Profile Information</h1>
 
-                  <div>Name: {userList.name}</div>
-                  <div> Gender: {userList.gender}</div>
-                  <div> Tidyness: {userList.tidyness}</div>
-                  <div> Year: {userList.yearP}</div>
-                  <div> Pets: {userList.pets}</div>
-                  <button onClick={this.remove} className="deleteAccButton">Delete Account</button>
-
-                </div>
-
-              </div>
-
-
-              <div className="col col-mg-8">
-                <div className="resetPassword">
-                  <h1>Change Password</h1>
-                  <form>
-                    <div class="form-group">
-                      <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
-                    </div>
-                    <div className="input-group-append">
-                      <button onClick={this.changePassword} className="resetButton">Send</button>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
+              <div>Name: {userList.name}</div>
+              <div> Gender: {userList.gender}</div>
+              <div> Tidyness: {userList.tidyness}</div>
+              <div> Year: {userList.yearP}</div>
+              <div> Pets: {userList.pets}</div>
+              <button onClick={this.remove} className="deleteAccButton">Delete Account</button>
             </div>
           </div>
-        </div>
+
+          <div className="resetPassword">
+            <h1>Change Password</h1>
+            <form>
+              <div class="form-group">
+                <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
+              </div>
+              <div className="input-group-append">
+                <button onClick={this.changePassword} className="resetButton">Send</button>
+              </div>
+            </form>
+
+          </div>
+
       </>
     );
   }

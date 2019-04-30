@@ -21,7 +21,7 @@ function Id() {
 }
 
 const Navbar = () => (
-    <nav className="navbar navbar-dark bg-dark justify-content-between">
+    <nav className="navbar navbar-dark bg-dark justify-content-between mt-" >
         <div>
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

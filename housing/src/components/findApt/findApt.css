@@ -80,3 +80,111 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
+
+  /*main*/
+* {
+  box-sizing: border-box;
+}
+
+html, body { min-height: 100%; }
+
+.user-button {
+  border-radius: 50%;
+}
+
+.blue {
+  background-color: #008CBA;
+}
+
+.white-text {
+  color: white;
+}
+
+.text-size {
+  font-size:4vw;
+}
+
+.option {
+  color: white;
+  background-color: #008CBA;
+  font-size:4vw;
+}
+
+.width {
+  width: 30vw;
+}
+
+.align {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50vh;
+}
+
+
+  /* code below derived from https://www.designskilz.com/cool-css-buttons/ all credits
+  go to original author */
+  body{
+    text-align:center;
+  }
+  body:before{
+    content:'';
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+  }
+  .filterButton,.perfectButton{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  .xbutton{
+    float: right;
+    text-align: center;
+    height: 20px;
+    font-size: 10px;
+    background-color: #A52A2A;
+    color:#fff;
+    border:none;
+    position:relative;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  .xbutton:hover,.filterButton:hover,.perfectButton:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  .xbutton:before,xbutton:after,.filterButton:before,.filterButton:after,.perfectButton:before,.perfectButton:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .xbutton:after,  .filterButton:after,  .perfectButton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .xbutton:hover:before,.xbutton:hover:after,.filterButton:hover:before,.filterButton:hover:after,  .perfectButton:hover:before,.perfectButton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+   
+  

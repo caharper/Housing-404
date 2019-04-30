@@ -22,20 +22,18 @@ export default class Event extends Component {
         const { events } = this.state;
         return (
             <>
-
                 <div>
                     <Navbar></Navbar>
                 </div>
-                <div className="container">
+                <div className="container pt-0">
                     <h1>Events</h1>
 
-                    <div className="card-deck">
+                    <div className="card-deck pt-0">
                         {events.map(events => (
                             <div className="eventCard">
                                 <div className="card-body">
                                     <div class="card-title">Details:{events.details}</div>
                                     <div class="card-text"> Date:{events.date}</div>
-
                                     <button onClick={this.myEvents} className="attendButton">Attend</button>
                                 </div>
                             </div>
