@@ -112,12 +112,19 @@ class FindApt extends Component {
   }
 
 
+
   render() {
     // if (this.state.items === [] || this.state.items === null) {
     //   return (
     //     <>No Match Found</>
     //   )
     // }
+    
+    if (!this.state.filteredApts) {
+      return <>No Match Found</>
+    }
+
+
     const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
 
 

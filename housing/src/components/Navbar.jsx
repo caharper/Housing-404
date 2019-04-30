@@ -38,7 +38,6 @@ class Navbar extends Component {
             <nav className="navbar navbar-dark bg-dark justify-content-between mt-" >
 
                 <div>
-
                     <div className="dropdown">
                         <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick={this.toggleDropdown}>
                             Menu

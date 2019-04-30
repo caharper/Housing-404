@@ -15,7 +15,16 @@ export default class AddNotification extends Component {
     updateNotification = (e) => {
         this.setState({ notification: e.target.value || null })
     }
-
+//     addNotification() {
+//         let newNotification = new Notification( this.state.notification)
+//         console.log(newNotification)
+//         //api call change 
+//         this.accountRepository.createUserOwnedEvent(localStorage.getItem("sessuid"))
+//             .then(newNotification => {
+//             console.log(newNotification)
+//             this.setState({newNotification})
+//       })
+//   }
 
     render() {
         return (
@@ -23,8 +32,7 @@ export default class AddNotification extends Component {
                 <h2>Notification</h2>
                 <label for="exampleFormControlTextarea1">Notification</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" onChange={this.updateNotification} value={this.notification}></textarea>
-
-                <button class="resetButton">Submit</button>
+                <button class="resetButton" onClick={() => this.addNotification()}>Submit</button>
             </div>
 
         );

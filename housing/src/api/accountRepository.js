@@ -63,7 +63,7 @@ export class AccountRepository {
   //     })
   // }
 
-  // Get notifications for a ingle user
+  // Get notifications for a single user
   getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
       axios.get(`${this.url}/user/notifications?sessuid=${sessuid}`)
