@@ -88,9 +88,9 @@ class FindApt extends Component {
   filter() {
     // request server api call
     let filter = new FilterApt(this.state.rent, this.state.leaseTime, this.state.occupants, this.state.beds,
-                               this.state.baths, this.state.squareFeet, this.state.rooms, this.state.kitchen,
-                               this.state.floor, this.state.pets, this.state.poBox, this.state.studyRooms,
-                               this.state.gym, this.state.pool, this.state.ac, this.state.heat)
+      this.state.baths, this.state.squareFeet, this.state.rooms, this.state.kitchen,
+      this.state.floor, this.state.pets, this.state.poBox, this.state.studyRooms,
+      this.state.gym, this.state.pool, this.state.ac, this.state.heat)
 
 
     this.accountRepository.filterApartments(filter)
@@ -98,11 +98,11 @@ class FindApt extends Component {
         console.log(resp)
 
         let apts = resp;
-        this.setState({filteredApts: apts})
+        this.setState({ filteredApts: apts })
         // this.setState({ filteredApts })
         console.log(this.state)
 
-        if(!this.state.filteredApts){
+        if (!this.state.filteredApts) {
           $("#no-apt-match").removeClass("incorrect-no-display");
         }
         else if (this.state.filteredApts.length === 0) {
@@ -118,7 +118,7 @@ class FindApt extends Component {
     //     <>No Match Found</>
     //   )
     // }
-    const {items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
+    const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
 
 
     return (
@@ -497,7 +497,7 @@ class FindApt extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text">Rent</span>
                   </div>
-                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" onChange={this.updateRent} value={this.rent} maxlength="4"/>
+                  <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" onChange={this.updateRent} value={this.rent} maxlength="4" />
                   <div className="input-group-append">
                     <span className="input-group-text">.00</span>
                   </div>
@@ -510,37 +510,14 @@ class FindApt extends Component {
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
               <div className="searchResultback">
-                <div>
-                  {
-                  // this.filteredApts.map((item, index) => (
-                  //   <div className="searchResult" key={index}>
-                  //     <div className="row">
-                  //
-                  //       <div class="col col-mg-3 img">
-                  //         <div className="imageSearched">
-                  //           <img src={item.img} />
-                  //         </div>
-                  //       </div>
-                  //
-                  //       <div className="col col-mg-8 items">
-                  //         <div>Name:{item.type}</div>
-                  //         <div> Type:{item.type}</div>
-                  //         <div> Description:{item.description}</div>
-                  //         <div> Location:{item.location}</div>
-                  //         <div> Rent:{item.rent}</div>
-                  //         <div> Avalibility:{item.leaseTime}</div>
-                  //         <div> Number of Occupants:{item.occupants}</div>
-                  //         <div> Number of Bedrooms:{item.beds}</div>
-                  //         <div> Number of Bathrooms:{item.baths}</div>
-                  //         <div> Sqaure Feet:{item.squareFeet}</div>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  // ))
-                  <button className="resetButton">Contact Owner</button>
+
+                {
+                  items.map((item, index) => (
+                    <SearchResult key={index} item={item} />
+                  ))
                 }
-                </div>
               </div>
+              
               <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>
             </div>
 
@@ -549,5 +526,35 @@ class FindApt extends Component {
       </>
     );
   }
+}
+//this.filteredApts.map((item, index) => (
+const SearchResult = ({ item }) => {
+
+  return (
+    <div className="searchResult">
+      <div className="row">
+
+        <div class="col col-mg-3 img">
+          <div className="imageSearched">
+            <img src={item.img} />
+          </div>
+        </div>
+
+        <div className="col col-mg-8 items">
+          <div>Name:{item.type}</div>
+          <div> Type:{item.type}</div>
+          <div> Description:{item.description}</div>
+          <div> Location:{item.location}</div>
+          <div> Rent:{item.rent}</div>
+          <div> Avalibility:{item.leaseTime}</div>
+          <div> Number of Occupants:{item.occupants}</div>
+          <div> Number of Bedrooms:{item.beds}</div>
+          <div> Number of Bathrooms:{item.baths}</div>
+          <div> Sqaure Feet:{item.squareFeet}</div>
+        </div>
+        <button className="resetButton">Contact Owner</button>
+      </div>
+    </div>
+  )
 }
 export default FindApt;

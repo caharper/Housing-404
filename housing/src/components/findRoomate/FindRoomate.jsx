@@ -50,36 +50,35 @@ class FindRoomate extends Component {
 
     // request server api call
     let filter = new FilterRoommate(this.state.gender, this.state.smoker, this.state.year,
-                                    this.state.pets, this.state.tempP, this.state.genderP,
-                                    this.state.smokerP, this.state.tidynessP, this.state.yearP,
-                                    this.state.bedTimeP, this.state.wakeTime, this.state.wakeTimeP)
+      this.state.pets, this.state.tempP, this.state.genderP,
+      this.state.smokerP, this.state.tidynessP, this.state.yearP,
+      this.state.bedTimeP, this.state.wakeTime, this.state.wakeTimeP)
 
     console.log(filter);
 
     // Need to make it where error pops up if no filters selected
-    if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
-       this.state.pets === null && this.state.tempP, this.state.genderP === null &&
-       this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
-       this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
-         $("#no-selected-r-filter").removeClass("incorrect-no-display");
-         $("#no-filter-select-heading").removeClass("incorrect-no-display");
-         return
-       }
+    if (this.state.gender === null && this.state.smoker === null && this.state.year === null &&
+      this.state.pets === null && this.state.tempP, this.state.genderP === null &&
+      this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
+      this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null) {
+      $("#no-selected-r-filter").removeClass("incorrect-no-display");
+      $("#no-filter-select-heading").removeClass("incorrect-no-display");
+      return
+    }
 
     this.accountRepository.filterUsers(filter)
       .then(resp => {
         console.log(resp)
         let roommates = resp;
-        this.setState({items: roommates})
-        console.log('items in state: ',this.state.items)
-        if(!this.state.items){
+        this.setState({ items: roommates })
+        console.log('items in state: ', this.state.items)
+        if (!this.state.items) {
           $("#no-roommate-match").removeClass("incorrect-no-display");
         }
         else if (this.state.items.length === 0) {
           $("#no-roommate-match").removeClass("incorrect-no-display");
         }
 
-        // ****************** needs another component to pass values to props
       })
 
   }
@@ -92,6 +91,8 @@ class FindRoomate extends Component {
     //     <h5 className="pt-4">No Match Found</h5>
     //   )
     // }
+
+
     const { items, gender, year, tidyness, smoker, genderP, smokerP, yearP, pets, tidynessP } = this.state;
 
     return (
@@ -115,7 +116,7 @@ class FindRoomate extends Component {
                   <option value={4}>Senior</option>
                 </select>
               </div>
-              
+
               <div className="filter">
                 <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
                   <option value="">Tidyness</option>
@@ -211,44 +212,54 @@ class FindRoomate extends Component {
               <h1 >Search Results</h1>
               <div className="searchResultback">
                 {
-                // items.map((item, index) => (
-                //   <div className="searchResult" key={index}>
-                //     <div className="row">
-                //
-                //       <div className="col col-mg-3 img">
-                //         <div className="imageSearched">
-                //           <img src={item.img} />
-                //         </div>
-                //
-                //       </div>
-                //       <div className="col col-mg-8 items">
-                //         <div>Name: {item.name}</div>
-                //         <div> Gender: {item.gender}</div>
-                //         <div> Smoker: {item.smoker}</div>
-                //         <div> Tidyness: {item.tidyness}</div>
-                //         <div> Smoker: {item.smoker}</div>
-                //         <div> Year: {item.yearP}</div>
-                //         <div> Pets: {item.pets}</div>
-                //
-                //       </div>
-                //     </div>
-                //   </div>
-                // ))
-                // Needs to be in a child component
-                 
-                <button className="resetButton">Contact</button>
+                  items.map((item, index) => (
+                    <SearchResult key={index} item={item}/>
+                ))
 
               }
               </div>
 
-              <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
-              <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
-            </div>
-
+            <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
+            <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
           </div>
+
         </div>
+      </div>
       </>
     );
   }
 }
+        // ****************** needs another component to pass values to props
+
+const SearchResult = ({ item }) => {
+
+  return (
+    <div className="searchResult">
+      <div className="row">
+
+        <div className="col col-mg-3 img">
+          <div className="imageSearched">
+            <img src={item.img} />
+          </div>
+
+        </div>
+        <div className="col col-mg-8 items">
+          <div>Name: {item.name}</div>
+          <div> Gender: {item.gender}</div>
+          <div> Smoker: {item.smoker}</div>
+          <div> Tidyness: {item.tidyness}</div>
+          <div> Smoker: {item.smoker}</div>
+          <div> Year: {item.yearP}</div>
+          <div> Pets: {item.pets}</div>
+
+        </div>
+
+        <button className="resetButton">Contact</button>
+
+      </div>
+    </div> 
+    )
+
+}
+
 export default FindRoomate;
