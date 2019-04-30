@@ -36,6 +36,20 @@ class Profile extends Component {
     })
   }
 
+  deleteAccount(){
+    this.accountRepository.deleteAccount(localStorage.getItem("sessuid"))
+      .then(resp => {
+        console.log(resp)
+        // redirect to login page
+        localStorage.removeItem("isLoggedIn");
+        // redirect login   if(this.state.user !== null){
+        window.location.href = '/';
+      })
+      .catch(resp => {
+        console.log(resp)
+      })
+  }
+
   deleteApartment(aId){
     this.accountRepository.deleteApartment(localStorage.getItem("sessuid"), aId)
       .then(eventListResp => {
@@ -73,7 +87,7 @@ class Profile extends Component {
                   <div> Tidyness: {userList.tidyness}</div>
                   <div> Year: {userList.yearP}</div>
                   <div> Pets: {userList.pets}</div>
-                  <button onClick={this.remove} className="deleteAccButton">Delete Account</button>
+                  <button onClick={() => this.deleteAccount()} className="deleteAccButton">Delete Account</button>
 
                 </div>
 

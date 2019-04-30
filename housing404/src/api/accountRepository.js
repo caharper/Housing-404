@@ -54,14 +54,14 @@ export class AccountRepository {
       })
   }
 
-  // Add delete user post
-  // deleteAccount(user) {
-  //   return new Promise((resolve, reject) => {
-  //       axios.delete(`${this.url}/user/edit`, user)
-  //       .then(resp => resolve(resp.data))
-  //       .catch(resp => alert(resp))
-  //     })
-  // }
+  //  delete user
+  deleteAccount(sessuid) {
+    return new Promise((resolve, reject) => {
+        axios.delete(`${this.url}/user/edit?sessuid=${sessuid}`)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
 
   // Get notifications for a single user
   getUserNotifications(sessuid) {
