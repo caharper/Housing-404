@@ -197,6 +197,14 @@ export class AccountRepository {
     })
   }
 
+  addToAttending(sessuid, eId){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/events/attending/${eId}?sessuid=${sessuid}`)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
   // Delete people attending user owned event
   // deleteAttendingUserEvent(eId, uId) {
   //   return new Promise((resolve, reject) => {

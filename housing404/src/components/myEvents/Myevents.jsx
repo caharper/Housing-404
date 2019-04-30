@@ -82,7 +82,7 @@ class Myevents extends Component {
               <div>
                 <div>Details:{events.name}</div>
                 <div> Date:{events.date}</div>
-                <button onClick={this.remove}>Remove</button>
+                <button onClick={() => this.remove()}>Remove</button>
               </div>
             ))}
           </div>
@@ -103,6 +103,7 @@ class Myevents extends Component {
                       <div className="col col-mg-8 items">
                         <div>Name:{item.details}</div>
                         <div> Date:{item.date}</div>
+                        <button onClick={this.myEvents} className="attendButton">Delete</button>
                       </div>
                     </div>
                   </div>
@@ -118,7 +119,7 @@ class Myevents extends Component {
                 <div>
                   <div>Details:{events.name}</div>
                   <div> Date:{events.date}</div>
-                  <button onClick={this.remove}>Remove</button>
+                  <button onClick={() => this.removePostedEvents()}>Remove</button>
                 </div>
               ))}
             </div>

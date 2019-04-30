@@ -9,8 +9,11 @@ export default class Event extends Component {
         events: [],
     }
 
-    addToMyEvents(){
-
+    addToMyEvents(eId){
+      this.accountRepository.addToAttending(localStorage.getItem("sessuid"), eId)
+          .then(newEvents => {
+          console.log(newEvents)
+        })
     }
 
     render() {
@@ -27,31 +30,20 @@ export default class Event extends Component {
                     <Navbar></Navbar>
                 </div>
 
-                <div className="card-deck">
-                    {events.map((event, index)=> (
-                      <>
-                      <div className="row" key={index}>
+                <div className="row justify-content-between">
+                      {events.map((event, index)=> (
+                        <>
+                          <div className="card col-4" key={index}>
+                              <div className="card-body">
 
-                      </div>
+                                  <div className="card-title">Details:{event.details}</div>
+                                  <div className="card-text"> Date:{event.date}</div>
 
-
-
-
-
-
-
-
-                        <div className="card">
-                            <div className="card-body">
-
-                                <div className="card-title">Details:{event.details}</div>
-                                <div className="card-text"> Date:{event.date}</div>
-
-                                <button onClick={() => this.addToMyEvents()} className="addToEvent">Add to My Events</button>
-                            </div>
-                        </div>
-                      </>
-                    ))}
+                                  <button onClick={() => this.addToMyEvents(event.e_id)} className="addToEvent">Add to My Events</button>
+                              </div>
+                          </div>
+                        </>
+                      ))}
                 </div>
             </>
         );
