@@ -16,7 +16,7 @@ class Navbar extends Component {
       this.accountRepository
           .logout()
           .then(logout => {
-              localStorage.removeItem("isLoggedIn");
+              localStorage.removeItem("sessuid");
               // redirect login   if(this.state.user !== null){
               window.location.href = '/';
           })

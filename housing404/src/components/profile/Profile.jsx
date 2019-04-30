@@ -62,7 +62,8 @@ class Profile extends Component {
 
   render() {
 
-    if (this.state.userList === null || !this.state.aptListings) {
+    if (!this.state.userList || !this.state.aptListings) {
+      console.log(this.state.userList)
       return (<></>)
     }
 

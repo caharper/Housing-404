@@ -63,6 +63,14 @@ export class AccountRepository {
       })
   }
 
+  sendNotification(sessuid, toId, data){
+    return new Promise((resolve, reject) => {
+        axios.post(`${this.url}/users/contact/${toId}?sessuid=${sessuid}`, data)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
   // Get notifications for a single user
   getUserNotifications(sessuid) {
     return new Promise((resolve, reject) => {
