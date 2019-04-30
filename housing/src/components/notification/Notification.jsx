@@ -5,15 +5,12 @@ import './notification.css';
 import AddNotification from "./AddNotification";
 
 
-
-
 class Notification extends Component {
   accountRepository = new AccountRepository;
 
   state = {
     notification: []
   }
-
 
   render() {
     // console.log(typeof(this.state.notifcation))
@@ -26,7 +23,6 @@ class Notification extends Component {
       )
     }
     return (
-
       <>
         <div>
           <Navbar></Navbar>

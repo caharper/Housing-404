@@ -9,7 +9,7 @@ export default class AddNotification extends Component {
 
     state = {
         AddNotification: null,
-        details: null,
+        notification: null,
     }
 
     updateNotification = (e) => {

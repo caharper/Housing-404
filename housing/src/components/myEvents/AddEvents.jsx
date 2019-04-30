@@ -4,7 +4,6 @@ import { AccountRepository } from './../../api/accountRepository';
 import './myEvent.css'
 
 
-
 export default class AddEvent extends Component {
     accountRepository = new AccountRepository;
 
