@@ -167,9 +167,9 @@ export class AccountRepository {
   }
 
   // Creates an event owned by a user
-  createUserOwnedEvent(eData){
+  createUserOwnedEvent(sessuid, eData){
     return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/user/myEvents`, eData)
+        axios.post(`${this.url}/user/myEvents?sessuid=${sessuid}`, eData)
         .then(resp => resolve(resp.data))
         .catch(resp => alert(resp))
       })

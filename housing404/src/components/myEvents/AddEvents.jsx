@@ -24,7 +24,7 @@ export default class AddEvent extends Component {
     addEvent() {
         let newEvent = new Event( this.state.details, this.state.date)
         console.log(newEvent)
-        this.accountRepository.createUserOwnedEvent(localStorage.getItem("sessuid"))
+        this.accountRepository.createUserOwnedEvent(localStorage.getItem("sessuid"), newEvent)
             .then(newEvents => {
             console.log(newEvents)
             this.setState({newEvents})
@@ -50,7 +50,7 @@ export default class AddEvent extends Component {
                                     <input type="text" className="form-control" id="eventDate" aria-describedby="date" placeholder="Event Date" onChange={this.updateDate} value={this.date}/>
                                 </div>
                             </form>
-                            <button  class="btn btn-primary" onClick={() => this.addEvent()}>Create event</button>
+                            <button  class="resetButton" onClick={() => this.addEvent()}>Create event</button>
                         </div>
                     </div>
                 </div>
