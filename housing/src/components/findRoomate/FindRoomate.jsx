@@ -78,11 +78,11 @@ class FindRoomate extends Component {
         else if (this.state.items.length === 0) {
           $("#no-roommate-match").removeClass("incorrect-no-display");
         }
+        // ****************** needs another component to pass values to props
 
       })
 
   }
-
 
   render() {
 
@@ -229,7 +229,6 @@ class FindRoomate extends Component {
     );
   }
 }
-        // ****************** needs another component to pass values to props
 
 const SearchResult = ({ item }) => {
 

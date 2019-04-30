@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
 import './notification.css';
+import AddNotification from "./AddNotification";
+
 
 
 
@@ -24,12 +26,17 @@ class Notification extends Component {
       )
     }
     return (
+
       <>
         <div>
           <Navbar></Navbar>
         </div>
         <div className="container">
           <h1>Notification</h1>
+          <div className="eventCard">
+            <AddNotification></AddNotification>
+
+          </div>
           <div>
             {this.state.notification.map((notif, index) => (
               <div className="eventCard">

@@ -512,12 +512,12 @@ class FindApt extends Component {
               <div className="searchResultback">
 
                 {
-                  items.map((item, index) => (
+                  this.filteredApts.map((item, index) => (
                     <SearchResult key={index} item={item} />
                   ))
                 }
               </div>
-              
+
               <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>
             </div>
 
@@ -527,7 +527,7 @@ class FindApt extends Component {
     );
   }
 }
-//this.filteredApts.map((item, index) => (
+
 const SearchResult = ({ item }) => {
 
   return (
