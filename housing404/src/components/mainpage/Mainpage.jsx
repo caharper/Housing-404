@@ -14,26 +14,32 @@ class MainPage extends Component {
             </div>
             <div>
                 <div className="align">
+                  <div>
+                      <Link to="/profile">
+                          <button className="width">My Profile</button>
+                      </Link>
+                  </div>
+
                     <div>
                         <Link to="/notification">
-                            <button className="width">Notification</button>
+                            <button className="width">Notifications</button>
                         </Link>
                     </div>
                     <div>
                         <Link to="/findroomate">
-                            <button className="width">Find Roomate</button>
+                            <button className="width">Find A Roomate</button>
                         </Link>
                     </div>
 
                     <div>
                         <Link to="/listApt">
-                            <button className="width">List Apartment</button>
+                            <button className="width">List An Apartment</button>
                         </Link>
                     </div>
 
                     <div>
                         <Link to="/findApt">
-                            <button className="width">Find Apartment</button>
+                            <button className="width">Find An Apartment</button>
                         </Link>
                     </div>
 
