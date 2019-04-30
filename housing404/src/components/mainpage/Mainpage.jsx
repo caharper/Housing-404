@@ -6,11 +6,15 @@ import './mainpage.css'
 
 class MainPage extends Component {
 
+  state = {
+    didChange: null,
+  }
+
     render() {
         return (
             <>
             <div>
-                <Navbar></Navbar>
+                <Navbar didChange={this.state.didChange}></Navbar>
             </div>
             <div>
                 <div className="align">

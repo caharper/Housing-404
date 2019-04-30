@@ -245,7 +245,7 @@ export class CreateAccountForm extends Component {
     if(currentStep <4){
       return (
         <button
-          className="btn btn-primary btn-block float-right mt-2"
+          className="btn btn-primary btn-block float-right mt-2 text-white font-weight-bold"
           type="button" onClick={this._next}>
         Next
         </button>

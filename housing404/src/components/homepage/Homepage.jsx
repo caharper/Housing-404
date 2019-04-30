@@ -122,17 +122,17 @@ export class Homepage extends React.Component {
           </div>
 
           <div className="row justify-content-center">
-            <div className="form-group">
+            <div className="form-group w-75">
               <input className="form-control mr-sm-2" placeholder="Email" id="emailsm" type="text" value={this.state.emailsm} onChange={e => this.setState({emailsm: e.target.value})}/>
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="form-group">
+            <div className="form-group w-75">
               <input className="form-control mr-sm-2" placeholder="Password" id="passwordsm" type="password" value={this.state.passwordsm} onChange={e => this.setState({passwordsm: e.target.value})}/>
             </div>
           </div>
           <div className="row justify-content-center">
-            <button onClick={e => this.onSubmit()} className="btn btn-lg btn-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
+            <button onClick={e => this.onSubmit()} className="btn btn-lg w-75 h-25 btn-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
           </div>
 
           <div className="row justify-content-center border-top border-bottom mb-2">

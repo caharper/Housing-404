@@ -29,6 +29,39 @@
   visibility: hidden;
 }
 
+/* .card-header{
+  background-color: #CCDBE9;
+  color: #023C40;
+} */
+
+/* .card-header h3 {
+  color: #023C40;
+} */
+
+.my-char{
+  background-color: #023C40;
+}
+
+.logo-blue {
+  background-color: #CCDBE9;
+}
+
+.logo-grey {
+  background-color: #D2D2D2;
+}
+
+.rose {
+  background-color: #C3979F;
+}
+
+.cust-primary {
+  background-color: #0AD3FF;
+}
+
+.btn-p-dark-blue {
+  background-color: #5fb0fc;
+}
+
 /* img {
   max-width: 20%;
   height: auto;

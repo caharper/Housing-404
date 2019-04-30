@@ -25,10 +25,7 @@ class Navbar extends Component {
   render() {
 
     if (!this.state.user) {
-      return (
-        <>
-        </>
-      )
+      return (<></>)
     }
 
     return (
