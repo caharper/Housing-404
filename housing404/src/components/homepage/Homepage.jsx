@@ -9,6 +9,7 @@ import './homepage.css'
 import logo from './../../housing404.svg';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
+import { LoginUser } from './../../models/loginUser';
 
 
 import axios from 'axios'
@@ -45,7 +46,9 @@ export class Homepage extends React.Component {
       this.accountRepository.createAccount(newUser)
       .then(user => {
         this.setState({user})
-        localStorage.setItem('sessuid', user[0].id)
+        let registeredUser = new LoginUser(newUser.email, newUser.password);
+        this.onLogin(registeredUser)
+        // localStorage.setItem('sessuid', user[0].id)
       })
     }
 
