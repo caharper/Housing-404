@@ -43,15 +43,21 @@ export class CreateApartmentListings extends React.Component {
         <div>
           <Navbar></Navbar>
         </div>
-        <div className="container">
+
+
+        <div className="container d-none d-lg-block">
           <div className="row">
             <ApartmentProgressBar></ApartmentProgressBar>
           </div>
           <div className="row justify-content-center">
             <CreateApartmentListingForm onCreateApt={x => this.onCreateApt(x)}></CreateApartmentListingForm>
           </div>
+        </div>
 
-
+        <div className="container d-lg-none pt-3">
+          <div className="row justify-content-center">
+            <CreateApartmentListingForm onCreateApt={x => this.onCreateApt(x)}></CreateApartmentListingForm>
+          </div>
         </div>
       </>
     )
