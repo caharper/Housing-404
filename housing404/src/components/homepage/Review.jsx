@@ -75,8 +75,8 @@ export class Review extends React.Component {
 
     // The markup for the Step 1 UI
     return(
-
-      <div className="card overflow-auto">
+      <>
+      <div className="card d-none d-lg-block overflow-auto">
         <div className="card-header bg-success text-white">
           <h5>Review</h5>
         </div>
@@ -151,6 +151,89 @@ export class Review extends React.Component {
 
         </div>
       </div>
+
+
+
+
+
+
+
+      <div className="card small-card overflow-auto d-lg-none">
+        <div className="card-header bg-success text-white">
+          <h5>Review</h5>
+        </div>
+        <div className="card-body special-card">
+          <div className="row justify-content-center">
+            <p className="text-secondary mb-0">Please review your information before creating an account.</p>
+          </div>
+
+
+
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th className="text-left">Your information</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="text-left">Name:</td>
+                <td className="text-right">{this.props.name}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Email:</td>
+                <td className="text-right">{this.props.email}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Gender:</td>
+                <td className="text-right">{gender}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Smoker:</td>
+                <td className="text-right">{this.props.smoker === "1" ? "Yes" : "No"}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Year:</td>
+                <td className="text-right">{year}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Pets:</td>
+                <td className="text-right">{this.props.pets == "y" ? "Yes" : "No"}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th className="text-left">Desired Roommate Description</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="text-left">Roommate Smoker:</td>
+                <td className="text-right">{this.props.smokerPref === "1" ? "Yes" : "No"}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Gender:</td>
+                <td className="text-right">{rGender}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Tidyness:</td>
+                <td className="text-right">{tidyness}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Roommate Year:</td>
+                <td className="text-right">{rYear}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      </>
     )
   }
 }

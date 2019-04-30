@@ -4,6 +4,12 @@
   overflow-y: auto;
 }
 
+.small-card{
+  width: 90vw;
+  height: auto;
+  overflow-y: auto;
+}
+
 .card-header {
   background-color: #55b776;
 }

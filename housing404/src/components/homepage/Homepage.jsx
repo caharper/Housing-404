@@ -24,7 +24,9 @@ export class Homepage extends React.Component {
       // this will need to be routed if true
       loggedIn: false,
       createdAccount: false,
-      user: null
+      user: null,
+      emailsm: '',
+      passsm: ''
     }
 
     onLogin(attemptUser){
@@ -40,6 +42,25 @@ export class Homepage extends React.Component {
         // $("#invalid-login").removeClass("incorrect-no-display")
      // )
     }
+
+    validateForm() {
+      // Checks for valid email and non empty email/password
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return this.state.emailsm.length > 0 && this.state.passwordsm.length > 0 && re.test(this.state.emailsm)
+    }
+
+    onSubmit(){
+        //
+        let attemptUser = new LoginUser(this.state.emailsm, this.state.passwordsm);
+        this.onLogin(attemptUser);
+        //
+        //     // clears the form
+        this.setState(
+          {
+            emailsm: '',
+            passwordsm: ''
+          })
+      }
 
 
     onCreateAccount(newUser){
@@ -72,7 +93,7 @@ export class Homepage extends React.Component {
 
       <>
         <LoginNav onLogin={x => this.onLogin(x) }></LoginNav>
-        <div className="container d-none d-xl-block">
+        <div className="container d-none d-lg-block">
           <div className="row pt-5">
             <div className="col-6">
               <div className="row justify-content-center mt-0 pt-0 mb-0 pb-0">
@@ -92,6 +113,38 @@ export class Homepage extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="container d-lg-none">
+          <div className="row justify-content-center mt-0 pt-3 mb-0 pb-0">
+            <h1>Find your roommate</h1>
+            <p className="text-secondary">By joining Housing404, you can search for roommates, set up meetings, and find your ideal roommate.</p>
+          </div>
+
+          <div className="row justify-content-center">
+            <div className="form-group">
+              <input className="form-control mr-sm-2" placeholder="Email" id="emailsm" type="text" value={this.state.emailsm} onChange={e => this.setState({emailsm: e.target.value})}/>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="form-group">
+              <input className="form-control mr-sm-2" placeholder="Password" id="passwordsm" type="password" value={this.state.passwordsm} onChange={e => this.setState({passwordsm: e.target.value})}/>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <button onClick={e => this.onSubmit()} className="btn btn-lg btn-success my-2 my-sm-0" disabled={!this.validateForm()}>Login</button>
+          </div>
+
+          <div className="row justify-content-center border-top border-bottom mb-2">
+            <h4 className="">OR</h4>
+          </div>
+
+          <div className="row justify-content-center">
+            <div className="">
+              <CreateAccountForm onCreateAccount={x => this.onCreateAccount(x) }></CreateAccountForm>
+            </div>
+          </div>
+
         </div>
       </>
     )
