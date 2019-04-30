@@ -537,6 +537,7 @@ class FindApt extends Component {
                   //     </div>
                   //   </div>
                   // ))
+                  <button className="resetButton">Contact Owner</button>
                 }
                 </div>
               </div>

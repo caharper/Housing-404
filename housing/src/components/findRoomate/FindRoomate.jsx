@@ -24,13 +24,11 @@ class FindRoomate extends Component {
     bedTimeP: null,
     wakeTime: null,
     wakeTimeP: null
-
   }
 
   updateSmoker = (e) => {
     this.setState({ smoker: e.target.value || null })
   }
-
   updateGender = (e) => {
     this.setState({ gender: e.target.value || null })
   }
@@ -236,7 +234,10 @@ class FindRoomate extends Component {
                 //     </div>
                 //   </div>
                 // ))
-                // Needs to be in a child component 
+                // Needs to be in a child component
+                 
+                <button className="resetButton">Contact</button>
+
               }
               </div>
 
