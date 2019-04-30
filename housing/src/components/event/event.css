@@ -95,5 +95,26 @@
       width:100%;
       transition:800ms ease all;
     }
+
+
+/*Cards https://codepen.io/PxelDxel/pen/ZOGmLR*/
+ * {
+ 
+    font-family: 'Source Sans Pro', sans-serif;
+}
+       
+      
+.eventCard {
+    top: 200px;
+    background-color: #eeeeee;
+    height: 245px;
+    width: 344px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin: 10px;
+    display: inline-block;
+    border-radius: 3px;
+    position: relative;
+    }
+      
      
     

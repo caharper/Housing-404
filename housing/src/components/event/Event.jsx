@@ -26,10 +26,11 @@ export default class Event extends Component {
                 <div>
                     <Navbar></Navbar>
                 </div>
-
+                <h1>Events</h1>
+                
                 <div className="card-deck">
                     {events.map(events => (
-                        <div className="card" id= "events">
+                        <div className="eventCard">
                             <div className="image searched">
                                 <img src={events.img} className="card-img-top" />
                             </div>
