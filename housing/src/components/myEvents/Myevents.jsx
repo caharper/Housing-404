@@ -31,7 +31,7 @@ class Myevents extends Component {
     // let badEventsattend = (this.state.eventsAttend === undefined || this.state.eventsAttend === null)
 
     console.log(this.state.eventsAttend)
-    console.log('my events: ',this.state.myEvents)
+    console.log('my events: ', this.state.myEvents)
 
     if (!this.state.myEvents && !this.state.eventsAttend) {
       return (
@@ -60,7 +60,7 @@ class Myevents extends Component {
                 <div> Date:{item.date}</div>
               </>
             ))} */
-            this.state.myEvents.name}
+              this.state.myEvents.name}
           </div>
         </>
       )
@@ -110,16 +110,17 @@ class Myevents extends Component {
                 ))}
               </div>
             </div>
+            
             <div class="col-6" >
               <h1>Events Posted</h1>
               <div>
                 <AddEvent></AddEvent>
               </div>
               {this.state.myEvents.map(events => (
-                <div>
+                <div className="searchResult">
+                  <button onClick={this.remove} className="attendButton">Remove</button>
                   <div>Details:{events.name}</div>
                   <div> Date:{events.date}</div>
-                  <button onClick={this.remove}>Remove</button>
                 </div>
               ))}
             </div>

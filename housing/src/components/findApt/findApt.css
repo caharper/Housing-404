@@ -162,11 +162,15 @@ html, body { min-height: 100%; }
     transition:800ms ease all;
     outline:none;
   }
-  .xbutton:hover,.filterButton:hover,.perfectButton:hover{
+  .filterButton:hover,.perfectButton:hover{
     background:#fff;
     color:#1AAB8A;
   }
-  .xbutton:before,xbutton:after,.filterButton:before,.filterButton:after,.perfectButton:before,.perfectButton:after{
+  .xbutton:hover{
+    background:#fff;
+    color:#A52A2A;
+  }
+  .filterButton:before,.filterButton:after,.perfectButton:before,.perfectButton:after{
     content:'';
     position:absolute;
     top:0;
@@ -174,6 +178,16 @@ html, body { min-height: 100%; }
     height:2px;
     width:0;
     background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .xbutton:before,.xbutton:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #A52A2A;
     transition:400ms ease all;
   }
   .xbutton:after,  .filterButton:after,  .perfectButton:after{

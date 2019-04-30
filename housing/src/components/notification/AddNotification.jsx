@@ -3,7 +3,6 @@ import { Notification } from '../../models/notification'
 import { AccountRepository } from '../../api/accountRepository';
 
 
-
 export default class AddNotification extends Component {
     accountRepository = new AccountRepository;
 

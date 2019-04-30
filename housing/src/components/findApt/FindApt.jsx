@@ -119,7 +119,7 @@ class FindApt extends Component {
     //     <>No Match Found</>
     //   )
     // }
-    
+
     if (!this.state.filteredApts) {
       return <>No Match Found</>
     }
@@ -140,11 +140,11 @@ class FindApt extends Component {
               <div className="filter">
                 <select className="custom-select" onChange={this.updateType} value={type}>
                   <option value="">Type</option>
-                  <option value="House">House</option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="TownHouse">TownHouse</option>
-                  <option value="Condo">Condo</option>
-                  <option value="Dorm">Dorm</option>
+                  <option value={1}>House</option>
+                  <option value={2}>Apartment</option>
+                  <option value={3}>TownHouse</option>
+                  <option value={4}>Condo</option>
+                  <option value={5}>Dorm</option>
                 </select>
               </div>
               <div className="filter">
@@ -160,8 +160,8 @@ class FindApt extends Component {
               <div className="filter">
                 <select className="custom-select" onChange={this.updateRoomStyle} value={roomStyle}>
                   <option value="">Room Style</option>
-                  <option value="Suite">Suite</option>
-                  <option value="Double">Double</option>
+                  <option value={1}>Suite</option>
+                  <option value={2}>Double</option>
                 </select>
               </div>
 
