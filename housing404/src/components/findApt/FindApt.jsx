@@ -285,28 +285,6 @@ class FindApt extends Component {
               </div>
 
               <div className="filter">
-                <div className="filterTitle">Kitchens
-                <button onClick={this.updateKitchens} className="xbutton">x</button>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="radio" name="kitchen" id="kitchenYes"
-                    checked={kitchen === '1'}
-                    value={1} onChange={this.updateKitchens} />
-                  <label className="form-check-label" htmlFor="kitchenYes">
-                    Yes
-                </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="radio" name="kitchen" id="kitchenNo"
-                    checked={kitchen === '0'}
-                    value={0} onChange={this.updateKitchens} />
-                  <label className="form-check-label" htmlFor="kitchenNo">
-                    No
-                </label>
-                </div>
-              </div>
-
-              <div className="filter">
                 <div className="filterTitle">Pet
                 <button onClick={this.updatePets} className="xbutton">x</button>
                 </div>
@@ -438,6 +416,15 @@ class FindApt extends Component {
       </>
 
     );
+  }
+
+  componentDidMount() {
+
+    this.accountRepository.getAllApartments()
+      .then(allApts => {
+        console.log(allApts)
+        this.setState({aptListings: allApts })
+      })
   }
 }
 
