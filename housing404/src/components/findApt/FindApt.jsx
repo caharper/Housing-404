@@ -86,11 +86,28 @@ class FindApt extends Component {
 
 
   filter() {
+
+    // Reset on new search
+    $("#no-apt-match").addClass("incorrect-no-display");
+    $("#no-selected-a-filter").addClass("incorrect-no-display");
+    $("#no-filter-select-a-heading").addClass("incorrect-no-display");
+
+
     // request server api call
     let filter = new FilterApt(this.state.rent, this.state.leaseTime, this.state.occupants, this.state.beds,
                                this.state.baths, this.state.squareFeet, this.state.rooms, this.state.kitchen,
                                this.state.floor, this.state.pets, this.state.poBox, this.state.studyRooms,
                                this.state.gym, this.state.pool, this.state.ac, this.state.heat)
+
+    if(this.state.rent === null && this.state.leaseTime === null && this.state.occupants === null &&
+       this.state.beds === null && this.state.baths === null && this.state.squareFeet === null &&
+       this.state.rooms === null && this.state.kitchen === null && this.state.floor === null &&
+       this.state.pets === null && this.state.poBox === null && this.state.studyRooms === null &&
+       this.state.gym === null && this.state.pool === null && this.state.ac === null && this.state.heat === null){
+         $("#no-selected-a-filter").removeClass("incorrect-no-display");
+         $("#no-filter-select-a-heading").removeClass("incorrect-no-display");
+         return
+       }
 
 
     this.accountRepository.filterApartments(filter)
@@ -129,6 +146,10 @@ class FindApt extends Component {
           <div className="row">
             <div className="col-sm-3">
               <h1>Filter</h1>
+
+                <div className="row justify-content-center py-0 my-0">
+                  <p className="incorrect incorrect-no-display" id="no-selected-a-filter">Please select a filter</p>
+                </div>
 
               <div className="filter">
                 <div className="filterTitle">Bedrooms
@@ -409,6 +430,7 @@ class FindApt extends Component {
                 </div>
               </div>
               <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>
+              <h5 id="no-filter-select-a-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
             </div>
 
           </div>
