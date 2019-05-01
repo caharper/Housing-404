@@ -184,7 +184,7 @@ app.get('/users/:uid?', (req, res) => {
 //view list of those events you are attending
 app.get('/user/events', (req, res) => {
 	var sessuid = parseInt(req.query.sessuid, 10);
-	connection.query('SELECT * FROM attending WHERE u_id = ?', [sessuid], function(err, results, fields) {
+	connection.query('SELECT * FROM attending JOIN events ON attending.e_id = events.e_id WHERE u_id = ?', [sessuid], function(err, results, fields) {
     	if (err) throw err;
     	else {
 		    res.status(200).send(results);
