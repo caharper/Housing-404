@@ -203,7 +203,7 @@ class FindRoomate extends Component {
                 </label>
                 </div>
               </div>
-              
+
               <div className="filter">
                 <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
                   <option value="">Tidyness</option>
@@ -231,15 +231,13 @@ class FindRoomate extends Component {
 
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
-              <div className="searchResultback">
-                {
-                  items.map((item, index) => (
-                    <SearchResult key={index} item={item} />
+              {
+                items.map((item, index) => (
+                  <SearchResult key={index} item={item} />
 
-                  ))
-                }
+                ))
+              }
 
-              </div>
 
               <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
               <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
@@ -264,18 +262,20 @@ class FindRoomate extends Component {
 const SearchResult = ({ item }) => {
 
   return (
-    <div className="searchResult">
-      <div className="row">
-        <div className="items">
-          <div>Name: {item.name}</div>
-          <div> Gender: {item.gender}</div>
-          <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
-          <div> Tidyness: {item.tidyness}</div>
-          <div> Year: {item.year}</div>
-          <div> Pets: {item.pets}</div>
-        </div>
-        <button className="resetButton">Contact</button>
+    <div className="container pt-0">
+      <div className="row justify content-center justify-content-between">
 
+        <div className="searchCard">
+          <div className="card-body">
+            <div>Name: {item.name}</div>
+            <div> Gender: {item.gender}</div>
+            <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
+            <div> Tidyness: {item.tidyness}</div>
+            <div> Year: {item.year}</div>
+            <div> Pets: {item.pets}</div>
+          </div>
+          <button className="resetButton">Contact</button>
+        </div>
       </div>
     </div>
   )

@@ -549,28 +549,23 @@ class FindApt extends Component {
 const SearchResult = ({ item }) => {
 
   return (
-    <div className="searchResult">
-      <div className="row">
+    <div className="container pt-0">
+      <div className="row justify content-center justify-content-between">
 
-        <div class="col col-mg-3 img">
-          <div className="imageSearched">
-            <img src={item.img} />
+        <div className="searchCard">
+          <div className="card-body">
+            <div> Description:{item.description}</div>
+            <div> Location:{item.location}</div>
+            <div> Rent:{item.rent}</div>
+            <div> Avalibility:{item.leaseTime}</div>
+            <div> Number of Occupants:{item.occupants}</div>
+            <div> Number of Bedrooms:{item.beds}</div>
+            <div> Number of Bathrooms:{item.baths}</div>
+            <div> Sqaure Feet:{item.squareFeet}</div>
           </div>
+          <button className="resetButton">Contact Owner</button>
         </div>
 
-        <div className="col col-mg-8 items">
-          <div>Name:{item.type}</div>
-          <div> Type:{item.type}</div>
-          <div> Description:{item.description}</div>
-          <div> Location:{item.location}</div>
-          <div> Rent:{item.rent}</div>
-          <div> Avalibility:{item.leaseTime}</div>
-          <div> Number of Occupants:{item.occupants}</div>
-          <div> Number of Bedrooms:{item.beds}</div>
-          <div> Number of Bathrooms:{item.baths}</div>
-          <div> Sqaure Feet:{item.squareFeet}</div>
-        </div>
-        <button className="resetButton">Contact Owner</button>
       </div>
     </div>
   )

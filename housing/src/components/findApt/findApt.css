@@ -40,9 +40,6 @@
     text-align: left;
   }
 
-  .searchResultback{
-      background: lightgrey;
-  }
 
 /*filter*/
 
@@ -199,6 +196,17 @@ html, body { min-height: 100%; }
   .xbutton:hover:before,.xbutton:hover:after,.filterButton:hover:before,.filterButton:hover:after,  .perfectButton:hover:before,.perfectButton:hover:after{
     width:100%;
     transition:800ms ease all;
+  }
+
+  .searchCard {
+    width: 30rem;
+    height:22rem;
+    text-align: left;
+    background-color: #eeeeee;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    display: inline-block;
+    border-radius: 3px;
+    /* position: relative; */
   }
    
   
