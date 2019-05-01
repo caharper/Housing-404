@@ -44,7 +44,7 @@ class FindRoomate extends Component {
     this.setState({ tidynessP: e.target.value || null })
   }
 
-  async filter() {
+  filter() {
     // Reset on new search
     $("#no-roommate-match").addClass("incorrect-no-display");
     $("#no-selected-r-filter").addClass("incorrect-no-display");
@@ -57,16 +57,17 @@ class FindRoomate extends Component {
                                     this.state.bedTimeP, this.state.wakeTime, this.state.wakeTimeP)
 
     console.log(filter);
+    console.log(this.state.gender)
 
     // Need to make it where error pops up if no filters selected
-    // if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
-    //    this.state.pets === null && this.state.tempP, this.state.genderP === null &&
-    //    this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
-    //    this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
-    //      $("#no-selected-r-filter").removeClass("incorrect-no-display");
-    //      $("#no-filter-select-heading").removeClass("incorrect-no-display");
-    //      return
-    //    }
+    if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
+       this.state.pets === null && this.state.tempP == null && this.state.genderP === null &&
+       this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
+       this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
+         $("#no-selected-r-filter").removeClass("incorrect-no-display");
+         $("#no-filter-select-heading").removeClass("incorrect-no-display");
+         return
+      }
 
     this.accountRepository.filterUsers(filter)
       .then(resp => {
@@ -213,7 +214,7 @@ class FindRoomate extends Component {
                 </select>
               </div>
 
-              <button await onClick={() => this.filter()} className="filterButton">Filter</button>
+              <button onClick={() => this.filter()} className="filterButton">Filter</button>
               <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
 
 
@@ -222,7 +223,7 @@ class FindRoomate extends Component {
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
               <div className="searchResultback">
-                
+
               </div>
 
               <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
