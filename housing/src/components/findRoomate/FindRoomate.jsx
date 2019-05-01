@@ -3,6 +3,7 @@ import { AccountRepository } from './../../api/accountRepository';
 import { FilterRoommate } from './../../models/filterRoomate'
 import Navbar from "../Navbar";
 import $ from 'jquery';
+import './findroomate.css';
 
 
 
@@ -222,9 +223,10 @@ class FindRoomate extends Component {
                   <option value={4}>Senior</option>
                 </select>
               </div>
-
-              <button await onClick={() => this.filter()} className="filterButton">Filter</button>
+              <div className="mb-2">
               <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
+              </div>
+              <button await onClick={() => this.filter()} className="filterButton">Filter</button>
 
 
             </div>
@@ -264,8 +266,7 @@ const SearchResult = ({ item }) => {
   return (
     <div className="container pt-0">
       <div className="row justify content-center justify-content-between">
-
-        <div className="searchCard">
+        <div className="searchRoomateCard mt-3">
           <div className="card-body">
             <div>Name: {item.name}</div>
             <div> Gender: {item.gender}</div>

@@ -94,3 +94,53 @@
     width:100%;
     transition:800ms ease all;
   }
+  
+  @media screen and (max-width: 375px) {
+  /* code below derived from https://www.designskilz.com/cool-css-buttons/ all credits
+  go to original author */
+  body{
+    text-align:center;
+  }
+  body:before{
+    content:'';
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+  }
+  .mainButton{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:0.8em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  .mainButton:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  .mainButton:before,.mainButton:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .mainButton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .mainButton:hover:before,.mainButton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  }

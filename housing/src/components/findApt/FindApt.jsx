@@ -278,36 +278,6 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <div className="filter">
-                <div className="filterTitle"> Rooms
-                <button onClick={this.updateRooms} className="xbutton">clear</button>
-                </div>
-                <div className="form-check form-check-inline" >
-                  <input className="form-check-input" type="radio" name="room" id="room" checked={rooms === '1'}
-                    value={1}
-                    onChange={this.updateRooms} />
-                  <label className="form-check-label" htmlFor="room1">
-                    1
-                </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="radio" name="room" id="room2"
-                    checked={rooms === '2'}
-                    value={2} onChange={this.updateRooms} />
-                  <label className="form-check-label" htmlFor="room2">
-                    2
-                </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="radio" name="room" id="room3"
-                    checked={rooms === '3'}
-                    value={3} onChange={this.updateRooms} />
-                  <label className="form-check-label" htmlFor="room3">
-                    3
-                </label>
-                </div>
-
-              </div>
 
               <div className="filter">
                 <div className="filterTitle">Number of Floors
@@ -515,7 +485,7 @@ class FindApt extends Component {
                 </div>
               </div>
 
-              <button onClick={() => this.filter()} className="filterButton">Filter</button>
+              <button onClick={() => this.filter()} className="filterButton ">Filter</button>
             </div>
 
             <div className="col col-lg-8">
@@ -552,15 +522,16 @@ const SearchResult = ({ item }) => {
     <div className="container pt-0">
       <div className="row justify content-center justify-content-between">
 
-        <div className="searchCard">
+        <div className="searchAptCard mt-3">
           <div className="card-body">
             <div> Description:{item.description}</div>
             <div> Location:{item.location}</div>
-            <div> Rent:{item.rent}</div>
-            <div> Avalibility:{item.leaseTime}</div>
-            <div> Number of Occupants:{item.occupants}</div>
             <div> Number of Bedrooms:{item.beds}</div>
             <div> Number of Bathrooms:{item.baths}</div>
+            <div> Number of Occupants:{item.occupants}</div>
+            <div>Smoking:{item.smoking}</div>
+            <div> Avalibility:{item.leaseTime}</div>
+            <div> Rent:{item.rent}</div>
             <div> Sqaure Feet:{item.squareFeet}</div>
           </div>
           <button className="resetButton">Contact Owner</button>
