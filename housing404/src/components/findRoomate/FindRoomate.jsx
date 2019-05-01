@@ -222,32 +222,7 @@ class FindRoomate extends Component {
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
               <div className="searchResultback">
-                {
-                // items.map((item, index) => (
-                //   <div className="searchResult" key={index}>
-                //     <div className="row">
-                //
-                //       <div className="col col-mg-3 img">
-                //         <div className="imageSearched">
-                //           <img src={item.img} />
-                //         </div>
-                //
-                //       </div>
-                //       <div className="col col-mg-8 items">
-                //         <div>Name: {item.name}</div>
-                //         <div> Gender: {item.gender}</div>
-                //         <div> Smoker: {item.smoker}</div>
-                //         <div> Tidyness: {item.tidyness}</div>
-                //         <div> Smoker: {item.smoker}</div>
-                //         <div> Year: {item.yearP}</div>
-                //         <div> Pets: {item.pets}</div>
-                //
-                //       </div>
-                //     </div>
-                //   </div>
-                // ))
-                // Needs to be in a child component
-              }
+                
               </div>
 
               <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
@@ -262,5 +237,30 @@ class FindRoomate extends Component {
     );
   }
 }
+
+
+// const SearchResult = ({ item }) => {
+//   return (
+//     <div className="searchResult">
+//       <div className="row">
+//         <div className="col col-mg-3 img">
+//           <div className="imageSearched">
+//             <img src={item.img} />
+//           </div>
+//         </div>
+//         <div className="col col-mg-8 items">
+//           <div>Name: {item.name}</div>
+//           <div> Gender: {item.gender}</div>
+//           <div> Smoker: {item.smoker}</div>
+//           <div> Tidyness: {item.tidyness}</div>
+//           <div> Smoker: {item.smoker}</div>
+//           <div> Year: {item.yearP}</div>
+//           <div> Pets: {item.pets}</div>
+//         </div>
+//         <button className="resetButton">Contact</button>
+//       </div>
+//     </div>
+//     )
+// }
 
 export default FindRoomate;

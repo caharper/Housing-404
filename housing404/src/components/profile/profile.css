@@ -23,7 +23,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    
+
 
 }
 .resetPassword{
@@ -34,4 +34,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.person-icon{
+  width: 18vw;
+  height: 18vw;
 }

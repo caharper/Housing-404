@@ -3,6 +3,7 @@ import Navbar from "../Navbar";
 import { AccountRepository } from './../../api/accountRepository';
 import './profile.css';
 import accountLogo from './../../user_ph_logo.svg';
+import 'font-awesome/css/font-awesome.css';
 
 
 class Profile extends Component {
@@ -41,7 +42,7 @@ class Profile extends Component {
       .then(resp => {
         console.log(resp)
         // redirect to login page
-        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("sessuid");
         // redirect login   if(this.state.user !== null){
         window.location.href = '/';
       })
@@ -69,69 +70,117 @@ class Profile extends Component {
 
     const { userList, resetPassword } = this.state;
 
+    let gender = '';
+
+    if(userList.gender === "M"){
+      gender = "Male";
+    }
+    else if (userList.gender === "F") {
+      gender = "Female";
+    }
+    else {
+      gender = "Other";
+    }
+
+    let year = '';
+
+    if(userList.year == "1"){
+      year = "Freshman";
+    }
+    else if (userList.year == "2") {
+      year = "Sophomore";
+    }
+    else if (userList.year == "3") {
+      year = "Junior";
+    }
+    else {
+      year = "Senior";
+    }
+
+
     return (
       <>
         <Navbar></Navbar>
 
-        <div>
-          <div className="archiveResult" >
-            <div className="row">
-              <div className="col col-mg-8">
-                <div className="profile">
-                  <div className="row">
-                    <img className="icon position-absolute pl-1" src={accountLogo}></img>
-                  </div>
-                  <h1>Profile Information</h1>
-
-                  <div>Name: {userList.name}</div>
-                  <div> Gender: {userList.gender}</div>
-                  <div> Tidyness: {userList.tidyness}</div>
-                  <div> Year: {userList.yearP}</div>
-                  <div> Pets: {userList.pets}</div>
-                  <button onClick={() => this.deleteAccount()} className="deleteAccButton">Delete Account</button>
-
-                </div>
-
-              </div>
 
 
-              <div className="col col-mg-8">
-                <div className="resetPassword">
-                  <h1>Change Password</h1>
-                  <form>
-                    <div class="form-group">
-                      <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
-                    </div>
-                    <div className="input-group-append">
-                      <button onClick={this.changePassword} className="resetButton">Send</button>
-                    </div>
-                  </form>
+          <div className="container position-relative">
+            <div className="row justify-content-center">
+              <h1>Profile Information</h1>
+            </div>
+            <div className="row justify-content-center">
+              <img className="person-icon position-relative pl-1" src={accountLogo}></img>
+            </div>
+            <div className="row justify-content-center">
+              <table className="table w-50">
+                <tbody>
+                  <tr>
+                    <td className="text-left">Name:</td>
+                    <td className="text-right">{userList.name}</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left">Gender:</td>
+                    <td className="text-right">{gender}</td>
+                  </tr>
+                  <tr className="border-bottom">
+                    <td className="text-left">Year:</td>
+                    <td className="text-right">{year}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-                </div>
+
+            <div className="row justify-content-center">
+              <h3>Your housing listings</h3>
+            </div>
+            <div className="row justify-content-center">
+              <table className="table table-striped table-condenced w-50">
+                <thead>
+                  <tr>
+                    <th>Listings</th>
+                    <th>Description</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    this.state.aptListings.map((a, i) =>
+                      <tr key={i}>
+                        <td>{i+1}</td>
+                        <td>{a.description}</td>
+                        <td>
+                          <button className="btn btn-block btn-danger"
+                                  onClick={() => this.deleteApartment(a.a_id)}>
+                            <i className="fa fa-lg fa-trash-o"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <div className="row justify-content-center">
+              <h3>Change Password</h3>
+            </div>
+
+            <div className="row justify-content-center">
+              <div class="form-group  w-50">
+                <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
               </div>
             </div>
 
-            <div className="row">
-              <h5>Your apartment listings:</h5>
+            <div className="row justify-content-center">
+                <button onClick={this.changePassword} className="resetButton w-50">Change Password</button>
             </div>
 
-            {this.state.aptListings.map(listing => (
-              <>
-                <div className="row">
-                  <div className="col-5">
-                    <div>Description: {listing.description}</div>
-                  </div>
-                  <div className="col-5">
-                    <div>Location: {listing.location}</div>
-                  </div>
-                  <button onClick={() => this.deleteApartment(listing.a_id)} className="btn-red">Delete</button>
-                </div>
-              </>
-            ))}
 
-
+            <div className="row justify-content-center">
+              <button onClick={() => this.deleteAccount()} className="deleteAccButton w-50">Delete Account</button>
+            </div>
           </div>
-        </div>
       </>
     );
   }

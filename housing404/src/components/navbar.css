@@ -31,7 +31,7 @@
   width: 30vw;
 }
 
-.align {
+/* .align {
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 50vh;
-}
+} */
 
 
   /* code below derived from https://www.designskilz.com/cool-css-buttons/ all credits

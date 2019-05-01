@@ -26,7 +26,21 @@ class Navbar extends Component {
   render() {
 
     if (!this.state.user) {
-      return (<></>)
+      return (
+        <nav className="navbar navbar-dark bg-dark justify-content-between postion-relative" >
+
+            <div className="navbar-brand">
+              <Link to="/main">
+                <img className="icon col-2 pl-1 postion-absolute float-left" src={logo}></img>
+              </Link>
+            </div>
+
+            <button onClick={() => this.Logout()} className="logoutButton" >
+                Logout
+                </button>
+
+        </nav>
+      );
     }
 
     if(!this.props.didChange){

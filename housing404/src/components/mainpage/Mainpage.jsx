@@ -18,42 +18,42 @@ class MainPage extends Component {
             </div>
             <div>
                 <div className="align">
-                  <div>
+                  <div className="mb-2">
                       <Link to="/profile">
                           <button className="width">My Profile</button>
                       </Link>
                   </div>
 
-                    <div>
+                    <div className="mb-2">
                         <Link to="/notification">
                             <button className="width">Notifications</button>
                         </Link>
                     </div>
-                    <div>
+                    <div className="mb-2">
                         <Link to="/findroomate">
                             <button className="width">Find A Roomate</button>
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="mb-2">
                         <Link to="/listApt">
                             <button className="width">List An Apartment</button>
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="mb-2">
                         <Link to="/findApt">
                             <button className="width">Find An Apartment</button>
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="mb-2">
                         <Link to="/myevent">
                             <button className="width">My Events</button>
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="mb-2">
                         <Link to="/event">
                             <button className="width">Events</button>
                         </Link>
@@ -66,4 +66,5 @@ class MainPage extends Component {
         );
     }
 }
+
 export default MainPage;

@@ -50,9 +50,6 @@ class Notification extends Component {
         <>
           <div><Navbar></Navbar></div>
           <h4 className="pt-5">You have no notifications</h4>
-          <div className="eventCard">
-            <AddNotification></AddNotification>
-          </div>
         </>
       )
     }
@@ -63,9 +60,6 @@ class Notification extends Component {
         </div>
         <div className="container">
           <h1>Notification</h1>
-          <div className="eventCard">
-            <AddNotification></AddNotification>
-          </div>
           <div>
             {this.state.notification.map((notif, index) => (
               <div className="eventCard">
