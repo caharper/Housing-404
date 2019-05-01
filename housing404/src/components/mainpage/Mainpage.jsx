@@ -20,42 +20,42 @@ class MainPage extends Component {
                 <div className="align">
                   <div className="mb-2">
                       <Link to="/profile">
-                          <button className="width">My Profile</button>
+                          <button className=" mainButton width">My Profile</button>
                       </Link>
                   </div>
 
                     <div className="mb-2">
                         <Link to="/notification">
-                            <button className="width">Notifications</button>
+                            <button className="mainButton width">Notifications</button>
                         </Link>
                     </div>
                     <div className="mb-2">
                         <Link to="/findroomate">
-                            <button className="width">Find A Roommate</button>
+                            <button className="mainButton width">Find A Roommate</button>
                         </Link>
                     </div>
 
                     <div className="mb-2">
                         <Link to="/listApt">
-                            <button className="width">List Housing</button>
+                            <button className="mainButton width">List Housing</button>
                         </Link>
                     </div>
 
                     <div className="mb-2">
                         <Link to="/findApt">
-                            <button className="width">Find Housing</button>
+                            <button className="mainButton width">Find Housing</button>
                         </Link>
                     </div>
 
                     <div className="mb-2">
                         <Link to="/myevent">
-                            <button className="width">My Events</button>
+                            <button className="mainButton width">My Events</button>
                         </Link>
                     </div>
 
                     <div className="mb-2">
                         <Link to="/event">
-                            <button className="width">Events</button>
+                            <button className="mainButton width">Events</button>
                         </Link>
                     </div>
 
