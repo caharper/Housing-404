@@ -30,7 +30,7 @@ import Notification from './components/notification/Notification';
 
 //check cookie or state if logged in
 function isAuthenticated(){    
-  const token = localStorage.getItem('isLoggedIn');
+  const token = localStorage.getItem('sessuid');
     console.log(token)
     if(token){
       return true;
@@ -63,14 +63,14 @@ const routing = (
     <div>
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/main" component={Mainpage} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/findroomate" component={FindRoomate} />
-        <Route path="/listApt" component={CreateApartmentListings} />
-        <Route path="/findApt" component={FindApt} />
-        <Route path="/myevent" component={MyEvents} />
-        <Route path="/event" component={Event} />
-        <Route path="/notification" component={Notification} />
+        <PrivateRoute exact path="/main" component={Mainpage} />
+        <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/findroomate" component={FindRoomate} />
+        <PrivateRoute path="/listApt" component={CreateApartmentListings} />
+        <PrivateRoute path="/findApt" component={FindApt} />
+        <PrivateRoute path="/myevent" component={MyEvents} />
+        <PrivateRoute path="/event" component={Event} />
+        <PrivateRoute path="/notification" component={Notification} />
 
       </Switch>
     </div>

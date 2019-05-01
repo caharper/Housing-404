@@ -120,9 +120,13 @@ class FindApt extends Component {
     //   )
     // }
 
-    if (!this.state.filteredApts) {
-      return <>No Match Found</>
-    }
+    // if (!this.props.filteredApts) {
+    //   return <>No Match Found</>
+    // }
+
+    // if(true){
+    //   return <>hahaha</>
+    // }
 
 
     const { items, type, bedrooms, year, squareFeet, bathrooms, occupants, rooms, floors, kitchens, laundryRooms, studyRoom, pets, smoking, gym, pool, roomStyle, rent } = this.state;
@@ -519,7 +523,7 @@ class FindApt extends Component {
               <div className="searchResultback">
 
                 {
-                  this.filteredApts.map((item, index) => (
+                  this.state.filteredApts.map((item, index) => (
                     <SearchResult key={index} item={item} />
                   ))
                 }

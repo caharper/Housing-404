@@ -15,20 +15,23 @@
   
   .white-text {
     color: white;
+
   }
   
   .text-size {
-    font-size:4vw;
+    font-size:4rem;
+    position: relative;
   }
   
   .option {
     color: white;
     background-color: #008CBA;
-    font-size:4vw;
+    font-size:4rem;
   }
   
   .width {
     width: 30vw;
+    
   }
   
   .align {

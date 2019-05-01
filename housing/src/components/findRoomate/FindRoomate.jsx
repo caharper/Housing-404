@@ -24,11 +24,13 @@ class FindRoomate extends Component {
     bedTimeP: null,
     wakeTime: null,
     wakeTimeP: null
+
   }
 
   updateSmoker = (e) => {
     this.setState({ smoker: e.target.value || null })
   }
+
   updateGender = (e) => {
     this.setState({ gender: e.target.value || null })
   }
@@ -57,18 +59,18 @@ class FindRoomate extends Component {
     console.log(filter);
 
     // Need to make it where error pops up if no filters selected
-    if (this.state.gender === null && this.state.smoker === null && this.state.year === null &&
-      this.state.pets === null && this.state.tempP, this.state.genderP === null &&
-      this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
-      this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null) {
-      $("#no-selected-r-filter").removeClass("incorrect-no-display");
-      $("#no-filter-select-heading").removeClass("incorrect-no-display");
-      return
-    }
+    // if(this.state.gender === null && this.state.smoker === null && this.state.year === null &&
+    //    this.state.pets === null && this.state.tempP, this.state.genderP === null &&
+    //    this.state.smokerP === null && this.state.tidynessP === null && this.state.yearP === null &&
+    //    this.state.bedTimeP === null && this.state.wakeTime === null && this.state.wakeTimeP === null){
+    //      $("#no-selected-r-filter").removeClass("incorrect-no-display");
+    //      $("#no-filter-select-heading").removeClass("incorrect-no-display");
+    //      return
+    //    }
 
     this.accountRepository.filterUsers(filter)
       .then(resp => {
-        console.log(resp)
+        console.log("response: ", resp)
         let roommates = resp;
         this.setState({ items: roommates })
         console.log('items in state: ', this.state.items)
@@ -78,11 +80,30 @@ class FindRoomate extends Component {
         else if (this.state.items.length === 0) {
           $("#no-roommate-match").removeClass("incorrect-no-display");
         }
-        // ****************** needs another component to pass values to props
+        else {
+          // Return child component
 
+        }
+
+        // ****************** needs another component to pass values to props
       })
 
   }
+
+
+  pMatch() {
+    this.accountRepository.getPerfectMatch(localStorage.getItem("sessuid"))
+      .then(matchResp => {
+        let matches = matchResp;
+        console.log(matches)
+        this.setState({ items: matches })
+      })
+  }
+  //if (true) {
+  //console.log(items)
+  //return (<></>)
+  ////}
+
 
   render() {
 
@@ -91,8 +112,6 @@ class FindRoomate extends Component {
     //     <h5 className="pt-4">No Match Found</h5>
     //   )
     // }
-
-
     const { items, gender, year, tidyness, smoker, genderP, smokerP, yearP, pets, tidynessP } = this.state;
 
     return (
@@ -105,25 +124,6 @@ class FindRoomate extends Component {
               <h1>Filter</h1>
               <div className="row justify-content-center py-0 my-0">
                 <p className="incorrect incorrect-no-display" id="no-selected-r-filter">Please select a filter</p>
-              </div>
-
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateYear} value={year}>
-                  <option value="">Year</option>
-                  <option value={1}>Freshman</option>
-                  <option value={2}>Sophmore</option>
-                  <option value={3}>Junior</option>
-                  <option value={4}>Senior</option>
-                </select>
-              </div>
-
-              <div className="filter">
-                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
-                  <option value="">Tidyness</option>
-                  <option value={1}>Not Tiddy</option>
-                  <option value={2}>Tidy</option>
-                  <option value={3}>Very Tiddy</option>
-                </select>
               </div>
 
               <div className="filter">
@@ -157,6 +157,7 @@ class FindRoomate extends Component {
               </div>
 
 
+
               <div className="filter">
                 <div className="filterTitle">Smoker
                 <button onClick={this.updateSmoker} className="xbutton">clear</button>
@@ -180,6 +181,7 @@ class FindRoomate extends Component {
               </div>
 
 
+
               <div className="filter">
                 <div className="filterTitle">Pet
                 <button onClick={this.updatePets} className="xbutton">clear</button>
@@ -201,10 +203,29 @@ class FindRoomate extends Component {
                 </label>
                 </div>
               </div>
+              
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
+                  <option value="">Tidyness</option>
+                  <option value={1}>Not Tiddy</option>
+                  <option value={2}>Tidy</option>
+                  <option value={3}>Very Tiddy</option>
+                </select>
+              </div>
 
+              <div className="filter">
+                <select className="custom-select" onChange={this.updateYear} value={year}>
+                  <option value="">Year</option>
+                  <option value={1}>Freshman</option>
+                  <option value={2}>Sophmore</option>
+                  <option value={3}>Junior</option>
+                  <option value={4}>Senior</option>
+                </select>
+              </div>
 
               <button await onClick={() => this.filter()} className="filterButton">Filter</button>
-              <button onClick={() => this.filter()} className="perfectButton">Perfect Match</button>
+              <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
+
 
             </div>
 
@@ -213,20 +234,30 @@ class FindRoomate extends Component {
               <div className="searchResultback">
                 {
                   items.map((item, index) => (
-                    <SearchResult key={index} item={item}/>
-                ))
+                    <SearchResult key={index} item={item} />
 
-              }
+                  ))
+                }
+
               </div>
 
-            <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
-            <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
-          </div>
+              <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
+              <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
+            </div>
 
+
+
+          </div>
         </div>
-      </div>
       </>
     );
+  }
+  componentDidMount() {
+    this.accountRepository.getUsers()
+      .then(items => {
+        console.log(items)
+        this.setState({ items })
+      })
   }
 }
 
@@ -235,30 +266,18 @@ const SearchResult = ({ item }) => {
   return (
     <div className="searchResult">
       <div className="row">
-
-        <div className="col col-mg-3 img">
-          <div className="imageSearched">
-            <img src={item.img} />
-          </div>
-
-        </div>
-        <div className="col col-mg-8 items">
+        <div className="items">
           <div>Name: {item.name}</div>
           <div> Gender: {item.gender}</div>
-          <div> Smoker: {item.smoker}</div>
+          <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
           <div> Tidyness: {item.tidyness}</div>
-          <div> Smoker: {item.smoker}</div>
-          <div> Year: {item.yearP}</div>
+          <div> Year: {item.year}</div>
           <div> Pets: {item.pets}</div>
-
         </div>
-
         <button className="resetButton">Contact</button>
 
       </div>
-    </div> 
-    )
-
+    </div>
+  )
 }
-
 export default FindRoomate;

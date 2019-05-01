@@ -28,13 +28,15 @@ export default class Event extends Component {
                 <div className="container pt-0">
                     <h1>Events</h1>
 
-                    <div className="card-deck pt-0">
+                    <div className="row justify content-center justify-content-between" id="cardRow">
                         {events.map(events => (
                             <div className="eventCard">
                                 <div className="card-body">
                                     <div class="card-title">Details:{events.details}</div>
                                     <div class="card-text"> Date:{events.date}</div>
-                                    <button onClick={this.myEvents} className="resetButton">Attend</button>
+                                    <div className="card-footer">
+                                        <button onClick={this.myEvents} className="resetButton">Attend</button>
+                                    </div>
                                 </div>
                             </div>
                         ))}

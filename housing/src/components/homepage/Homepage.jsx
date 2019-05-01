@@ -30,8 +30,8 @@ export class Homepage extends React.Component {
       // works
       this.accountRepository.login(attemptUser)
       .then(user => {
-        this.setState({user})
         localStorage.setItem('sessuid', user[0].id)
+        this.setState({user})
       })
       //.catch(
         // $("#email").addClass("is-invalid"),
@@ -61,6 +61,7 @@ export class Homepage extends React.Component {
   render() {
     
     if(this.state.user !== null){
+
       return <Redirect to='/main'/>
     }
 

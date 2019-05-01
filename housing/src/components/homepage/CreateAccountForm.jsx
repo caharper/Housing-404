@@ -331,7 +331,6 @@ export class CreateAccountForm extends Component {
       Password: ${password}`)
   }
 
-
   render() {
     return (
       <React.Fragment>

@@ -10,7 +10,7 @@ function Logout() {
     accountRepository
         .logout()
         .then(logout => {
-            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("sessuid");
             // redirect login   if(this.state.user !== null){
             window.location.href = '/';
         })
@@ -35,7 +35,7 @@ class Navbar extends Component {
 
         return (
 
-            <nav className="navbar navbar-dark bg-dark justify-content-between mt-" >
+            <nav className="navbar navbar-dark bg-dark justify-content-between mt-0" >
 
                 <div>
                     <div className="dropdown">
@@ -51,7 +51,7 @@ class Navbar extends Component {
                                     <li><Link id="findroomate" className="dropdown-item" href="/findroomate" >Find Roomate</Link></li>
                                     <li><Link id="listApt" className="dropdown-item" to="/findroomate">List Apartment</Link></li>
                                     <li><Link id="findApt" className="dropdown-item" to="/findApt">Find Apartment</Link></li>
-                                    <li><Link id="event" className="dropdown-item" to="to=/event">Events</Link></li>
+                                    <li><Link id="event" className="dropdown-item" to="event">Events</Link></li>
                                     <li><Link id="myevent" className="dropdown-item" to="/myevent">My Events</Link></li>
                                     <li><Link id="profile" className="dropdown-item" to="/profile">Profile</Link></li>
                                 </div>
