@@ -224,7 +224,7 @@ class FindRoomate extends Component {
                 </select>
               </div>
               <div className="mb-2">
-              <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
+                <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
               </div>
               <button await onClick={() => this.filter()} className="filterButton">Filter</button>
 
@@ -233,19 +233,22 @@ class FindRoomate extends Component {
 
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
-              {
-                items.map((item, index) => (
-                  <SearchResult key={index} item={item} />
+              <div className="container pt-0">
 
-                ))
-              }
+                <div className="row justify content-center justify-content-between" id="cardRow">
 
+                  {
+                    items.map((item, index) => (
+                      <SearchResult key={index} item={item} />
 
-              <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
-              <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
+                    ))
+                  }
+                </div>
+
+                <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
+                <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
+              </div>
             </div>
-
-
 
           </div>
         </div>
@@ -265,15 +268,15 @@ const SearchResult = ({ item }) => {
 
   return (
     <div className="container pt-0">
-      <div className="row justify content-center justify-content-between">
-        <div className="searchRoomateCard mt-3">
+      <div className="row justify-content-center justify-content-between">
+        <div className="searchAptCard mt-3">
           <div className="card-body">
-            <div>Name: {item.name}</div>
-            <div> Gender: {item.gender}</div>
-            <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
-            <div> Tidyness: {item.tidyness}</div>
-            <div> Year: {item.year}</div>
-            <div> Pets: {item.pets}</div>
+            <div className="row search justify content-center">Name: {item.name}</div>
+            <div className="row search"> Gender: {item.gender}</div>
+            <div className="row search"> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
+            <div className="row search"> Tidyness: {item.tidyness}</div>
+            <div className="row search"> Year: {item.year}</div>
+            <div className="row search"> Pets: {item.pets}</div>
           </div>
           <button className="resetButton">Contact</button>
         </div>
