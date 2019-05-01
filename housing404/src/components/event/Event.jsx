@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AccountRepository } from './../../api/accountRepository'
 import Navbar from "../Navbar";
+import './event.css'
 
 
 export default class Event extends Component {
