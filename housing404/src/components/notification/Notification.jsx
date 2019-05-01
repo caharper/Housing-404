@@ -53,26 +53,43 @@ class Notification extends Component {
         </>
       )
     }
+
+    if(true){
+      console.log(this.state.notification)
+    }
     return (
       <>
         <div>
           <Navbar></Navbar>
         </div>
-        <div className="container">
-          <h1>Notification</h1>
-          <div>
-            {this.state.notification.map((notif, index) => (
-              <div className="eventCard">
-                <div key={index}>
-                  <div>From:{notif.name}</div>
-                  <div>Email:{notif.email}</div>
-                  <div>Notifcation:{notif.notification}</div>
-                  <button onClick={() => this.replyToNotification()} className="attendButton">Reply</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+
+      <table className="table table-striped table-condenced">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>Email</th>
+            <th>Details</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            this.state.notification.map((notif, i) =>
+              <tr key={i}>
+                <td>{notif.name}</td>
+                <td>{notif.email}</td>
+                <td>{notif.notification}</td>
+                <td>
+                  <button className="attendButton"
+                          onClick={() => this.replyToNotification()}>
+                          Reply
+                  </button>
+                </td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
       </>
     );
   }
