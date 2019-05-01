@@ -84,6 +84,15 @@ class FindApt extends Component {
     this.setState({ squareFeet: e.target.value || null })
   }
 
+// should be same as the find roommmatte
+  contactOwner(toId){
+    let notif = "";
+
+    this.accountRepository.sendNotification(localStorage.getItem("sessuid"), toId, notif)
+      .then(notificationResp => {
+        console.log(notificationResp)
+      })
+  }
 
   filter() {
 
@@ -157,7 +166,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Bedrooms
-                 <button onClick={this.updateBedrooms} className="xbutton">x</button>
+                 <button onClick={this.updateBedrooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="beds" id="bedroom1" checked={beds === "1"}
@@ -189,7 +198,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Bathrooms
-                <button onClick={this.updateBathrooms} className="xbutton">x</button>
+                <button onClick={this.updateBathrooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="baths" id="bathroom1" checked={baths === "1"}
@@ -219,7 +228,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Number of occupants
-                <button onClick={this.updateOccupants} className="xbutton">x</button>
+                <button onClick={this.updateOccupants} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="occupant" id="occupant" checked={occupants === '1'}
@@ -249,7 +258,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle"> Rooms
-                <button onClick={this.updateRooms} className="xbutton">x</button>
+                <button onClick={this.updateRooms} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="room" id="room" checked={rooms === '1'}
@@ -280,7 +289,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Number of Floors
-                <button onClick={this.updateFloors} className="xbutton">x</button>
+                <button onClick={this.updateFloors} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="floor" id="floor1"
@@ -311,7 +320,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Pet
-                <button onClick={this.updatePets} className="xbutton">x</button>
+                <button onClick={this.updatePets} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pet" id="petYes"
@@ -333,7 +342,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Pool
-                <button onClick={this.updatePool} className="xbutton">x</button>
+                <button onClick={this.updatePool} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="pool" id="poolYes"
@@ -355,7 +364,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Gym
-                <button onClick={this.updateGym} className="xbutton">x</button>
+                <button onClick={this.updateGym} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="gym" id="gymYes"
@@ -377,7 +386,7 @@ class FindApt extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Study Room
-                <button onClick={this.updatestudyRoom} className="xbutton">x</button>
+                <button onClick={this.updatestudyRoom} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="studyRoom" id="studyRoomYes"
@@ -402,40 +411,13 @@ class FindApt extends Component {
 
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
-              <div className="searchResultback">
-                <div>
                   {
-                  // this.filteredApts.map((item, index) => (
-                  //   <div className="searchResult" key={index}>
-                  //     <div className="row">
-                  //
-                  //       <div class="col col-mg-3 img">
-                  //         <div className="imageSearched">
-                  //           <img src={item.img} />
-                  //         </div>
-                  //       </div>
-                  //
-                  //       <div className="col col-mg-8 items">
-                  //         <div>Name:{item.type}</div>
-                  //         <div> Type:{item.type}</div>
-                  //         <div> Description:{item.description}</div>
-                  //         <div> Location:{item.location}</div>
-                  //         <div> Rent:{item.rent}</div>
-                  //         <div> Avalibility:{item.leaseTime}</div>
-                  //         <div> Number of Occupants:{item.occupants}</div>
-                  //         <div> Number of Bedrooms:{item.beds}</div>
-                  //         <div> Number of Bathrooms:{item.baths}</div>
-                  //         <div> Sqaure Feet:{item.squareFeet}</div>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  // ))
                   this.state.filteredApts.map((item, index) => (
-                    <SearchResult key={index} item={item} />
+                    <div>
+                      <SearchResult key={index} item={item} contactOwner={x => this.contactOwner(x)}/>
+                    </div>
                   ))
                 }
-                </div>
-              </div>
               <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>
               <h5 id="no-filter-select-a-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
             </div>
@@ -458,30 +440,26 @@ class FindApt extends Component {
 }
 
 
-const SearchResult = ({ item }) => {
+const SearchResult = (props) => {
   return (
-    <div className="searchResult">
-      <div className="row">
-        <div class="col col-mg-3 img">
-          <div className="imageSearched">
-            <img src={item.img} />
+    <>
+    <div className="searchResult pl-5">
+
+        <div className="searchAptCard mt-3">
+          <div className="card-body">
+            <div> Description: {props.item.description}</div>
+            <div> Location: {props.item.location}</div>
+            <div> Rent: ${props.item.rent}</div>
+            <div> Number of Occupants: {props.item.occupants}</div>
+            <div> Number of Bedrooms: {props.item.beds}</div>
+            <div> Number of Bathrooms: {props.item.baths}</div>
+            <div> Square Feet: {props.item.squareFeet}</div>
+            <button className="resetButton" onClick={(e) => props.contactOwner(props.item.u_id)}>Send My Info</button>
           </div>
         </div>
-        <div className="col col-mg-8 items">
-          <div>Name:{item.type}</div>
-          <div> Type:{item.type}</div>
-          <div> Description:{item.description}</div>
-          <div> Location:{item.location}</div>
-          <div> Rent:{item.rent}</div>
-          <div> Avalibility:{item.leaseTime}</div>
-          <div> Number of Occupants:{item.occupants}</div>
-          <div> Number of Bedrooms:{item.beds}</div>
-          <div> Number of Bathrooms:{item.baths}</div>
-          <div> Sqaure Feet:{item.squareFeet}</div>
-        </div>
-        <button className="resetButton">Contact Owner</button>
-      </div>
+
     </div>
+    </>
   )
 }
 

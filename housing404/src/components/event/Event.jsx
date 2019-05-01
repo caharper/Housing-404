@@ -29,11 +29,13 @@ export default class Event extends Component {
                 <div>
                     <Navbar></Navbar>
                 </div>
+                <div className="container pt-0">
+                  <h1>Events</h1>
 
-                <div className="row justify-content-between">
+                <div className="row justify-content-between justify-content-between" id="cardRow">
                       {events.map((event, index)=> (
                         <>
-                          <div className="card col-4" key={index}>
+                          <div className="eventCard mt-3" key={index}>
                               <div className="card-body">
 
                                   <div className="card-title">Details:{event.details}</div>
@@ -44,6 +46,7 @@ export default class Event extends Component {
                           </div>
                         </>
                       ))}
+                    </div>
                 </div>
             </>
         );

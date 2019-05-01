@@ -1,6 +1,109 @@
-.card .event{
-    width: 18rem;
+/*main*/
+* {
+    box-sizing: border-box;
+  }
+
+  html, body { min-height: 100%; }
+
+  .user-button {
+    border-radius: 50%;
+  }
+
+  .blue {
+    background-color: #008CBA;
+  }
+
+  .white-text {
+    color: white;
+  }
+
+  .text-size {
+    font-size:1vw;
+  }
+
+  .option {
+    color: white;
+    background-color: #008CBA;
+    font-size:1vw;
+  }
+
+  .width {
+    width: 30vw;
+  }
+
+  .align {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50vh;
+  }
+
+
+/* code below derived from https://www.designskilz.com/cool-css-buttons/ all credits
+go to original author */
+body{
+    text-align:center;
 }
-.addToEvent{
-  
+body:before{
+    content:'';
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.attendButton{
+    float:right;
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+.attendButton:hover{
+    background:#fff;
+    color:#1AAB8A;
+}
+.attendButton:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+}
+.attendButton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.attendButton:hover:before,.attendButton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+
+/*Cards*/
+ * {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.eventCard {
+  width: 20rem;
+  height:12rem;
+  text-align: left;
+  background-color: #eeeeee;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: inline-block;
+  border-radius: 3px;
+  /* position: relative; */
 }

@@ -162,6 +162,14 @@ export class AccountRepository {
       })
   }
 
+  deleteEvent(eId, sessuid) {
+    return new Promise((resolve, reject) => {
+        axios.delete(`${this.url}/user/myEvents/${eId}?sessuid=${sessuid}`)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
+
 
   // Get all events owned by a user  ------ ****** doesn't this need a user id ?
   getUserOwnedEvents(sessuid) {

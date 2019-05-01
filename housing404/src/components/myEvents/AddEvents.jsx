@@ -11,7 +11,7 @@ export default class AddEvent extends Component {
     state = {
         addEvents: null,
         details: null,
-        date: null
+        date: null,
     }
 
     updateDetails = (e) => {
@@ -47,12 +47,12 @@ export default class AddEvent extends Component {
                                     <h2>Add Events</h2>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Event Details</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" onChange={this.updateDetails} value={this.state.details}></textarea>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Event Details" onChange={this.updateDetails} value={this.state.details}></textarea>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="eventDate">Event Date</label>
-                                    <input type="text" className="form-control" id="eventDate" aria-describedby="date" placeholder="Event Date" onChange={this.state.updateDate} value={this.date}/>
+                                    <input type="text" className="form-control" id="eventDate" aria-describedby="date" placeholder="Event Date" onChange={this.updateDate} value={this.state.date}/>
                                 </div>
                             </form>
                             <button  class="resetButton" onClick={() => this.addEvent()}>Create event</button>

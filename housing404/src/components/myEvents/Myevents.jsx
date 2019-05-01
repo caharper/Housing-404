@@ -23,8 +23,8 @@ class Myevents extends Component {
   //     })
   // }
 
-  removeFromAttending(eId) {
-    this.accountRepository.deleteSingleGoingEvent(eId, localStorage.getItem("sessuid"))
+  deleteAnEvent(eId){
+    this.accountRepository.deleteEvent(eId, localStorage.getItem("sessuid"))
       .then(resp => {
         console.log(resp)
         // redirect login   if(this.state.user !== null){
@@ -35,14 +35,26 @@ class Myevents extends Component {
       })
   }
 
-  getAttending(eId) {
-    // make api call
-    this.accountRepository.getAttendingEventWithId(eId)
-        .then(attendees => {
-          let list = attendees.join()
-          return list
+    removeFromAttending(eId) {
+      this.accountRepository.deleteSingleGoingEvent(eId, localStorage.getItem("sessuid"))
+        .then(resp => {
+          console.log(resp)
+          // redirect login   if(this.state.user !== null){
+          window.location.href = '/main';
         })
-  }
+        .catch(resp => {
+          console.log(resp)
+        })
+    }
+
+    getAttending(eId) {
+      // make api call
+      this.accountRepository.getAttendingEventWithId(eId)
+          .then(attendees => {
+            let list = attendees.join()
+            return list
+          })
+    }
 
   render() {
 
@@ -52,15 +64,15 @@ class Myevents extends Component {
     // let badEventsattend = (this.state.eventsAttend === undefined || this.state.eventsAttend === null)
 
     console.log(this.state.eventsAttend)
-    console.log('my events: ',this.state.myEvents)
+    console.log('my events: ', this.state.myEvents)
 
     if (!this.state.myEvents && !this.state.eventsAttend) {
       return (
         <>
           <div><Navbar></Navbar></div>
-          <div className="row justify-content-center pb-2">
-            <h1>My Events</h1>
-          </div>
+            <div className="row justify-content-center pb-2">
+                <h1>My Events</h1>
+            </div>
           <div>
             <AddEvent></AddEvent>
           </div>
@@ -73,7 +85,7 @@ class Myevents extends Component {
         <>
           <div><Navbar></Navbar></div>
             <div className="row justify-content-center pb-2">
-              <h1>My Events</h1>
+                <h1>My Events</h1>
             </div>
           <div>
             <AddEvent></AddEvent>
@@ -87,7 +99,7 @@ class Myevents extends Component {
                 <div> Date:{item.date}</div>
               </>
             ))} */
-            this.state.myEvents.name}
+              this.state.myEvents.name}
           </div>
         </>
       )
@@ -97,13 +109,12 @@ class Myevents extends Component {
         <>
           <div><Navbar></Navbar></div>
             <div className="row justify-content-center pb-2">
-              <h1>My Events</h1>
+                <h1>My Events</h1>
             </div>
-
           <div>
             <AddEvent></AddEvent>
           </div>
-          You have no created events, but you are attending events
+          You have no created events, but you have attending events
             <h1>Events Posted</h1>
           <div>
             <AddEvent></AddEvent>
@@ -113,24 +124,20 @@ class Myevents extends Component {
               <div>
                 <div>Details:{events.name}</div>
                 <div> Date:{events.date}</div>
-                <button onClick={() => this.removeFromAttending(events.e_id)}>Remove</button>
+                <button onClick={this.remove}>Remove</button>
               </div>
             ))}
           </div>
         </>
       )
     }
-
-    else{
-
-    }
     return (
       <>
         <div><Navbar></Navbar></div>
-        <div class="container">
           <div className="row justify-content-center pb-2">
-            <h1>My Events</h1>
+              <h1>My Events</h1>
           </div>
+        <div class="container">
           <div class="row">
             <div class="col-6">
               <h1>Event Attending</h1>
@@ -139,34 +146,37 @@ class Myevents extends Component {
                   <div className="searchResult" >
                     <div className="row">
                       <div className="col col-mg-8 items">
-                        <div>Name:{item.details}</div>
-                        <div> Date:{item.date}</div>
-                        <button onClick={() => this.removeFromAttending(item.e_id)} className="attendButton">Delete</button>
+                        <div className="row">Name:{item.details}</div>
+                        <div className="row"> Date:{item.date}</div>
+                        <div className="row">
+                          <button onClick={() => this.removeFromAttending(item.e_id)} className="attendButton">Delete</button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
             <div class="col-6" >
               <h1>Events Posted</h1>
               <div>
                 <AddEvent></AddEvent>
               </div>
               {this.state.myEvents.map(events => (
-                <>
-                  <div className="row">
-                    <div className="col-6">
-                      <div>Details:{events.name}</div>
+                <div className="row justify-content-center pt-2">
+                  <div className="searchResult border w-75">
+                    <div className="container">
+                      <div className="row">Owner: {events.name}</div>
+                      <div className="row">Details: {events.details}</div>
+                      <div className="row">Date: {events.date}</div>
+                      <div className="row">Attending: {this.getAttending(events.e_id)}</div>
+                      <div className="row justify-content-center pt-3">
+                        <button onClick={() => this.deleteAnEvent(events.e_id)} className="attendButton">Remove</button>
+                      </div>
                     </div>
-                    <div className="col-6">
-                      <div> Date:{events.date}</div>
                     </div>
-                  </div>
-                  <div className="row pb-2">
-                    <div>Attending: {this.getAttending(events.e_id)}</div>
-                  </div>
-                </>
+                </div>
               ))}
             </div>
           </div>
@@ -189,9 +199,34 @@ class Myevents extends Component {
         console.log(this.state.eventsAttend)
         console.log(this.state.myEvents)
       })
-
-      // Get who is going to my event
-
   }
 }
 export default Myevents;
+
+// <button onClick={() => this.removeFromAttending(item.e_id)} className="attendButton">Delete</button>
+//
+//
+//
+//
+//   removeFromAttending(eId) {
+//     this.accountRepository.deleteSingleGoingEvent(eId, localStorage.getItem("sessuid"))
+//       .then(resp => {
+//         console.log(resp)
+//         // redirect login   if(this.state.user !== null){
+//         window.location.href = '/main';
+//       })
+//       .catch(resp => {
+//         console.log(resp)
+//       })
+//   }
+//
+//   getAttending(eId) {
+//     // make api call
+//     this.accountRepository.getAttendingEventWithId(eId)
+//         .then(attendees => {
+//           let list = attendees.join()
+//           return list
+//         })
+//   }
+//
+//   <div>Attending: {this.getAttending(events.e_id)}</div>

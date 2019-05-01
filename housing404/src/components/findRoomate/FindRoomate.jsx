@@ -148,7 +148,7 @@ class FindRoomate extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Gender
-              <button onClick={this.updateGender} className="xbutton">x</button>
+              <button onClick={this.updateGender} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline" >
                   <input className="form-check-input" type="radio" name="gender" id="genderMale" checked={gender === "M"}
@@ -180,7 +180,7 @@ class FindRoomate extends Component {
 
               <div className="filter">
                 <div className="filterTitle">Smoker
-                <button onClick={this.updateSmoker} className="xbutton"></button>
+                <button onClick={this.updateSmoker} className="xbutton">clear</button>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="radio" name="smoker" id="smokerYes"
@@ -240,8 +240,10 @@ class FindRoomate extends Component {
                   <option value={3}>Very Tiddy</option>
                 </select>
               </div>
-
+              
+              <div className="mb-2">
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
+              </div>
               <button onClick={() => this.pMatch()} className="perfectButton">Perfect Match</button>
 
 
