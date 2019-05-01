@@ -1,77 +1,88 @@
+import React , { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import React, { Component } from 'react'
-import { AccountRepository } from './../api/accountRepository'
+import { AccountRepository } from './../api/accountRepository';
+import logo from './../housing404.svg';
 
 import './navbar.css'
 
-
-function Logout() {
-    const accountRepository = new AccountRepository
-    accountRepository
-        .logout()
-        .then(logout => {
-            localStorage.removeItem("sessuid");
-            // redirect login   if(this.state.user !== null){
-            window.location.href = '/';
-        })
-
-}
-function Id() {
-    localStorage.getItem("sessuid")
-}
-
-
 class Navbar extends Component {
-    state = {
-        active: false,
+  accountRepository = new AccountRepository;
+
+  state = {
+    user: null,
+  }
+
+  Logout() {
+
+      this.accountRepository
+          .logout()
+          .then(logout => {
+              localStorage.removeItem("sessuid");
+              // redirect login   if(this.state.user !== null){
+              window.location.href = '/';
+          })
+  }
+
+  render() {
+
+    if (!this.state.user) {
+      return (
+        <nav className="navbar navbar-dark bg-dark justify-content-between postion-relative" >
+
+            <div className="navbar-brand">
+              <Link to="/main">
+                <img className="icon col-2 pl-1 postion-absolute float-left" src={logo}></img>
+              </Link>
+            </div>
+
+            <button onClick={() => this.Logout()} className="logoutButton" >
+                Logout
+                </button>
+
+        </nav>
+      );
     }
 
-    toggleDropdown = () => {
-        this.setState(state => ({ active: !state.active }))
+    if(!this.props.didChange){
+      return (
+        <nav className="navbar navbar-dark bg-dark justify-content-between postion-relative" >
+
+            <div className="navbar-brand">
+              <Link to="/main">
+                <img className="icon col-2 pl-1 postion-absolute float-left" src={logo}></img>
+              </Link>
+            </div>
+
+            <button onClick={() => this.Logout()} className="logoutButton" >
+                Logout
+                </button>
+
+        </nav>
+      );
     }
 
+    return (
+      <nav className="navbar navbar-dark bg-dark justify-content-between mt-" >
 
-    render() {
+          <div className="navbar-brand">
+            <h4>
+              Hello, {this.state.user.name}
+            </h4>
+          </div>
 
-        return (
+          <button onClick={() => this.Logout()} className="logoutButton" >
+              Logout
+              </button>
 
-            <nav className="navbar navbar-dark bg-dark justify-content-between mt-0" >
-
-                <div>
-                    <div className="dropdown">
-                        <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" onClick={this.toggleDropdown}>
-                            Menu
-                        </a>
-
-                        {
-                            this.state.active && (
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenuLink" style={{ display: 'block' }}>
-                                    <li><Link id="main" className="dropdown-item" to="/main">Main</Link></li>
-                                    <li> <Link id="notifcation" className="dropdown-item" to="/notification">Notifcation</Link></li>
-                                    <li><Link id="findroomate" className="dropdown-item" href="/findroomate" >Find Roomate</Link></li>
-                                    <li><Link id="listApt" className="dropdown-item" to="/findroomate">List Apartment</Link></li>
-                                    <li><Link id="findApt" className="dropdown-item" to="/findApt">Find Apartment</Link></li>
-                                    <li><Link id="event" className="dropdown-item" to="event">Events</Link></li>
-                                    <li><Link id="myevent" className="dropdown-item" to="/myevent">My Events</Link></li>
-                                    <li><Link id="profile" className="dropdown-item" to="/profile">Profile</Link></li>
-                                </div>
-                            )
-                        }
-                    </div>
-                    <a className="navbar-brand" href="#">PlaceHolder</a>
-
-                </div>
-
-                <a className="navbar-brand" href="#">Housing404</a>
-
-                <button onClick={Logout} className="logoutButton" >
-                    Logout
-            </button>
-
-            </nav>
-        )
-    }
+      </nav>
+    );
+  }
+  componentDidMount() {
+    this.accountRepository.getUserProfile(localStorage.getItem("sessuid"))
+      .then(userListResp => {
+        let userList = userListResp[0];
+        this.setState({user: userList })
+      })
+  }
 }
-
 export default Navbar;
-

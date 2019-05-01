@@ -32,17 +32,17 @@ class FindApt extends Component {
 
   }
 
-  // updateType = (e) => {
-  //   this.setState({ type: e.target.value || null })
-  // }
-  // updateYear = (e) => {
-  //   this.setState({ year: e.target.value || null })
-  // }
+  updateType = (e) => {
+    this.setState({ type: e.target.value || null })
+  }
+  updateYear = (e) => {
+    this.setState({ year: e.target.value || null })
+  }
   updateBedrooms = (e) => {
-    this.setState({ beds: e.target.value || null })
+    this.setState({ bedrooms: e.target.value || null })
   }
   updateBathrooms = (e) => {
-    this.setState({ baths: e.target.value || null })
+    this.setState({ bathrooms: e.target.value || null })
   }
   updateOccupants = (e) => {
     this.setState({ occupants: e.target.value || null })
@@ -51,16 +51,16 @@ class FindApt extends Component {
     this.setState({ rooms: e.target.value || null })
   }
   updateFloors = (e) => {
-    this.setState({ floor: e.target.value || null })
+    this.setState({ floors: e.target.value || null })
   }
   updateKitchens = (e) => {
-    this.setState({ kitchen: e.target.value || null })
+    this.setState({ kitchens: e.target.value || null })
   }
-  // updateLaundryRooms = (e) => {
-  //   this.setState({ laundryRooms: e.target.value || null })
-  // }
+  updateLaundryRooms = (e) => {
+    this.setState({ laundryRooms: e.target.value || null })
+  }
   updateStudyRoom = (e) => {
-    this.setState({ studyRooms: e.target.value || null })
+    this.setState({ studyRoom: e.target.value || null })
   }
   updatePets = (e) => {
     this.setState({ pets: e.target.value || null })
@@ -68,15 +68,15 @@ class FindApt extends Component {
   updateGym = (e) => {
     this.setState({ gym: e.target.value || null })
   }
-  // updateSmoking = (e) => {
-  //   this.setState({ smoking: e.target.value || null })
-  // }
+  updateSmoking = (e) => {
+    this.setState({ smoking: e.target.value || null })
+  }
   updatePool = (e) => {
     this.setState({ pool: e.target.value || null })
   }
-  // updateRoomStyle = (e) => {
-  //   this.setState({ roomStyle: e.target.value || null })
-  // }
+  updateRoomStyle = (e) => {
+    this.setState({ roomStyle: e.target.value || null })
+  }
   updateRent = (e) => {
     this.setState({ rent: e.target.value || null })
   }
@@ -536,6 +536,13 @@ class FindApt extends Component {
         </div>
       </>
     );
+  }
+  componentDidMount() {
+    this.accountRepository.getAllApartments()
+      .then(filteredApts => {
+        console.log(filteredApts)
+        this.setState({ filteredApts })
+      })
   }
 }
 
