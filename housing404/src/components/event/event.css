@@ -47,12 +47,12 @@ go to original author */
 body{
     text-align:center;
 }
-body:before{
+/* body:before{
     content:'';
     height:100%;
     display:inline-block;
     vertical-align:middle;
-}
+} */
 .attendButton{
     float:right;
     background:#1AAB8A;
@@ -99,7 +99,7 @@ body:before{
 
 .eventCard {
   width: 20rem;
-  height:12rem;
+  height:13rem;
   text-align: left;
   background-color: #eeeeee;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

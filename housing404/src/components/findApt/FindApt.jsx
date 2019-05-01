@@ -413,9 +413,14 @@ class FindApt extends Component {
               <h1 >Search Results</h1>
                   {
                   this.state.filteredApts.map((item, index) => (
-                    <div className="move-over">
+                    <>
+                    <div className="move-over d-none d-lg-block">
                       <SearchResult key={index} item={item} contactOwner={x => this.contactOwner(x)}/>
                     </div>
+                    <div className="move-left d-lg-none">
+                      <SearchResult key={index} item={item} contactOwner={x => this.contactOwner(x)}/>
+                    </div>
+                    </>
                   ))
                 }
               <h5 id="no-apt-match" className="incorrect-no-display">You have no results</h5>

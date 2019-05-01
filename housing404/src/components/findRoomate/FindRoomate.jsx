@@ -253,9 +253,15 @@ class FindRoomate extends Component {
                 <h1 className="">Search Results</h1>
                 {
                   items.map((item, index) => (
-                    <div className="move-over-more">
+                    <>
+                    <div className="move-over-more d-none d-lg-block">
                       <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
                     </div>
+
+                    <div className="move-left-less d-lg-none">
+                      <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
+                    </div>
+                    </>
 
                   ))
                 }

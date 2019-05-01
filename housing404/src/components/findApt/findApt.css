@@ -227,3 +227,13 @@ html, body { min-height: 100%; }
   .move-over-more{
     padding-left: 10rem;
   }
+
+  .move-left {
+    padding-left: -4em;
+    margin-left: -5em;
+  }
+
+  .move-left-less {
+    padding-left: 7em;
+    margin-left: 4em;
+  }
