@@ -1,0 +1,42 @@
+.resetButton{
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.deleteAccButton{
+    background-color: #A52A2A;
+    position: relative;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.profile{
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+
+}
+.resetPassword{
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.person-icon{
+  width: 18vw;
+  height: 18vw;
+}
