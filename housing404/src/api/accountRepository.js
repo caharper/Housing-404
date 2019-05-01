@@ -83,13 +83,13 @@ export class AccountRepository {
   }
 
   // Create notifcation
-  createNotification(sessuid, toId, notif){
-    return new Promise((resolve, reject) => {
-        axios.post(`${this.url}/users/${toId}/contact?sessuid=${sessuid}`, notif)
-        .then(resp => resolve(resp.data))
-        .catch(resp => alert(resp))
-      })
-  }
+  // createNotification(sessuid, toId, notif){
+  //   return new Promise((resolve, reject) => {
+  //       axios.post(`${this.url}/users/${toId}/contact?sessuid=${sessuid}`, notif)
+  //       .then(resp => resolve(resp.data))
+  //       .catch(resp => alert(resp))
+  //     })
+  // }
 
   // // Delete ALL user notifications for ALL users
   // deleteUserNotifications() {

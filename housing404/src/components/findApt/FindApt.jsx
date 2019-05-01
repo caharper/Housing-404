@@ -426,6 +426,9 @@ class FindApt extends Component {
                   //     </div>
                   //   </div>
                   // ))
+                  this.state.filteredApts.map((item, index) => (
+                    <SearchResult key={index} item={item} />
+                  ))
                 }
                 </div>
               </div>
@@ -445,9 +448,37 @@ class FindApt extends Component {
     this.accountRepository.getAllApartments()
       .then(allApts => {
         console.log(allApts)
-        this.setState({aptListings: allApts })
+        this.setState({filteredApts: allApts })
       })
   }
+}
+
+
+const SearchResult = ({ item }) => {
+  return (
+    <div className="searchResult">
+      <div className="row">
+        <div class="col col-mg-3 img">
+          <div className="imageSearched">
+            <img src={item.img} />
+          </div>
+        </div>
+        <div className="col col-mg-8 items">
+          <div>Name:{item.type}</div>
+          <div> Type:{item.type}</div>
+          <div> Description:{item.description}</div>
+          <div> Location:{item.location}</div>
+          <div> Rent:{item.rent}</div>
+          <div> Avalibility:{item.leaseTime}</div>
+          <div> Number of Occupants:{item.occupants}</div>
+          <div> Number of Bedrooms:{item.beds}</div>
+          <div> Number of Bathrooms:{item.baths}</div>
+          <div> Sqaure Feet:{item.squareFeet}</div>
+        </div>
+        <button className="resetButton">Contact Owner</button>
+      </div>
+    </div>
+  )
 }
 
 export default FindApt;

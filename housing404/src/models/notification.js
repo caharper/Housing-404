@@ -1,5 +1,5 @@
-export class Notification{
-    constructor(notification){
-        notification= this.notification;
-    }
-}
+// export class NewNotification{
+//     constructor(notification){
+//         this.notification= notification;
+//     }
+// }

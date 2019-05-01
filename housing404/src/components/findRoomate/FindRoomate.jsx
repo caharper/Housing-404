@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { AccountRepository } from './../../api/accountRepository';
-import { FilterRoommate } from './../../models/filterRoomate'
+import { FilterRoommate } from './../../models/filterRoomate';
+
 import Navbar from "../Navbar";
 import $ from 'jquery';
+import { SearchResults } from './searchResult'
+import { NewNotification } from './../../models/newNotif';
 
 
 
@@ -23,9 +26,30 @@ class FindRoomate extends Component {
     yearP: null,
     bedTimeP: null,
     wakeTime: null,
-    wakeTimeP: null
+    wakeTimeP: null,
+
+    notification: null
 
   }
+
+  contactUser(toId, notif){
+
+    // first need to get the user with that id that sent the notification
+    // add that in the paramaters passed from below
+
+    console.log(toId)
+    console.log(notif)
+
+    let notification = new NewNotification(notif);
+
+    this.accountRepository.sendNotification(localStorage.getItem("sessuid"), toId, notif)
+      .then(notificationResp => {
+        console.log(notificationResp)
+      })
+
+
+  }
+
 
   updateSmoker = (e) => {
     this.setState({ smoker: e.target.value || null })
@@ -222,9 +246,13 @@ class FindRoomate extends Component {
 
             <div className="col col-lg-8">
               <h1 >Search Results</h1>
-              <div className="searchResultback">
+                {
+                  items.map((item, index) => (
+                    // <SearchResult contactUser={x => this.contactUser(x)} key={index} item={item} />
+                    <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
 
-              </div>
+                  ))
+                }
 
               <h5 id="no-roommate-match" className="incorrect-no-display">You have no results</h5>
               <h5 id="no-filter-select-heading" className="incorrect-no-display text-danger">Please select a filter</h5>
@@ -237,7 +265,33 @@ class FindRoomate extends Component {
       </>
     );
   }
+  componentDidMount() {
+    this.accountRepository.getUsers()
+      .then(items => {
+        console.log(items)
+        this.setState({ items })
+      })
+  }
 }
+
+// const SearchResult = ({ item }) => {
+//   return (
+//     <div className="container pt-0">
+//       <div className="row justify content-center justify-content-between">
+//         <div className="searchCard">
+//           <div className="card-body">
+//             <div> Gender: {item.gender}</div>
+//             <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
+//             <div> Tidyness: {item.tidyness}</div>
+//             <div> Year: {item.year}</div>
+//             <div> Pets: {item.pets}</div>
+//           </div>
+//           <button className="resetButton" onClick={(e) => this.props.contactUser(item.id)}>Contact</button>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 
 
 // const SearchResult = ({ item }) => {
