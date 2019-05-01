@@ -13,7 +13,8 @@ class Profile extends Component {
     userList: null,
     resetPassword: null,
     password: '',
-    aptListings: null
+    aptListings: null,
+    change: false,
   }
 
   updatePassword = e => {
@@ -55,6 +56,7 @@ class Profile extends Component {
     this.accountRepository.deleteApartment(localStorage.getItem("sessuid"), aId)
       .then(eventListResp => {
         console.log(eventListResp)
+        window.location.href = '/main';
       })
       .catch(eventListResp => {
         console.log(eventListResp)
@@ -95,6 +97,70 @@ class Profile extends Component {
     }
     else {
       year = "Senior";
+    }
+
+    if(this.state.aptListings.length === 0){
+      return (
+        <>
+          <Navbar></Navbar>
+
+
+
+            <div className="container position-relative">
+              <div className="row justify-content-center">
+                <h1>Profile Information</h1>
+              </div>
+              <div className="row justify-content-center">
+                <img className="person-icon position-relative pl-1" src={accountLogo}></img>
+              </div>
+              <div className="row justify-content-center">
+                <table className="table w-50">
+                  <tbody>
+                    <tr>
+                      <td className="text-left">Name:</td>
+                      <td className="text-right">{userList.name}</td>
+                    </tr>
+                    <tr>
+                      <td className="text-left">Gender:</td>
+                      <td className="text-right">{gender}</td>
+                    </tr>
+                    <tr className="border-bottom">
+                      <td className="text-left">Year:</td>
+                      <td className="text-right">{year}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+              <div className="row justify-content-center">
+                <h3>Your housing listings</h3>
+              </div>
+              <div className="row justify-content-center">
+                <h6>You have no housing listings</h6>
+              </div>
+
+              <div className="row justify-content-center">
+                <h3>Change Password</h3>
+              </div>
+
+              <div className="row justify-content-center">
+                <div class="form-group  w-50">
+                  <input type="password" onChange={this.updatePassword} value={this.state.password} className="form-control" id="newPassword" placeholder="New Password" />
+                </div>
+              </div>
+
+              <div className="row justify-content-center">
+                  <button onClick={this.changePassword} className="resetButton w-50">Change Password</button>
+              </div>
+
+
+              <div className="row justify-content-center">
+                <button onClick={() => this.deleteAccount()} className="deleteAccButton w-50">Delete Account</button>
+              </div>
+            </div>
+        </>
+      );
     }
 
 

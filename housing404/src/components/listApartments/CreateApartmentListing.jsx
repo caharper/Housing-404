@@ -29,7 +29,10 @@ export class CreateApartmentListings extends React.Component {
   onCreateApt(newApt) {
     let sessuid = localStorage.getItem("sessuid")
     this.accountRepository.createApartment(newApt, sessuid)
-      .then(createdApt => this.setState({ createdApt }))
+      .then(createdApt => {
+        this.setState({ createdApt })
+        window.location.href = '/main';
+      })
   }
 
 
