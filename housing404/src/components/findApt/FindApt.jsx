@@ -413,7 +413,7 @@ class FindApt extends Component {
               <h1 >Search Results</h1>
                   {
                   this.state.filteredApts.map((item, index) => (
-                    <div>
+                    <div className="move-over">
                       <SearchResult key={index} item={item} contactOwner={x => this.contactOwner(x)}/>
                     </div>
                   ))

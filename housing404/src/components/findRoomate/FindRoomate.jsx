@@ -201,16 +201,6 @@ class FindRoomate extends Component {
               </div>
 
               <div className="filter">
-                <select className="custom-select" onChange={this.updateYear} value={year}>
-                  <option value="">Year</option>
-                  <option value={1}>Freshman</option>
-                  <option value={2}>Sophmore</option>
-                  <option value={3}>Junior</option>
-                  <option value={4}>Senior</option>
-                </select>
-              </div>
-
-              <div className="filter">
                 <div className="filterTitle">Pet
                 <button onClick={this.updatePets} className="xbutton">clear</button>
                 </div>
@@ -233,6 +223,16 @@ class FindRoomate extends Component {
               </div>
 
               <div className="filter">
+                <select className="custom-select" onChange={this.updateYear} value={year}>
+                  <option value="">Year</option>
+                  <option value={1}>Freshman</option>
+                  <option value={2}>Sophmore</option>
+                  <option value={3}>Junior</option>
+                  <option value={4}>Senior</option>
+                </select>
+              </div>
+
+              <div className="filter">
                 <select className="custom-select" onChange={this.updateTidyness} value={tidynessP}>
                   <option value="">Tidyness</option>
                   <option value={1}>Not Tiddy</option>
@@ -240,7 +240,7 @@ class FindRoomate extends Component {
                   <option value={3}>Very Tiddy</option>
                 </select>
               </div>
-              
+
               <div className="mb-2">
               <button onClick={() => this.filter()} className="filterButton">Filter</button>
               </div>
@@ -250,10 +250,12 @@ class FindRoomate extends Component {
             </div>
 
             <div className="col col-lg-8">
-              <h1 >Search Results</h1>
+                <h1 className="">Search Results</h1>
                 {
                   items.map((item, index) => (
-                    <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
+                    <div className="move-over-more">
+                      <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
+                    </div>
 
                   ))
                 }
