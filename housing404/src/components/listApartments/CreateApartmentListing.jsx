@@ -49,6 +49,10 @@ export class CreateApartmentListings extends React.Component {
 
 
         <div className="container d-none d-lg-block">
+          <div className="row justify-content-center pb-2">
+            <h1>Create a Listing</h1>
+          </div>
+
           <div className="row">
             <ApartmentProgressBar></ApartmentProgressBar>
           </div>

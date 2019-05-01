@@ -18,20 +18,7 @@ export class SearchResults extends Component {
                 <div> Year: {this.props.item.year}</div>
                 <div> Pets: {this.props.item.pets}</div>
 
-              <div className="form-group w-100 ">
-                <label htmlFor="description"></label>
-                <textarea type="textarea"
-                       id="notif"
-                       name="nofif"
-                       placeholder="Send Message"
-                       maxLength={50}
-                       className="form-control"
-                       value={this.state.notif}
-                       onChange={e => this.setState({notif: e.target.value})}>
-                 </textarea>
-              </div>
-
-              <button className="resetButton" onClick={(e,x) => this.props.contactUser(this.props.item.id, this.state.notif)}>Contact</button>
+              <button className="resetButton" onClick={(e,x) => this.props.contactUser(this.props.item.id, this.state.notif)}>Send My Information</button>
             </div>
           </div>
         </div>

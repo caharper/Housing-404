@@ -49,6 +49,9 @@ class Notification extends Component {
       return (
         <>
           <div><Navbar></Navbar></div>
+            <div className="row justify-content-center pb-2">
+              <h1>Notifications</h1>
+            </div>
           <h4 className="pt-5">You have no notifications</h4>
         </>
       )
@@ -63,13 +66,15 @@ class Notification extends Component {
           <Navbar></Navbar>
         </div>
 
+        <div className="row justify-content-center pb-2">
+          <h1>Notifications</h1>
+        </div>
+
       <table className="table table-striped table-condenced">
         <thead>
           <tr>
             <th>From</th>
             <th>Email</th>
-            <th>Details</th>
-            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -78,13 +83,6 @@ class Notification extends Component {
               <tr key={i}>
                 <td>{notif.name}</td>
                 <td>{notif.email}</td>
-                <td>{notif.notification}</td>
-                <td>
-                  <button className="attendButton"
-                          onClick={() => this.replyToNotification()}>
-                          Reply
-                  </button>
-                </td>
               </tr>
             )
           }

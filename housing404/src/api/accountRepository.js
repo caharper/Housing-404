@@ -154,13 +154,13 @@ export class AccountRepository {
   }
 
   // Delete a single event a user is going to
-  // deleteSingleGoingEvent(eId) {
-  //   return new Promise((resolve, reject) => {
-  //       axios.delete(`${this.url}/user/events/${eId}`, eId)
-  //       .then(resp => resolve(resp.data))
-  //       .catch(resp => alert(resp))
-  //     })
-  // }
+  deleteSingleGoingEvent(eId, sessuid) {
+    return new Promise((resolve, reject) => {
+        axios.delete(`${this.url}/user/events/${eId}?sessuid=${sessuid}`)
+        .then(resp => resolve(resp.data))
+        .catch(resp => alert(resp))
+      })
+  }
 
 
   // Get all events owned by a user  ------ ****** doesn't this need a user id ?

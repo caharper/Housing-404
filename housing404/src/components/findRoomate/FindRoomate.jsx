@@ -135,6 +135,9 @@ class FindRoomate extends Component {
       <>
         <div><Navbar></Navbar></div>
         <div className="container">
+          <div className="row justify-content-center pb-2">
+            <h1>Find a Roommate</h1>
+          </div>
           <div className="row">
 
             <div className="col-sm-3">
@@ -248,7 +251,6 @@ class FindRoomate extends Component {
               <h1 >Search Results</h1>
                 {
                   items.map((item, index) => (
-                    // <SearchResult contactUser={x => this.contactUser(x)} key={index} item={item} />
                     <SearchResults contactUser={x => this.contactUser(x)} key={index} item={item} notif={this.state.notifcation}></SearchResults>
 
                   ))
@@ -274,48 +276,5 @@ class FindRoomate extends Component {
   }
 }
 
-// const SearchResult = ({ item }) => {
-//   return (
-//     <div className="container pt-0">
-//       <div className="row justify content-center justify-content-between">
-//         <div className="searchCard">
-//           <div className="card-body">
-//             <div> Gender: {item.gender}</div>
-//             <div> Smoker: {item.smoker.data[0] === 1 ? "Yes" : "No"}</div>
-//             <div> Tidyness: {item.tidyness}</div>
-//             <div> Year: {item.year}</div>
-//             <div> Pets: {item.pets}</div>
-//           </div>
-//           <button className="resetButton" onClick={(e) => this.props.contactUser(item.id)}>Contact</button>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-
-// const SearchResult = ({ item }) => {
-//   return (
-//     <div className="searchResult">
-//       <div className="row">
-//         <div className="col col-mg-3 img">
-//           <div className="imageSearched">
-//             <img src={item.img} />
-//           </div>
-//         </div>
-//         <div className="col col-mg-8 items">
-//           <div>Name: {item.name}</div>
-//           <div> Gender: {item.gender}</div>
-//           <div> Smoker: {item.smoker}</div>
-//           <div> Tidyness: {item.tidyness}</div>
-//           <div> Smoker: {item.smoker}</div>
-//           <div> Year: {item.yearP}</div>
-//           <div> Pets: {item.pets}</div>
-//         </div>
-//         <button className="resetButton">Contact</button>
-//       </div>
-//     </div>
-//     )
-// }
 
 export default FindRoomate;

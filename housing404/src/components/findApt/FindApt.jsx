@@ -143,6 +143,10 @@ class FindApt extends Component {
         <div><Navbar></Navbar></div>
 
         <div className="container">
+          <div className="row justify-content-center pb-2">
+            <h1>Find Housing</h1>
+          </div>
+
           <div className="row">
             <div className="col-sm-3">
               <h1>Filter</h1>

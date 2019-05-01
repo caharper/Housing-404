@@ -37,13 +37,13 @@ class MainPage extends Component {
 
                     <div className="mb-2">
                         <Link to="/listApt">
-                            <button className="width">List An Apartment</button>
+                            <button className="width">List Housing</button>
                         </Link>
                     </div>
 
                     <div className="mb-2">
                         <Link to="/findApt">
-                            <button className="width">Find An Apartment</button>
+                            <button className="width">Find Housing</button>
                         </Link>
                     </div>
 

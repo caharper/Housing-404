@@ -285,7 +285,7 @@ export class CreateApartmentListingForm extends Component {
         <button
           className="btn btn-success btn-block float-right mt-2"
           type="button" onClick={() => this.onSubmit()}>
-        Create Account
+        Create Listing
         </button>
       )
     }

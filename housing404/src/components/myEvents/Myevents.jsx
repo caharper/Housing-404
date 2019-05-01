@@ -23,6 +23,18 @@ class Myevents extends Component {
   //     })
   // }
 
+  removeFromAttending(eId) {
+    this.accountRepository.deleteSingleGoingEvent(eId, localStorage.getItem("sessuid"))
+      .then(resp => {
+        console.log(resp)
+        // redirect login   if(this.state.user !== null){
+        window.location.href = '/main';
+      })
+      .catch(resp => {
+        console.log(resp)
+      })
+  }
+
   getAttending(eId) {
     // make api call
     this.accountRepository.getAttendingEventWithId(eId)
@@ -46,6 +58,9 @@ class Myevents extends Component {
       return (
         <>
           <div><Navbar></Navbar></div>
+          <div className="row justify-content-center pb-2">
+            <h1>My Events</h1>
+          </div>
           <div>
             <AddEvent></AddEvent>
           </div>
@@ -57,6 +72,9 @@ class Myevents extends Component {
       return (
         <>
           <div><Navbar></Navbar></div>
+            <div className="row justify-content-center pb-2">
+              <h1>My Events</h1>
+            </div>
           <div>
             <AddEvent></AddEvent>
           </div>
@@ -78,10 +96,14 @@ class Myevents extends Component {
       return (
         <>
           <div><Navbar></Navbar></div>
+            <div className="row justify-content-center pb-2">
+              <h1>My Events</h1>
+            </div>
+
           <div>
             <AddEvent></AddEvent>
           </div>
-          You have no created events, but you have attending events
+          You have no created events, but you are attending events
             <h1>Events Posted</h1>
           <div>
             <AddEvent></AddEvent>
@@ -91,7 +113,7 @@ class Myevents extends Component {
               <div>
                 <div>Details:{events.name}</div>
                 <div> Date:{events.date}</div>
-                <button onClick={() => this.remove()}>Remove</button>
+                <button onClick={() => this.removeFromAttending(events.e_id)}>Remove</button>
               </div>
             ))}
           </div>
@@ -106,6 +128,9 @@ class Myevents extends Component {
       <>
         <div><Navbar></Navbar></div>
         <div class="container">
+          <div className="row justify-content-center pb-2">
+            <h1>My Events</h1>
+          </div>
           <div class="row">
             <div class="col-6">
               <h1>Event Attending</h1>
@@ -116,7 +141,7 @@ class Myevents extends Component {
                       <div className="col col-mg-8 items">
                         <div>Name:{item.details}</div>
                         <div> Date:{item.date}</div>
-                        <button onClick={this.myEvents} className="attendButton">Delete</button>
+                        <button onClick={() => this.removeFromAttending(item.e_id)} className="attendButton">Delete</button>
                       </div>
                     </div>
                   </div>
