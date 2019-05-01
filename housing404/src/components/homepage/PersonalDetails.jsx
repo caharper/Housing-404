@@ -51,14 +51,6 @@ export class PersonalDetails extends React.Component {
       return null
     }
 
-    let {imagePreviewUrl} = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-    $imagePreview = (<img className="rounded-circle prof-pic imgPreview" src={imagePreviewUrl} />);
-    } else {
-      $imagePreview = (<img className="rounded-circle prof-pic imgPreview" src="http://placehold.it/65" />);
-    }
-
     // The markup for the Step 1 UI
     return(
       <>
@@ -71,25 +63,6 @@ export class PersonalDetails extends React.Component {
             <p className="text-secondary mb-0">Tell us about yourself.</p>
           </div>
 
-
-          <div className="row img-prev justify-content-center mb-1">
-            <div className="imgPreview">
-              {$imagePreview}
-            </div>
-          </div>
-
-          <div className="custom-file">
-            <form onSubmit={(e)=>this._handleSubmit(e)}>
-              <input className="custom-file-input"
-                value={this.state.pic}
-                type="file"
-                id="validatedCustomFile"
-                required
-                onChange={(e)=>this._handleImageChange(e)}/>
-            </form>
-            <label className="custom-file-label" htmlFor="validatedCustomFile">Choose a profile picture...</label>
-            <div className="invalid-feedback">Example invalid custom file feedback</div>
-          </div>
 
           <div className="row justify-content-center py-0 my-0">
             <p className="incorrect incorrect-no-display" id="invalid-personal-details">All information must be filled</p>
@@ -164,25 +137,6 @@ export class PersonalDetails extends React.Component {
             <p className="text-secondary mb-0">Tell us about yourself.</p>
           </div>
 
-
-          <div className="row img-prev justify-content-center mb-1">
-            <div className="imgPreview">
-              {$imagePreview}
-            </div>
-          </div>
-
-          <div className="custom-file">
-            <form onSubmit={(e)=>this._handleSubmit(e)}>
-              <input className="custom-file-input"
-                value={this.state.pic}
-                type="file"
-                id="validatedCustomFile"
-                required
-                onChange={(e)=>this._handleImageChange(e)}/>
-            </form>
-            <label className="custom-file-label" htmlFor="validatedCustomFile">Choose a profile picture...</label>
-            <div className="invalid-feedback">Example invalid custom file feedback</div>
-          </div>
 
           <div className="row justify-content-center py-0 my-0">
             <p className="incorrect incorrect-no-display" id="invalid-personal-details">All information must be filled</p>
