@@ -17,7 +17,7 @@ export class SearchResults extends Component {
               <div> Year: {this.props.item.year === 1 ? "Freshman" : (this.props.item.year === 2 ? "Sophomore" : (this.props.item.year === 3 ? "Junior" : "Senior"))}</div>
               <div> Pets: {this.props.item.pets === "Y" ? "Yes" : "No"}</div>
 
-            <button className="resetButton" onClick={(e,x) => this.props.contactUser(this.props.item.id, this.state.notif)}>Send My Information</button>
+            <button className="resetButton" onClick={(e,x) => this.props.contactUser(this.props.item.id, this.state.notif)}>Notify</button>
           </div>
         </div>
       </div>

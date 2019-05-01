@@ -33,8 +33,10 @@ export class Homepage extends React.Component {
       // works
       this.accountRepository.login(attemptUser)
       .then(user => {
+        // come back to this for sqapping
         localStorage.setItem('sessuid', user[0].id)
         this.setState({user})
+        window.location.href = '/main';
       })
       //.catch(
         // $("#email").addClass("is-invalid"),

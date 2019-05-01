@@ -31,7 +31,7 @@ class MainPage extends Component {
                     </div>
                     <div className="mb-2">
                         <Link to="/findroomate">
-                            <button className="width">Find A Roomate</button>
+                            <button className="width">Find A Roommate</button>
                         </Link>
                     </div>
 

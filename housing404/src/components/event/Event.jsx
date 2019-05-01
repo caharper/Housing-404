@@ -32,7 +32,7 @@ export default class Event extends Component {
                 <div className="container pt-0">
                   <h1>Events</h1>
 
-                <div className="row justify-content-between justify-content-between" id="cardRow">
+                <div className="row justify-content-center justify-content-between" id="cardRow">
                       {events.map((event, index)=> (
                         <>
                           <div className="eventCard mt-3" key={index}>
@@ -41,7 +41,7 @@ export default class Event extends Component {
                                   <div className="card-title">Details:{event.details}</div>
                                   <div className="card-text"> Date:{event.date}</div>
 
-                                  <button onClick={() => this.addToMyEvents(event.e_id)} className="addToEvent">Add to My Events</button>
+                                  <button onClick={() => this.addToMyEvents(event.e_id)} className="resetButton">Attend</button>
                               </div>
                           </div>
                         </>

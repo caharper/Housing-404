@@ -143,17 +143,18 @@ class Myevents extends Component {
               <h1>Event Attending</h1>
               <div>
                 {this.state.eventsAttend.map(item => (
-                  <div className="searchResult" >
-                    <div className="row">
-                      <div className="col col-mg-8 items">
-                        <div className="row">Name:{item.details}</div>
-                        <div className="row"> Date:{item.date}</div>
-                        <div className="row">
+                  <div className="row justify-content-center pt-2">
+                    <div className="searchResult border w-75">
+                      <div className="container">
+                        <div className="row">Details: {item.details}</div>
+                        <div className="row">Date: {item.date}</div>
+                        <div className="row justify-content-center pt-3">
                           <button onClick={() => this.removeFromAttending(item.e_id)} className="attendButton">Delete</button>
                         </div>
                       </div>
-                    </div>
+                      </div>
                   </div>
+
                 ))}
               </div>
             </div>
